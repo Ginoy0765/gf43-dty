@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?ya2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?ya2">
 <link rel="manifest" href="manifest.webmanifest">
-<title> </title>
+<title> </title>
 <style>
   :root{--bg:#0f1720;--bg2:#16212e;--card:#1b2837;--line:#293a4d;--txt:#e8eef4;
     --mut:#90a4b8;--acc:#ffb300;--acc2:#29b6f6;--ok:#43d17a;--pro:#ff7043;--radius:16px}
@@ -51,7 +51,6 @@
   .hlpcard h4{margin:0 0 6px;font-size:15px;color:var(--txt);display:flex;align-items:center;justify-content:space-between;gap:8px}
   .hlpcard .hx{background:none;border:none;color:var(--mut);font-size:22px;cursor:pointer;line-height:1}
   .hlpcard p{font-size:13px;color:#a9bccb;line-height:1.55;margin:8px 0 0}
-
   input[readonly]{color:var(--acc);font-weight:700;background:#101a25}
   select:focus,input:focus{border-color:var(--acc2)}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
@@ -120,12 +119,10 @@
 .chbox .cc{display:flex;align-items:center;gap:5px;background:#16283a;border:1px solid #2b4658;border-radius:16px;padding:4px 9px 4px 5px;font-size:10.5px;color:#cfe0ee;font-weight:600}
 .chbox .cc b{width:15px;height:15px;border-radius:50%;background:#5fd0ff;color:#0a1118;font-size:8.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
 .chbox .ar{color:#4c6377;font-size:11px;align-self:center}
-
 /* GROOVING VIEW STYLES */
 .simFull{display:none!important}.simFull.on{display:flex!important}
 #groove .backbtn{background:var(--bg2);border:1px solid var(--line);color:var(--mut);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer}#groove .strat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}#groove .strat h3{margin:0 0 6px;font-size:11.5px;color:var(--mut);font-weight:700;letter-spacing:.4px}#groove .pills{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}#groove .pills.two{grid-template-columns:1fr 1fr}#groove .pills3{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:6px}
 @media(max-width:520px){#groove .pills3{grid-template-columns:1fr 1fr}}#groove .pill{background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:10px;text-align:center;font-weight:700;font-size:13px;color:var(--mut);cursor:pointer;user-select:none}#groove .pill.on{background:var(--acc);color:#1a1200;border-color:var(--acc)}#groove .pill.suggested{border-color:var(--acc2);color:var(--acc2)}#groove .pill.suggested::after{content:' \2605';font-size:10px}#groove .postbtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}#groove .pbtn{background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:12px;font-size:13.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}#groove .pbtn:hover{border-color:var(--acc2);color:var(--acc2)}#groove .pbtn.primary{background:linear-gradient(135deg,#29b6f6,#0288d1);color:#fff;border:none}#groove .pbtn.save{background:linear-gradient(135deg,var(--ok),#2e8f52);color:#0a2016;border:none}
-
 .simFull{position:fixed;inset:0;background:var(--bg);z-index:100;display:none;flex-direction:column;padding:14px;overflow:hidden}
 .simFull.on{display:flex}
 .simFullHead{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:12px}
@@ -145,7 +142,6 @@
 .simLegend{display:flex;gap:12px;font-size:11.5px;color:var(--mut);flex-wrap:wrap}
 .simLegend .lg{display:inline-flex;align-items:center;gap:5px}
 .simLegend .sw{width:16px;height:3px;display:inline-block}#groove .sec{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:10px;overflow:hidden}#groove .sec>.st{background:var(--bg2);padding:11px 14px;font-weight:700;font-size:12.5px;letter-spacing:.5px;color:var(--acc2);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}#groove .sec>.st .caret{transition:transform .2s;font-size:11px}#groove .sec.open>.st .caret{transform:rotate(90deg)}#groove .sec>.sb{padding:4px 14px 14px;display:none}#groove .sec.open>.sb{display:block}#groove label{display:block;color:var(--mut);font-size:11px;font-weight:600;margin:10px 0 5px;letter-spacing:.2px}#groove input[type=number], #groove input[type=text], #groove select, #groove textarea{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:9px 10px;font-size:14px;font-family:inherit;outline:none}#groove input[type=number]::-webkit-outer-spin-button, #groove input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}#groove input[type=number]{-moz-appearance:textfield;appearance:textfield}#groove input:focus, #groove select:focus, #groove textarea:focus{border-color:var(--acc2)}#groove .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}#groove .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}#groove .row4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}#groove .chip{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;background:var(--bg2);border:1px solid var(--line);border-radius:20px;font-size:12.5px;font-weight:600;color:var(--mut);cursor:pointer;user-select:none;margin-right:6px;margin-top:6px}#groove .chip.on{background:var(--acc);color:#1a1200;border-color:var(--acc)}#groove .chips{margin:2px 0 6px}#groove .cornerBox{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px}#groove .cornerBox h4{margin:0 0 6px;font-size:12px;font-weight:700;color:var(--acc)}#groove .cornerBox label{margin-top:6px}#groove .cornerBox input, #groove .cornerBox select{padding:7px 8px;font-size:12.5px}#groove .chkrow{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;color:var(--txt);cursor:pointer;user-select:none}#groove .chkrow input[type=checkbox]{width:16px;height:16px;margin:0;cursor:pointer;accent-color:var(--acc)}#groove table{width:100%;border-collapse:collapse;margin-top:8px;background:var(--bg2);border-radius:9px;overflow:hidden;font-size:13px}#groove th{background:#1f2b3a;padding:8px 6px;text-align:left;font-size:11px;letter-spacing:.4px;color:var(--mut);font-weight:700}#groove td{padding:4px 6px;border-top:1px solid var(--line)}#groove td input, #groove td select{padding:6px 7px;font-size:12.5px;border-radius:6px}#groove .previewbox{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}#groove .hint{color:var(--mut);font-size:11.5px;margin-top:6px;line-height:1.4}#groove .warn{color:var(--warn);font-size:12.5px;margin-top:6px;font-weight:600}#groove .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:700;letter-spacing:.4px;background:var(--bg2);color:var(--mut);margin-left:6px}#groove .badge.live{background:rgba(67,209,122,.15);color:var(--ok)}#groove .genbtn{width:100%;background:linear-gradient(135deg,var(--acc),#ff8f00);color:#1a1200;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:800;letter-spacing:.5px;cursor:pointer;margin-top:14px;box-shadow:0 6px 20px rgba(255,179,0,.25)}#groove .genbtn:active{transform:translateY(1px)}#groove .gcode{background:#080d13;border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:10px;font-family:'Consolas','Courier New',monospace;font-size:12.5px;color:#b8ffb8;white-space:pre;overflow-x:auto;max-height:320px;overflow-y:auto}#groove .gcodehead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}#groove .gcodehead .cyc{color:var(--acc);font-weight:700;font-size:12.5px}#groove .gcodehead .copy{background:var(--bg2);border:1px solid var(--line);color:var(--mut);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer}
-
 /* END */
 </style>
 <script src="https://unpkg.com/pyodide@0.26.4/pyodide.js"></script>
@@ -163,9 +159,8 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v25.2 &middot; 23 Jul 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:var(--acc);color:#1a1200">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v25.9 &middot; 27 Jul 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:var(--acc);color:#1a1200">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
-
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
       <div class="grid">
@@ -200,8 +195,6 @@
       </div>
       <p class="note" style="color:var(--mut);font-size:11px;text-align:center;margin-top:14px">More hole operations can be added later &middot; tap the settings button for Job Setup</p>
     </section>
-
-
     <section id="fulljob" class="view">
       <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2>Full Job</h2><button class="back" style="margin-left:auto;width:auto;padding:0 12px;font-size:12.5px" onclick="clearJob()">Clear</button></div>
       <p class="note" style="text-align:left">Build your sequence of operations, then open each step to create its program. Runs top-to-bottom with M01 between and M30 at the end.</p>
@@ -219,7 +212,6 @@
       <div id="joboutwrap" style="display:none"><div id="jobout"></div>
       <button class="btn btn2" onclick="saveJob()">&#128190;  Save job .txt</button></div>
     </section>
-
     <!-- THREADING submenu -->
     <section id="threading" class="view">
       <div style="background:rgba(67,209,122,.08);border:1px solid rgba(67,209,122,.28);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:12px;color:var(--txt)">
@@ -245,7 +237,6 @@
         <div class="tile" data-mode="turn" onclick="(function(){show('prog');var _o=$('opsel');if(_o&&_o.parentNode)_o.parentNode.style.display='';var _h=$('prog_h2');if(_h)_h.textContent='Programming';})()"><span class="tag free">FREE</span><div class="ic">&#128196;</div><div><div class="t">Programming</div><div class="s">Milling &amp; turning G-code</div></div></div>
       </div>
     </section>
-
     <!-- THREAD DATA -->
     <section id="data" class="view">
       <div class="vhead"><button class="back" onclick="show('prog')">&lsaquo;</button><h2>Thread Data</h2></div>
@@ -253,7 +244,6 @@
       <label>Size</label><select id="d_size" onchange="calcData()"></select>
       <div id="d_res"></div>
     </section>
-
     <!-- PROGRAMMING -->
     <section id="setup" class="view">
       <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2>Job Setup</h2></div>
@@ -273,18 +263,14 @@
         <div class="js-turn-only"><label>Tool change position</label><input id="js_tcp" type="text" value="G28 U0 W0"></div>
       </div></div>
     </section>
-
     <section id="prog" class="view">
       <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2 id="prog_h2">Programming</h2><button class="back" style="margin-left:auto;width:auto;padding:0 12px;font-size:12.5px" onclick="show('data')">Thread data</button></div>
-
       <div class="sec"><div class="st" onclick="tog(this)">THREAD DETAILS <span>&#9662;</span></div><div class="sb"><div style="display:none"><select id="opsel" onchange="setMethodSel()"><option>Milling</option><option>Turning</option></select></div><div class="row2"><div><label>Internal / External</label><select id="side" onchange="minorEdited=false;clearD();recalc();recalcT();tmVis();entryVis();fdUpd()"><option>Internal</option><option>External</option></select></div><div><label>Thread profile</label><select id="profile" onchange="profChange();fdUpd()"><option>ISO Metric</option><option>UN (TPI)</option><option>NPT (Taper)</option><option>Custom</option></select></div></div><div class="row2"><div><label id="fd_ptlabel">Pitch P (mm)</label><input id="P" type="number" value="2" inputmode="decimal" oninput="syncTpi();clearD();recalc();recalcT();updateTeeth();setDefaultPasses();fdUpd();sizeFill()"><div id="fd_tpibox" style="display:none"><select id="tpi" onchange="tpiPick()"></select><input id="tpiother" type="number" inputmode="decimal" placeholder="TPI" style="display:none;margin-top:6px" oninput="tpiPick()"></div></div><div><label>Thread standard</label><select id="size" onchange="sizeChange();fdUpd()"></select></div></div><div class="row2"><div><label>Major Dia D (mm)</label><input id="D" type="number" value="16" inputmode="decimal" oninput="minorEdited=false;recalc();recalcT();fdUpd()"></div><div><label>Minor dia (auto, editable)</label><input id="minor" type="number" inputmode="decimal" oninput="minorEdited=true;var t=$('t_minor');if(t)t.value=this.value;fdUpd()"></div></div><div><label>Thread length (mm)</label><input id="L" type="number" value="20" inputmode="decimal" oninput="clearD()"></div><div class="row2"><div><label>LH / RH</label><select id="hand" onchange="clearD()"><option>RH</option><option>LH</option></select></div><div><label>No. of starts</label><input id="starts" type="number" value="1" inputmode="numeric" oninput="clearD();fdUpd()"></div></div><div class="row2"><div><label id="fd_derivlabel">TPI (auto)</label><input id="fd_deriv" readonly></div><div><label>Helix / lead angle (auto)</label><input id="fd_helix" readonly></div></div><label>Material</label><select id="mat" onchange="clearD();matChange()"></select><div id="mrinfo" class="mrinfo"></div></div></div>
-
       <div class="sec mill-only"><div class="st" onclick="tog(this)">TOOL DATA <span>&#9662;</span></div><div class="sb">
         <div class="row2"><div><label>Tool dia d (mm)</label><input id="d" type="number" value="" placeholder="required" inputmode="decimal" oninput="matChange()"></div><div><label>Flutes Z</label><input id="Z" type="number" value="3" inputmode="numeric"></div></div>
         <div class="row2"><div><label>No. of teeth</label><input id="teeth" type="number" value="1" inputmode="numeric" oninput="matChange()"></div><div><label>Length of insert (mm)</label><input id="insl" type="number" inputmode="decimal" placeholder="blank = teeth" oninput="updateTeeth()"></div></div>
         <label>Path mode</label><select id="path" onchange="updateSubs()"><option>Helical</option><option>Stepped</option></select>
       </div></div>
-
       <div class="sec mill-only"><div class="st" onclick="tog(this)">CUTTING PARAMETERS <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Stability %</label><input id="stab" type="number" value="50" inputmode="numeric" oninput="matChange()"></div><div><label>Vc (m/min)</label><input id="vc" type="number" value="60" inputmode="decimal" oninput="vcEdited=true;recalc()"></div></div>
         <div class="row2"><div><label>RPM (auto)</label><input id="rpm" readonly></div><div><label>fz (mm/tooth)</label><input id="fz" inputmode="decimal" oninput="fzEdited=true;recalc()" placeholder="auto"></div></div>
@@ -293,7 +279,6 @@
         <div id="passpcts"></div>
         <label>Equal-volume passes</label><select id="eqvol" onchange="renderPassPcts()"><option>No</option><option>Yes</option></select>
       </div></div>
-
       <div class="sec mill-only"><div class="st" onclick="tog(this)">CUSTOMISATION <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Control</label><select id="ctrl"><option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Siemens I &amp; J</option><option>Siemens R</option><option>Heidenhain</option><option>Haas</option><option>Turn-mill (polar)</option></select></div><div><label>Start XYZ</label><select id="startxyz" onchange="updateSubs()"><option>No</option><option>Yes</option></select></div></div>
         <div id="startWrap" style="display:none"><div class="row3"><div><label>Start X (mm)</label><input id="start_x" type="number" value="0" inputmode="decimal"></div><div><label>Start Y (mm)</label><input id="start_y" type="number" value="0" inputmode="decimal"></div><div><label>Start Z (mm)</label><input id="start_z" type="number" value="0" inputmode="decimal"></div></div></div>
@@ -303,7 +288,6 @@
         <label>User name</label><input id="username" placeholder="optional">
         <label>Subprogram (M99, no tool call)</label><select id="subprog"><option>No</option><option>Yes</option></select>
       </div></div>
-
       <div class="sec mill-only"><div class="st" onclick="tog(this)">ADVANCED &mdash; MILLING <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>M-code</label><select id="mcode"><option>M03</option><option>M04</option></select></div><div><label>Max RPM</label><input id="maxrpm" type="number" value="5000" inputmode="numeric" oninput="recalc()"></div></div>
         <div class="row2"><div><label>Major dia +/- (mm)</label><input id="majadj" type="number" value="0" inputmode="decimal"></div></div>
@@ -314,7 +298,6 @@
         <label>Bottom repass</label><select id="brepass" onchange="updateSubs()"><option>No</option><option>Yes</option></select>
         <div id="repWrap" style="display:none"><div class="row2"><div><label>Repass threads (pitches)</label><input id="repp" type="number" value="1" inputmode="numeric"></div><div><label>Repass offset dia (mm)</label><input id="repoff" type="number" value="0" inputmode="decimal"></div></div></div>
       </div></div>
-
       <div class="sec mill-only"><div class="st" onclick="tog(this)">HIGHLY ADVANCED &mdash; MILLING <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>RCTF comp (%)</label><input id="rctf" type="number" value="0" inputmode="numeric"></div><div><label>Requirement</label><select id="req"><option>Standard</option><option>Finishing</option><option>Productivity</option><option>Weak setup</option><option>Tool life</option></select></div></div>
         <div class="row2"><div><label>Entry angle (deg)</label><input id="entryang" type="number" value="0" inputmode="decimal"></div><div><label>Tool axis</label><select id="toolaxis"><option>Z- (default)</option><option>Z+</option><option>X-</option><option>X+</option><option>Y-</option><option>Y+</option></select></div></div>
@@ -322,7 +305,6 @@
         <label>Find / Replace</label><div class="row2"><input id="findr" placeholder="find..."><input id="repl" placeholder="replace with..."></div>
         <p class="note" style="text-align:left">Specials editor &amp; Drill&rarr;Thread converter: desktop Pro.</p>
       </div></div>
-
       <div class="sec turn-only"><div class="st" onclick="tog(this)">PARAMETERS <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Stability %</label><input id="t_stab" type="number" value="50" inputmode="numeric" oninput="matChange()"></div><div><label>Vc (m/min)</label><input id="t_vc" type="number" value="120" inputmode="decimal" oninput="recalcT()"></div></div>
         <div class="row2"><div><label>RPM (auto)</label><input id="t_rpm" readonly></div><div><label>Max RPM</label><input id="t_maxrpm" type="number" value="5000" inputmode="numeric" oninput="recalcT()"></div></div>
@@ -330,7 +312,6 @@
         <div class="row2"><div><label>End DOC at 80% (mm)</label><input id="t_e80" type="number" value="0.08" inputmode="decimal" oninput="recalcT()"></div><div><label>End DOC at 100% (mm)</label><input id="t_e100" type="number" value="0.05" inputmode="decimal" oninput="recalcT()"></div></div>
         <div class="row2"><div><label>Idle (spring) passes</label><input id="t_idle" type="number" value="2" inputmode="numeric"></div><div><label>Total passes (auto)</label><input id="t_total" readonly></div></div>
       </div></div>
-
       <div class="sec turn-only"><div class="st" onclick="tog(this)">CUSTOMISATION <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Control</label><select id="t_ctrl"><option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Siemens</option></select></div><div><label>Tool offset</label><select id="t_toff" onchange="updateSubs()"><option>No</option><option>Yes</option></select></div></div>
         <div id="ttoffWrap" style="display:none"><label>Tool no. T (e.g. 0101)</label><input id="t_tool" value="0101"></div>
@@ -339,7 +320,6 @@
         <label>User name</label><input id="t_username" placeholder="optional">
         <label>Subprogram (M99, no tool call)</label><select id="t_subprog"><option>No</option><option>Yes</option></select>
       </div></div>
-
       <div class="sec turn-only"><div class="st" onclick="tog(this)">ADVANCED &mdash; TURNING <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>M-code</label><select id="t_mcode"><option>M03</option><option>M04</option></select></div><div><label>Minor dia</label><input id="t_minor" type="number" inputmode="decimal" placeholder="auto"></div></div>
         <div class="row2"><div><label>Major dia +/- (mm)</label><input id="t_majadj" type="number" value="0" inputmode="decimal"></div><div><label>Infeed type</label><select id="t_infeed" onchange="updateSubs()"><option>Flank</option><option>Radial</option><option>Alternate flank</option></select></div></div>
@@ -349,13 +329,11 @@
         <div id="tTaper" style="display:none"><label>Taper degree</label><input id="t_taperdeg" type="number" value="0" inputmode="decimal"><label>Dia diff at end of thread (mm)</label><input id="t_diadiff" type="number" value="0" inputmode="decimal"></div>
         <label>Pre-size (bore/turn first)</label><select id="t_presize"><option>No</option><option>Yes</option></select>
       </div></div>
-
       <div class="sec turn-only"><div class="st" onclick="tog(this)">HIGHLY ADVANCED &mdash; TURNING <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Requirement</label><select id="t_req"><option>Standard</option><option>Finishing</option><option>Productivity</option><option>Weak setup</option><option>Tool life</option></select></div><div><label>Thread start angle (deg)</label><input id="t_startang" type="number" value="0" inputmode="decimal"></div></div>
         <label>Find / Replace</label><div class="row2"><input id="t_findr" placeholder="find..."><input id="t_repl" placeholder="replace with..."></div>
         <button class="btn btn2" type="button" onclick="var _e=$('sp_feat');if(_e)_e.value='Thread';var _p=$('sp_ptype');if(_p)_p.value='V (sharp / round root)';spOpen();" style="margin-top:6px">&#9881;&#65039; Specials &mdash; Profile + Insert</button>
       </div></div>
-
       <div id="engineStatus" class="note" style="text-align:center;margin-top:8px">Loading engine... (first time needs internet)</div>
       <button class="btn" onclick="genProg()">&#9881;&#65039;  GENERATE G-CODE</button>
       <button class="btn btn2" onclick="resetAll()">&#8634;  Reset to defaults</button>
@@ -383,15 +361,12 @@
         <div id="simpos" style="width:100%;text-align:center;font-family:monospace;font-size:13px;color:#ffb300;margin-top:2px"></div>
       </div>
     </section>
-
-
     <!-- COMING SOON -->
     <section id="phist" class="view">
       <div class="vhead"><button class="back" onclick="show('prog')">&lsaquo;</button><h2>Saved programs</h2><button class="back" style="margin-left:auto;width:auto;padding:0 12px;font-size:12.5px" onclick="clearHist()">Clear all</button></div>
       <div id="histlist"></div>
       <p class="note">Saved on this device only. Tap a program to reopen &amp; simulate.</p>
     </section>
-
     <section id="drill" class="view">
       <div style="background:rgba(67,209,122,.08);border:1px solid rgba(67,209,122,.28);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:12px;color:var(--txt)">
         <b style="color:#43d17a">Z convention:</b> Job face = <b>Z=0</b> &middot; toward chuck is <b>&minus;Z</b> &middot; away from face is <b>+Z</b>. Enter machining Z as negative values.
@@ -471,7 +446,6 @@
         <div id="dr_simlbl" class="note" style="width:100%;text-align:center;margin-top:2px"></div>
       </div>
     </section>
-
     <section id="turnops" class="view">
       <div style="background:rgba(67,209,122,.08);border:1px solid rgba(67,209,122,.28);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:12px;color:var(--txt)">
         <b style="color:#43d17a">Z convention:</b> Job face = <b>Z=0</b> &middot; toward chuck is <b>&minus;Z</b> &middot; away from face is <b>+Z</b>. Enter machining Z as negative values.
@@ -531,7 +505,6 @@
       <button class="btn btn2" id="tn_simbtn" style="display:none" onclick="tnSim()">&#128202;  Simulate</button>
       
     </section>
-
     <section id="groove" class="view">
 <div style="max-width:920px;margin:0 auto;padding:14px 14px 40px">
 <!-- ============ 1. OPERATION ============ -->
@@ -555,7 +528,6 @@
       <span class="chip" data-t="back">Face (back)</span>
     </div>
   </div></div>
-
   <!-- ============ 3. TOOL ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">TOOL <span class="caret">&#9656;</span></div><div class="sb">
     <div class="row2">
@@ -567,11 +539,11 @@
       <div><label>Corner radius r (mm)</label><input id="tl_rc" type="number" value="0.2" step="0.01"></div>
     </div>
     <div class="row2">
-      <div><label>Offset reference (where tool offset is touched off)</label>
+      <div><label>Offset position (which point of the cutting edge is touched off)</label>
         <select id="tl_off_ref" onchange="drawInsertRef();recalc();">
-          <option value="L">Left edge of insert (&minus;Z side)</option>
-          <option value="C" selected>Center of insert</option>
-          <option value="R">Right edge of insert (+Z side)</option>
+          <option value="L">Left of cutting edge (&minus;Z corner)</option>
+          <option value="C" selected>Center of cutting edge</option>
+          <option value="R">Right of cutting edge (+Z corner)</option>
         </select>
       </div>
       <div><label>Hand</label>
@@ -595,10 +567,11 @@
       </div>
       <div><label>Nose radius compensation</label>
         <select id="tl_comp" onchange="gv_recalc()">
-          <option value="off">Off (G40 &mdash; program sharp tip)</option>
-          <option value="auto" selected>Auto (dual G41/G42 finish for grooving)</option>
-          <option value="G42">G42 only (right of feed &mdash; OD)</option>
-          <option value="G41">G41 only (left of feed &mdash; ID)</option>
+          <option value="off" selected>Baked-in nose R (manual, single pass) &mdash; proven default</option>
+          <option value="twoblk">Two-block manual (nose R baked, near/far split, no G41/G42)</option>
+          <option value="auto">G41/G42 two half-pass (control offsets nose R)</option>
+          <option value="G42">G41/G42 &mdash; force G42 both halves</option>
+          <option value="G41">G41/G42 &mdash; force G41 both halves</option>
         </select>
       </div>
     </div>
@@ -609,7 +582,6 @@
     <input id="tl_ins" type="text" placeholder="e.g. GIPI 3.18-0.20 IC328">
     <div class="hint">YANTRA shifts programmed Z coordinates so groove wall positions land exactly where you specified, regardless of where you touched off the tool. Fanuc, Siemens, Mazatrol, and Heidenhain all handle this the same way &mdash; whichever edge you touched off, the offset table stores that as the reference point.</div>
   </div></div>
-
   
   <!-- ============ GROOVE ============ -->
   <div class="sec open"><div class="st" onclick="gv_toggle(this)">GROOVE <span class="badge live" id="modeBadge">auto</span> <span class="caret">&#9656;</span></div><div class="sb">
@@ -623,10 +595,8 @@
     </div>
     <div class="hint">Width = |Z1&minus;Z2| = <span id="wCalc">6</span> mm &nbsp;&middot;&nbsp; Depth = (D1&minus;D2)/2 = <span id="dCalc">3</span> mm
     <br>Z convention: <b>face = 0</b>, towards chuck is <b>&minus;Z</b>, away from face is <b>+Z</b>. All Z values in a normal turning setup are negative.</div>
-
   
     <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:18px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">CORNER TREATMENT</div>
-
     <div class="hint" style="margin-bottom:4px">Set the treatment for each corner independently. Type + Size on each row applies to that specific corner.</div>
     <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
       <select id="A_t" onchange="gv_recalc()" style="flex:1;min-width:110px"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select>
@@ -655,8 +625,8 @@
     <label class="chkrow" style="margin-top:14px"><input type="checkbox" id="indepLegs" onchange="gv_recalc()"> Independent chamfer legs (Z-leg &ne; X-leg)</label>
     <div class="hint" style="margin-top:6px">When on, each row shows a Size 2 field for the X-leg (asymmetric chamfer). Individual corner points can be tweaked further in the PROFILE section below.</div>
   
-    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:18px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">PROFILE POINTS / PATTERN</div>
-
+    <div class="sec" style="margin-top:14px"><div class="st" onclick="gv_toggle(this)">PROFILE <span class="caret">&#9656;</span></div><div class="sb">
+    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:6px 2px 6px;font-weight:700;padding-top:2px">PROFILE POINTS / PATTERN</div>
     <div class="hint" style="margin-top:6px"><b>A</b> top-left &middot; <b>B</b> bottom-left &middot; <b>C</b> bottom-right &middot; <b>D</b> top-right<br>Each corner has its own X (diameter) and Z entry &mdash; edit directly for asymmetric grooves, or leave and use GEOMETRY / modifiers to auto-fill. Changes flow immediately into the points table below.</div>
     <div class="row4" style="margin-top:8px">
       <div class="cornerBox"><h4>A &mdash; top-L</h4>
@@ -684,7 +654,6 @@
         <input id="D_z" type="number" step="0.001" value="-10" oninput="gv_pointEdit('D')">
       </div>
     </div>
-
     <div style="margin-top:12px;border-top:1px solid var(--line);padding-top:8px">
       <label class="chkrow"><input type="checkbox" id="mod_trap" onchange="gv_recalc()"> Trapezoidal (separate bottom width)</label>
       <div id="trapBox" style="display:none;margin-left:24px">
@@ -706,7 +675,6 @@
         </div>
       </div>
     </div>
-
     <div style="margin-top:12px;border-top:1px solid var(--line);padding-top:8px">
       <label class="chkrow"><input type="checkbox" id="patOn" onchange="gv_recalc()"> Multi-groove pattern</label>
       <div id="patBox" style="display:none">
@@ -721,7 +689,6 @@
         </div>
       </div>
     </div>
-
     <div style="margin-top:12px;border-top:1px solid var(--line);padding-top:8px">
       <label class="chkrow"><input type="checkbox" id="manual" onchange="gv_recalc()"> Manual mode &mdash; edit points table directly</label>
       <table id="ptTbl">
@@ -732,7 +699,6 @@
     </div>
   
     <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:18px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">PREVIEW</div>
-
     <div class="previewbox">
       <canvas id="gv_preview" width="380" height="300" style="touch-action:none;width:100%;height:min(46vh,340px);display:block;background:#0a1118;border:1px solid #293a4d;border-radius:10px"></canvas>
       <div style="text-align:right;margin-top:6px">
@@ -741,10 +707,9 @@
       </div>
     </div>
     <div class="hint">Longitudinal cross-section &mdash; centerline dashed. Grey shapes = groove copies.</div>
-  
+    </div></div>
+
   </div></div>
-
-
   <!-- ============ PARAMETERS ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">PARAMETERS <span class="caret">&#9656;</span></div><div class="sb">
     <div class="row3">
@@ -766,7 +731,6 @@
     </div>
   
     <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:18px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">ROUGH / FINISH STRATEGY</div>
-
     <h3 style="margin:10px 0 4px">ROUGHING STRATEGY</h3>
     <div class="pills3" id="stratPills">
       <div class="pill on" data-v="single">Single plunge</div>
@@ -788,7 +752,6 @@
     </div>
   
   </div></div>
-
 <!-- ============ 6. POSITIONING (approach/retract) ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">POSITIONING <span class="caret">&#9656;</span></div><div class="sb">
     <div class="row2">
@@ -807,7 +770,6 @@
     </select>
     <div class="hint">Angular retract reduces witness marks on the side wall of finish grooves.</div>
   </div></div>
-
   <!-- ============ 7. CUT SETUP (peck / chip break) ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">CUT SETUP <span class="caret">&#9656;</span></div><div class="sb">
     <label class="chkrow"><input type="checkbox" id="cs_peck" onchange="gv_recalc()" checked> Peck the plunge</label>
@@ -843,7 +805,6 @@
       <div class="hint">Only used when Ramping strategy is selected. Shallow angle (10-20&deg;) with small DOC reduces radial force on slender parts.</div>
     </div>
   </div></div>
-
   <!-- ============ 8. MACHINE / SETUP ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">MACHINE / SETUP <span class="caret">&#9656;</span></div><div class="sb">
     <div class="row2">
@@ -865,10 +826,8 @@
     <label>Tool-change position</label>
     <input id="ms_tcp" type="text" value="G28 U0 W0">
   </div></div>
-
   <!-- ============ GENERATE + OUTPUT ============ -->
   <button class="genbtn" onclick="gv_generate()">&#9881; GENERATE G-CODE</button>
-
   <div id="outputArea" style="display:none;margin-top:14px">
     <div class="sec open"><div class="st" onclick="gv_toggle(this)">PROGRAM <span class="badge live" id="cycBadge">-</span> <span class="caret">&#9656;</span></div><div class="sb">
       <div class="gcodehead"><span class="cyc" id="cycLabel">Cycle: -</span></div>
@@ -878,13 +837,11 @@
         <button class="pbtn save" onclick="gv_saveProg()">&#128190; Save</button>
         <button class="pbtn" onclick="gv_copyGcode()">&#128203; Copy</button>
       </div>
-
       <div id="saveConfirm" class="hint" style="display:none;color:var(--ok);font-weight:600;margin-top:8px"></div>
     </div></div>
   </div>
 </div>
 </section>
-
     <section id="ttbl" class="view">
       <div class="vhead"><button class="back" onclick="show('turnops')">&lsaquo;</button><h2>Profile points</h2></div>
       <div id="tt_gwrap" style="position:relative;margin-bottom:8px"><canvas id="tt_preview" width="380" height="460" style="touch-action:none;width:100%;height:min(56vh,440px);display:block;background:#0a1118;border:1px solid #293a4d;border-radius:10px"></canvas><div id="pp_hud" style="position:absolute;left:0;top:0;display:none;gap:6px;align-items:stretch;z-index:6"><div style="background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;padding:4px 8px;font-size:11px;line-height:1.3;text-align:left;pointer-events:none"><div style="color:#8aa;font-size:9px">cursor</div><div id="pp_curx" style="color:#e8c84a;font-weight:700">&#216; &ndash;</div><div id="pp_curz" style="color:#59d0ff;font-weight:700">Z &ndash;</div></div><button id="pp_add" type="button" onclick="ppAdd()" style="background:#123a5c;border:1px solid #2f6ea0;color:#bfe3ff;border-radius:7px;font-size:13px;font-weight:800;padding:0 12px;cursor:pointer">Add</button></div><div id="pp_urdo" style="position:absolute;left:8px;top:8px;display:flex;gap:4px;z-index:6"><button id="pp_undo" type="button" onclick="ppUndo()" title="Undo" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:15px;cursor:pointer">&#8630;</button><button id="pp_redo" type="button" onclick="ppRedo()" title="Redo" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:15px;cursor:pointer">&#8631;</button></div><div id="pp_zoom" style="position:absolute;left:8px;bottom:8px;display:flex;flex-direction:column;gap:4px;z-index:6"><button type="button" onclick="ppZoom(1.25)" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:16px;font-weight:800;cursor:pointer">+</button><button type="button" onclick="ppZoom(0.8)" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:16px;font-weight:800;cursor:pointer">&minus;</button><button type="button" onclick="ppZoomReset()" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#9cc4e6;font-size:13px;cursor:pointer">&#8635;</button></div></div>
@@ -899,7 +856,6 @@
       </div>
       <button class="btn" onclick="tnCalc();show('turnops')">&#10003; Done</button>
     </section>
-
     <section id="rawtbl" class="view">
       <div class="vhead"><button class="back" onclick="show('turnops')">&lsaquo;</button><h2>Raw material</h2></div>
       <div class="sec"><div class="st" onclick="tog(this)">RAW MATERIAL <span>&#9662;</span></div><div class="sb">
@@ -924,7 +880,6 @@
       </div></div>
       <button class="btn" onclick="tnCalc();show('turnops')">&#10003; Done</button>
     </section>
-
     <section id="manual" class="view">
       <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2>Manual Program</h2></div>
       <p class="note" style="text-align:left">Upload a program (.nc / .txt / .tap / .min / .mpf) or write one here. Edit it freely in the Yantra editor, then save.</p>
@@ -935,7 +890,6 @@
       <div class="row2"><button class="btn btn2" onclick="mpSave('nc')">&#128190;  Save .nc</button><button class="btn btn2" onclick="mpSave('txt')">&#128190;  Save .txt</button></div>
       <button class="btn btn2" onclick="mpClear()">Clear</button>
     </section>
-
     <section id="soon" class="view">
       <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2>Coming soon</h2></div>
       <div class="prolock"><div class="ic">&#128736;&#65039;</div><h3>Being built next</h3>
@@ -943,7 +897,6 @@
         <p>are on the way &mdash; one solid operation at a time.</p></div>
       <p class="note">Got a request for what this should do? Tap "Send message" below.</p>
     </section>
-
 <section id="g_holes" class="view"><div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2>Holes</h2></div><p class="note" style="text-align:left">On-centre axial ops — into the face on the spindle axis.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px"><div class="mop" onclick="openMillOp('Centering / spot')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M12 4v8m-3 0h6l-3 5z" stroke="#9fc4e6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="mn">Centre / spot</div><div class="ms">Start the hole true</div></div><div class="mop" onclick="show('drill')"><span class="mtag lv">LIVE</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M12 3v9m0 0l-3 4.5m3-4.5l3 4.5" stroke="#5fd0ff" stroke-width="1.8" stroke-linecap="round"/><path d="M9 16.5h6l-3 4z" fill="#5fd0ff"/></svg><div class="mn">Drilling</div><div class="ms">Peck / degressive</div></div><div class="mop" onclick="openMillOp('Boring')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M8 4v10a4 4 0 008 0V4" stroke="#9fc4e6" stroke-width="1.6"/></svg><div class="mn">Boring</div><div class="ms">Enlarge / finish ID</div></div><div class="mop" onclick="openMillOp('Reaming')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><rect x="9" y="4" width="6" height="14" rx="1" stroke="#9fc4e6" stroke-width="1.6"/></svg><div class="mn">Reaming</div><div class="ms">H7 finish bore</div></div><div class="mop" onclick="openMillOp('Tapping')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M12 3v14" stroke="#9fc4e6" stroke-width="1.6"/><path d="M9 7h6M9 10h6M9 13h6" stroke="#9fc4e6" stroke-width="1.4"/></svg><div class="mn">Tapping</div><div class="ms">On-centre tap</div></div><div class="mop" onclick="tnQuick('FACE')"><span class="mtag lv">LIVE</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M7 4v16" stroke="#5fd0ff" stroke-width="1.8"/><path d="M11 6l6-2M11 12l6-2M11 18l6-2" stroke="#5fd0ff" stroke-width="1.3"/></svg><div class="mn">Facing</div><div class="ms">End face cut</div></div><div class="mop" onclick="tnQuick('OD')"><span class="mtag lv">LIVE</span><svg class="mi" viewBox="0 0 24 24" fill="none"><rect x="4" y="9" width="16" height="6" rx="1" stroke="#5fd0ff" stroke-width="1.6"/><path d="M12 4v5" stroke="#5fd0ff" stroke-width="1.6"/><path d="M9 4h6" stroke="#5fd0ff" stroke-width="1.4"/></svg><div class="mn">OD turning</div><div class="ms">Outside / step</div></div><div class="mop" onclick="tnQuick('ID')"><span class="mtag lv">LIVE</span><svg class="mi" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="12" rx="1" stroke="#5fd0ff" stroke-width="1.6"/><rect x="8" y="10" width="8" height="4" fill="#0a1118" stroke="#5fd0ff" stroke-width="1.4"/></svg><div class="mn">ID turning</div><div class="ms">Bore / internal</div></div></div></section>
     <section id="g_profile" class="view"><div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2>Profile</h2></div><p class="note" style="text-align:left">The turned silhouette — OD / ID contour, grooves, threads.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px"><div class="mop" onclick="show('turnops');try{tnMachRefresh();}catch(e){}"><span class="mtag lv">LIVE</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M4 18h5v-5h5v-4h6" stroke="#ffcf6a" stroke-width="1.7" stroke-linejoin="round"/><line x1="3" y1="20" x2="21" y2="20" stroke="#ffcf6a" stroke-width="1" stroke-dasharray="3 2"/></svg><div class="mn">Turning</div><div class="ms">OD / ID / facing</div></div><div class="mop" onclick="openThreadTurn()"><span class="mtag lv">LIVE</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M5 8a7 7 0 0114 0" stroke="#ffcf6a" stroke-width="1.7"/><path d="M8 11h8M8 13.5h8M8 16h8" stroke="#ffcf6a" stroke-width="1.3"/></svg><div class="mn">Threading</div><div class="ms">Single-point OD / ID</div></div><div class="mop" onclick="show('groove')"><span class="mtag lv">LIVE</span><svg class="mi" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="12" rx="1" stroke="#ffcf6a" stroke-width="1.6"/><rect x="10" y="6" width="4" height="12" fill="#0a1118" stroke="#ffcf6a" stroke-width="1.4"/></svg><div class="mn">Grooving / parting</div><div class="ms">OD / face / cut-off</div></div><div class="mop" onclick="openMillOp('Chamfer / taper')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M4 17l6-6h10" stroke="#ffcf6a" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 17h6" stroke="#ffcf6a" stroke-width="1.6"/></svg><div class="mn">Chamfer / taper</div><div class="ms">Bevel / radius / cone</div></div><div class="mop" onclick="openMillOp('Specials — generative profile')"><span class="mtag sn">BETA</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M4 20l4-8 3 4 3-8 3 6 3-3" stroke="#ffcf6a" stroke-width="1.6" stroke-linejoin="round"/></svg><div class="mn">Specials</div><div class="ms">Generative profile</div></div></div></section>
     <section id="g_center" class="view"><div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2>Center-line ops</h2></div><p class="note" style="text-align:left">Anything located at a point or pattern — holes, taps, bores, interpolated features.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px"><div class="mop" onclick="show('drill')"><span class="mtag lv">LIVE</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M12 3v9m0 0l-3 4.5m3-4.5l3 4.5" stroke="#5fd0ff" stroke-width="1.8" stroke-linecap="round"/><path d="M9 16.5h6l-3 4z" fill="#5fd0ff"/></svg><div class="mn">Drilling</div><div class="ms">Peck / degressive</div></div><div class="mop" onclick="openMillOp('Centering')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M12 4v8m-3 0h6l-3 5z" stroke="#9fc4e6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="mn">Centering</div><div class="ms">Spot / center drill</div></div><div class="mop" onclick="openMillOp('Tapping')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M12 3v14" stroke="#9fc4e6" stroke-width="1.6"/><path d="M9 7h6M9 10h6M9 13h6" stroke="#9fc4e6" stroke-width="1.4"/></svg><div class="mn">Tapping</div><div class="ms">Rigid / floating</div></div><div class="mop" onclick="openMillOp('Reaming')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><rect x="9" y="4" width="6" height="14" rx="1" stroke="#9fc4e6" stroke-width="1.6"/></svg><div class="mn">Reaming</div><div class="ms">H7 finish bore</div></div><div class="mop" onclick="openMillOp('Boring')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M8 4v10a4 4 0 008 0V4" stroke="#9fc4e6" stroke-width="1.6"/></svg><div class="mn">Boring</div><div class="ms">Interpolated ID</div></div><div class="mop" onclick="openMillOp('Counterbore')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M6 8h5v-4h2v4h5M8 8v8h8V8" stroke="#9fc4e6" stroke-width="1.5" stroke-linejoin="round"/></svg><div class="mn">Counterbore</div><div class="ms">Front / back C'bore</div></div><div class="mop" onclick="openThreadMill()"><span class="mtag lv">LIVE</span><svg class="mi" viewBox="0 0 24 24" fill="none"><path d="M6 12a6 6 0 1112 0" stroke="#5fd0ff" stroke-width="1.7"/><path d="M9 15h6M9 17.5h6" stroke="#5fd0ff" stroke-width="1.3"/></svg><div class="mn">Thread milling</div><div class="ms">Helical interp.</div></div><div class="mop" onclick="openMillOp('Circular groove')"><span class="mtag sn">SOON</span><svg class="mi" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="7" stroke="#9fc4e6" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="#9fc4e6" stroke-width="1.4" stroke-dasharray="2 2"/></svg><div class="mn">Circular groove</div><div class="ms">O-ring / seal slot</div></div></div></section>
@@ -954,7 +907,6 @@
   <button id="savestepbtn" onclick="addToJob()" style="display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:60;background:#3fcf86;color:#06243a;border:none;font-weight:700;padding:11px 18px;border-radius:24px;box-shadow:0 6px 20px rgba(0,0,0,.4);cursor:pointer">&#10003; Save to step</button>
   <button class="fab" onclick="sendMsg()" title="Send message / request a feature" aria-label="Send message" style="width:auto;padding:9px 12px;font-size:17px;border-radius:50%">&#9993;&#65039;</button>
 </div>
-
 <script>
 window.onerror=function(m,src,l){var e=document.getElementById('engineStatus');if(e){e.textContent='Startup error: '+m+' (line '+l+')';e.style.color='var(--pro)';}return false;};
 const ADVANCED=true;  /* single complete build */
@@ -992,7 +944,6 @@ async function initPy(){
   }catch(e){clearTimeout(wd);S('Engine load failed: '+(e&&e.message?e.message:e),'var(--pro)');}
 }
 function notReady(){$('p_res').innerHTML='<p class="warn">Engine still loading \u2014 wait a few seconds and tap Generate again.</p>';$('cyc').innerHTML='';}
-
 const $=id=>document.getElementById(id);
 /* v24.1: pretty-print engine errors, hide Python traceback */
 function cleanErr(e){
@@ -1324,7 +1275,6 @@ document.addEventListener('keydown',function(e){if(e.key!=='ArrowUp'&&e.key!=='A
 function matBy(name){return MATS.find(x=>x[0]===name)||MATS.find(x=>x[0]==='Stainless 316 austenitic')||MATS[0];}
 function clearD(){var e=$('d');if(e)e.value='';if($('rpm'))$('rpm').value='';if($('fz'))$('fz').value='';fzEdited=false;}
 function taperOffset(internal,L){var pre=(method==='Turn')?'t_':'';var tm=$(pre+'thtaper');if(tm){var mode=tm.value;var dd=parseFloat($(pre+'diadiff').value);var deg=parseFloat($(pre+'taperdeg').value);if(mode==='Manual'){if(!isNaN(dd)&&dd!==0)return dd;if(!isNaN(deg)&&deg!==0)return 2*L*Math.tan(deg*Math.PI/180);return 0;}if(mode==='NPT'||mode==='BSPT')return internal?-L/16:L/16;}var pv=$('profile').value;if(pv==='NPT (Taper)'||pv==='BSPT (Taper)')return internal?-L/16:L/16;return 0;}
-
 function setMethod(m){method=m;
   var mm=$('mMill'),mt=$('mTurn');if(mm)mm.classList.toggle('on',m==='Mill');if(mt)mt.classList.toggle('on',m==='Turn');
   var os=$('opsel');if(os)os.value=(m==='Mill'?'Milling':'Turning');
@@ -1372,7 +1322,6 @@ function buildTurnPasses(){
   return out;
 }
 function recalcT(){var Vc=num('t_vc',120),D=num('D',16),mx=num('t_maxrpm',5000);var rpm=Math.round(Vc*1000/(Math.PI*D));if(mx>0&&rpm>mx)rpm=mx;$('t_rpm').value=rpm;if($('t_total'))$('t_total').value=buildTurnPasses().length;}
-
 function updateTeeth(){var il=$('insl'),tt=$('teeth');if(!il||!tt)return;var t=parseFloat(il.value),P=num('P',0);
   if(il.value.trim()&&t>0&&P>0){tt.value=Math.max(1,Math.floor(t/P));tt.readOnly=true;tt.style.color='var(--acc)';tt.style.background='#101a25';}
   else{tt.readOnly=false;tt.style.color='';tt.style.background='';}matChange();}
@@ -1512,7 +1461,6 @@ function bindSim(cv){if(SIM.bound)return;SIM.bound=true;var T={};cv.style.touchA
   cv.addEventListener('wheel',function(e){e.preventDefault();SIM.zoom*=(e.deltaY<0?1.1:0.9);renderSim();},{passive:false});
 }
 function genProg(){ if(method!=='Turn'&&$('ctrl')&&$('ctrl').value.indexOf('Turn-mill')>=0&&$('side')&&$('side').value==='Internal') return genTurnMill(); if(!pyReady){pendingGen=true;$('p_res').innerHTML='<p class="warn">Engine loading (first time only, ~10\u201330s on phone)\u2026 it will generate automatically once ready.</p>';return;} pendingGen=false; if(method==='Turn') return genTurn(); return genMill(); }
-
 function computeVcFz(stab){var m=matBy($('mat').value);var vc=m[1],fzb=m[3];var s=Math.max(0,Math.min(100,stab));var vcF=Math.max(0.33,s/50);var fzF=s>=50?(0.5+s/100):Math.max(0.5,s/50);var d=num('d',0),nt=Math.max(1,Math.round(num('teeth',1)));var nf=Math.max(0.1,1-0.08*Math.min(9,nt-1)-0.02*Math.max(0,nt-10));return {vc:Math.round(vc*vcF),fz:d>0?(fzb*Math.min(d,40)/10*nf*fzF):0};}
 function applyHeader(prog,msg,uname){var L=prog.split('\n');var ins=[];if(msg)ins.push('('+msg+')');if(uname)ins.push('(BY '+uname+')');if(!ins.length)return prog;for(var i=0;i<L.length;i++){if(/^\s*O\d/.test(L[i])||/^\s*%1001/.test(L[i])){L.splice.apply(L,[i+1,0].concat(ins));return L.join('\n');}}L.splice.apply(L,[1,0].concat(ins));return L.join('\n');}
 function applySubprogram(prog){var L=prog.split('\n'),o=[];for(var i=0;i<L.length;i++){var ln=L[i],t=ln.trim();
@@ -1862,7 +1810,6 @@ function genDrill(){var d=parseFloat($('dr_d').value);if(!(d>0)){$('dr_res').inn
 function saveDrill(){if(!lastProg)return;var nm='YANTRA_DRILL_D'+($('dr_d').value||'')+'.txt';var b=new Blob([lastProg],{type:'text/plain'});var u=URL.createObjectURL(b);var x=document.createElement('a');x.href=u;x.download=nm;document.body.appendChild(x);x.click();setTimeout(function(){URL.revokeObjectURL(u);x.remove();},800);}
 function saveProg(){if(!lastProg)return;var D=num('D',16),P=num('P',2),side=$('side').value==='Internal'?'INT':'EXT',mth=method==='Turn'?'TURN':'MILL';var name=('YANTRA_M'+D+'x'+P+'_'+side+'_'+mth+'.txt').replace(/\s+/g,'');addHist(name,lastProg);var b=new Blob([lastProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},800);}
 function copyProg(){if(navigator.clipboard&&lastProg){navigator.clipboard.writeText(lastProg);$('copybtn').textContent='✓ Copied';setTimeout(function(){$('copybtn').textContent='📋  Copy program';},1500);}}
-
 function fillSizes(){opt($('d_size'),SERIES[$('d_series').value].map(x=>x[0]));calcData();}
 function calcData(){const row=find($('d_size').value);if(!row)return;const des=row[0],P=row[1],D=row[2];
   const drill=Math.round((D-P)/0.05)*0.05,minorInt=D-1.0825*P,minorExt=D-1.226*P,pd=D-0.6495*P,ht=0.6134*P,W=0.57735*P,M3=pd+3*W-1.5155*P;
@@ -1877,9 +1824,7 @@ function calcData(){const row=find($('d_size').value);if(!row)return;const des=r
    '<div class="kv"><span class="k">3-wire over (W='+r(W,3)+')</span><span class="v">'+r(M3,3)+' mm</span></div>'+
    '<div class="kv"><span class="k">Thread height</span><span class="v">'+r(ht,3)+' mm</span></div></div>'+
    '<div style="margin-top:12px"><span class="chip">75% engagement</span><span class="chip">ISO 60&deg;</span></div>';}
-
 function sendMsg(){window.location.href='mailto:ginoymanuel@gmail.com?subject=YANTRA%20feedback&body='+encodeURIComponent('YANTRA feedback:\n\n');}
-
 function init(){
   /* single complete build: all sections active */
   opt($('mat'),MATS.map(x=>x[0]),'Stainless 316 austenitic');
@@ -1893,7 +1838,6 @@ function init(){
   var _d=$('d');if(_d){var _dc=function(){_d.style.caretColor=(_d.value.trim()==='')?'#000':'';};_d.addEventListener('focus',_dc);_d.addEventListener('input',_dc);_d.addEventListener('blur',_dc);_dc();}
   var _dd=$('dr_d');if(_dd){var _ddc=function(){_dd.style.caretColor=(_dd.value.trim()==='')?'#000':'';};_dd.addEventListener('focus',_ddc);_dd.addEventListener('input',_ddc);_dd.addEventListener('blur',_ddc);_ddc();}
 }
-
 GL2={C:'<polygon points="50,20 75,50 50,80 25,50" fill="url(#gold)" stroke="#a8791e" stroke-width="4"/>',D:'<polygon points="18,50 50,33 82,50 50,67" fill="url(#gold)" stroke="#a8791e" stroke-width="4"/>',V:'<polygon points="10,50 50,38 90,50 50,62" fill="url(#gold)" stroke="#a8791e" stroke-width="4"/>',T:'<polygon points="50,26 72,68 28,68" fill="url(#gold)" stroke="#a8791e" stroke-width="4"/>',S:'<rect x="30" y="30" width="40" height="40" rx="3" fill="url(#gold)" stroke="#a8791e" stroke-width="4"/>',W:'<path d="M50,24 Q78,45 72,66 Q50,74 28,66 Q22,45 50,24 Z" fill="url(#gold)" stroke="#a8791e" stroke-width="4"/>',CUST:'<polygon points="50,20 75,50 50,80 25,50" fill="url(#gold)" stroke="#a8791e" stroke-width="3" stroke-dasharray="6 4"/>',GRV:'<rect x="42" y="22" width="16" height="56" rx="2" fill="url(#gold)" stroke="#a8791e" stroke-width="4"/>'};
 function insCell(sh,num,sel){var pts=SHP[sh]||SHP.C;var f=pts.split(' ')[0].split(',');var ang=ORI[num];var g;if(num===9){g='<circle cx="0" cy="0" r="16" fill="url(#gold)" stroke="#a8791e" stroke-width="2.5"/><circle cx="0" cy="0" r="3" fill="#ff5a5a"/>';}else{g='<g transform="rotate('+ang+')"><polygon points="'+pts+'" fill="url(#gold)" stroke="#a8791e" stroke-width="2.5"/><circle cx="'+f[0]+'" cy="'+f[1]+'" r="3" fill="#ff5a5a" stroke="#fff" stroke-width="0.7"/></g>';}var bg=sel?'#16301f':'#0f1c27',bd=sel?'#5cd06a':'#26404f';return '<button type="button" onclick="insPickOrient('+num+')" style="aspect-ratio:1;background:'+bg+';border:1px solid '+bd+';border-radius:10px;padding:4px;cursor:pointer;position:relative"><span style="position:absolute;top:2px;left:5px;font-size:9px;color:#7f97a8">'+num+'</span><svg viewBox="-30 -30 60 60" width="100%" height="100%">'+g+'</svg></button>';}
 function opIcoOD(){var s='<line x1="6" y1="40" x2="114" y2="40" stroke="#5f7185" stroke-width="1.1" stroke-dasharray="10 3 2 3"/>';s+='<ellipse cx="14" cy="40" rx="6" ry="20" fill="#3f4951"/>';s+='<rect x="14" y="26" width="86" height="28" rx="1.5" fill="url(#steel)"/><rect x="14" y="28" width="86" height="2.6" fill="#fff" opacity="0.4"/>';s+='<ellipse cx="100" cy="40" rx="5" ry="14" fill="url(#face)" stroke="#6b7580" stroke-width="0.8"/>';s+='<rect x="52" y="4" width="17" height="13" rx="2" fill="url(#dark)"/>';s+='<polygon points="60,26 52,13 68,13" fill="url(#gold)" stroke="#a8791e" stroke-width="0.8"/><circle cx="60" cy="26" r="2.6" fill="#ff5a5a" stroke="#fff" stroke-width="0.7"/>';s+=mfAh(64,21,96,21,'#3fe06a');return s;}
@@ -1971,22 +1915,15 @@ function cloudUI(){
   if(reconnected){cloudStatus('Previously connected — tap Connect to resume syncing.','#90a4b8');}
 }
 try{cloudUI();}catch(e){}
-
-
-
 (function(){
-
 var typ='od', patMode='pitch', strat='single', finStrat='profile', rf='both';
-
 function $(id){return document.getElementById(id);}
 function toggle(el){el.parentNode.classList.toggle('open');}
-
 document.querySelectorAll('#stratPills .pill').forEach(function(p){p.onclick=function(){document.querySelectorAll('#stratPills .pill').forEach(function(x){x.classList.remove('on');});p.classList.add('on');strat=p.getAttribute('data-v');updateStratHint();};});
 document.querySelectorAll('#finPills .pill').forEach(function(p){p.onclick=function(){document.querySelectorAll('#finPills .pill').forEach(function(x){x.classList.remove('on');});p.classList.add('on');finStrat=p.getAttribute('data-v');};});
 document.querySelectorAll('#rfPills .pill').forEach(function(p){p.onclick=function(){document.querySelectorAll('#rfPills .pill').forEach(function(x){x.classList.remove('on');});p.classList.add('on');rf=p.getAttribute('data-v');};});
 document.querySelectorAll('#typeChips .chip').forEach(function(c){c.onclick=function(){document.querySelectorAll('#typeChips .chip').forEach(function(x){x.classList.remove('on');});c.classList.add('on');typ=c.getAttribute('data-t');recalc();};});
 document.querySelectorAll('.chip[data-p]').forEach(function(c){c.onclick=function(){document.querySelectorAll('.chip[data-p]').forEach(function(x){x.classList.remove('on');});c.classList.add('on');patMode=c.getAttribute('data-p');$('pat2lbl').textContent=(patMode==='pitch'?'Pitch (mm)':'Total span (mm)');recalc();};});
-
 function updateStratHint(){
   var D1=parseFloat($('D1').value)||0, D2=parseFloat($('D2').value)||0;
   var Z1=parseFloat($('Z1').value)||0, Z2=parseFloat($('Z2').value)||0;
@@ -2001,7 +1938,6 @@ function updateStratHint(){
   document.querySelectorAll('#stratPills .pill').forEach(function(p){p.classList.toggle('suggested', p.getAttribute('data-v')===suggested && !p.classList.contains('on'));});
   $('stratHint').innerHTML='<b>Suggested: '+({single:'Single plunge',multi:'Multi-plunge',plturn:'Plunge turning',ramp:'Ramping'})[suggested]+'</b> &mdash; '+reason;
 }
-
 var MATERIALS=[
   {v:'steel_lc',    name:'Low carbon steel <0.55%C',    iso:'P', vc:120, fz:0.08, mach:78,  c:'#3b8bd9'},
   {v:'steel_1045',  name:'AISI 1045 medium carbon',     iso:'P', vc:100, fz:0.08, mach:65,  c:'#3b8bd9'},
@@ -2027,7 +1963,6 @@ var MATERIALS=[
   {v:'hard_4340',   name:'4340 hardened HRC 45-50',     iso:'H', vc:60,  fz:0.05, mach:20,  c:'#4a4a4a'},
   {v:'hard_d2',     name:'D2 tool steel HRC 58-62',     iso:'H', vc:40,  fz:0.03, mach:12,  c:'#4a4a4a'},
 ];
-
 function initMaterials(){
   var sel=$('mat');
   MATERIALS.forEach(function(m){
@@ -2042,7 +1977,6 @@ function initMaterials(){
   });
   matChange();
 }
-
 function matChange(){
   var opt=$('mat').selectedOptions[0];
   if(!opt)return;
@@ -2056,7 +1990,6 @@ function matChange(){
   $('matMach').textContent=mach+'%';
   recalc();
 }
-
 function drawInsertRef(){
   var svg=$('insertRef'); if(!svg)return;
   var ref=$('tl_off_ref').value;
@@ -2087,7 +2020,7 @@ function drawInsertRef(){
   g+='<text x="'+cx+'" y="'+(cy+H/2+14)+'" fill="#90a4b8" font-size="10" text-anchor="middle">Wi = '+Wi+' mm</text>';
   svg.innerHTML=g;
 }
-
+try{window.drawInsertRef=drawInsertRef;}catch(e){}
 function applyAllCorners(){
   var t=$('allc_t').value;
   var s=$('allc_s').value||'0';
@@ -2099,7 +2032,6 @@ function applyAllCorners(){
   });
   recalc();
 }
-
 function recalc(){
   $('trapBox').style.display=$('mod_trap').checked?'block':'none';
   $('asymBox').style.display=$('mod_asym').checked?'block':'none';
@@ -2113,17 +2045,14 @@ function recalc(){
   $('modeBadge').textContent=m?'manual':'auto';
   $('modeBadge').style.background=m?'rgba(255,112,67,.15)':'rgba(67,209,122,.15)';
   $('modeBadge').style.color=m?'var(--warn)':'var(--ok)';
-
   var D1=parseFloat($('D1').value)||0, D2=parseFloat($('D2').value)||0;
   var Z1=parseFloat($('Z1').value)||0, Z2=parseFloat($('Z2').value)||0;
   $('wCalc').textContent=Math.abs(Z1-Z2).toFixed(3);
   $('dCalc').textContent=(Math.abs(D1-D2)/2).toFixed(3);
-
   var Vc=parseFloat($('p_vc').value)||0;
   var maxR=parseFloat($('p_maxrpm').value)||99999;
   var rpm=(D1>0&&Vc>0)?Math.min(maxR,Math.round(Vc*1000/(Math.PI*D1))):0;
   $('p_rpm').value=rpm;
-
   var A={x:D1, z:Z1}, B={x:D2, z:Z1}, C={x:D2, z:Z2}, D={x:D1, z:Z2};
   if($('mod_trap').checked){
     var botW=parseFloat($('botW').value)||Math.abs(Z1-Z2);
@@ -2146,12 +2075,10 @@ function recalc(){
   $('B_x').value=B.x.toFixed(3); $('B_z').value=B.z.toFixed(3);
   $('C_x').value=C.x.toFixed(3); $('C_z').value=C.z.toFixed(3);
   $('D_x').value=D.x.toFixed(3); $('D_z').value=D.z.toFixed(3);
-
   // Now build points from what's actually in the cells (allows manual override)
   updateTableAndPreview();
   updateStratHint();
 }
-
 function readCorners(){
   return ['A','B','C','D'].map(function(p){
     var t=$(p+'_t').value;
@@ -2165,26 +2092,22 @@ function readCorners(){
     };
   });
 }
-
 function updateTableAndPreview(){
   var pts=readCorners();
   renderTable(pts);
   gvDraw();
   pzAttach('gv_preview',gvView,gvDraw);  // ensures interactive zoom/pan on the preview SVG
 }
-
 function pointEdit(p){
   // User edited a corner X or Z directly - just refresh table + preview without re-syncing from geometry
   updateTableAndPreview();
 }
-
 function cornerRow(id){
   var t=$(id+'_t').value;
   var s1=parseFloat($(id+'_s1').value)||0;
   var s2=parseFloat($(id+'_s2').value)||0;
   return {ctype:t, cs1:s1, cs2:$('indepLegs').checked?s2:s1};
 }
-
 function renderTable(pts){
   var tb=$('ptTbl').querySelector('tbody'); tb.innerHTML='';
   var manual=$('manual').checked;
@@ -2206,7 +2129,6 @@ function renderTable(pts){
     $('ptStatus').innerHTML='<b>4 corner points</b> &middot; single groove';
   }
 }
-
 function drawPreview(pts){
   var svg=$('prev'); svg.innerHTML='';
   var D1=pts[0].x;
@@ -2255,7 +2177,6 @@ function drawPreview(pts){
     }
   }
 }
-
 // -------- G-CODE GENERATION --------
 function generate(P){
   var _T=!!(P&&P._test);
@@ -2297,7 +2218,10 @@ function generate(P){
   var mv=[];
   mv.push({t:'cmt', txt:'Groove program - '+stratLabel});
   mv.push({t:'cmt', txt:'Insert width: '+Wi.toFixed(3)+' mm  |  Offset reference: '+originLabel+' (single-plunge edge aligns to '+({L:'LEFT wall',C:'groove centre',R:'RIGHT wall'}[origin])+')'});
-  mv.push({t:'cmt', txt:'Tool ref: IMAGINARY CORNER (touch off the 2 outer edges) - no tip number, no G41/G42 needed | Nose R '+(rIns.toFixed(3))+' mm baked into the finish path'});
+  var _isComp=(compSet==='auto'||compSet==='G41'||compSet==='G42');
+  mv.push({t:'cmt', txt: _isComp
+    ? ('Finish comp: G41/G42 nose-R comp (control offsets nose R '+rIns.toFixed(3)+' mm) - SET tool nose R + tip number on the machine. Rough still references imaginary corner.')
+    : ('Tool ref: IMAGINARY CORNER (touch off the 2 outer edges) - no tip number, no G41/G42 needed | Nose R '+(rIns.toFixed(3))+' mm baked into the finish path')});
   mv.push({t:'cmt', txt:'Material: '+mat});
   mv.push({t:'cmt', txt:'Target control: '+ctrl+' (long-form G-code)'});
   mv.push({t:'cmt', txt:'Insert width Wi='+Wi+' mm - Offset reference: '+offLbl});
@@ -2310,7 +2234,6 @@ function generate(P){
   mv.push({t:'raw', s:'G96 S'+Vc+' M03 M08'});
   mv.push({t:'raw', s:'G50 S'+maxRPM});
   mv.push({t:'g0', X:safeX, Z:Z1+sZ});
-
   for(var g=0;g<N;g++){
     var z1g=Z1+g*pitch*dir, z2g=Z2+g*pitch*dir;
     if(N>1)mv.push({t:'cmt', txt:'-- Groove '+(g+1)+'/'+N+' at Z='+z1g.toFixed(3)+' --'});
@@ -2367,8 +2290,15 @@ function generate(P){
       }
     }
     if(doFin){
-      // Fanuc TNRC + grooving flank overlay: gouge-safe finish for the width-Wi insert.
-      finishTNRC(mv, D1, D2, z1g, z2g, corners, rIns, Wi, safeX, Ff, refOff);
+      // Finish mode from tl_comp: 'off'=baked-in manual nose-R (default), else G41/G42 two half-pass.
+      if(compSet==='auto'||compSet==='G41'||compSet==='G42'){
+        finishTNRCcomp(mv, D1, D2, z1g, z2g, corners, rIns, Wi, safeX, Ff, refOff, compSet);
+      } else if(compSet==='twoblk'){
+        finishTwoBlock(mv, D1, D2, z1g, z2g, corners, rIns, Wi, safeX, Ff, refOff);
+      } else {
+        // Fanuc TNRC + grooving flank overlay: gouge-safe finish for the width-Wi insert.
+        finishTNRC(mv, D1, D2, z1g, z2g, corners, rIns, Wi, safeX, Ff, refOff);
+      }
     }
   }
   mv.push({t:'g0', X:safeX});
@@ -2376,7 +2306,6 @@ function generate(P){
   mv.push({t:'raw', s:'M09 M05'});
   mv.push({t:'raw', s:'M30'});
   mv.push({t:'raw', s:'%'});
-
   // dedup consecutive identical X-only rapids
   mv=mv.filter(function(m,i){return !(m.t==='g0'&&m.X!==undefined&&m.Z===undefined&&i>0&&mv[i-1].t==='g0'&&mv[i-1].X===m.X&&mv[i-1].Z===undefined);});
   // === Emit ===
@@ -2413,7 +2342,6 @@ function pluneRough(mv, xTop, xBot, z, safeX, pd, pr, F, dwell, peck){
   if(dwell>0)mv.push({t:'dwell', p:dwell});
   mv.push({t:'g0', X:safeX});
 }
-
 // ===== Fanuc Tool-Nose-Radius Compensation engine (B-62554E section 15.2) =====
 // Computes the tool-nose-CENTRE path from the finished profile. point={z,x} (x=radius).
 var TNRC=(function(){
@@ -2442,7 +2370,7 @@ var TNRC=(function(){
       var line=o1.type==='line'?o1:(o2.type==='line'?o2:null);
       if(line){var arc=o1.type==='arc'?o1:o2;var d=sub(line.p2,line.p1),f=sub(line.p1,arc.center);
         var a=d.z*d.z+d.x*d.x,b2=2*(f.z*d.z+f.x*d.x),c=f.z*f.z+f.x*f.x-arc.rad*arc.rad,disc=b2*b2-4*a*c;
-        if(disc<0)return corner;disc=Math.sqrt(disc);
+        if(disc<-1e-6)return corner;if(disc<0)disc=0;disc=Math.sqrt(disc);
         [(-b2-disc)/(2*a),(-b2+disc)/(2*a)].forEach(function(t){cands.push(add(line.p1,mul(d,t)));});
       } else {
         var c1=o1.center,c2=o2.center,r1=o1.rad,r2=o2.rad,dz=c2.z-c1.z,dx=c2.x-c1.x,D=Math.hypot(dz,dx);
@@ -2509,7 +2437,6 @@ var TNRC=(function(){
   }
   return {run:run, run2:run2, run2moves:run2moves};
 })();
-
 // Grooving finish = Fanuc TNRC + flank overlay (gouge-safe for a width-Wi grooving insert).
 // Straight walls/floor are flank-cut (offset 0) with the left-corner reference shift
 // (-Wi on the near/right-edge half, 0 on the far/left-edge half); mouth chamfers/rounds are
@@ -2557,15 +2484,174 @@ function finishTNRC(mv, D1, D2, Z1, Z2, corners, nr, Wi, safeX, F, refOff){
   var seq=TNRC.run2moves(blocks);
   mv.push({t:'cmt', txt:'Finish - Fanuc TNRC + flank overlay (nose R'+nr.toFixed(2)+', G02/G03 arcs, no G41/G42)'});
   baseAlarm.forEach(function(a){ mv.push({t:'cmt', txt:'ALARM: '+a+' (OVERRIDEABLE)'}); });
-  mv.push({t:'g0', X:safeX});
-  mv.push({t:'g0', X:2*seq.start.x, Z:seq.start.z});
-  seq.moves.forEach(function(m){
-    if(m.code==='g1') mv.push({t:'g1', X:2*m.to.x, Z:m.to.z, F:F});
-    else mv.push({t:m.code, X:2*m.to.x, Z:m.to.z, R:m.R, F:F});
+  // ---- Approach sequence: P1 Safe -> P2 Clearance -> P3 Infeed -> feed through P4 Cut-start ----
+  var _rOD=D1/2;
+  mv.push({t:'g0', X:D1+100, Z:50});          // P1  Safe X & Z: 50mm radial above OD, 50mm off face
+  mv.push({t:'g0', X:D1+10, Z:5});            // P2  Clearance: 5mm radial above OD, 5mm off face (Z0)
+  // P3 Infeed: 1 nose-radius above OD, on the first-cut line extended (co-axial) so the G00
+  // never lands the nose on material. Straight first move (chamfer / sharp); arcs (radius mouth)
+  // keep the plain start for now.
+  var _p0=seq.start, _m0=seq.moves[0], _appr=null, _arcLead=false;
+  if(_m0 && _m0.code==='g1'){
+    // chamfer / sharp mouth: co-axial infeed 1 nr above OD on the first-cut line
+    var _dz=_m0.to.z-_p0.z, _dx=_m0.to.x-_p0.x, _L=Math.hypot(_dz,_dx);
+    if(_L>1e-6 && _dx<-1e-6){ var _t=(_p0.x-(_rOD+nr))/(_dx/_L); _appr={z:_p0.z-(_dz/_L)*_t, x:_p0.x-(_dx/_L)*_t}; }
+  } else if(_m0 && (_m0.code==='g2'||_m0.code==='g3') && Math.abs(_p0.x-_rOD)<1e-3){
+    // radius mouth (arc entry): 0.5 nr above OD, 2 nr toward the open side of the mouth
+    var _od=(_m0.to.z<_p0.z)?1:-1;
+    _appr={x:_rOD+0.5*nr, z:_p0.z+2*nr*_od}; _arcLead=true;
+  }
+  if(_appr) mv.push({t:'g0', X:2*_appr.x, Z:_appr.z});   // P3 infeed
+  else mv.push({t:'g0', X:2*seq.start.x, Z:seq.start.z});
+  if(_arcLead) mv.push({t:'g1', X:2*_p0.x, Z:_p0.z, F:F});   // lead-in feed onto the arc's OD-tangent start
+  // (P4 = cut start; the following feed passes through it)
+  // Retract lead-out: extend the LAST cut co-axially to 1 nr above the OD (X = D1+2nr) so the
+  // G00 retract lifts off in air, never dragging the nose out through the OD. Straight last
+  // move (chamfer / sharp); arc last move (radius mouth) keeps its plain end for now.
+  var _lm=seq.moves[seq.moves.length-1], _lp=(seq.moves.length>=2)?seq.moves[seq.moves.length-2].to:seq.start, _lead=null, _leadArc=null;
+  if(_lm && _lm.code==='g1'){
+    var _ez=_lm.to.z-_lp.z, _ex=_lm.to.x-_lp.x, _eL=Math.hypot(_ez,_ex);
+    if(_eL>1e-6 && _ex>1e-6){ var _s=((_rOD+nr)-_lm.to.x)/(_ex/_eL); _lead={z:_lm.to.z+(_ez/_eL)*_s, x:_lm.to.x+(_ex/_eL)*_s}; }
+  } else if(_lm && (_lm.code==='g2'||_lm.code==='g3') && Math.abs(_lm.to.x-_rOD)<1e-3){
+    // radius mouth (arc exit): after the arc ends on the OD, lift 0.5 nr above OD and 2 nr
+    // toward the open side (mirror of the arc infeed).
+    var _eod=(_lm.to.z<_lp.z)?-1:1;
+    _leadArc={x:_rOD+0.5*nr, z:_lm.to.z+2*nr*_eod};
+  }
+  seq.moves.forEach(function(m,_i){
+    var _to=(_i===seq.moves.length-1 && _lead)?_lead:m.to;
+    if(m.code==='g1') mv.push({t:'g1', X:2*_to.x, Z:_to.z, F:F});
+    else mv.push({t:m.code, X:2*_to.x, Z:_to.z, R:m.R, F:F});
   });
+  if(_leadArc) mv.push({t:'g1', X:2*_leadArc.x, Z:_leadArc.z, F:F});   // arc mouth lead-out
+  // Retract mirrors the approach: back out through P2 (clearance) then P1 (safe).
+  mv.push({t:'g0', X:D1+10, Z:5});      // P2 clearance: 5mm above OD, 5mm off face
+  mv.push({t:'g0', X:D1+100, Z:50});    // P1 safe: 50mm above OD, 50mm off face
+}
+// Two-block MANUAL finish: same nose-R-baked contour as finishTNRC, but cut as a NEAR half
+// then (retract) a FAR half, each entering from its own mouth and meeting at the floor centre.
+// No G41/G42. Handles all corner combos (external chamfer/radius, internal chamfer/radius).
+function finishTwoBlock(mv, D1, D2, Z1, Z2, corners, nr, Wi, safeX, F, refOff){
+  if(refOff===undefined)refOff=Wi/2;
+  var rOD=D1/2, rFL=D2/2, zN=Math.max(Z1,Z2), zF=Math.min(Z1,Z2);
+  var A=corners.A||{t:'Sharp',s1:0}, D=corners.D||{t:'Sharp',s1:0};
+  var V=[], S=[];
+  function vtx(z,x,reg){ V.push({z:z,x:x,reg:reg}); return V.length-1; }
+  var wallTop;
+  if(A.t==='Radius'&&A.s1>0){ var Ra=A.s1; var a0=vtx(zN+Ra,rOD,'near'), b0=vtx(zN,rOD-Ra,'near'); S.push({i:a0,j:b0,type:'arc',cz:zN+Ra,cx:rOD-Ra,cw:false,off:nr}); wallTop=b0; }
+  else if(A.t==='Chamfer'&&A.s1>0){ var ch=A.s1; var a1=vtx(zN+ch,rOD,'near'), b1=vtx(zN,rOD-ch,'near'); S.push({i:a1,j:b1,type:'line',off:nr}); wallTop=b1; }
+  else { wallTop=vtx(zN,rOD,'near'); }
+  var B=corners.B||{t:'Sharp',s1:0}, C=corners.C||{t:'Sharp',s1:0}, baseAlarm=[];
+  var nbFloor;
+  if(B.t==='Chamfer'&&B.s1>0){ var sB=B.s1; var wB=vtx(zN,rFL+sB,'near'); S.push({i:wallTop,j:wB,type:'line',off:0}); nbFloor=vtx(zN-sB,rFL,'near'); S.push({i:wB,j:nbFloor,type:'line',off:nr}); }
+  else if(B.t==='Radius'&&B.s1>0){ var RB=B.s1; if(RB<nr){baseAlarm.push('BASE B R'+RB.toFixed(2)+' < NOSE '+nr.toFixed(2)+' -> CUT AS '+nr.toFixed(2)); RB=nr;} var wB2=vtx(zN,rFL+RB,'near'); S.push({i:wallTop,j:wB2,type:'line',off:0}); nbFloor=vtx(zN-RB,rFL,'near'); S.push({i:wB2,j:nbFloor,type:'arc',cz:zN-RB,cx:rFL+RB,cw:true,off:nr}); }
+  else { nbFloor=vtx(zN,rFL,'near'); S.push({i:wallTop,j:nbFloor,type:'line',off:0}); }
+  var baseFar;
+  if(C.t==='Chamfer'&&C.s1>0){ var sC=C.s1; var fC=vtx(zF+sC,rFL,'far'); S.push({i:nbFloor,j:fC,type:'line',off:0}); baseFar=vtx(zF,rFL+sC,'far'); S.push({i:fC,j:baseFar,type:'line',off:nr}); }
+  else if(C.t==='Radius'&&C.s1>0){ var RC=C.s1; if(RC<nr){baseAlarm.push('BASE C R'+RC.toFixed(2)+' < NOSE '+nr.toFixed(2)+' -> CUT AS '+nr.toFixed(2)); RC=nr;} var fC2=vtx(zF+RC,rFL,'far'); S.push({i:nbFloor,j:fC2,type:'line',off:0}); baseFar=vtx(zF,rFL+RC,'far'); S.push({i:fC2,j:baseFar,type:'arc',cz:zF+RC,cx:rFL+RC,cw:true,off:nr}); }
+  else { baseFar=vtx(zF,rFL,'far'); S.push({i:nbFloor,j:baseFar,type:'line',off:0}); }
+  if(D.t==='Radius'&&D.s1>0){ var Rd=D.s1; var w=vtx(zF,rOD-Rd,'far'), d2=vtx(zF-Rd,rOD,'far'); S.push({i:baseFar,j:w,type:'line',off:0}); S.push({i:w,j:d2,type:'arc',cz:zF-Rd,cx:rOD-Rd,cw:false,off:nr}); }
+  else if(D.t==='Chamfer'&&D.s1>0){ var chd=D.s1; var w2=vtx(zF,rOD-chd,'far'), d3=vtx(zF-chd,rOD,'far'); S.push({i:baseFar,j:w2,type:'line',off:0}); S.push({i:w2,j:d3,type:'line',off:nr}); }
+  else { var top=vtx(zF,rOD,'far'); S.push({i:baseFar,j:top,type:'line',off:0}); }
+  V.forEach(function(v){ v.zs = v.z + (v.reg==='near'? (-Wi+refOff) : refOff); });
+  var blocks=S.map(function(s){
+    var p1={z:V[s.i].zs,x:V[s.i].x}, p2={z:V[s.j].zs,x:V[s.j].x}, reg=V[s.i].reg;
+    var tv = (s.off>0) ? {z:(reg==='near'? nr : -nr), x:-nr} : {z:0,x:0};
+    if(s.type==='line') return {type:'line',p1:p1,p2:p2,off:s.off,tv:tv};
+    var cz=s.cz + (reg==='near'? (-Wi+refOff) : refOff);
+    return {type:'arc',p1:p1,p2:p2,center:{z:cz,x:s.cx},cw:s.cw,off:s.off,tv:tv};
+  });
+  var seq=TNRC.run2moves(blocks);
+  var pts=[{z:seq.start.z,x:seq.start.x}], codes=[];
+  seq.moves.forEach(function(m){ pts.push({z:m.to.z,x:m.to.x}); codes.push({code:m.code,R:m.R}); });
+  var fl=[]; for(var i=0;i<pts.length;i++) if(Math.abs(pts[i].x-rFL)<1e-4) fl.push(i);
+  var flip={g2:'g3',g3:'g2',g1:'g1'};
+  mv.push({t:'cmt', txt:'Finish - TWO-BLOCK manual (nose R'+nr.toFixed(2)+' baked, near then far, no G41/G42)'});
+  baseAlarm.forEach(function(a){ mv.push({t:'cmt', txt:'ALARM: '+a+' (OVERRIDEABLE)'}); });
+  function emitBlock(startPt, ml, label){
+    mv.push({t:'cmt', txt:label});
+    mv.push({t:'g0', X:safeX});
+    mv.push({t:'g0', Z:startPt.z});
+    mv.push({t:'g0', X:2*startPt.x});
+    ml.forEach(function(m){ if(m.code==='g1') mv.push({t:'g1',X:2*m.to.x,Z:m.to.z,F:F}); else mv.push({t:m.code,X:2*m.to.x,Z:m.to.z,R:m.R,F:F}); });
+    mv.push({t:'g0', X:safeX});
+  }
+  if(fl.length<2){ var ml=[]; for(var i=1;i<pts.length;i++) ml.push({code:codes[i-1].code,to:pts[i],R:codes[i-1].R}); emitBlock(pts[0], ml, 'Single pass (no floor split)'); mv.push({t:'g0', X:safeX}); return; }
+  var a=fl[0], b=fl[fl.length-1], zmid=(pts[a].z+pts[b].z)/2;
+  var dir=(pts[b].z>pts[a].z)?1:-1, ov=Math.min(nr*0.5, Math.abs(pts[a].z-pts[b].z)*0.15);
+  var nearML=[]; for(var i=1;i<=a;i++) nearML.push({code:codes[i-1].code,to:pts[i],R:codes[i-1].R});
+  nearML.push({code:'g1',to:{z:zmid+dir*ov,x:rFL}});
+  emitBlock(pts[0], nearML, 'NEAR half - from near mouth, cut to floor centre');
+  var farML=[]; for(var i=pts.length-2;i>=b;i--) farML.push({code:flip[codes[i].code],to:pts[i],R:codes[i].R});
+  farML.push({code:'g1',to:{z:zmid-dir*ov,x:rFL}});
+  emitBlock(pts[pts.length-1], farML, 'FAR half - from far mouth, cut to floor centre');
   mv.push({t:'g0', X:safeX});
 }
-
+// ===== G41/G42 two-half-pass groove finish (control applies nose R) =====
+// Programs the FINISHED PROFILE (true part coords, control offsets nose R via G41/G42),
+// split into a NEAR half (mouth A -> near wall -> base B -> floor past centre, comp G42)
+// and a FAR half (mouth D -> far wall -> base C -> floor past centre, comp G41), so the
+// offset side never has to flip mid-cut. Each half engages/cancels comp in free air
+// outside the OD. Insert-width datum uses the same offset-reference shift as the baked-in
+// path (near -Wi+refOff, far +refOff); the control adds nose R perpendicular. OD grooves.
+function finishTNRCcomp(mv, D1, D2, Z1, Z2, corners, nr, Wi, safeX, F, refOff, mode){
+  if(refOff===undefined)refOff=Wi/2;
+  var rOD=D1/2, rFL=D2/2, zN=Math.max(Z1,Z2), zF=Math.min(Z1,Z2), zMid=(zN+zF)/2;
+  var A=corners.A||{t:'Sharp',s1:0}, B=corners.B||{t:'Sharp',s1:0}, C=corners.C||{t:'Sharp',s1:0}, D=corners.D||{t:'Sharp',s1:0};
+  var compNear=(mode==='G41')?'G41':'G42', compFar=(mode==='G42')?'G42':'G41';
+  var ov0=Math.min(nr, (zN-zF)*0.1);           // tiny past-centre overlap when room allows
+  var lead=2*Math.max(nr,0.4)+1;               // radial engagement length outside OD
+  var appX=D1+2*lead+4;                          // rapid-clear diameter
+  var alarms=[];
+  function zs(z,near){ return z + (near? (-Wi+refOff) : refOff); }
+  // Build ordered profile nodes for one half. node: {z,r} line, or {z,r,arc:1,cw:bool,cr:R}.
+  // node[0] sits on the OD (r=rOD) = engagement arrival point.
+  function nearNodes(){ var p=[];
+    if(A.t==='Radius'&&A.s1>0){ p.push({z:zN+A.s1,r:rOD}); p.push({z:zN,r:rOD-A.s1,arc:1,cw:false,cr:A.s1}); }
+    else if(A.t==='Chamfer'&&A.s1>0){ p.push({z:zN+A.s1,r:rOD}); p.push({z:zN,r:rOD-A.s1}); }
+    else { p.push({z:zN,r:rOD}); }
+    if(B.t==='Chamfer'&&B.s1>0){ p.push({z:zN,r:rFL+B.s1}); p.push({z:zN-B.s1,r:rFL}); }
+    else if(B.t==='Radius'&&B.s1>0){ var RB=B.s1; if(RB<nr)alarms.push('BASE B R'+RB.toFixed(2)+' < NOSE '+nr.toFixed(2)+' -> control alarms 272'); p.push({z:zN,r:rFL+RB}); p.push({z:zN-RB,r:rFL,arc:1,cw:true,cr:RB}); }
+    else { p.push({z:zN,r:rFL}); }
+    // Floor: near half's CUTTING corner is the +Z (right) edge; its trailing (-Z) edge must
+    // not cross the far wall (zF), so the right corner can reach at most zF+Wi. Beyond that the
+    // floor middle is finished flat by the plunge, not by this pass.
+    var nbz=p[p.length-1].z, nend=Math.min(nbz, Math.max(zF+Wi, zMid-ov0));
+    if(nend < nbz-1e-4) p.push({z:nend, r:rFL});
+    else if(zF+Wi > nbz+1e-4) alarms.push('NEAR floor middle beyond insert reach - finished flat by plunge');
+    return p; }
+  function farNodes(){ var p=[];
+    if(D.t==='Radius'&&D.s1>0){ p.push({z:zF-D.s1,r:rOD}); p.push({z:zF,r:rOD-D.s1,arc:1,cw:true,cr:D.s1}); }
+    else if(D.t==='Chamfer'&&D.s1>0){ p.push({z:zF-D.s1,r:rOD}); p.push({z:zF,r:rOD-D.s1}); }
+    else { p.push({z:zF,r:rOD}); }
+    if(C.t==='Chamfer'&&C.s1>0){ p.push({z:zF,r:rFL+C.s1}); p.push({z:zF+C.s1,r:rFL}); }
+    else if(C.t==='Radius'&&C.s1>0){ var RC=C.s1; if(RC<nr)alarms.push('BASE C R'+RC.toFixed(2)+' < NOSE '+nr.toFixed(2)+' -> control alarms 272'); p.push({z:zF,r:rFL+RC}); p.push({z:zF+RC,r:rFL,arc:1,cw:false,cr:RC}); }
+    else { p.push({z:zF,r:rFL}); }
+    // Floor: far half's CUTTING corner is the -Z (left) edge; its trailing (+Z) edge must not
+    // cross the near wall (zN), so the left corner can reach at most zN-Wi.
+    var fbz=p[p.length-1].z, fend=Math.max(fbz, Math.min(zN-Wi, zMid+ov0));
+    if(fend > fbz+1e-4) p.push({z:fend, r:rFL});
+    return p; }
+  function emitHalf(nodes,comp,near,label){
+    var Z0=zs(nodes[0].z,near);
+    mv.push({t:'cmt', txt:label+' half - '+comp+' (control offsets nose R'+nr.toFixed(2)+')'});
+    mv.push({t:'g0', X:safeX});
+    mv.push({t:'g0', X:appX, Z:Z0});
+    mv.push({t:'g0', X:D1+2*lead});                                   // rapid close, still outside OD
+    mv.push({t:'raw', s:comp+' ( engage nose-R comp )'});
+    mv.push({t:'g1', X:D1, Z:Z0, F:F, cmt:'co-axial engage'});        // -X buildup move onto OD
+    for(var k=1;k<nodes.length;k++){ var n=nodes[k], Zk=zs(n.z,near), Xk=2*n.r;
+      if(n.arc) mv.push({t:(n.cw?'g2':'g3'), X:Xk, Z:Zk, R:n.cr, F:F});
+      else mv.push({t:'g1', X:Xk, Z:Zk, F:F}); }
+    mv.push({t:'raw', s:'G40 ( cancel comp )'});
+    mv.push({t:'g0', X:safeX});
+  }
+  mv.push({t:'cmt', txt:'Finish - G41/G42 two half-pass (nose R'+nr.toFixed(2)+' applied by CONTROL). SET on machine: tool nose R & tip number; near/far reference opposite insert corners.'});
+  if(Wi>(zN-zF)+1e-6) alarms.push('INSERT WIDTH '+Wi.toFixed(2)+' > GROOVE '+((zN-zF).toFixed(2))+' - halves fully overlap');
+  alarms.forEach(function(a){ mv.push({t:'cmt', txt:'ALARM: '+a+' (OVERRIDEABLE)'}); });
+  emitHalf(nearNodes(), compNear, true, 'NEAR');
+  emitHalf(farNodes(),  compFar,  false,'FAR');
+}
 // Finish pass with G41/G42 nose radius compensation and tangent-arc lead-in/out.
 // Dual-comp mode: two half-passes meeting at floor midpoint.
 //   Near-face half: approach A, tangent lead-in, G42, wall A->B, half floor B->mid, tangent lead-out, G40
@@ -2577,7 +2663,6 @@ function finishPass(mv, D1, D2, z1, z2, safeX, F, c, dwell, compSet, rIns){
   // offset is instead applied by hand in the contour (per the reference example).
   finishPassNoComp(mv, D1, D2, z1, z2, safeX, F, c, dwell);
 }
-
 // Half-pass: enter from one side, cut wall + half floor, exit
 // side: 'near' | 'far' | 'full'
 function finishHalfComp(mv, side, D1, D2, z1, z2, safeX, F, c, dwell, R, compCode){
@@ -2605,7 +2690,6 @@ function finishHalfComp(mv, side, D1, D2, z1, z2, safeX, F, c, dwell, R, compCod
     arcOutCode = 'g2';
     walkCorner = 'A';
   }
-
   // Co-axial lead-in/out: the pre-move is colinear with the first cut,
   // so the tool is already moving in the cutting direction when comp engages.
   // For the wall (first cut direction = -X), the lead-in is a straight -X move at Z=startZ.
@@ -2618,45 +2702,36 @@ function finishHalfComp(mv, side, D1, D2, z1, z2, safeX, F, c, dwell, R, compCod
   var leadStartZ = startZ;
   var leadEndX = D1;                                    // engagement move END = profile start
   var leadEndZ = startZ;
-
   // === Approach — rapid to safe X at target Z ===
   mv.push({t:'cmt', txt:'--- Finish '+side+' half (comp '+compCode+') ---'});
   mv.push({t:'g0', X: approachX, Z: approachZ});
   mv.push({t:'g0', X: leadStartX + startAbovePad});   // rapid close to engagement start
-
   // === Engage nose comp on a straight co-axial move ===
   // Direction = -X (same as the first cutting move), length = 2R (> R, safe engagement)
   mv.push({t:'raw', s: compCode + '   ( Engage nose radius comp )'});
   mv.push({t:'g1', X: leadStartX, Z: leadStartZ, F: F, cmt: 'Co-axial engagement move'});
-
   // === Continue same direction into the profile (no direction change) ===
   // This is the "profile-start" move; tool nose is already offset by R when it arrives at (D1, startZ).
   mv.push({t:'g1', X: D2, Z: startZ, F: F, cmt: side + ' wall (D1 to D2)'});
-
   // === Floor from wall to midpoint (perpendicular cut) ===
   mv.push({t:'g1', Z: endZ, cmt: 'Half floor to middle'});
-
   // === Co-axial lead-out: straight move continuing the floor direction ===
   // Floor direction was in Z. Continue further past the midpoint in the same direction,
   // then rapid out. The lead-out move is colinear with the last cut.
   var zDir = (side === 'far') ? +1 : -1;   // opposite of the entry Z direction
   var leadOutEndZ = endZ + zDir * leadLen; // 2R past the midpoint in the floor direction
   mv.push({t:'g1', Z: leadOutEndZ, F: F, cmt: 'Co-axial lead-out (extend floor direction)'});
-
   // === Cancel comp on a straight retract move ===
   mv.push({t:'raw', s: 'G40   ( Cancel nose radius comp )'});
   mv.push({t:'g1', X: D2 + 2*leadLen, Z: leadOutEndZ, F: F, cmt: 'Retract after G40'});
-
   // === Rapid to safe X ===
   mv.push({t:'g0', X: safeX});
 }
-
 // Legacy no-comp finish walk (used when comp is Off).
 function finishPassNoComp(mv, D1, D2, z1, z2, safeX, F, c, dwell){
   // Rapid approach above and outside corner A
   mv.push({t:'g0', X:D1+2, Z:z1+1});
   mv.push({t:'g0', X:D1+0.5});
-
   // ----- Enter at A -----
   var A=c.A;
   var enterA_z = z1 + ((A.t!=='Sharp' && A.s1>0) ? A.s1 : 0);
@@ -2669,7 +2744,6 @@ function finishPassNoComp(mv, D1, D2, z1, z2, safeX, F, c, dwell){
     exitA_x = D1 - 2*A.s1;
     mv.push({t:'g3', X:exitA_x, Z:z1, R:A.s1, F:F, cmt:'Radius A r='+A.s1});
   }
-
   // ----- Feed down wall (A->B) up to corner B entry point -----
   var B=c.B;
   var enterB_x = (B.t!=='Sharp' && B.s1>0) ? (D2 + 2*(B.t==='Chamfer'?B.s2:B.s1)) : D2;
@@ -2679,7 +2753,6 @@ function finishPassNoComp(mv, D1, D2, z1, z2, safeX, F, c, dwell){
   } else if(B.t==='Radius' && B.s1>0){
     mv.push({t:'g3', X:D2, Z:z1 - B.s1, R:B.s1, F:F, cmt:'Radius B r='+B.s1});
   }
-
   // ----- Feed along floor (B->C) up to corner C entry point -----
   var C=c.C;
   var enterC_z = (C.t!=='Sharp' && C.s1>0) ? (z2 + C.s1) : z2;
@@ -2689,7 +2762,6 @@ function finishPassNoComp(mv, D1, D2, z1, z2, safeX, F, c, dwell){
   } else if(C.t==='Radius' && C.s1>0){
     mv.push({t:'g3', X:D2 + 2*C.s1, Z:z2, R:C.s1, F:F, cmt:'Radius C r='+C.s1});
   }
-
   // ----- Feed up wall (C->D) up to corner D entry point -----
   var D_c=c.D;
   var enterD_x = (D_c.t!=='Sharp' && D_c.s1>0) ? (D1 - 2*(D_c.t==='Chamfer'?D_c.s2:D_c.s1)) : D1;
@@ -2699,14 +2771,11 @@ function finishPassNoComp(mv, D1, D2, z1, z2, safeX, F, c, dwell){
   } else if(D_c.t==='Radius' && D_c.s1>0){
     mv.push({t:'g3', X:D1, Z:z2 + D_c.s1, R:D_c.s1, F:F, cmt:'Radius D r='+D_c.s1});
   }
-
   if(dwell>0)mv.push({t:'dwell', p:dwell});
   mv.push({t:'g0', X:safeX});
 }
-
 // Placeholder retained for backward compatibility with any old callers
 function cornerEmit(mv, pt, dirOut, dirIn, corner, F){}
-
 // Emit moves as G-code strings.
 // incr=true -> after the first positioning move, X/Z become incremental U/W deltas
 // (Fanuc-style). Siemens/Heidenhain keep absolute (their incremental syntax differs).
@@ -2761,7 +2830,6 @@ function emitMoves(mv, ctrl, incr){
   });
   return lines.join('\n');
 }
-
 function copyGcode(){
   var t=$('gcode').textContent;
   if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){
@@ -2770,7 +2838,6 @@ function copyGcode(){
     setTimeout(function(){$('saveConfirm').style.display='none';},2000);
   });
 }
-
 // -------- SAVE --------
 function saveProg(){
   var mat=$('mat').selectedOptions[0].text.split(' ')[0].toLowerCase();
@@ -2796,10 +2863,8 @@ function saveProg(){
   $('saveConfirm').innerHTML='&#10003; Saved as <b>'+safe+ext+'</b> &middot; also in browser storage (Saved programs)';
   setTimeout(function(){$('saveConfirm').style.display='none';},4000);
 }
-
 // -------- SIMULATION --------
 var simFrames=[], simIdx=0, simTimer=null;
-
 function toggleSim(){
   var box=$('simFull');
   box.classList.add('on');
@@ -2811,13 +2876,11 @@ function toggleSim(){
   $('simMax').textContent=Math.max(0, simFrames.length-1);
   drawSim();
 }
-
 function closeSim(){
   simPause();
   $('simFull').classList.remove('on');
   document.body.style.overflow='';
 }
-
 function simSeek(v){
   simPause();
   simIdx=parseInt(v)||0;
@@ -2830,7 +2893,6 @@ function simHalfPass(side, D1, D2, z1, z2, zMid, safeX, R, cA, cB, cC, cD){
   var endZ   = (side==='full') ? z2 : zMid;
   var leadLen = 2 * R;
   var zDir = (side==='far') ? +1 : -1;   // floor lead-out direction
-
   // Rapid to safe approach position at target Z (co-axial with first cut)
   simFrames.push({x: D1 + 2*leadLen + 2, z: startZ, type:'rapid'});
   simFrames.push({x: D1 + 2*leadLen + 1, z: startZ, type:'rapid'});
@@ -2849,7 +2911,6 @@ function simHalfPass(side, D1, D2, z1, z2, zMid, safeX, R, cA, cB, cC, cD){
   // Rapid to safe X
   simFrames.push({x: safeX, z: endZ + zDir*leadLen, type:'retract'});
 }
-
 function simDoPasses(centers, oShift, D1, D2, safeX, pd, pr){
   centers.forEach(function(ctr){
     var zPos = ctr + oShift;
@@ -2867,7 +2928,6 @@ function simDoPasses(centers, oShift, D1, D2, safeX, pd, pr){
     simFrames.push({x:safeX, z:zPos, type:'retract'});
   });
 }
-
 function buildSimFrames(){
   simFrames=[];
   var D1=parseFloat($('D1').value)||0, D2=parseFloat($('D2').value)||0;
@@ -2977,7 +3037,6 @@ function buildSimFrames(){
   simIdx=0;
   $('simStatus').textContent='Move 0 / '+simFrames.length;
 }
-
 // Helpers for corner-treatment emission in sim
 // simEmitCornerV2: emit chamfer diagonal or radius arc for one corner.
 // Matches the G-code finishPass geometry so simulation and program agree.
@@ -3023,8 +3082,6 @@ function simEmitCornerV2(c, Dx, zBase, cornerName, zoff){
     return;
   }
 }
-
-
 // -------- ZOOM/PAN for profile preview SVG --------
 var zpState={init:false, baseVB:null, vb:null};
 function initZoomPan(){
@@ -3111,7 +3168,6 @@ function resetZoom(){
   var svg = $('prev');
   svg.setAttribute('viewBox', zpState.vb.x+' '+zpState.vb.y+' '+zpState.vb.w+' '+zpState.vb.h);
 }
-
 function drawSim(){
   var svg=$('simSvg'); svg.innerHTML='';
   if(!simFrames.length)return;
@@ -3120,7 +3176,6 @@ function drawSim(){
   var Wi=parseFloat($('tl_wi').value)||3;
   var stockOD=D1*1.15+8;
   var VW=1000, VH=500, MG=40;
-
   // ----- View range: include Z=0 (face) and all frame positions -----
   var Zs=[0]; simFrames.forEach(function(f){Zs.push(f.z);});
   var Zmin=Math.min.apply(null,Zs)-4, Zmax=Math.max.apply(null,Zs)+4;
@@ -3135,26 +3190,21 @@ function drawSim(){
   var cy=VH/2;
   var mapYTop=function(dia){return cy - (dia/2)*scaleR;};
   var mapYBot=function(dia){return cy + (dia/2)*scaleR;};
-
   // ----- Solid dark background -----
   svg.innerHTML+='<rect x="0" y="0" width="'+VW+'" height="'+VH+'" fill="#0a1219"/>';
-
   // ----- Very faint dashed centerline -----
   svg.innerHTML+='<line x1="'+MG+'" y1="'+cy+'" x2="'+(VW-MG)+'" y2="'+cy+'" stroke="#2a3540" stroke-width="1" stroke-dasharray="8 6"/>';
-
   // ----- FACE Z=0 marker (kept — takes little space, essential reference) -----
   var faceX=mapZ(0);
   if(faceX>MG && faceX<VW-MG){
     svg.innerHTML+='<line x1="'+faceX+'" y1="'+MG+'" x2="'+faceX+'" y2="'+(VH-MG)+'" stroke="#43d17a" stroke-width="1.6" stroke-dasharray="6 4" opacity="0.7"/>';
     svg.innerHTML+='<text x="'+(faceX+6)+'" y="'+(MG+14)+'" fill="#43d17a" font-size="12" font-weight="700">FACE Z=0</text>';
   }
-
   // ----- Colors -----
   var CDONE='#29b6f6';   // blue (completed cuts / rapids)
   var CCUR='#ffb300';    // orange (current move)
   var CRAP='#5a6c78';    // greyed-out rapid
   var CTIP='#ff2626';    // red tool tip
-
   // ----- Paths (mirrored top + bottom) -----
   // Draw completed segments as blue thin lines; current segment as orange thick
   var doneW = 1.4;
@@ -3179,7 +3229,6 @@ function drawSim(){
     // bottom mirror
     svg.innerHTML+='<line x1="'+z1p+'" y1="'+yBotA+'" x2="'+z2p+'" y2="'+yBotB+'" stroke="'+stroke+'" stroke-width="'+w+'" stroke-linecap="round"'+(dash?' stroke-dasharray="'+dash+'"':'')+' opacity="0.85"/>';
   }
-
   // ----- Tool tip (red circle top + bottom, mirrored) -----
   if(simIdx<simFrames.length){
     var f=simFrames[simIdx];
@@ -3188,7 +3237,6 @@ function drawSim(){
     svg.innerHTML+='<circle cx="'+tzp+'" cy="'+tyt+'" r="6" fill="'+CTIP+'" stroke="#fff" stroke-width="1.4"/>';
     svg.innerHTML+='<circle cx="'+tzp+'" cy="'+tyb+'" r="6" fill="'+CTIP+'" stroke="#fff" stroke-width="1.4" opacity="0.85"/>';
   }
-
   // ----- Text label at bottom (like turning sim) -----
   var statusMsg;
   if(simIdx<simFrames.length){
@@ -3198,11 +3246,9 @@ function drawSim(){
     statusMsg='Move '+simIdx+' / '+(simFrames.length-1);
   }
   svg.innerHTML+='<text x="'+MG+'" y="'+(VH-14)+'" fill="#c2d0dc" font-size="14" font-weight="600" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">'+statusMsg+'</text>';
-
   $('simStatus').textContent=statusMsg;
   if($('simScrub')){ $('simScrub').max=Math.max(0,simFrames.length-1); $('simScrub').value=simIdx; }
 }
-
 function simPlay(){
   if(!simFrames.length){buildSimFrames();}
   if(simIdx>=simFrames.length-1){simIdx=0;}
@@ -3216,7 +3262,6 @@ function simPlay(){
 }
 function simPause(){clearInterval(simTimer); $('simPlayBtn').classList.remove('on'); if($('simRevBtn'))$('simRevBtn').classList.remove('on');}
 function simReset(){simPause(); simIdx=0; if($('simFull').classList.contains('on')){buildSimFrames(); drawSim();}}
-
 // Advance one frame (single-block)
 function simStep(){
   simPause();
@@ -3254,11 +3299,9 @@ function simPlayReverse(){
   $('simRevBtn') && $('simRevBtn').classList.add('on');
   $('simPlayBtn').classList.remove('on');
 }
-
 initMaterials();
 drawInsertRef();
 recalc();
-
 window.gv_toggle = toggle;
 window.gv_recalc = recalc;
 window.gv_matChange = matChange;
