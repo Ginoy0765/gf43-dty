@@ -1506,7 +1506,7 @@ function bindSim(cv){if(SIM.bound)return;SIM.bound=true;var T={};cv.style.touchA
     else{var _kp=cv.width/((cv.getBoundingClientRect().width)||cv.width);var dx=(e.clientX-pv.x)*_kp,dy=(e.clientY-pv.y)*_kp;SIM.panX+=dx;SIM.panY+=dy;renderSim();}});
   function end(e){delete T[e.pointerId];if(Object.keys(T).length<2)SIM.pd=0;}
   cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);cv.addEventListener('pointerleave',end);
-  cv.addEventListener('wheel',function(e){e.preventDefault();SIM.zoom*=(e.deltaY<0?1.1:0.9);renderSim();},{passive:false});
+  cv.addEventListener('wheel',function(e){e.preventDefault();SIM.zoom*=(e.deltaY<0?1.02:0.98);renderSim();},{passive:false});
 }
 function genProg(){ if(method!=='Turn'&&$('ctrl')&&$('ctrl').value.indexOf('Turn-mill')>=0&&$('side')&&$('side').value==='Internal') return genTurnMill(); if(!pyReady){pendingGen=true;$('p_res').innerHTML='<p class="warn">Engine loading (first time only, ~10\u201330s on phone)\u2026 it will generate automatically once ready.</p>';return;} pendingGen=false; if(method==='Turn') return genTurn(); return genMill(); }
 function computeVcFz(stab){var m=matBy($('mat').value);var vc=m[1],fzb=m[3];var s=Math.max(0,Math.min(100,stab));var vcF=Math.max(0.33,s/50);var fzF=s>=50?(0.5+s/100):Math.max(0.5,s/50);var d=num('d',0),nt=Math.max(1,Math.round(num('teeth',1)));var nf=Math.max(0.1,1-0.08*Math.min(9,nt-1)-0.02*Math.max(0,nt-10));return {vc:Math.round(vc*vcF),fz:d>0?(fzb*Math.min(d,40)/10*nf*fzF):0};}
