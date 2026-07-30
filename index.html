@@ -58,7 +58,8 @@
   .segbtns{display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:3px;gap:2px;margin:0 0 4px}
   .segbtns button{flex:1;border:none;background:transparent;color:var(--mut);padding:9px 4px;border-radius:16px;font-size:12.5px;font-weight:700;cursor:pointer;line-height:1.1}
   .segbtns button.on{background:var(--acc);color:#1a1200}.row4{display:grid;grid-template-columns:.9fr 1.2fr .8fr .8fr;gap:6px}
-  .btn{width:100%;background:linear-gradient(135deg,var(--acc),#ff8f00);color:#1a1200;border:none;border-radius:12px;padding:15px;font-size:16px;font-weight:800;letter-spacing:.5px;margin-top:16px;cursor:pointer}
+  .btn{width:100%;background:linear-gradient(135deg,var(--acc),#ff8f00);color:#1a1200;border:none;border-radius:9px;padding:8px 12px;font-size:13.5px;font-weight:800;letter-spacing:.5px;margin-top:10px;cursor:pointer}
+.btn.genbtn{padding:6px 12px;font-size:13px;border-radius:9px;margin-top:10px}
   .btn:active{transform:scale(.98)}
   .btn2{background:var(--bg2);color:var(--txt);border:1px solid var(--line);font-weight:700}
   .res{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
@@ -123,7 +124,7 @@
 /* GROOVING VIEW STYLES */
 .simFull{display:none!important}.simFull.on{display:flex!important}
 #groove .backbtn{background:var(--bg2);border:1px solid var(--line);color:var(--mut);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer}#groove .strat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}#groove .strat h3{margin:0 0 6px;font-size:11.5px;color:var(--mut);font-weight:700;letter-spacing:.4px}#groove .pills{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}#groove .pills.two{grid-template-columns:1fr 1fr}#groove .pills3{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:6px}
-@media(max-width:520px){#groove .pills3{grid-template-columns:1fr 1fr}}#groove .pill{background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:10px;text-align:center;font-weight:700;font-size:13px;color:var(--mut);cursor:pointer;user-select:none}#groove .pill.on{background:var(--acc);color:#1a1200;border-color:var(--acc)}#groove .pill.suggested{border-color:var(--acc2);color:var(--acc2)}#groove .pill.suggested::after{content:' \2605';font-size:10px}#groove .postbtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}#groove .pbtn{background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:12px;font-size:13.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}#groove .pbtn:hover{border-color:var(--acc2);color:var(--acc2)}#groove .pbtn.primary{background:linear-gradient(135deg,#29b6f6,#0288d1);color:#fff;border:none}#groove .pbtn.save{background:linear-gradient(135deg,var(--ok),#2e8f52);color:#0a2016;border:none}
+@media(max-width:520px){#groove .pills3{grid-template-columns:1fr 1fr}}#groove .pill{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:8px 6px;text-align:center;font-weight:700;font-size:12px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--mut);cursor:pointer;user-select:none}#groove .pill.on{background:var(--acc);color:#1a1200;border-color:var(--acc)}#groove .pill.suggested{border-color:var(--acc2);color:var(--acc2)}#groove .pill.suggested::after{content:' \2605';font-size:10px}#groove .postbtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}#groove .pbtn{background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:8px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}#groove .pbtn:hover{border-color:var(--acc2);color:var(--acc2)}#groove .pbtn.primary{background:linear-gradient(135deg,#29b6f6,#0288d1);color:#fff;border:none}#groove .pbtn.save{background:linear-gradient(135deg,var(--ok),#2e8f52);color:#0a2016;border:none}
 .simFull{position:fixed;inset:0;background:var(--bg);z-index:100;display:none;flex-direction:column;padding:14px;overflow:hidden}
 .simFull.on{display:flex}
 .simFullHead{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:12px}
@@ -142,7 +143,7 @@
 .simScrub input[type=range]{flex:1;accent-color:var(--acc)}
 .simLegend{display:flex;gap:12px;font-size:11.5px;color:var(--mut);flex-wrap:wrap}
 .simLegend .lg{display:inline-flex;align-items:center;gap:5px}
-.simLegend .sw{width:16px;height:3px;display:inline-block}#groove .sec{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:10px;overflow:hidden}#groove .sec>.st{background:var(--bg2);padding:11px 14px;font-weight:700;font-size:12.5px;letter-spacing:.5px;color:var(--acc2);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}#groove .sec>.st .caret{transition:transform .2s;font-size:11px}#groove .sec.open>.st .caret{transform:rotate(90deg)}#groove .sec>.sb{padding:4px 14px 14px;display:none}#groove .sec.open>.sb{display:block}#groove label{display:block;color:var(--mut);font-size:11px;font-weight:600;margin:10px 0 5px;letter-spacing:.2px}#groove input[type=number], #groove input[type=text], #groove select, #groove textarea{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:9px 10px;font-size:14px;font-family:inherit;outline:none}#groove input[type=number]::-webkit-outer-spin-button, #groove input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}#groove input[type=number]{-moz-appearance:textfield;appearance:textfield}#groove input:focus, #groove select:focus, #groove textarea:focus{border-color:var(--acc2)}#groove .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}#groove .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}#groove .row4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}#groove .chip{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;background:var(--bg2);border:1px solid var(--line);border-radius:20px;font-size:12.5px;font-weight:600;color:var(--mut);cursor:pointer;user-select:none;margin-right:6px;margin-top:6px}#groove .chip.on{background:var(--acc);color:#1a1200;border-color:var(--acc)}#groove .chips{margin:2px 0 6px}#groove .cornerBox{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px}#groove .cornerBox h4{margin:0 0 6px;font-size:12px;font-weight:700;color:var(--acc)}#groove .cornerBox label{margin-top:6px}#groove .cornerBox input, #groove .cornerBox select{padding:7px 8px;font-size:12.5px}#groove .chkrow{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;color:var(--txt);cursor:pointer;user-select:none}#groove .chkrow input[type=checkbox]{width:16px;height:16px;margin:0;cursor:pointer;accent-color:var(--acc)}#groove table{width:100%;border-collapse:collapse;margin-top:8px;background:var(--bg2);border-radius:9px;overflow:hidden;font-size:13px}#groove th{background:#1f2b3a;padding:8px 6px;text-align:left;font-size:11px;letter-spacing:.4px;color:var(--mut);font-weight:700}#groove td{padding:4px 6px;border-top:1px solid var(--line)}#groove td input, #groove td select{padding:6px 7px;font-size:12.5px;border-radius:6px}#groove .previewbox{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}#groove .hint{color:var(--mut);font-size:11.5px;margin-top:6px;line-height:1.4;display:none}body.helpon #groove .hint{display:block}#groove .hint.keep{display:block}#groove .warn{color:var(--warn);font-size:12.5px;margin-top:6px;font-weight:600}#groove .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:700;letter-spacing:.4px;background:var(--bg2);color:var(--mut);margin-left:6px}#groove .badge.live{background:rgba(67,209,122,.15);color:var(--ok)}#groove .genbtn{width:100%;background:linear-gradient(135deg,var(--acc),#ff8f00);color:#1a1200;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:800;letter-spacing:.5px;cursor:pointer;margin-top:14px;box-shadow:0 6px 20px rgba(255,179,0,.25)}#groove .genbtn:active{transform:translateY(1px)}#groove .gcode{background:#080d13;border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:10px;font-family:'Consolas','Courier New',monospace;font-size:12.5px;color:#b8ffb8;white-space:pre;overflow-x:auto;max-height:320px;overflow-y:auto}#groove .gcodehead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}#groove .gcodehead .cyc{color:var(--acc);font-weight:700;font-size:12.5px}#groove .gcodehead .copy{background:var(--bg2);border:1px solid var(--line);color:var(--mut);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer}
+.simLegend .sw{width:16px;height:3px;display:inline-block}#groove .sec{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:10px;overflow:hidden}#groove .sec>.st{background:var(--bg2);padding:11px 14px;font-weight:700;font-size:12.5px;letter-spacing:.5px;color:var(--acc2);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}#groove .sec>.st .caret{transition:transform .2s;font-size:11px}#groove .sec.open>.st .caret{transform:rotate(90deg)}#groove .sec>.sb{padding:4px 14px 14px;display:none}#groove .sec.open>.sb{display:block}#groove label{display:block;color:var(--mut);font-size:11px;font-weight:600;margin:10px 0 5px;letter-spacing:.2px}#groove input[type=number], #groove input[type=text], #groove select, #groove textarea{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:9px 10px;font-size:14px;font-family:inherit;outline:none}#groove input[type=number]::-webkit-outer-spin-button, #groove input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}#groove input[type=number]{-moz-appearance:textfield;appearance:textfield}#groove input:focus, #groove select:focus, #groove textarea:focus{border-color:var(--acc2)}#groove .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}#groove .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}#groove .row4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}#groove .chip{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;background:var(--bg2);border:1px solid var(--line);border-radius:20px;font-size:12.5px;font-weight:600;color:var(--mut);cursor:pointer;user-select:none;margin-right:6px;margin-top:6px}#groove .chip.on{background:var(--acc);color:#1a1200;border-color:var(--acc)}#groove .chips{margin:2px 0 6px}#groove .cornerBox{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px}#groove .cornerBox h4{margin:0 0 6px;font-size:12px;font-weight:700;color:var(--acc)}#groove .cornerBox label{margin-top:6px}#groove .cornerBox input, #groove .cornerBox select{padding:7px 8px;font-size:12.5px}#groove .chkrow{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;color:var(--txt);cursor:pointer;user-select:none}#groove .chkrow input[type=checkbox]{width:16px;height:16px;margin:0;cursor:pointer;accent-color:var(--acc)}#groove table{width:100%;border-collapse:collapse;margin-top:8px;background:var(--bg2);border-radius:9px;overflow:hidden;font-size:13px}#groove th{background:#1f2b3a;padding:8px 6px;text-align:left;font-size:11px;letter-spacing:.4px;color:var(--mut);font-weight:700}#groove td{padding:4px 6px;border-top:1px solid var(--line)}#groove td input, #groove td select{padding:6px 7px;font-size:12.5px;border-radius:6px}#groove .previewbox{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}#groove .hint{color:var(--mut);font-size:11.5px;margin-top:6px;line-height:1.4;display:none}body.helpon #groove .hint{display:block}#groove .hint.keep{display:block}#groove .warn{color:var(--warn);font-size:12.5px;margin-top:6px;font-weight:600}#groove .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:700;letter-spacing:.4px;background:var(--bg2);color:var(--mut);margin-left:6px}#groove .badge.live{background:rgba(67,209,122,.15);color:var(--ok)}#groove .genbtn{width:100%;background:linear-gradient(135deg,var(--acc),#ff8f00);color:#1a1200;border:none;border-radius:9px;padding:6px 12px;font-size:13px;font-weight:800;letter-spacing:.5px;cursor:pointer;margin-top:10px;box-shadow:0 3px 10px rgba(255,179,0,.2)}#groove .genbtn:active{transform:translateY(1px)}#groove .gcode{background:#080d13;border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:10px;font-family:'Consolas','Courier New',monospace;font-size:12.5px;color:#b8ffb8;white-space:pre;overflow-x:auto;max-height:320px;overflow-y:auto}#groove .gcodehead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}#groove .gcodehead .cyc{color:var(--acc);font-weight:700;font-size:12.5px}#groove .gcodehead .copy{background:var(--bg2);border:1px solid var(--line);color:var(--mut);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer}
 /* END */
 </style>
 <script src="https://unpkg.com/pyodide@0.26.4/pyodide.js"></script>
@@ -160,7 +161,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.10 &middot; 27 Jul 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:var(--acc);color:#1a1200">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.21 &middot; 30 Jul 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:var(--acc);color:#1a1200">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -386,7 +387,7 @@
         <button class="btn btn2" type="button" onclick="var _e=$('sp_feat');if(_e)_e.value='Thread';var _p=$('sp_ptype');if(_p)_p.value='V (sharp / round root)';spOpen();" style="margin-top:6px">&#9881;&#65039; Specials &mdash; Profile + Insert</button>
       </div></div>
       <div id="engineStatus" class="note" style="text-align:center;margin-top:8px">Loading engine... (first time needs internet)</div>
-      <button class="btn" onclick="genProg()">&#9881;&#65039;  GENERATE G-CODE</button>
+      <button class="btn genbtn" onclick="genProg()">&#9881;&#65039;  GENERATE G-CODE</button>
       <button class="btn btn2" onclick="resetAll()">&#8634;  Reset to defaults</button>
       <button class="btn btn2" onclick="show('phist');renderHist()">&#128338;  Saved programs</button>
       <div id="cyc"></div>
@@ -488,7 +489,7 @@
       
       
       
-      <button class="btn" onclick="genDrill()">&#9881;&#65039;  GENERATE G-CODE</button>
+      <button class="btn genbtn" onclick="genDrill()">&#9881;&#65039;  GENERATE G-CODE</button>
       <div id="dr_res"></div>
       <button class="btn btn2" id="dr_savebtn" style="display:none" onclick="saveDrill()">&#128190;  Save .txt</button>
       <button class="btn btn2" id="dr_simbtn" style="display:none" onclick="drSim()">&#128202;  Simulate</button>
@@ -500,20 +501,31 @@
       </div>
       <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2>Turning</h2></div>
       <div class="sec"><div class="st" onclick="tog(this)">OPERATION <span>&#9662;</span></div><div class="sb">
-        <div id="opRaw"><label>Outside / Inside</label><div class="segbtns"><button type="button" class="on" id="opb_od" onclick="segPick('tn_odid','OD (outside)',this)">OD (outside)</button><button type="button" id="opb_id" onclick="segPick('tn_odid','ID (bore)',this)">ID (bore)</button></div><select id="tn_odid" onchange="tnFaceStockDefault();tnPosDefaults();tnApplyTip()" style="display:none"><option>OD (outside)</option><option>ID (bore)</option></select>
-        <label>Path</label><div class="segbtns"><button type="button" class="on" id="opb_turn" onclick="tnPath('Turning',this)">Turning</button><button type="button" id="opb_face" onclick="tnPath('Facing',this)">Facing</button><button type="button" id="opb_copy" onclick="tnPath('Copying',this)">Copying</button></div><select id="tn_op" onchange="tnOp()" style="display:none"><option>Turning</option><option>Facing</option></select><select id="tn_strat" style="display:none"><option>Stepped</option><option>Copying</option></select>
-        <label>Feed direction</label><div class="segbtns"><button type="button" class="on" id="opb_fnorm" onclick="segPick('tn_back','Normal',this)">Normal</button><button type="button" id="opb_fback" onclick="segPick('tn_back','Back',this)">Back</button></div><select id="tn_back" onchange="tnApplyTip();tnCalc()" style="display:none"><option>Normal</option><option>Back</option></select>
-        <label>Rough / Finish</label><div class="segbtns"><button type="button" class="on" id="opb_rough" onclick="segPick('tn_mode','Roughing',this)">Rough</button><button type="button" id="opb_fin" onclick="segPick('tn_mode','Finishing',this)">Finish</button><button type="button" id="opb_rf" onclick="segPick('tn_mode','Rough + Finish',this)">Rough + Finish</button></div><select id="tn_mode" onchange="tnModeChange()" style="display:none"><option>Roughing</option><option>Finishing</option><option>Rough + Finish</option></select></div>
+        <div id="opRaw">
+        <div class="row2"><div><label>Outside / Inside</label><select id="tn_odid" onchange="tnFaceStockDefault();tnPosDefaults();tnApplyTip()"><option>OD (outside)</option><option>ID (bore)</option></select></div>
+        <div><label>Path</label><select id="tn_pathsel" onchange="tnPath(this.value)"><option>Turning</option><option>Facing</option><option>Copying</option></select><select id="tn_op" onchange="tnOp()" style="display:none"><option>Turning</option><option>Facing</option></select><select id="tn_strat" style="display:none"><option>Stepped</option><option>Copying</option></select></div></div>
+        <div class="row2"><div><label>Feed direction</label><select id="tn_back" onchange="tnApplyTip();tnCalc()"><option>Normal</option><option>Back</option></select></div>
+        <div><label>Rough / Finish</label><select id="tn_mode" onchange="tnModeChange()"><option>Roughing</option><option>Finishing</option><option>Rough + Finish</option></select></div></div></div>
         <div style="font-size:11px;letter-spacing:.5px;color:#8aa2b4;margin:16px 2px 6px">RAW MATERIAL <span style="color:#5f7385;letter-spacing:0">· OD / ID / Face &mdash; 0 face = no stock</span></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><div><label>Raw OD (⌀)</label><input id="tn_roughod" type="number" value="75" inputmode="decimal" oninput="tnPosCalc()"></div><div><label>Raw ID (⌀)</label><input id="tn_roughid" type="number" value="30" inputmode="decimal" oninput="tnPosCalc()"></div><div><label>Face (mm)</label><input id="tn_facex" type="number" value="5" inputmode="decimal" oninput="rwDraw();tnPosCalc()"></div></div>
       </div></div>
       <div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9662;</span></div><div class="sb">
         <div class="row3" style="align-items:start"><div><label>Insert shape</label><input id="tn_shape" type="hidden" value="C" onchange="tnShape()"><input id="tn_orient" type="hidden" value="3"><button type="button" onclick="insOpen()" id="tn_shapechip" style="width:100%;margin-top:2px;background:#12202c;border:1px solid #2b4658;border-radius:10px;padding:9px 10px;cursor:pointer;display:flex;align-items:center;gap:9px"><svg id="tn_chipsvg" viewBox="0 0 100 100" width="26" height="26"><polygon points="50,20 75,50 50,80 25,50" fill="#a8e6a0" stroke="#5cae5c" stroke-width="4"/></svg><span id="tn_chiptxt" style="font-size:12.5px;color:#cfe0ee">C 80&deg; &middot; T3</span><span style="margin-left:auto;color:#5f7385;font-size:11px">tap &#9656;</span></button><input id="tn_ia" class="nospin" type="number" value="80" inputmode="decimal" style="display:none;margin-top:5px" placeholder="angle"><input id="tn_iw" type="number" inputmode="decimal" style="display:none;margin-top:5px" placeholder="insert width mm"><select id="tn_grvoff" style="display:none;margin-top:5px;width:100%"><option value="auto">Offset: Auto (leading corner)</option><option value="1">Offset 1 &mdash; left / chuck side</option><option value="2">Offset 2 &mdash; centre</option><option value="3">Offset 3 &mdash; right / tailstock</option></select></div><div id="tn_reliefrow"><label>Approach / lead angle&deg;</label><input id="tn_relief" type="number" value="95" inputmode="decimal"></div><div><label>Nose radius (mm)</label><input id="tn_nr" type="number" value="0.8" inputmode="decimal" oninput="tnCalc()"></div></div>
-        <label>Spindle direction</label><div class="segbtns"><button type="button" class="on" onclick="segPick('tn_sdir','M03',this)">M03</button><button type="button" onclick="segPick('tn_sdir','M04',this)">M04</button></div><select id="tn_sdir" style="display:none"><option>M03</option><option>M04</option></select>
+        <label>Spindle direction</label><select id="tn_sdir"><option>M03</option><option>M04</option></select>
         <div class="row2"><div><label>Tool no.</label><input id="tn_t1no" type="number" value="1" inputmode="numeric"></div><div><label>Offset no.</label><input id="tn_t1off" type="number" value="1" inputmode="numeric"></div></div>
         <div class="row2" id="tn_t2row" style="display:none"><div><label>Finish tool no.</label><input id="tn_t2no" type="number" value="2" inputmode="numeric"></div><div><label>Finish offset no.</label><input id="tn_t2off" type="number" value="2" inputmode="numeric"></div></div>
       </div></div>
-      <div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9662;</span></div><div class="sb">
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><button class="btn btn2" type="button" onclick="openProfileTable()" style="margin:0">&#128203; Open profile table</button><span id="tn_ptsum" class="note" style="margin:0">1 point</span></div>
+      <div class="sec"><div class="st" onclick="tog(this);try{ppDraw();}catch(e){}">PROFILE <span>&#9662;</span></div><div class="sb">
+        <div id="tt_gwrap" style="position:relative;margin-bottom:8px"><canvas id="tt_preview" width="380" height="460" style="touch-action:none;width:100%;height:min(30vh,215px);display:block;background:#0a1118;border:1px solid #293a4d;border-radius:10px"></canvas><div id="pp_hud" style="position:absolute;left:0;top:0;display:none;gap:6px;align-items:stretch;z-index:6"><div style="background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;padding:4px 8px;font-size:11px;line-height:1.3;text-align:left;pointer-events:none"><div style="color:#8aa;font-size:9px">cursor</div><div id="pp_curx" style="color:#e8c84a;font-weight:700">&#216; &ndash;</div><div id="pp_curz" style="color:#59d0ff;font-weight:700">Z &ndash;</div></div><button id="pp_add" type="button" onclick="ppAdd()" style="background:#123a5c;border:1px solid #2f6ea0;color:#bfe3ff;border-radius:7px;font-size:13px;font-weight:800;padding:0 12px;cursor:pointer">Add</button></div><div id="pp_urdo" style="position:absolute;left:8px;top:8px;display:flex;gap:4px;z-index:6"><button id="pp_undo" type="button" onclick="ppUndo()" title="Undo" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:15px;cursor:pointer">&#8630;</button><button id="pp_redo" type="button" onclick="ppRedo()" title="Redo" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:15px;cursor:pointer">&#8631;</button></div><div id="pp_zoom" style="position:absolute;left:8px;bottom:8px;display:flex;flex-direction:column;gap:4px;z-index:6"><button type="button" onclick="ppZoom(1.25)" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:16px;font-weight:800;cursor:pointer">+</button><button type="button" onclick="ppZoom(0.8)" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:16px;font-weight:800;cursor:pointer">&minus;</button><button type="button" onclick="ppZoomReset()" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#9cc4e6;font-size:13px;cursor:pointer">&#8635;</button></div></div>
+      <div id="tt_body" style="overflow:auto;max-height:290px"></div>
+      <div style="display:flex;gap:6px;margin-top:4px;align-items:center;flex-wrap:wrap"><button class="btn btn2" type="button" onclick="tnAddPt()" style="margin:0;flex:1;min-width:70px;white-space:nowrap">+ Add</button><button class="btn btn2" type="button" onclick="ppBackup()" style="margin:0;width:auto;padding:8px 12px">&#128190; Backup</button><button class="btn btn2" type="button" onclick="document.getElementById('pp_restore').click()" style="margin:0;width:auto;padding:8px 12px">&#128194; Restore</button><button class="btn btn2" type="button" onclick="ppLoadDefault()" style="margin:0;width:auto;padding:8px 12px" title="Load default profile + raw">&#8634; Default</button><input type="file" id="pp_restore" accept=".json,application/json" style="display:none" onchange="ppRestore(event)"></div>
+      <div id="tt_status" class="note" style="text-align:left;margin-top:6px"></div>
+      <div style="margin-top:8px;border-top:1px solid #1d2c38;padding-top:8px">
+        <label style="text-align:left;display:block;color:#8aa;font-size:11px;margin-bottom:3px">Saved profiles (this device)</label>
+        <div style="display:flex;gap:6px;margin-bottom:6px"><input id="tn_profname" value="Sample part" placeholder="profile name" style="flex:1;padding:8px 10px;font-size:13px"><button class="btn btn2" type="button" onclick="tnProfSave()" style="margin:0;width:auto;padding:8px 12px;font-size:13px">&#128190; Save</button></div>
+        <div style="display:flex;gap:6px"><select id="tn_proflist" style="flex:1;padding:8px 10px;font-size:13px"></select><button class="btn btn2" type="button" onclick="tnProfLoad()" style="margin:0;width:auto;padding:8px 12px;font-size:13px">&#128194; Load</button><button class="btn btn2" type="button" onclick="tnProfDelete()" style="margin:0;width:auto;padding:8px 11px;font-size:13px">&#128465;</button></div>
+        <div id="tn_profmsg" class="note" style="text-align:left;margin-top:4px"></div>
+      </div>
+        <span id="tn_ptsum" class="note" style="display:none">1 point</span>
       </div></div>
       <div class="sec"><div class="st" onclick="tog(this)">PATTERN <span>&#9656;</span></div><div class="sb" style="display:none">
         <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="tn_patOn" style="width:auto" onchange="tnCalc();try{ppDraw();}catch(e){}"> Repeat this feature along Z</label>
@@ -540,11 +552,11 @@
         <div class="row2"><div><label>Retract (mm)</label><input id="tn_retr" type="number" value="1" inputmode="decimal"></div><div><label>Retract angle&deg;</label><input id="tn_reta" type="number" value="45" inputmode="decimal"></div></div>
         <div class="row2"><div><label>Plunge feed %</label><input id="tn_plf" type="number" value="50" inputmode="decimal"></div><div></div></div><input id="tn_gap" type="hidden" value="1">
         <input id="tn_fcl" type="hidden" value="1"><div class="row2"><div><label>Finish entry</label><select id="tn_lead"><option>Line</option><option>Arc (smooth)</option></select></div><div></div></div><div class="row2"><div><label>Arc output</label><select id="tn_arcfmt"><option value="R">R word</option><option value="IK">I,K center</option></select></div><div></div></div>
-        <label>DOC infeed</label><div class="segbtns"><button type="button" class="on" onclick="segPick('tn_docg','G1',this)">G1 (feed)</button><button type="button" onclick="segPick('tn_docg','G0',this)">G0 (rapid)</button></div><select id="tn_docg" style="display:none"><option>G1</option><option>G0</option></select>
+        <label>DOC infeed</label><select id="tn_docg"><option>G1</option><option>G0</option></select>
         <div class="row2"><div><label>Finish allow. X (mm)</label><input id="tn_ax" type="number" inputmode="decimal" oninput="tnAxEdit=1"></div><div><label>Finish allow. Z (mm)</label><input id="tn_az" type="number" inputmode="decimal" oninput="tnAzEdit=1"></div></div>
         <p class="note" style="text-align:left">Stepped = constant-X passes &#8741; Z. Copying = follow profile, offset by stock. Roughing = multiple passes; Finishing = single pass.</p>
       </div></div>
-      <button class="btn" onclick="genTurnOp()">&#9881;&#65039;  GENERATE G-CODE</button>
+      <button class="btn genbtn" onclick="genTurnOp()">&#9881;&#65039;  GENERATE G-CODE</button>
       <button class="btn btn2" type="button" onclick="tnAddToJob()" style="margin-top:8px">&#128736;&#65039;  Add to Full Job</button>
       <div id="tn_res"></div>
       <button class="btn btn2" id="tn_simbtn" style="display:none" onclick="tnSim()">&#128202;  Simulate</button>
@@ -554,21 +566,61 @@
 <div style="max-width:920px;margin:0 auto;padding:14px 14px 40px">
   <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2>Grooving / Parting</h2></div>
 <!-- ============ 1. OPERATION ============ -->
-  <div class="sec open"><div class="st" onclick="gv_toggle(this)">OPERATION <span class="caret">&#9656;</span></div><div class="sb">
-    <label>Groove type</label>
-    <div class="chips" id="typeChips">
-      <span class="chip on" data-t="od">OD radial</span>
-      <span class="chip" data-t="id">ID radial</span>
-      <span class="chip" data-t="face">Face (front)</span>
-      <span class="chip" data-t="back">Face (back)</span>
-      <span class="chip" data-t="cutoff">Parting (cut-off)</span>
+  <div class="sec open"><div class="st" onclick="gv_toggle(this)">OPERATION <span class="badge live" id="modeBadge">auto</span> <span class="caret">&#9656;</span></div><div class="sb">
+    <div class="row2">
+      <div><label>Groove type</label>
+        <select id="gv_type" onchange="gv_selset('type',this.value)">
+          <option value="od">OD radial</option>
+          <option value="id">ID radial</option>
+          <option value="face">Face (front)</option>
+          <option value="back">Face (back)</option>
+          <option value="cutoff">Parting (cut-off)</option>
+        </select></div>
+      <div><label>Rough / Finish</label>
+        <select id="gv_rf" onchange="gv_selset('rf',this.value)">
+          <option value="rough">Rough only</option>
+          <option value="finish">Finish only</option>
+          <option value="both" selected>Rough + Finish</option>
+        </select></div>
     </div>
-    <label style="margin-top:14px">Rough / Finish</label>
-    <div class="pills" id="rfPills">
-      <div class="pill" data-v="rough">Rough only</div>
-      <div class="pill" data-v="finish">Finish only</div>
-      <div class="pill on" data-v="both">Rough + Finish</div>
+    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">GROOVE SIZE</div>
+    <div class="row2">
+      <div><label>Top dia D1 (mm)</label><input id="D1" type="number" value="60" step="0.001" oninput="gv_recalc()"></div>
+      <div><label>Bottom dia D2 (mm)</label><input id="D2" type="number" value="40" step="0.001" oninput="gv_recalc()"></div>
     </div>
+    <div class="row2">
+      <div><label>Start Z1 (mm, face = 0)</label><input id="Z1" type="number" value="-35" step="0.001" oninput="gv_recalc()"></div>
+      <div><label>End Z2 (mm)</label><input id="Z2" type="number" value="-55" step="0.001" oninput="gv_recalc()"></div>
+    </div>
+    <div class="hint">Width = |Z1&minus;Z2| = <span id="wCalc">6</span> mm &middot; Depth = (D1&minus;D2)/2 = <span id="dCalc">3</span> mm. Face = 0, toward chuck is &minus;Z.</div>
+    <div class="sec" style="margin-top:12px"><div class="st" onclick="gv_toggle(this)">CORNER TREATMENT <span class="caret">&#9656;</span></div><div class="sb">
+      <div class="hint" style="margin-bottom:4px">Type + Size per corner (A top-L, B bot-L, C bot-R, D top-R).</div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+        <select id="A_t" onchange="gv_recalc()" style="flex:1;min-width:80px"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select>
+        <input id="A_s1" type="number" step="0.01" value="0" placeholder="Size 1" oninput="gv_recalc()" style="flex:1;max-width:100px">
+        <input id="A_s2" class="indepOnly" type="number" step="0.01" value="0" placeholder="Size 2 (X)" oninput="gv_recalc()" style="flex:1;max-width:100px">
+        <button class="pbtn" onclick="gv_recalc()" style="padding:9px 12px;white-space:nowrap;min-width:78px">Apply A</button>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+        <select id="B_t" onchange="gv_recalc()" style="flex:1;min-width:80px"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select>
+        <input id="B_s1" type="number" step="0.01" value="0.2" placeholder="Size 1" oninput="gv_recalc()" style="flex:1;max-width:100px">
+        <input id="B_s2" class="indepOnly" type="number" step="0.01" value="0" placeholder="Size 2 (X)" oninput="gv_recalc()" style="flex:1;max-width:100px">
+        <button class="pbtn" onclick="gv_recalc()" style="padding:9px 12px;white-space:nowrap;min-width:78px">Apply B</button>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+        <select id="C_t" onchange="gv_recalc()" style="flex:1;min-width:80px"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select>
+        <input id="C_s1" type="number" step="0.01" value="0.2" placeholder="Size 1" oninput="gv_recalc()" style="flex:1;max-width:100px">
+        <input id="C_s2" class="indepOnly" type="number" step="0.01" value="0" placeholder="Size 2 (X)" oninput="gv_recalc()" style="flex:1;max-width:100px">
+        <button class="pbtn" onclick="gv_recalc()" style="padding:9px 12px;white-space:nowrap;min-width:78px">Apply C</button>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+        <select id="D_t" onchange="gv_recalc()" style="flex:1;min-width:80px"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select>
+        <input id="D_s1" type="number" step="0.01" value="0" placeholder="Size 1" oninput="gv_recalc()" style="flex:1;max-width:100px">
+        <input id="D_s2" class="indepOnly" type="number" step="0.01" value="0" placeholder="Size 2 (X)" oninput="gv_recalc()" style="flex:1;max-width:100px">
+        <button class="pbtn" onclick="gv_recalc()" style="padding:9px 12px;white-space:nowrap;min-width:78px">Apply D</button>
+      </div>
+      <label class="chkrow" style="margin-top:12px"><input type="checkbox" id="indepLegs" onchange="gv_recalc()"> Independent chamfer legs (Z-leg &ne; X-leg)</label>
+    </div></div>
   </div></div>
   <!-- ============ 3. TOOL ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">TOOL <span class="caret">&#9656;</span></div><div class="sb">
@@ -608,88 +660,17 @@
     <div class="hint">YANTRA shifts programmed Z coordinates so groove wall positions land exactly where you specified, regardless of where you touched off the tool. Fanuc, Siemens, Mazatrol, and Heidenhain all handle this the same way &mdash; whichever edge you touched off, the offset table stores that as the reference point.</div>
   </div></div>
   
-  <!-- ============ GROOVE ============ -->
-  <div class="sec open"><div class="st" onclick="gv_toggle(this)">GROOVE <span class="badge live" id="modeBadge">auto</span> <span class="caret">&#9656;</span></div><div class="sb">
-    <div class="row2">
-      <div><label>Top dia D1 (mm)</label><input id="D1" type="number" value="60" step="0.001" oninput="gv_recalc()"></div>
-      <div><label>Bottom dia D2 (mm)</label><input id="D2" type="number" value="40" step="0.001" oninput="gv_recalc()"></div>
-    </div>
-    <div class="row2">
-      <div><label>Start Z1 (mm, face = 0)</label><input id="Z1" type="number" value="-35" step="0.001" oninput="gv_recalc()"></div>
-      <div><label>End Z2 (mm)</label><input id="Z2" type="number" value="-55" step="0.001" oninput="gv_recalc()"></div>
-    </div>
-    <div class="hint">Width = |Z1&minus;Z2| = <span id="wCalc">6</span> mm &nbsp;&middot;&nbsp; Depth = (D1&minus;D2)/2 = <span id="dCalc">3</span> mm
-    <br>Z convention: <b>face = 0</b>, towards chuck is <b>&minus;Z</b>, away from face is <b>+Z</b>. All Z values in a normal turning setup are negative.</div>
-  
-    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:18px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">CORNER TREATMENT</div>
-    <div class="hint" style="margin-bottom:4px">Set the treatment for each corner independently. Type + Size on each row applies to that specific corner.</div>
-    <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
-      <select id="A_t" onchange="gv_recalc()" style="flex:1;min-width:110px"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select>
-      <input id="A_s1" type="number" step="0.01" value="0" placeholder="Size 1" oninput="gv_recalc()" style="flex:1;max-width:110px">
-      <input id="A_s2" class="indepOnly" type="number" step="0.01" value="0" placeholder="Size 2 (X)" oninput="gv_recalc()" style="flex:1;max-width:110px">
-      <button class="pbtn" onclick="gv_recalc()" style="padding:9px 18px;white-space:nowrap;min-width:100px">Apply to A</button>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
-      <select id="B_t" onchange="gv_recalc()" style="flex:1;min-width:110px"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select>
-      <input id="B_s1" type="number" step="0.01" value="0.2" placeholder="Size 1" oninput="gv_recalc()" style="flex:1;max-width:110px">
-      <input id="B_s2" class="indepOnly" type="number" step="0.01" value="0" placeholder="Size 2 (X)" oninput="gv_recalc()" style="flex:1;max-width:110px">
-      <button class="pbtn" onclick="gv_recalc()" style="padding:9px 18px;white-space:nowrap;min-width:100px">Apply to B</button>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
-      <select id="C_t" onchange="gv_recalc()" style="flex:1;min-width:110px"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select>
-      <input id="C_s1" type="number" step="0.01" value="0.2" placeholder="Size 1" oninput="gv_recalc()" style="flex:1;max-width:110px">
-      <input id="C_s2" class="indepOnly" type="number" step="0.01" value="0" placeholder="Size 2 (X)" oninput="gv_recalc()" style="flex:1;max-width:110px">
-      <button class="pbtn" onclick="gv_recalc()" style="padding:9px 18px;white-space:nowrap;min-width:100px">Apply to C</button>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
-      <select id="D_t" onchange="gv_recalc()" style="flex:1;min-width:110px"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select>
-      <input id="D_s1" type="number" step="0.01" value="0" placeholder="Size 1" oninput="gv_recalc()" style="flex:1;max-width:110px">
-      <input id="D_s2" class="indepOnly" type="number" step="0.01" value="0" placeholder="Size 2 (X)" oninput="gv_recalc()" style="flex:1;max-width:110px">
-      <button class="pbtn" onclick="gv_recalc()" style="padding:9px 18px;white-space:nowrap;min-width:100px">Apply to D</button>
-    </div>
-    <label class="chkrow" style="margin-top:14px"><input type="checkbox" id="indepLegs" onchange="gv_recalc()"> Independent chamfer legs (Z-leg &ne; X-leg)</label>
-    <div class="hint" style="margin-top:6px">When on, each row shows a Size 2 field for the X-leg (asymmetric chamfer). Individual corner points can be tweaked further in the PROFILE section below.</div>
-  
     <div class="sec" style="margin-top:14px"><div class="st" onclick="gv_toggle(this)">PROFILE <span class="caret">&#9656;</span></div><div class="sb">
-    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:6px 2px 6px;font-weight:700;padding-top:2px">PROFILE POINTS / PATTERN</div>
-    <div class="hint" style="margin-top:6px"><b>A</b> top-left &middot; <b>B</b> bottom-left &middot; <b>C</b> bottom-right &middot; <b>D</b> top-right<br>Each corner has its own X (diameter) and Z entry &mdash; edit directly for asymmetric grooves, or leave and use GEOMETRY / modifiers to auto-fill. Changes flow immediately into the points table below.</div>
-    <div class="row4" style="margin-top:8px">
-      <div class="cornerBox"><h4>A &mdash; top-L</h4>
-        <label style="margin-top:0">X (dia)</label>
-        <input id="A_x" type="number" step="0.001" value="32" oninput="gv_pointEdit('A')">
-        <label>Z</label>
-        <input id="A_z" type="number" step="0.001" value="-4" oninput="gv_pointEdit('A')">
-      </div>
-      <div class="cornerBox"><h4>B &mdash; bot-L</h4>
-        <label style="margin-top:0">X (dia)</label>
-        <input id="B_x" type="number" step="0.001" value="26" oninput="gv_pointEdit('B')">
-        <label>Z</label>
-        <input id="B_z" type="number" step="0.001" value="-4" oninput="gv_pointEdit('B')">
-      </div>
-      <div class="cornerBox"><h4>C &mdash; bot-R</h4>
-        <label style="margin-top:0">X (dia)</label>
-        <input id="C_x" type="number" step="0.001" value="26" oninput="gv_pointEdit('C')">
-        <label>Z</label>
-        <input id="C_z" type="number" step="0.001" value="-10" oninput="gv_pointEdit('C')">
-      </div>
-      <div class="cornerBox"><h4>D &mdash; top-R</h4>
-        <label style="margin-top:0">X (dia)</label>
-        <input id="D_x" type="number" step="0.001" value="32" oninput="gv_pointEdit('D')">
-        <label>Z</label>
-        <input id="D_z" type="number" step="0.001" value="-10" oninput="gv_pointEdit('D')">
-      </div>
-    </div>
+    <!-- corner coordinates kept as hidden inputs (auto-filled by GEOMETRY, read by generator/sim) -->
+    <input id="A_x" type="hidden" value="32"><input id="A_z" type="hidden" value="-4">
+    <input id="B_x" type="hidden" value="26"><input id="B_z" type="hidden" value="-4">
+    <input id="C_x" type="hidden" value="26"><input id="C_z" type="hidden" value="-10">
+    <input id="D_x" type="hidden" value="32"><input id="D_z" type="hidden" value="-10">
+    <div id="gvAutoBox">
     <div style="margin-top:12px;border-top:1px solid var(--line);padding-top:8px">
       <label class="chkrow"><input type="checkbox" id="mod_trap" onchange="gv_recalc()"> Trapezoidal (separate bottom width)</label>
       <div id="trapBox" style="display:none;margin-left:24px">
         <label>Bottom width (mm)</label><input id="botW" type="number" value="5" step="0.01" oninput="gv_recalc()">
-      </div>
-      <label class="chkrow"><input type="checkbox" id="mod_asym" onchange="gv_recalc()"> Asymmetric depth (left &ne; right)</label>
-      <div id="asymBox" style="display:none;margin-left:24px">
-        <div class="row2">
-          <div><label>Depth left</label><input id="depL" type="number" value="3" step="0.01" oninput="gv_recalc()"></div>
-          <div><label>Depth right</label><input id="depR" type="number" value="3" step="0.01" oninput="gv_recalc()"></div>
-        </div>
       </div>
       <label class="chkrow"><input type="checkbox" id="mod_ang" onchange="gv_recalc()"> Angled walls / bottom</label>
       <div id="angBox" style="display:none;margin-left:24px">
@@ -702,10 +683,10 @@
     <div style="margin-top:12px;border-top:1px solid var(--line);padding-top:8px">
       <label class="chkrow"><input type="checkbox" id="patOn" onchange="gv_recalc()"> Multi-groove pattern</label>
       <div id="patBox" style="display:none">
-        <div class="chips" style="margin-top:8px">
-          <span class="chip on" data-p="pitch">Enter pitch</span>
-          <span class="chip" data-p="span">Fit N in span</span>
-        </div>
+        <select id="gv_patmode" onchange="gv_selset('patmode',this.value)" style="margin-top:8px">
+          <option value="pitch">Enter pitch</option>
+          <option value="span">Fit N in span</option>
+        </select>
         <div class="row3">
           <div><label>Count N</label><input id="patN" type="number" value="3" min="1" step="1" oninput="gv_recalc()"></div>
           <div><label id="pat2lbl">Pitch (mm)</label><input id="pat2" type="number" value="10" step="0.01" oninput="gv_recalc()"></div>
@@ -713,27 +694,17 @@
         </div>
       </div>
     </div>
+    </div><!-- /gvAutoBox -->
     <div style="margin-top:12px;border-top:1px solid var(--line);padding-top:8px">
-      <label class="chkrow"><input type="checkbox" id="gv_manual" onchange="gv_recalc()"> Manual mode &mdash; edit points table directly</label>
-      <table id="ptTbl">
-        <thead><tr><th>Pt</th><th>X (dia)</th><th>Z</th><th>Corner</th><th>Sz 1</th><th>Sz 2</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="hint keep" id="ptStatus" style="margin-top:6px"></div>
-    </div>
-  
-    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:18px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">PREVIEW</div>
-    <div class="previewbox">
-      <canvas id="gv_preview" width="380" height="300" style="touch-action:none;width:100%;height:min(46vh,340px);display:block;background:#0a1118;border:1px solid #293a4d;border-radius:10px"></canvas>
-      <div style="text-align:right;margin-top:6px">
-        <button class="pbtn" onclick="gvView.z=1;gvView.ox=0;gvView.oy=0;gvDraw()" style="padding:6px 14px;font-size:12px">Reset view</button>
-        <span class="hint" style="margin-left:10px">Scroll to zoom &middot; drag to pan &middot; pinch on mobile</span>
+      <label class="chkrow"><input type="checkbox" id="gv_manual" onchange="gv_recalc()"> Manual mode &mdash; define the groove profile point-by-point (like turning)</label>
+      <div id="gvManWrap" style="display:none;margin-top:8px">
+        <div class="hint" style="margin-top:2px">Manual profile drives the G-code. Top/bottom &#216; and start/end Z lock while manual mode is on. Table starts from the turning default profile &mdash; edit freely.</div>
+        <div id="gvManBox"></div>
       </div>
+      <table id="ptTbl" style="display:none"><thead><tr><th>Pt</th><th>X</th><th>Z</th><th>Corner</th><th>Sz1</th><th>Sz2</th></tr></thead><tbody></tbody></table>
+      <div class="hint keep" id="ptStatus" style="display:none"></div>
     </div>
-    <div class="hint">Longitudinal cross-section &mdash; centerline dashed. Grey shapes = groove copies.</div>
     </div></div>
-
-  </div></div>
   <!-- ============ PARAMETERS ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">PARAMETERS <span class="caret">&#9656;</span></div><div class="sb">
     <label>Material</label>
@@ -759,20 +730,37 @@
       <div></div>
     </div>
   
-    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:18px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">ROUGH / FINISH STRATEGY</div>
-    <h3 style="margin:10px 0 4px">ROUGHING STRATEGY</h3>
-    <div class="pills3" id="stratPills">
-      <div class="pill on" data-v="single">Single plunge</div>
-      <div class="pill" data-v="multi">Multi-plunge</div>
-      <div class="pill" data-v="plturn">Plunge turning</div>
-      <div class="pill" data-v="ramp">Ramping</div>
+    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">PECK / OUTPUT</div>
+    <label class="chkrow"><input type="checkbox" id="cs_peck" onchange="gv_recalc()" checked> Peck the plunge</label>
+    <div id="peckBox" style="margin-left:24px">
+      <div class="row2">
+        <div><label>Peck depth (mm)</label><input id="cs_pd" type="number" value="0.5" step="0.05" oninput="gv_recalc()"></div>
+        <div><label>Retract per peck (mm)</label><input id="cs_pr" type="number" value="0.3" step="0.05" oninput="gv_recalc()"></div>
+      </div>
     </div>
-    <div class="hint keep" id="stratHint" style="margin:-6px 0 10px">Recommended strategy updates automatically based on the groove geometry you enter above.</div>
-    <h3>FINISHING STRATEGY</h3>
-    <div class="pills two" id="finPills">
-      <div class="pill on" data-v="profile">Profile pass</div>
-      <div class="pill" data-v="walls">Walls-then-floor</div>
+    <div class="row2" style="margin-top:6px">
+      <div><label>Radial DOC &mdash; turn (mm)</label><input id="cs_rdoc" type="number" value="" placeholder="= peck depth" step="0.05" oninput="gv_recalc()"></div>
+      <div></div>
     </div>
+    <div class="hint">Radial depth of cut per turning pass in <b>Plunge-turning</b> roughing (plunge tailstock wall, turn toward spindle). Blank = use peck depth.</div>
+    <label class="chkrow"><input type="checkbox" id="cs_incr" onchange="gv_recalc()"> Incremental output (U/W after start point)</label>
+    <div class="hint">First positioning move stays absolute (X/Z); all following moves are emitted as incremental U/W deltas. Fanuc-style controls only &mdash; Siemens/Heidenhain stay absolute.</div>
+    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">STRATEGY</div>
+    <div class="row2">
+      <div><label style="margin-top:0">Roughing strategy</label>
+        <select id="gv_strat" onchange="gv_selset('strat',this.value)">
+          <option value="single">Single plunge</option>
+          <option value="multi">Multi-plunge</option>
+          <option value="plturn">Plunge turning</option>
+          <option value="ramp">Ramping</option>
+        </select></div>
+      <div><label style="margin-top:0">Finishing strategy</label>
+        <select id="gv_fin" onchange="gv_selset('fin',this.value)">
+          <option value="profile">Profile pass</option>
+          <option value="walls">Walls-then-floor</option>
+        </select></div>
+    </div>
+    <div class="hint keep" id="stratHint" style="margin:4px 0 8px">Recommended strategy updates automatically based on the groove geometry.</div>
 
   </div></div>
 <!-- ============ 6. POSITIONING (approach/retract) ============ -->
@@ -784,15 +772,15 @@
   </div></div>
   <!-- ============ 7. CUT SETUP (peck / chip break) ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">CUT SETUP <span class="caret">&#9656;</span></div><div class="sb">
-    <label class="chkrow"><input type="checkbox" id="cs_peck" onchange="gv_recalc()" checked> Peck the plunge</label>
-    <div id="peckBox" style="margin-left:24px">
-      <div class="row2">
-        <div><label>Peck depth (mm)</label><input id="cs_pd" type="number" value="0.5" step="0.05" oninput="gv_recalc()"></div>
-        <div><label>Retract per peck (mm)</label><input id="cs_pr" type="number" value="0.3" step="0.05" oninput="gv_recalc()"></div>
-      </div>
+    <div class="row2">
+      <div><label>Finish allowance (mm)</label><input id="gv_fa" type="number" value="0.1" step="0.02" oninput="gv_recalc()"></div>
+      <div><label>Plunge feed %</label><input id="gv_plf" type="number" value="100" step="5" oninput="gv_recalc()"></div>
     </div>
-    <label class="chkrow"><input type="checkbox" id="cs_incr" onchange="gv_recalc()"> Incremental output (U/W after start point)</label>
-    <div class="hint">First positioning move stays absolute (X/Z); all following moves are emitted as incremental U/W deltas. Fanuc-style controls only &mdash; Siemens/Heidenhain stay absolute.</div>
+    <div class="row2">
+      <div><label>Retract clearance (mm)</label><input id="gv_rtr" type="number" value="" placeholder="to Safe X" step="0.5" oninput="gv_recalc()"></div>
+      <div><label>Arc output</label><select id="gv_arcfmt" onchange="gv_recalc()"><option value="R">R word</option><option value="IK">I,K center</option></select></div>
+    </div>
+    <div class="hint">Finish allowance = radial stock left by roughing for the finish pass. Plunge feed % scales the radial plunge feed. Retract clearance = &#216; above the groove to rapid between plunges (blank = Safe X). Arc output = R word or I,K centre for finish arcs.</div>
   </div></div>
   <!-- MACHINE / SETUP removed — control from Defaults screen; spindle direction now in TOOL; tool-change from Defaults -->
   <!-- ============ GENERATE + OUTPUT ============ -->
@@ -811,20 +799,7 @@
   </div>
 </div>
 </section>
-    <section id="ttbl" class="view">
-      <div class="vhead"><button class="back" onclick="show('turnops')">&lsaquo;</button><h2>Profile points</h2></div>
-      <div id="tt_gwrap" style="position:relative;margin-bottom:8px"><canvas id="tt_preview" width="380" height="460" style="touch-action:none;width:100%;height:min(56vh,440px);display:block;background:#0a1118;border:1px solid #293a4d;border-radius:10px"></canvas><div id="pp_hud" style="position:absolute;left:0;top:0;display:none;gap:6px;align-items:stretch;z-index:6"><div style="background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;padding:4px 8px;font-size:11px;line-height:1.3;text-align:left;pointer-events:none"><div style="color:#8aa;font-size:9px">cursor</div><div id="pp_curx" style="color:#e8c84a;font-weight:700">&#216; &ndash;</div><div id="pp_curz" style="color:#59d0ff;font-weight:700">Z &ndash;</div></div><button id="pp_add" type="button" onclick="ppAdd()" style="background:#123a5c;border:1px solid #2f6ea0;color:#bfe3ff;border-radius:7px;font-size:13px;font-weight:800;padding:0 12px;cursor:pointer">Add</button></div><div id="pp_urdo" style="position:absolute;left:8px;top:8px;display:flex;gap:4px;z-index:6"><button id="pp_undo" type="button" onclick="ppUndo()" title="Undo" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:15px;cursor:pointer">&#8630;</button><button id="pp_redo" type="button" onclick="ppRedo()" title="Redo" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:15px;cursor:pointer">&#8631;</button></div><div id="pp_zoom" style="position:absolute;left:8px;bottom:8px;display:flex;flex-direction:column;gap:4px;z-index:6"><button type="button" onclick="ppZoom(1.25)" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:16px;font-weight:800;cursor:pointer">+</button><button type="button" onclick="ppZoom(0.8)" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#cfe0ee;font-size:16px;font-weight:800;cursor:pointer">&minus;</button><button type="button" onclick="ppZoomReset()" style="width:30px;height:30px;background:rgba(14,26,37,.94);border:1px solid #2b4658;border-radius:7px;color:#9cc4e6;font-size:13px;cursor:pointer">&#8635;</button></div></div>
-      <div id="tt_body" style="overflow:auto;max-height:134px"></div>
-      <div style="display:flex;gap:6px;margin-top:4px"><button class="btn btn2" type="button" onclick="tnAddPt()" style="margin:0;flex:1">+ Add point</button><button class="btn btn2" type="button" onclick="ppBackup()" style="margin:0;width:auto;padding:8px 12px">&#128190; Backup</button><button class="btn btn2" type="button" onclick="document.getElementById('pp_restore').click()" style="margin:0;width:auto;padding:8px 12px">&#128194; Restore</button><button class="btn btn2" type="button" onclick="ppLoadDefault()" style="margin:0;width:auto;padding:8px 12px" title="Load default profile + raw">&#8634; Default</button><input type="file" id="pp_restore" accept=".json,application/json" style="display:none" onchange="ppRestore(event)"></div>
-      <div id="tt_status" class="note" style="text-align:left;margin-top:6px"></div>
-      <div style="margin-top:8px;border-top:1px solid #1d2c38;padding-top:8px">
-        <label style="text-align:left;display:block;color:#8aa;font-size:11px;margin-bottom:3px">Saved profiles (this device)</label>
-        <div style="display:flex;gap:6px;margin-bottom:6px"><input id="tn_profname" value="Sample part" placeholder="profile name" style="flex:1;padding:8px 10px;font-size:13px"><button class="btn btn2" type="button" onclick="tnProfSave()" style="margin:0;width:auto;padding:8px 12px;font-size:13px">&#128190; Save</button></div>
-        <div style="display:flex;gap:6px"><select id="tn_proflist" style="flex:1;padding:8px 10px;font-size:13px"></select><button class="btn btn2" type="button" onclick="tnProfLoad()" style="margin:0;width:auto;padding:8px 12px;font-size:13px">&#128194; Load</button><button class="btn btn2" type="button" onclick="tnProfDelete()" style="margin:0;width:auto;padding:8px 11px;font-size:13px">&#128465;</button></div>
-        <div id="tn_profmsg" class="note" style="text-align:left;margin-top:4px"></div>
-      </div>
-      <button class="btn" onclick="tnCalc();show('turnops')">&#10003; Done</button>
-    </section>
+    <!-- profile editor moved inline into turning PROFILE section -->
     <section id="rawtbl" class="view">
       <div class="vhead"><button class="back" onclick="show('turnops')">&lsaquo;</button><h2>Raw material</h2></div>
       <div class="sec"><div class="st" onclick="tog(this)">RAW MATERIAL <span>&#9662;</span></div><div class="sb">
@@ -948,7 +923,7 @@ function mfClose(){var m=$('mfModal');if(m)m.style.display='none';try{document.b
 function mfPick(key,val){if($(key))$(key).value=val;mfRender();mfUpdate();}
 function mfChip(d){d=d||mfDerive();var el=$('js_mfchiptxt');if(el)el.textContent=d.chuck+' · '+d.turret+' · '+d.hand+' hand';}
 function mfDerive(){var ch=($('js_chuck')?$('js_chuck').value:'Left'),tu=($('js_turret')?$('js_turret').value:'Rear'),hn=($('js_hand')?$('js_hand').value:'R');var flips=((tu==='Front')?1:0)+((hn==='L')?1:0);var compOD=(flips%2===0)?'G42':'G41';return {chuck:ch,turret:tu,hand:hn,feed:(hn==='L')?'+Z':'-Z',side:(tu==='Rear')?'above centreline (+X)':'below centreline (-X)',compOD:compOD,compID:(compOD==='G42')?'G41':'G42',arc:(tu==='Rear')?'normal':'mirrored'};}function mfUpdate(){var d=mfDerive();try{mfChip(d);}catch(e){}var el=$('js_mfout');if(!el)return;function c(x){return '<b style="color:'+(x==='G41'?'#7fd1a6':'#ffd277')+'">'+x+'</b>';}el.innerHTML='Feed OD '+d.feed+' · '+d.side+' · OD comp '+c(d.compOD)+' · ID comp '+c(d.compID)+' · arc '+d.arc;}
-function segPick(id,val,el){var s=$(id);if(s){s.value=val;if(typeof s.onchange==='function'){s.onchange();}}var pr=el.parentNode;for(var i=0;i<pr.children.length;i++){pr.children[i].classList.remove('on');}el.classList.add('on');}function tnPosDefaults(){var isID=($('tn_odid')&&$('tn_odid').value.indexOf('ID')>=0);var od=parseFloat($('js_od')?$('js_od').value:'')||0,idv=parseFloat($('js_id')?$('js_id').value:'')||0;var fs=parseFloat($('tn_facex')?$('tn_facex').value:'')||0;var consid=(fs>0);var pmaxZ=0;try{var pts=tnResolve().pts.filter(function(p){return isFinite(p.z);});if(pts.length)pmaxZ=Math.max.apply(null,pts.map(function(p){return p.z;}));}catch(e){}var rawFaceZ=pmaxZ+(consid?fs:0);function setv(id,v){var e=$(id);if(e)e.value=(Math.round(v*1000)/1000);}setv('tn_safex',isID?idv:(od+100));setv('tn_safez',50+(consid?fs:0));setv('tn_infx',isID?(idv-2):(od+2));setv('tn_infz',rawFaceZ+1);}function tnFaceStockDefault(){var s=$('tn_facestock');if(!s)return;var pf=($('tn_op')&&$('tn_op').value.indexOf('Facing')>=0),mr=($('tn_mode')&&$('tn_mode').value.indexOf('Rough')>=0),od=!($('tn_odid')&&$('tn_odid').value.indexOf('ID')>=0);var v=(pf&&mr&&od)?'Yes':'No';s.value=v;var sb=s.previousElementSibling;if(sb&&sb.classList&&sb.classList.contains('segbtns')){for(var i=0;i<sb.children.length;i++){sb.children[i].classList.toggle('on',sb.children[i].textContent.trim()===v);}}}function opIcoOD(){var s='<line x1="6" y1="40" x2="114" y2="40" stroke="#3a5266" stroke-width="1" stroke-dasharray="4 3"/>';s+='<rect x="18" y="28" width="84" height="24" fill="#45596d" stroke="#6a89a0"/>';s+='<rect x="52" y="6" width="16" height="13" fill="#2a3a49" stroke="#4a6478"/>';s+='<polygon points="60,28 54,17 66,17" fill="#e8c84a" stroke="#a8861e"/><circle cx="60" cy="28" r="2.4" fill="#ff5a5a"/>';s+=mfAh(64,23,98,23,'#35d95f');return s;}
+function segPick(id,val,el){var s=$(id);if(s){s.value=val;if(typeof s.onchange==='function'){s.onchange();}}if(el&&el.parentNode){var pr=el.parentNode;for(var i=0;i<pr.children.length;i++){pr.children[i].classList.remove('on');}el.classList.add('on');}}function tnPosDefaults(){var isID=($('tn_odid')&&$('tn_odid').value.indexOf('ID')>=0);var od=parseFloat($('js_od')?$('js_od').value:'')||0,idv=parseFloat($('js_id')?$('js_id').value:'')||0;var fs=parseFloat($('tn_facex')?$('tn_facex').value:'')||0;var consid=(fs>0);var pmaxZ=0;try{var pts=tnResolve().pts.filter(function(p){return isFinite(p.z);});if(pts.length)pmaxZ=Math.max.apply(null,pts.map(function(p){return p.z;}));}catch(e){}var rawFaceZ=pmaxZ+(consid?fs:0);function setv(id,v){var e=$(id);if(e)e.value=(Math.round(v*1000)/1000);}setv('tn_safex',isID?idv:(od+100));setv('tn_safez',50+(consid?fs:0));setv('tn_infx',isID?(idv-2):(od+2));setv('tn_infz',rawFaceZ+1);}function tnFaceStockDefault(){var s=$('tn_facestock');if(!s)return;var pf=($('tn_op')&&$('tn_op').value.indexOf('Facing')>=0),mr=($('tn_mode')&&$('tn_mode').value.indexOf('Rough')>=0),od=!($('tn_odid')&&$('tn_odid').value.indexOf('ID')>=0);var v=(pf&&mr&&od)?'Yes':'No';s.value=v;var sb=s.previousElementSibling;if(sb&&sb.classList&&sb.classList.contains('segbtns')){for(var i=0;i<sb.children.length;i++){sb.children[i].classList.toggle('on',sb.children[i].textContent.trim()===v);}}}function opIcoOD(){var s='<line x1="6" y1="40" x2="114" y2="40" stroke="#3a5266" stroke-width="1" stroke-dasharray="4 3"/>';s+='<rect x="18" y="28" width="84" height="24" fill="#45596d" stroke="#6a89a0"/>';s+='<rect x="52" y="6" width="16" height="13" fill="#2a3a49" stroke="#4a6478"/>';s+='<polygon points="60,28 54,17 66,17" fill="#e8c84a" stroke="#a8861e"/><circle cx="60" cy="28" r="2.4" fill="#ff5a5a"/>';s+=mfAh(64,23,98,23,'#35d95f');return s;}
 function opIcoID(){var s='<line x1="6" y1="34" x2="114" y2="34" stroke="#3a5266" stroke-width="1" stroke-dasharray="4 3"/>';s+='<rect x="40" y="8" width="70" height="52" fill="#45596d" stroke="#6a89a0"/>';s+='<rect x="40" y="26" width="70" height="16" fill="#0a1118" stroke="#4a6478"/>';s+='<rect x="8" y="31" width="54" height="6" fill="#2a3a49" stroke="#4a6478"/>';s+='<polygon points="62,26 56,36 68,36" fill="#e8c84a" stroke="#a8861e"/><circle cx="62" cy="26" r="2.4" fill="#ff5a5a"/>';s+=mfAh(58,30,96,30,'#35d95f');return s;}
 function opIcoTurn(){var s='<line x1="6" y1="34" x2="114" y2="34" stroke="#3a5266" stroke-width="1" stroke-dasharray="4 3"/>';s+='<rect x="18" y="20" width="84" height="28" fill="#45596d" stroke="#6a89a0"/>';for(var i=0;i<3;i++){var y=25+i*7;s+='<line x1="24" y1="'+y+'" x2="96" y2="'+y+'" stroke="#7f97a8" stroke-width="1" stroke-dasharray="3 3"/>';}s+=mfAh(30,13,100,13,'#35d95f');return s;}
 function opIcoFace(){var s='<line x1="6" y1="52" x2="114" y2="52" stroke="#3a5266" stroke-width="1" stroke-dasharray="4 3"/>';s+='<rect x="18" y="20" width="72" height="32" fill="#45596d" stroke="#6a89a0"/>';for(var i=0;i<3;i++){var x=84-i*7;s+='<line x1="'+x+'" y1="24" x2="'+x+'" y2="50" stroke="#7f97a8" stroke-width="1" stroke-dasharray="3 3"/>';}s+=mfAh(102,22,102,50,'#35d95f');return s;}
@@ -969,7 +944,7 @@ function opPickMode(v){opClick(v==='Finishing'?'opb_fin':v==='Rough + Finish'?'o
 function opChip(){var c=opCur();var sm=(c.md==='Roughing')?'Rough':(c.md==='Finishing')?'Finish':'Rough+Finish';var tx=$('op_chiptxt');if(tx)tx.textContent=(c.isID?'ID':'OD')+' · '+c.path+' · '+sm;var sv=$('op_chipsvg');if(sv)sv.innerHTML=(c.path==='Facing'?opIcoFace():c.path==='Copying'?opIcoCopy():(c.isID?opIcoID():opIcoTurn()));}
 function opOpen(){opRender();var m=$('opModal');if(m)m.style.display='block';try{document.body.style.overflow='hidden';}catch(e){}}
 function opClose(){var m=$('opModal');if(m)m.style.display='none';try{document.body.style.overflow='';}catch(e){}opChip();}
-function tnPath(val,el){var op=$('tn_op'),st=$('tn_strat');if(val==='Copying'){if(st)st.value='Copying';}else{if(op){op.value=val;if(typeof op.onchange==='function')op.onchange();}if(st)st.value='Stepped';}if(typeof tnApplyTip==='function')tnApplyTip();if(typeof tnCalc==='function')tnCalc();if(typeof tnFaceStockDefault==='function')tnFaceStockDefault();if(typeof tnPosDefaults==='function')tnPosDefaults();var pr=el.parentNode;for(var i=0;i<pr.children.length;i++){pr.children[i].classList.remove('on');}el.classList.add('on');}
+function tnPath(val,el){var op=$('tn_op'),st=$('tn_strat');if(val==='Copying'){if(st)st.value='Copying';}else{if(op){op.value=val;if(typeof op.onchange==='function')op.onchange();}if(st)st.value='Stepped';}if(typeof tnApplyTip==='function')tnApplyTip();if(typeof tnCalc==='function')tnCalc();if(typeof tnFaceStockDefault==='function')tnFaceStockDefault();if(typeof tnPosDefaults==='function')tnPosDefaults();if(el&&el.parentNode){var pr=el.parentNode;for(var i=0;i<pr.children.length;i++){pr.children[i].classList.remove('on');}el.classList.add('on');}}
 var GL2={C:'<polygon points="50,20 75,50 50,80 25,50" fill="#a8e6a0" stroke="#5cae5c" stroke-width="4"/>',D:'<polygon points="18,50 50,33 82,50 50,67" fill="#a8e6a0" stroke="#5cae5c" stroke-width="4"/>',V:'<polygon points="10,50 50,38 90,50 50,62" fill="#a8e6a0" stroke="#5cae5c" stroke-width="4"/>',T:'<polygon points="50,26 72,68 28,68" fill="#a8e6a0" stroke="#5cae5c" stroke-width="4"/>',S:'<rect x="30" y="30" width="40" height="40" rx="3" fill="#a8e6a0" stroke="#5cae5c" stroke-width="4"/>',W:'<path d="M50,24 Q78,45 72,66 Q50,74 28,66 Q22,45 50,24 Z" fill="#a8e6a0" stroke="#5cae5c" stroke-width="4"/>',CUST:'<polygon points="50,20 75,50 50,80 25,50" fill="#a8e6a0" stroke="#5cae5c" stroke-width="3" stroke-dasharray="6 4"/>',GRV:'<rect x="42" y="22" width="16" height="56" rx="2" fill="#a8e6a0" stroke="#5cae5c" stroke-width="4"/>'};
 var SHP={C:'0,-22 13,0 0,22 -13,0',D:'0,-24 10,0 0,24 -10,0',V:'0,-26 7,0 0,26 -7,0',T:'0,-20 17,16 -17,16',S:'-16,-16 16,-16 16,16 -16,16',W:'0,-22 19,-4 12,18 -12,18 -19,-4',CUST:'0,-22 13,0 0,22 -13,0',GRV:'-6,-20 6,-20 6,20 -6,20'};
 var ORI={1:45,2:315,3:225,4:135,5:180,6:0,7:270,8:90,9:0};
@@ -1035,7 +1010,7 @@ var helpMode=false;
 function toggleHelp(){helpMode=!helpMode;document.body.classList.toggle('helpon',helpMode);var b=document.getElementById('helpbtn');if(b)b.classList.toggle('on',helpMode);}
 function openMillOp(n){var t=$('mill_op_title');if(t)t.textContent=n;show('mill_op');}
 function millGrp(id){var el=document.getElementById(id);if(!el)return;var op=el.classList.contains('open');['mg_c','mg_p'].forEach(function(g){var e=document.getElementById(g);if(e)e.classList.remove('open');});if(!op)el.classList.add('open');}
-function tnQuick(k){show('turnops');try{tnMachRefresh();}catch(e){}try{if(k==='OD'){segPick('tn_odid','OD (outside)',document.getElementById('opb_od'));tnPath('Turning',document.getElementById('opb_turn'));}else if(k==='ID'){segPick('tn_odid','ID (bore)',document.getElementById('opb_id'));tnPath('Turning',document.getElementById('opb_turn'));}else if(k==='FACE'){segPick('tn_odid','OD (outside)',document.getElementById('opb_od'));tnPath('Facing',document.getElementById('opb_face'));}}catch(e){}}
+function tnQuick(k){show('turnops');try{tnMachRefresh();}catch(e){}try{function _qs(id,v){var e=document.getElementById(id);if(e){e.value=v;if(typeof e.onchange==='function')e.onchange();}}if(k==='OD'){_qs('tn_odid','OD (outside)');_qs('tn_pathsel','Turning');}else if(k==='ID'){_qs('tn_odid','ID (bore)');_qs('tn_pathsel','Turning');}else if(k==='FACE'){_qs('tn_odid','OD (outside)');_qs('tn_pathsel','Facing');}}catch(e){}}
 function setMode(m){var t=document.getElementById('mt-turn'),l=document.getElementById('mt-mill');if(!t||!l)return;window._mode=m;try{document.querySelectorAll('.tile[data-mode]').forEach(function(x){var dm=x.getAttribute('data-mode');x.style.display=(dm==='both'||dm===m)?'':'none';});document.querySelectorAll('.jobop-turn').forEach(function(x){x.style.display=(m==='turn')?'':'none';});document.querySelectorAll('.jobop-mill').forEach(function(x){x.style.display=(m==='mill')?'':'none';});document.querySelectorAll('.js-turn-only').forEach(function(x){x.style.display=(m==='mill')?'none':'';});document.querySelectorAll('.js-mill-only').forEach(function(x){x.style.display=(m==='mill')?'':'none';});}catch(e){}var jt=document.getElementById('js-turn'),jm=document.getElementById('js-mill');if(m==='mill'){l.style.background='var(--acc)';l.style.color='#1a1200';t.style.background='transparent';t.style.color='var(--mut)';if(jt)jt.style.display='none';if(jm)jm.style.display='block';}else{t.style.background='var(--acc)';t.style.color='#1a1200';l.style.background='transparent';l.style.color='var(--mut)';if(jt)jt.style.display='block';if(jm)jm.style.display='none';}}
 var jsOD=[{x:null,z:null},{x:null,z:null},{x:null,z:null}];
 var jsID=[{x:null,z:null},{x:null,z:null},{x:null,z:null}];
@@ -1092,7 +1067,7 @@ function ppLoadDefault(){tnPts.length=0;var d=JSON.parse(JSON.stringify(PP_DEF))
 function ppBackup(){try{var data={app:'yantra',kind:'profiles-backup',v:1,ts:Date.now(),profiles:tnProfAll(),current:tnPts};var blob=new Blob([JSON.stringify(data)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='yantra-profiles-backup.json';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},120);if(typeof tnProfMsg==='function')tnProfMsg('Backup file downloaded',0);}catch(e){if(typeof tnProfMsg==='function')tnProfMsg('Backup failed',1);}}
 function ppRestore(ev){var f=ev.target.files&&ev.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result);var inc=(d&&d.profiles)?d.profiles:[];var cur=tnProfAll(),byName={};cur.forEach(function(r){byName[r.name]=r;});inc.forEach(function(r){if(r&&r.name)byName[r.name]=r;});var merged=Object.keys(byName).map(function(k){return byName[k];});tnProfStore(merged);tnProfRefresh();if(typeof tnProfMsg==='function')tnProfMsg('Restored '+inc.length+' profile(s)',0);}catch(e){if(typeof tnProfMsg==='function')tnProfMsg('Bad backup file',1);}ev.target.value='';};rd.readAsText(f);}
 var ttView={z:1,ox:0,oy:0},rwView={z:1,ox:0,oy:0};var gvView={z:1,ox:0,oy:0};var s2view={get z(){return S2.zoom||1;},set z(v){S2.zoom=v;},get ox(){return S2.panX||0;},set ox(v){S2.panX=v;},get oy(){return S2.panY||0;},set oy(v){S2.panY=v;}};function pzAttach(id,view,redraw,opts){var cv=$(id);if(!cv||cv._pz)return;cv._pz=1;opts=opts||{};function loc(t){var r=cv.getBoundingClientRect();return {x:(t.clientX-r.left)*(cv.width/r.width),y:(t.clientY-r.top)*(cv.height/r.height)};}function zoomAt(px,py,f){var W=cv.width,H=cv.height;var nz=Math.max(0.3,Math.min(12,view.z*f));view.ox=px-W/2-((px-view.ox-W/2)/view.z)*nz;view.oy=py-H/2-((py-view.oy-H/2)/view.z)*nz;view.z=nz;redraw();}cv.addEventListener('wheel',function(e){e.preventDefault();var p=loc(e);zoomAt(p.x,p.y,e.deltaY<0?1.12:1/1.12);},{passive:false});if(!opts.noMouseDrag){var dr=false,lx=0,ly=0;cv.addEventListener('mousedown',function(e){dr=true;lx=e.clientX;ly=e.clientY;});window.addEventListener('mousemove',function(e){if(!dr)return;var r=cv.getBoundingClientRect();view.ox+=(e.clientX-lx)*(cv.width/r.width);view.oy+=(e.clientY-ly)*(cv.height/r.height);lx=e.clientX;ly=e.clientY;redraw();});window.addEventListener('mouseup',function(){dr=false;});}cv.addEventListener('dblclick',function(e){e.preventDefault();view.z=1;view.ox=0;view.oy=0;redraw();});var tlx=0,tly=0,tdist=0,tmid=null,lastTap=0;cv.addEventListener('touchstart',function(e){if(e.touches.length===1){tlx=e.touches[0].clientX;tly=e.touches[0].clientY;}else if(e.touches.length===2){var a=e.touches[0],b=e.touches[1];tdist=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);tmid=loc({clientX:(a.clientX+b.clientX)/2,clientY:(a.clientY+b.clientY)/2});}},{passive:false});cv.addEventListener('touchmove',function(e){e.preventDefault();var r=cv.getBoundingClientRect();if(e.touches.length===1){var t=e.touches[0];view.ox+=(t.clientX-tlx)*(cv.width/r.width);view.oy+=(t.clientY-tly)*(cv.height/r.height);tlx=t.clientX;tly=t.clientY;redraw();}else if(e.touches.length===2){var a=e.touches[0],b=e.touches[1];var nd=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);if(tdist>0&&tmid)zoomAt(tmid.x,tmid.y,nd/tdist);tdist=nd;}},{passive:false});cv.addEventListener('touchend',function(e){if(e.touches.length===0){var now=Date.now();if(now-lastTap<300){view.z=1;view.ox=0;view.oy=0;redraw();}lastTap=now;}});}
-function openProfileTable(){show('ttbl');ttRender();tnProfRefresh();ppAttach();var _b=$('tt_body');if(_b&&!_b._ppchg){_b._ppchg=1;_b.addEventListener('change',function(e){var t=e.target;if(t&&t.classList&&t.classList.contains('ttf'))ppRecord();});}if(ppHist.length===0)ppRecord();ppUndoUI();ppDraw();}
+function openProfileTable(){ttRender();tnProfRefresh();ppAttach();var _b=$('tt_body');if(_b&&!_b._ppchg){_b._ppchg=1;_b.addEventListener('change',function(e){var t=e.target;if(t&&t.classList&&t.classList.contains('ttf'))ppRecord();});}if(ppHist.length===0)ppRecord();ppUndoUI();ppDraw();}
 function tnProfKey(){return 'yantra_tn_profiles';}
 function tnProfAll(){try{return JSON.parse(localStorage.getItem(tnProfKey())||'[]');}catch(e){return [];}}
 function tnProfStore(a){try{localStorage.setItem(tnProfKey(),JSON.stringify(a));}catch(e){}if(window.cloudTouch)cloudTouch();}
@@ -1177,12 +1152,112 @@ function miSim(){
   cv.style.display='block';if($('tn_simctrls'))$('tn_simctrls').style.display='flex';
   s2Start(cv,segs,{fitFeed:true,fmt:function(r){return 'X'+r[0].toFixed(2)+' Y'+r[1].toFixed(2);}},'mi');
 }
+/* ===== Grooving MANUAL profile: turning-style points table drives the groove ===== */
+var gvPts=(typeof PP_DEF!=='undefined')?JSON.parse(JSON.stringify(PP_DEF)):[];
+var gvManInit=false, gvManRendered=false;
+function gvManOn(){var e=document.getElementById('gv_manual');return !!(e&&e.checked);}
+function gvManNodes(){try{var r=tnGeom(tnResolve(gvPts).pts);return (r.nodes||[]).filter(function(n){return isFinite(n.x)&&isFinite(n.z);});}catch(e){return [];}}
+function gvManProfileForGen(){
+  var nd=gvManNodes();if(nd.length<2)return null;
+  var rs=nd.map(function(n){return n.x/2;});
+  var rMax=Math.max.apply(null,rs),rMin=Math.min.apply(null,rs);
+  if(!(rMax>rMin+1e-6))return null;
+  // groove span = region meaningfully below the OD (ignore tiny corner-round nodes at the mouth)
+  var rTh=rMax-Math.max(0.2,0.05*(rMax-rMin));
+  var zLo=Infinity,zHi=-Infinity,i;
+  for(i=0;i<nd.length;i++){if(nd[i].x/2<rTh){if(nd[i].z<zLo)zLo=nd[i].z;if(nd[i].z>zHi)zHi=nd[i].z;}}
+  if(!isFinite(zLo)||!(zHi>zLo))return null;
+  var fin=nd.map(function(n){return {z:n.z,r:n.x/2,arc:n.arc,ar:n.ar};});
+  return {D1:2*rMax,D2:2*rMin,Z1:zHi,Z2:zLo,fin:fin};
+}
+/* Gouge-safe grooving-insert toolpath for the manual profile (reuses the verified _grvToolPath envelope). */
+function gvManToolpath(){
+  var g=gvManProfileForGen();if(!g)return null;
+  var Wi=_gvn('tl_wi',3);if(!(Wi>0))Wi=3;
+  var rc={grv:true,W:Wi,off:'2',kr:90,ia:0,back:90,front:270};/* off '2' = symmetric footprint -> path point = insert CENTRE */
+  var tp=null;try{tp=_grvToolPath(g.fin,rc);}catch(e){tp=null;}
+  if(!tp||!tp.adj||tp.adj.length<2)return null;
+  var _or=($('tl_off_ref')?$('tl_off_ref').value:'C'),refOff={L:0,C:Wi/2,R:Wi}[_or];if(refOff===undefined)refOff=Wi/2;
+  var rs=g.fin.map(function(p){return p.r;});
+  return {adj:tp.adj,resid:tp.resid,fin:g.fin,Wi:Wi,refOff:refOff,rMouth:Math.max.apply(null,rs),rFloor:Math.min.apply(null,rs),D1:g.D1,D2:g.D2,Z1:g.Z1,Z2:g.Z2};
+}
+function _gvAdjR(adj,z){var best=null;for(var i=0;i<adj.length-1;i++){var a=adj[i],b=adj[i+1];var zl=Math.min(a.z,b.z),zh=Math.max(a.z,b.z);if(z>=zl-1e-9&&z<=zh+1e-9){var r=(Math.abs(b.z-a.z)<1e-9)?Math.max(a.r,b.r):(a.r+(b.r-a.r)*((z-a.z)/(b.z-a.z)));if(best===null||r>best)best=r;}}return best;}
+function gvManRough(mv,tp,safeX,pd,pr,Fr,dwell,peck,stock,rIns){
+  var adj=tp.adj,Wi=tp.Wi,refOff=tp.refOff,rMouth=tp.rMouth;
+  var zA=Math.min(tp.Z1,tp.Z2),zB=Math.max(tp.Z1,tp.Z2);
+  var step=Math.max(0.2,Wi-2*(rIns||0));
+  var zcFirst=zA+Wi/2,zcLast=zB-Wi/2;
+  if(zcLast<zcFirst){zcFirst=zcLast=(zA+zB)/2;}
+  var span=zcLast-zcFirst,N=(span<=1e-6)?1:Math.max(2,Math.ceil(span/step)+1),dz=(N>1)?span/(N-1):0,k;
+  mv.push({t:'cmt',txt:'Gouge-safe roughing: '+N+' plunge(s) following the profile envelope (insert '+Wi.toFixed(2)+' mm)'});
+  for(k=0;k<N;k++){
+    var zc=zcFirst+k*dz;var tr=_gvAdjR(adj,zc);if(tr===null)continue;tr=tr+(stock||0);
+    if(tr>=rMouth-1e-6)continue;
+    var zp=zc-Wi/2+refOff;
+    mv.push({t:'g0',X:safeX});mv.push({t:'g0',Z:zp});mv.push({t:'g0',X:2*rMouth+2});
+    var d=0,totalD=(rMouth-tr);
+    if(peck===false){mv.push({t:'g1',X:2*tr,Z:zp,F:Fr});}
+    else{while(d<totalD-1e-4){var nx=Math.min(totalD,d+pd);mv.push({t:'g1',X:2*(rMouth-nx),Z:zp,F:Fr});if(nx<totalD){mv.push({t:'g1',X:2*(rMouth-nx)+2*pr});mv.push({t:'g1',X:2*(rMouth-nx)});}d=nx;}}
+    if(dwell>0)mv.push({t:'dwell',p:dwell});
+    mv.push({t:'g0',X:safeX});
+  }
+}
+function gvManFinish(mv,tp,safeX,Ff){
+  var adj=tp.adj,Wi=tp.Wi,refOff=tp.refOff,rMouth=tp.rMouth;
+  if(!adj||adj.length<2)return;
+  mv.push({t:'cmt',txt:'Gouge-safe finish: trace insert-centre envelope ('+adj.length+' pts)'});
+  mv.push({t:'g0',X:safeX});
+  mv.push({t:'g0',Z:adj[0].z-Wi/2+refOff});
+  mv.push({t:'g0',X:2*rMouth+2});
+  for(var i=0;i<adj.length;i++){mv.push({t:'g1',X:2*adj[i].r,Z:adj[i].z-Wi/2+refOff,F:Ff});}
+  mv.push({t:'g0',X:safeX});
+}
+function gvManSel(v,o){return v===o?' selected':'';}
+function gvManRow(i){
+  var r=gvPts[i],first=(i===0),st='width:46px;padding:4px;font-size:12px';
+  var TY=['Line','Arc CW','Arc CCW'],tcell;
+  if(first){r.t='Start';tcell='<td><span style="padding:3px 7px;font-size:11px;font-weight:700;color:#ffd277;background:#22150f;border:1px solid #3a2a20;border-radius:7px">Start</span></td>';}
+  else{var o='';for(var k=0;k<TY.length;k++)o+='<option'+gvManSel(r.t,TY[k])+'>'+TY[k]+'</option>';tcell='<td><select oninput="gvManEdit(this)" onchange="gvManEdit(this)" data-i="'+i+'" data-k="t" style="padding:4px;font-size:12px;min-width:62px">'+o+'</select></td>';}
+  var del=first?'<td></td>':'<td><button type="button" onclick="gvManDel('+i+')" style="background:none;border:none;color:#ff8a8a;cursor:pointer;font-size:14px">&#10005;</button></td>';
+  function inp(k,ph){return '<input oninput="gvManEdit(this)" data-i="'+i+'" data-k="'+k+'" inputmode="decimal" placeholder="'+ph+'" value="'+(r[k]==null?'':(''+r[k]))+'" style="'+st+'">';}
+  var bsel='<td><select oninput="gvManEdit(this)" onchange="gvManEdit(this)" data-i="'+i+'" data-k="b" style="padding:4px;font-size:12px"><option value="None"'+gvManSel(r.b,'None')+'>None</option><option value="Chamfer"'+gvManSel(r.b,'Chamfer')+'>Cham</option><option value="Radius"'+gvManSel(r.b,'Radius')+'>Rad</option></select></td>';
+  return '<tr style="border-top:1px solid #1d2c38"><td style="color:#8aa;font-size:12px;padding:2px 4px">'+(i+1)+'</td>'+tcell+'<td>'+inp('x','&#216;')+'</td><td>'+inp('z','Z')+'</td><td>'+inp('a','&#176;')+'</td><td>'+inp('ar','R')+'</td>'+bsel+'<td>'+inp('bs','')+'</td>'+del+'</tr>';
+}
+function gvManRender(){
+  var host=document.getElementById('gvManBox');if(!host)return;
+  var h='<div style="display:flex;gap:6px;margin:2px 0 8px"><button type="button" class="btn btn2" onclick="gvManAdd()" style="margin:0;flex:1">+ Add point</button><button type="button" class="btn btn2" onclick="gvManDefault()" style="margin:0;width:auto;padding:8px 12px">&#8634; Turning default</button></div>';
+  h+='<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;min-width:420px"><tr style="color:#8aa;font-size:11px;text-align:left"><th>#</th><th>Type</th><th>&#216;</th><th>Z</th><th>Ang&#176;</th><th>Arc R</th><th>Corner</th><th>Size</th><th></th></tr>';
+  for(var i=0;i<gvPts.length;i++)h+=gvManRow(i);
+  h+='</table></div><div class="hint keep" id="gvManStatus" style="margin-top:6px"></div>';
+  host.innerHTML=h;gvManStatus();
+}
+function gvManStatus(){
+  var s=document.getElementById('gvManStatus');if(!s)return;
+  var g=gvManProfileForGen();
+  if(!g){s.innerHTML='<span style="color:#ffb300">&#9888; Need a valid groove profile (a dip below the OD).</span>';return;}
+  s.innerHTML='<span style="color:#3fcf86">&#10003; '+gvPts.length+' pts &middot; &#216;'+g.D1.toFixed(2)+'&rarr;'+g.D2.toFixed(2)+' &middot; Z '+g.Z1.toFixed(2)+'&hellip;'+g.Z2.toFixed(2)+'</span>';
+}
+function gvManEdit(el){var i=+el.dataset.i,k=el.dataset.k;if(gvPts[i]){gvPts[i][k]=el.value;}gvManStatus();}
+function gvManAdd(){if(gvPts.length<100){gvPts.push({t:'Line',x:'',z:'',len:'',a:'',ar:'',b:'None',bs:''});gvManRender();}}
+function gvManDel(i){if(i>0&&i<gvPts.length){gvPts.splice(i,1);gvManRender();}}
+function gvManDefault(){gvPts=(typeof PP_DEF!=='undefined')?JSON.parse(JSON.stringify(PP_DEF)):[];gvManInit=true;gvManRender();}
+function gvManSync(){
+  var m=gvManOn();
+  var mw=document.getElementById('gvManWrap');if(mw)mw.style.display=m?'block':'none';
+  var ab=document.getElementById('gvAutoBox');if(ab)ab.style.display=m?'none':'block';
+  ['D1','D2','Z1','Z2'].forEach(function(id){var e=document.getElementById(id);if(e){e.disabled=m;e.style.opacity=m?'0.5':'1';}});
+  if(m){if(!gvManInit){gvPts=(typeof PP_DEF!=='undefined')?JSON.parse(JSON.stringify(PP_DEF)):[];gvManInit=true;}if(!gvManRendered){gvManRender();gvManRendered=true;}}
+  else{gvManRendered=false;}
+}
+/* sim backdrop source: groove's own profile when simulating a groove, else turning's */
+function _s2Fin(){return (window._gvSimProf&&window._gvSimProf.fin)?window._gvSimProf.fin:tnFinPts();}
+function _s2Raw(){return (window._gvSimProf&&window._gvSimProf.raw)?window._gvSimProf.raw:tnRawPts();}
 function tnSim(gvProf){window._gvSimProf=gvProf||null;if(!lastTurnProg)return;var cv=$('tn_simcv');if(!cv)return;if($('tn_simfull'))$('tn_simfull').style.display='flex';cv.style.display='block';if($('tn_simctrls'))$('tn_simctrls').style.display='flex';var L=lastTurnProg.split('\n');var X=0,Z=0,g=0,first=true;var segs=[];for(var k=0;k<L.length;k++){var u=L[k].trim();if(!u||u[0]==='('||u[0]==='%')continue;if(/\bG28\b|\bG30\b|\bG53\b/.test(u))continue;if(/\bG0?0\b/.test(u))g=0;else if(/\bG0?1\b/.test(u))g=1;else if(/\bG0?2\b/.test(u))g=2;else if(/\bG0?3\b/.test(u))g=3;var nX=_sv('X',u),nZ=_sv('Z',u),Rr=_sv('R',u),Ii=_sv('I',u),Kk=_sv('K',u);if(nX==null&&nZ==null)continue;var ex=(nX!=null?nX:X),ez=(nZ!=null?nZ:Z);if(first){X=ex;Z=ez;first=false;continue;}var r0=X/2,r1=ex/2;if((g===2||g===3)&&(Rr>0||(Ii!=null&&Kk!=null))){var ap=(Rr>0)?tnArc(Z,r0,ez,r1,Rr,g===3):tnArcIK(Z,r0,ez,r1,Ii,Kk,g===3);var pz=Z,pr=r0;for(var q=0;q<ap.length;q++){segs.push([pz,pr,ap[q][0],ap[q][1],1,[2*pr,pz],[2*ap[q][1],ap[q][0]]]);pz=ap[q][0];pr=ap[q][1];}}else{segs.push([Z,r0,ez,r1,g,[X,Z],[ex,ez]]);}X=ex;Z=ez;}s2Start(cv,segs,{base:true,dash:true,fitFeed:true,rough:(($('tn_mode')&&$('tn_mode').value.indexOf('Rough')>=0)),finish:(($('tn_mode')&&$('tn_mode').value.indexOf('Finish')>=0)),allow:(parseFloat($('tn_ax')?$('tn_ax').value:'')||0),insert:{kr:parseFloat($('tn_relief')?$('tn_relief').value:'')||95,ia:parseFloat($('tn_ia')?$('tn_ia').value:'')||80,nr:parseFloat($('tn_nr')?$('tn_nr').value:'')||0.8},fmt:function(r){return 'X'+r[0].toFixed(2)+' Z'+r[1].toFixed(2);}},'tn');}
 var S2={speed:5};
 function updateS2Speed(){var b=S2.prefix&&$(S2.prefix+'_simspeed');if(b)b.innerHTML=S2.speed+'\u00d7';}
-function s2Start(cv,segs,opt,prefix){var ctx=cv.getContext('2d');if(!ctx)return;S2.ctx=ctx;S2.cv=cv;S2.vert=(prefix==='tn');S2.dpr=(S2.vert?(window.devicePixelRatio||1):1);S2.cssW=(cv.clientWidth||cv.width);S2.cssH=(cv.clientHeight||cv.height);if(S2.vert){cv.width=Math.round(S2.cssW*S2.dpr);cv.height=Math.round(S2.cssH*S2.dpr);S2.W=S2.cssH;S2.H=S2.cssW;}else{if(prefix==='mi'){cv.width=S2.cssW;cv.height=S2.cssH;}S2.W=cv.width;S2.H=cv.height;}S2.segs=segs;S2.allsegs=null;S2.frame=null;S2.marquee=false;S2._sel=false;if(cv)cv.style.cursor='';if(typeof s2SetZinIcon==='function')s2SetZinIcon(false);S2.opt=opt||{};S2.fmt=S2.opt.fmt||null;S2.prefix=prefix;var mnh=1e9,mxh=-1e9,mnv=1e9,mxv=-1e9;var fitSegs=(S2.opt&&S2.opt.fitFeed)?segs.filter(function(sg){return sg[4]!==0;}):segs;if(!fitSegs.length)fitSegs=segs;fitSegs.forEach(function(sg){[[sg[0],sg[1]],[sg[2],sg[3]]].forEach(function(pt){if(pt[0]<mnh)mnh=pt[0];if(pt[0]>mxh)mxh=pt[0];if(pt[1]<mnv)mnv=pt[1];if(pt[1]>mxv)mxv=pt[1];});});if((S2.opt.base||window._gvSimProf)&&prefix==='tn'){try{var _wp=(tnFinPts()||[]).concat(tnRawPts()||[]);for(var _wi=0;_wi<_wp.length;_wi++){var _p=_wp[_wi];if(!_p||!isFinite(_p.z)||!isFinite(_p.r))continue;if(_p.z<mnh)mnh=_p.z;if(_p.z>mxh)mxh=_p.z;if(_p.r<mnv)mnv=_p.r;if(_p.r>mxv)mxv=_p.r;}}catch(e){}}if(S2.opt.base){if(0<mnv)mnv=0;if(0>mxv)mxv=0;}if(mnh>mxh){mnh=0;mxh=1;mnv=0;mxv=1;}if(S2.opt.pad){var _pd=S2.opt.pad;mnh-=_pd;mxh+=_pd;mnv-=_pd;mxv+=_pd;}var pad=34,sph=(mxh-mnh)||1,spv=(mxv-mnv)||1,sc=Math.min((S2.W-2*pad)/sph,(S2.H-2*pad)/spv);S2.mnh=mnh;S2.mxh=mxh;S2.mnv=mnv;S2.mxv=mxv;S2.sc=sc;S2.pad=pad;S2.zoom=1;S2.panX=0;S2.panY=0;S2.PX=function(h){var cx=S2.W/2;return cx+((S2.pad+(h-S2.mnh)*S2.sc)-cx)*S2.zoom+S2.panX;};S2.PY=function(v){var cy=S2.H/2;return cy+((S2.H-S2.pad-(v-S2.mnv)*S2.sc)-cy)*S2.zoom+S2.panY;};if(!cv._z){cv._z=1;cv.addEventListener('wheel',function(e){e.preventDefault();s2Zoom(e.deltaY<0?1.04:1/1.04);},{passive:false});cv.addEventListener('mousedown',function(e){if(S2.marquee){var rc=cv.getBoundingClientRect();S2._sel=true;S2._selx0=e.clientX-rc.left;S2._sely0=e.clientY-rc.top;S2._selx1=S2._selx0;S2._sely1=S2._sely0;var ov=document.getElementById('tn_simsel');if(ov){ov.style.display='block';ov.style.left=S2._selx0+'px';ov.style.top=S2._sely0+'px';ov.style.width='0px';ov.style.height='0px';}e.preventDefault();return;}S2._drag=true;S2._mx=e.clientX;S2._my=e.clientY;});window.addEventListener('mousemove',function(e){if(S2._sel){var rc=S2.cv.getBoundingClientRect();S2._selx1=e.clientX-rc.left;S2._sely1=e.clientY-rc.top;var ov=document.getElementById('tn_simsel');if(ov){var x=Math.min(S2._selx0,S2._selx1),y=Math.min(S2._sely0,S2._sely1),w=Math.abs(S2._selx1-S2._selx0),h=Math.abs(S2._sely1-S2._sely0);ov.style.left=x+'px';ov.style.top=y+'px';ov.style.width=w+'px';ov.style.height=h+'px';}return;}if(!S2._drag)return;var _cv=S2.cv,_rw=S2.vert?1:((_cv&&_cv.clientWidth)?_cv.width/_cv.clientWidth:1),_rh=S2.vert?1:((_cv&&_cv.clientHeight)?_cv.height/_cv.clientHeight:1),_dx=(e.clientX-S2._mx),_dy=(e.clientY-S2._my);if(S2.vert){S2.panX+=_dy*_rh;S2.panY-=_dx*_rw;}else{S2.panX+=_dx*_rw;S2.panY+=_dy*_rh;}S2._mx=e.clientX;S2._my=e.clientY;s2Render();});window.addEventListener('mouseup',function(e){if(S2._sel){S2._sel=false;var ov=document.getElementById('tn_simsel');if(ov)ov.style.display='none';if(Math.abs(S2._selx1-S2._selx0)>6&&Math.abs(S2._sely1-S2._sely0)>6){var a=s2ScreenToData(S2._selx0,S2._sely0),b=s2ScreenToData(S2._selx1,S2._sely1);s2ApplyFrame({zmin:Math.min(a.z,b.z),zmax:Math.max(a.z,b.z),rmin:Math.min(a.r,b.r),rmax:Math.max(a.r,b.r)});}return;}S2._drag=false;});if(prefix==='tn'||prefix==='mi'){var _tp=false,_tx=0,_ty=0,_pd=0;cv.addEventListener('touchstart',function(e){if(e.touches.length===2){var a=e.touches[0],b=e.touches[1];_pd=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);return;}var t=e.touches[0],rc=cv.getBoundingClientRect();if(S2.marquee){S2._sel=true;S2._selx0=t.clientX-rc.left;S2._sely0=t.clientY-rc.top;S2._selx1=S2._selx0;S2._sely1=S2._sely0;var ov=document.getElementById('tn_simsel');if(ov){ov.style.display='block';ov.style.left=S2._selx0+'px';ov.style.top=S2._sely0+'px';ov.style.width='0px';ov.style.height='0px';}}else{_tp=true;_tx=t.clientX;_ty=t.clientY;}},{passive:false});cv.addEventListener('touchmove',function(e){e.preventDefault();if(e.touches.length===2){var a=e.touches[0],b=e.touches[1];var nd=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);if(_pd>0)s2Zoom(nd/_pd);_pd=nd;return;}var t=e.touches[0];if(S2._sel){var rc=cv.getBoundingClientRect();S2._selx1=t.clientX-rc.left;S2._sely1=t.clientY-rc.top;var ov=document.getElementById('tn_simsel');if(ov){var x=Math.min(S2._selx0,S2._selx1),y=Math.min(S2._sely0,S2._sely1),w=Math.abs(S2._selx1-S2._selx0),h=Math.abs(S2._sely1-S2._sely0);ov.style.left=x+'px';ov.style.top=y+'px';ov.style.width=w+'px';ov.style.height=h+'px';}return;}if(_tp){var dx=t.clientX-_tx,dy=t.clientY-_ty;if(S2.vert){S2.panX+=dy;S2.panY-=dx;}else{S2.panX+=dx;S2.panY+=dy;}_tx=t.clientX;_ty=t.clientY;s2Render();}},{passive:false});cv.addEventListener('touchend',function(e){if(S2._sel&&e.touches.length===0){S2._sel=false;var ov=document.getElementById('tn_simsel');if(ov)ov.style.display='none';if(Math.abs(S2._selx1-S2._selx0)>6&&Math.abs(S2._sely1-S2._sely0)>6){var a=s2ScreenToData(S2._selx0,S2._sely0),b=s2ScreenToData(S2._selx1,S2._sely1);s2ApplyFrame({zmin:Math.min(a.z,b.z),zmax:Math.max(a.z,b.z),rmin:Math.min(a.r,b.r),rmax:Math.max(a.r,b.r)});}}if(e.touches.length===0){_tp=false;_pd=0;}});}}S2.prog=segs.length;S2.playing=false;if(!S2.speed)S2.speed=5;updateS2Speed();s2Render();}
+function s2Start(cv,segs,opt,prefix){var ctx=cv.getContext('2d');if(!ctx)return;S2.ctx=ctx;S2.cv=cv;S2.vert=(prefix==='tn');S2.dpr=(S2.vert?(window.devicePixelRatio||1):1);S2.cssW=(cv.clientWidth||cv.width);S2.cssH=(cv.clientHeight||cv.height);if(S2.vert){cv.width=Math.round(S2.cssW*S2.dpr);cv.height=Math.round(S2.cssH*S2.dpr);S2.W=S2.cssH;S2.H=S2.cssW;}else{if(prefix==='mi'){cv.width=S2.cssW;cv.height=S2.cssH;}S2.W=cv.width;S2.H=cv.height;}S2.segs=segs;S2.allsegs=null;S2.frame=null;S2.marquee=false;S2._sel=false;if(cv)cv.style.cursor='';if(typeof s2SetZinIcon==='function')s2SetZinIcon(false);S2.opt=opt||{};S2.fmt=S2.opt.fmt||null;S2.prefix=prefix;var mnh=1e9,mxh=-1e9,mnv=1e9,mxv=-1e9;var fitSegs=(S2.opt&&S2.opt.fitFeed)?segs.filter(function(sg){return sg[4]!==0;}):segs;if(!fitSegs.length)fitSegs=segs;fitSegs.forEach(function(sg){[[sg[0],sg[1]],[sg[2],sg[3]]].forEach(function(pt){if(pt[0]<mnh)mnh=pt[0];if(pt[0]>mxh)mxh=pt[0];if(pt[1]<mnv)mnv=pt[1];if(pt[1]>mxv)mxv=pt[1];});});if((S2.opt.base||window._gvSimProf)&&prefix==='tn'){try{var _wp=(_s2Fin()||[]).concat(_s2Raw()||[]);for(var _wi=0;_wi<_wp.length;_wi++){var _p=_wp[_wi];if(!_p||!isFinite(_p.z)||!isFinite(_p.r))continue;if(_p.z<mnh)mnh=_p.z;if(_p.z>mxh)mxh=_p.z;if(_p.r<mnv)mnv=_p.r;if(_p.r>mxv)mxv=_p.r;}}catch(e){}}if(S2.opt.base){if(0<mnv)mnv=0;if(0>mxv)mxv=0;}if(mnh>mxh){mnh=0;mxh=1;mnv=0;mxv=1;}if(S2.opt.pad){var _pd=S2.opt.pad;mnh-=_pd;mxh+=_pd;mnv-=_pd;mxv+=_pd;}var pad=34,sph=(mxh-mnh)||1,spv=(mxv-mnv)||1,sc=Math.min((S2.W-2*pad)/sph,(S2.H-2*pad)/spv);S2.mnh=mnh;S2.mxh=mxh;S2.mnv=mnv;S2.mxv=mxv;S2.sc=sc;S2.pad=pad;S2.zoom=1;S2.panX=0;S2.panY=0;S2.PX=function(h){var cx=S2.W/2;return cx+((S2.pad+(h-S2.mnh)*S2.sc)-cx)*S2.zoom+S2.panX;};S2.PY=function(v){var cy=S2.H/2;return cy+((S2.H-S2.pad-(v-S2.mnv)*S2.sc)-cy)*S2.zoom+S2.panY;};if(!cv._z){cv._z=1;cv.addEventListener('wheel',function(e){e.preventDefault();s2Zoom(e.deltaY<0?1.04:1/1.04);},{passive:false});cv.addEventListener('mousedown',function(e){if(S2.marquee){var rc=cv.getBoundingClientRect();S2._sel=true;S2._selx0=e.clientX-rc.left;S2._sely0=e.clientY-rc.top;S2._selx1=S2._selx0;S2._sely1=S2._sely0;var ov=document.getElementById('tn_simsel');if(ov){ov.style.display='block';ov.style.left=S2._selx0+'px';ov.style.top=S2._sely0+'px';ov.style.width='0px';ov.style.height='0px';}e.preventDefault();return;}S2._drag=true;S2._mx=e.clientX;S2._my=e.clientY;});window.addEventListener('mousemove',function(e){if(S2._sel){var rc=S2.cv.getBoundingClientRect();S2._selx1=e.clientX-rc.left;S2._sely1=e.clientY-rc.top;var ov=document.getElementById('tn_simsel');if(ov){var x=Math.min(S2._selx0,S2._selx1),y=Math.min(S2._sely0,S2._sely1),w=Math.abs(S2._selx1-S2._selx0),h=Math.abs(S2._sely1-S2._sely0);ov.style.left=x+'px';ov.style.top=y+'px';ov.style.width=w+'px';ov.style.height=h+'px';}return;}if(!S2._drag)return;var _cv=S2.cv,_rw=S2.vert?1:((_cv&&_cv.clientWidth)?_cv.width/_cv.clientWidth:1),_rh=S2.vert?1:((_cv&&_cv.clientHeight)?_cv.height/_cv.clientHeight:1),_dx=(e.clientX-S2._mx),_dy=(e.clientY-S2._my);if(S2.vert){S2.panX+=_dy*_rh;S2.panY-=_dx*_rw;}else{S2.panX+=_dx*_rw;S2.panY+=_dy*_rh;}S2._mx=e.clientX;S2._my=e.clientY;s2Render();});window.addEventListener('mouseup',function(e){if(S2._sel){S2._sel=false;var ov=document.getElementById('tn_simsel');if(ov)ov.style.display='none';if(Math.abs(S2._selx1-S2._selx0)>6&&Math.abs(S2._sely1-S2._sely0)>6){var a=s2ScreenToData(S2._selx0,S2._sely0),b=s2ScreenToData(S2._selx1,S2._sely1);s2ApplyFrame({zmin:Math.min(a.z,b.z),zmax:Math.max(a.z,b.z),rmin:Math.min(a.r,b.r),rmax:Math.max(a.r,b.r)});}return;}S2._drag=false;});if(prefix==='tn'||prefix==='mi'){var _tp=false,_tx=0,_ty=0,_pd=0;cv.addEventListener('touchstart',function(e){if(e.touches.length===2){var a=e.touches[0],b=e.touches[1];_pd=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);return;}var t=e.touches[0],rc=cv.getBoundingClientRect();if(S2.marquee){S2._sel=true;S2._selx0=t.clientX-rc.left;S2._sely0=t.clientY-rc.top;S2._selx1=S2._selx0;S2._sely1=S2._sely0;var ov=document.getElementById('tn_simsel');if(ov){ov.style.display='block';ov.style.left=S2._selx0+'px';ov.style.top=S2._sely0+'px';ov.style.width='0px';ov.style.height='0px';}}else{_tp=true;_tx=t.clientX;_ty=t.clientY;}},{passive:false});cv.addEventListener('touchmove',function(e){e.preventDefault();if(e.touches.length===2){var a=e.touches[0],b=e.touches[1];var nd=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);if(_pd>0)s2Zoom(nd/_pd);_pd=nd;return;}var t=e.touches[0];if(S2._sel){var rc=cv.getBoundingClientRect();S2._selx1=t.clientX-rc.left;S2._sely1=t.clientY-rc.top;var ov=document.getElementById('tn_simsel');if(ov){var x=Math.min(S2._selx0,S2._selx1),y=Math.min(S2._sely0,S2._sely1),w=Math.abs(S2._selx1-S2._selx0),h=Math.abs(S2._sely1-S2._sely0);ov.style.left=x+'px';ov.style.top=y+'px';ov.style.width=w+'px';ov.style.height=h+'px';}return;}if(_tp){var dx=t.clientX-_tx,dy=t.clientY-_ty;if(S2.vert){S2.panX+=dy;S2.panY-=dx;}else{S2.panX+=dx;S2.panY+=dy;}_tx=t.clientX;_ty=t.clientY;s2Render();}},{passive:false});cv.addEventListener('touchend',function(e){if(S2._sel&&e.touches.length===0){S2._sel=false;var ov=document.getElementById('tn_simsel');if(ov)ov.style.display='none';if(Math.abs(S2._selx1-S2._selx0)>6&&Math.abs(S2._sely1-S2._sely0)>6){var a=s2ScreenToData(S2._selx0,S2._sely0),b=s2ScreenToData(S2._selx1,S2._sely1);s2ApplyFrame({zmin:Math.min(a.z,b.z),zmax:Math.max(a.z,b.z),rmin:Math.min(a.r,b.r),rmax:Math.max(a.r,b.r)});}}if(e.touches.length===0){_tp=false;_pd=0;}});}}S2.prog=segs.length;S2.playing=false;if(!S2.speed)S2.speed=5;updateS2Speed();s2Render();}
 function s2Zoom(f){if(!S2.ctx)return;S2.zoom=Math.max(0.4,Math.min(8,(S2.zoom||1)*f));s2Render();}
-function s2Render(){var c=S2.ctx;if(!c)return;if(S2.opt&&S2.opt.drill&&S2.hv3d&&S2.prefix==='dr'){dr3dDraw();if(S2.opt.unroll)drUnrollDraw();var _l3=$('dr_simlbl');if(_l3)_l3.textContent='Move '+Math.min(S2.segs.length,Math.ceil(S2.prog))+' / '+S2.segs.length;return;}var cw=S2.cv?S2.cv.width:S2.H,ch=S2.cv?S2.cv.height:S2.W;c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,cw,ch);c.fillStyle='#0a1118';c.fillRect(0,0,cw,ch);if(S2.vert){c.setTransform(S2.dpr,0,0,S2.dpr,0,0);c.save();c.translate(S2.cssW,0);c.rotate(Math.PI/2);}var W=S2.W,H=S2.H;if(S2.prefix!=='mi'){try{tnSceneOn(c,S2.PX,S2.PY,tnFinPts(),S2.clean?[]:tnRawPts(),{backOnly:1});}catch(e){}}if(S2.prefix==='tn'&&S2.opt.base&&!S2.clean){try{var _rw=tnRawPts()||[],_rawR=0,_rk;for(_rk=0;_rk<_rw.length;_rk++)if(_rw[_rk].r>_rawR)_rawR=_rw[_rk].r;if(_rawR>0){var _zL=S2.mnh,_zR=S2.mxh,_NB=280;var _ebk=function(z){var t=(z-_zL)/((_zR-_zL)||1);var b=Math.round(t*(_NB-1));return b<0?0:(b>_NB-1?_NB-1:b);};var _finOnly=(!window._gvSimProf&&S2.opt.finish&&!S2.opt.rough);var _profR=[],_pb;for(_pb=0;_pb<_NB;_pb++)_profR[_pb]=-1;if(_finOnly){var _fp=tnFinPts()||[],_fi;for(_fi=1;_fi<_fp.length;_fi++){var _q0=_fp[_fi-1],_q1=_fp[_fi];if(!_q0||!_q1||!isFinite(_q0.z)||!isFinite(_q1.z))continue;var _pb0=_ebk(_q0.z),_pb1=_ebk(_q1.z),_plo=Math.min(_pb0,_pb1),_phi=Math.max(_pb0,_pb1),_pi;for(_pi=_plo;_pi<=_phi;_pi++){var _pr;if(_pb1===_pb0)_pr=Math.max(_q0.r,_q1.r);else{var _pt=(_pi-_pb0)/(_pb1-_pb0);_pr=_q0.r+(_q1.r-_q0.r)*_pt;}if(_pr>_profR[_pi])_profR[_pi]=_pr;}}}var _layer=Math.max((S2.opt.allow||0),1),_env=[],_eb;for(_eb=0;_eb<_NB;_eb++){_env[_eb]=_finOnly?((_profR[_eb]>=0)?_profR[_eb]+_layer:0):_rawR;}var _ef=Math.floor(S2.prog),_efr=S2.prog-_ef;for(var _es=0;_es<S2.segs.length&&_es<=_ef;_es++){var _sg=S2.segs[_es];if(!_sg||_sg[4]===0)continue;var _z0=_sg[0],_r0=_sg[1],_z1=_sg[2],_r1=_sg[3];if(_es===_ef&&_efr<1){_z1=_z0+(_z1-_z0)*_efr;_r1=_r0+(_r1-_r0)*_efr;}var _bb0=_ebk(_z0),_bb1=_ebk(_z1),_blo=Math.min(_bb0,_bb1),_bhi=Math.max(_bb0,_bb1),_bi;for(_bi=_blo;_bi<=_bhi;_bi++){var _rr;if(_bb1===_bb0)_rr=Math.min(_r0,_r1);else{var _tt=(_bi-_bb0)/(_bb1-_bb0);_rr=_r0+(_r1-_r0)*_tt;}if(_rr<_env[_bi])_env[_bi]=_rr;}}c.fillStyle='#0a1118';c.beginPath();c.moveTo(S2.PX(_zL),S2.PY(_rawR));var _ei;for(_ei=0;_ei<_NB;_ei++){var _zz=_zL+(_zR-_zL)*_ei/(_NB-1);c.lineTo(S2.PX(_zz),S2.PY(_env[_ei]));}c.lineTo(S2.PX(_zR),S2.PY(_rawR));c.closePath();c.fill();}}catch(e){}}if(S2.opt.base){c.strokeStyle='#24435a';c.lineWidth=1;if(S2.opt.dash)c.setLineDash([6,5]);else c.setLineDash([]);c.beginPath();c.moveTo(S2.PX(S2.mnh),S2.PY(0));c.lineTo(S2.PX(S2.mxh),S2.PY(0));c.stroke();c.setLineDash([]);}var full=Math.floor(S2.prog),frac=S2.prog-full,cur=null,curReal=null;for(var i=0;i<S2.segs.length&&i<=full;i++){var sg=S2.segs[i];var ex=sg[2],ey=sg[3];if(i===full&&frac<1){ex=sg[0]+(sg[2]-sg[0])*frac;ey=sg[1]+(sg[3]-sg[1])*frac;}if(!(S2.clean&&sg[4]===0)){c.beginPath();c.moveTo(S2.PX(sg[0]),S2.PY(sg[1]));c.lineTo(S2.PX(ex),S2.PY(ey));c.setLineDash(sg[4]===0?[2,4]:[]);c.strokeStyle=(sg[7]==='dwell')?'#3fa9ff':((sg[4]===0)?'#3d4f5e':'#35d95f');c.lineWidth=(sg[4]===0)?0.8:1.2;c.stroke();c.setLineDash([]);}cur=[ex,ey];if(sg[5]){if(i===full&&frac<1){curReal=sg[5].map(function(vv,kk){return vv+(sg[6][kk]-vv)*frac;});}else{curReal=sg[6];}}}if(cur){c.fillStyle='#ff5a5a';c.beginPath();c.arc(S2.PX(cur[0]),S2.PY(cur[1]),3.5,0,2*Math.PI);c.fill();
+function s2Render(){var c=S2.ctx;if(!c)return;if(S2.opt&&S2.opt.drill&&S2.hv3d&&S2.prefix==='dr'){dr3dDraw();if(S2.opt.unroll)drUnrollDraw();var _l3=$('dr_simlbl');if(_l3)_l3.textContent='Move '+Math.min(S2.segs.length,Math.ceil(S2.prog))+' / '+S2.segs.length;return;}var cw=S2.cv?S2.cv.width:S2.H,ch=S2.cv?S2.cv.height:S2.W;c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,cw,ch);c.fillStyle='#0a1118';c.fillRect(0,0,cw,ch);if(S2.vert){c.setTransform(S2.dpr,0,0,S2.dpr,0,0);c.save();c.translate(S2.cssW,0);c.rotate(Math.PI/2);}var W=S2.W,H=S2.H;if(S2.prefix!=='mi'){try{tnSceneOn(c,S2.PX,S2.PY,_s2Fin(),S2.clean?[]:_s2Raw(),{backOnly:1});}catch(e){}}if(S2.prefix==='tn'&&S2.opt.base&&!S2.clean){try{var _rw=_s2Raw()||[],_rawR=0,_rk;for(_rk=0;_rk<_rw.length;_rk++)if(_rw[_rk].r>_rawR)_rawR=_rw[_rk].r;if(_rawR>0){var _zL=S2.mnh,_zR=S2.mxh,_NB=280;var _ebk=function(z){var t=(z-_zL)/((_zR-_zL)||1);var b=Math.round(t*(_NB-1));return b<0?0:(b>_NB-1?_NB-1:b);};var _finOnly=(!window._gvSimProf&&S2.opt.finish&&!S2.opt.rough);var _profR=[],_pb;for(_pb=0;_pb<_NB;_pb++)_profR[_pb]=-1;if(_finOnly){var _fp=_s2Fin()||[],_fi;for(_fi=1;_fi<_fp.length;_fi++){var _q0=_fp[_fi-1],_q1=_fp[_fi];if(!_q0||!_q1||!isFinite(_q0.z)||!isFinite(_q1.z))continue;var _pb0=_ebk(_q0.z),_pb1=_ebk(_q1.z),_plo=Math.min(_pb0,_pb1),_phi=Math.max(_pb0,_pb1),_pi;for(_pi=_plo;_pi<=_phi;_pi++){var _pr;if(_pb1===_pb0)_pr=Math.max(_q0.r,_q1.r);else{var _pt=(_pi-_pb0)/(_pb1-_pb0);_pr=_q0.r+(_q1.r-_q0.r)*_pt;}if(_pr>_profR[_pi])_profR[_pi]=_pr;}}}var _layer=Math.max((S2.opt.allow||0),1),_env=[],_eb;for(_eb=0;_eb<_NB;_eb++){_env[_eb]=_finOnly?((_profR[_eb]>=0)?_profR[_eb]+_layer:0):_rawR;}var _ef=Math.floor(S2.prog),_efr=S2.prog-_ef;for(var _es=0;_es<S2.segs.length&&_es<=_ef;_es++){var _sg=S2.segs[_es];if(!_sg||_sg[4]===0)continue;var _z0=_sg[0],_r0=_sg[1],_z1=_sg[2],_r1=_sg[3];if(_es===_ef&&_efr<1){_z1=_z0+(_z1-_z0)*_efr;_r1=_r0+(_r1-_r0)*_efr;}var _bb0=_ebk(_z0),_bb1=_ebk(_z1),_blo=Math.min(_bb0,_bb1),_bhi=Math.max(_bb0,_bb1),_bi;for(_bi=_blo;_bi<=_bhi;_bi++){var _rr;if(_bb1===_bb0)_rr=Math.min(_r0,_r1);else{var _tt=(_bi-_bb0)/(_bb1-_bb0);_rr=_r0+(_r1-_r0)*_tt;}if(_rr<_env[_bi])_env[_bi]=_rr;}}c.fillStyle='#0a1118';c.beginPath();c.moveTo(S2.PX(_zL),S2.PY(_rawR));var _ei;for(_ei=0;_ei<_NB;_ei++){var _zz=_zL+(_zR-_zL)*_ei/(_NB-1);c.lineTo(S2.PX(_zz),S2.PY(_env[_ei]));}c.lineTo(S2.PX(_zR),S2.PY(_rawR));c.closePath();c.fill();}}catch(e){}}if(S2.opt.base){c.strokeStyle='#24435a';c.lineWidth=1;if(S2.opt.dash)c.setLineDash([6,5]);else c.setLineDash([]);c.beginPath();c.moveTo(S2.PX(S2.mnh),S2.PY(0));c.lineTo(S2.PX(S2.mxh),S2.PY(0));c.stroke();c.setLineDash([]);}var full=Math.floor(S2.prog),frac=S2.prog-full,cur=null,curReal=null;for(var i=0;i<S2.segs.length&&i<=full;i++){var sg=S2.segs[i];var ex=sg[2],ey=sg[3];if(i===full&&frac<1){ex=sg[0]+(sg[2]-sg[0])*frac;ey=sg[1]+(sg[3]-sg[1])*frac;}if(!(S2.clean&&sg[4]===0)){c.beginPath();c.moveTo(S2.PX(sg[0]),S2.PY(sg[1]));c.lineTo(S2.PX(ex),S2.PY(ey));c.setLineDash(sg[4]===0?[2,4]:[]);c.strokeStyle=(sg[7]==='dwell')?'#3fa9ff':((sg[4]===0)?'#3d4f5e':'#35d95f');c.lineWidth=(sg[4]===0)?0.8:1.2;c.stroke();c.setLineDash([]);}cur=[ex,ey];if(sg[5]){if(i===full&&frac<1){curReal=sg[5].map(function(vv,kk){return vv+(sg[6][kk]-vv)*frac;});}else{curReal=sg[6];}}}if(cur){c.fillStyle='#ff5a5a';c.beginPath();c.arc(S2.PX(cur[0]),S2.PY(cur[1]),3.5,0,2*Math.PI);c.fill();
 if(window._gvSimProf&&window._gvSimProf.wi){var _gp=window._gvSimProf,_wi=_gp.wi,_nr=Math.max(0,_gp.nr||0),_z=cur[0]-(_gp.refOff||0),_r=cur[1],_top=(_gp.rOD||_r)+2;if(_r<_top-0.3){_nr=Math.min(_nr,_wi/2);var _ip=[[_z,_top],[_z,_r+_nr]],_a,_th;for(_a=0;_a<=6;_a++){_th=Math.PI*(1+0.5*_a/6);_ip.push([_z+_nr+_nr*Math.cos(_th),_r+_nr+_nr*Math.sin(_th)]);}for(_a=0;_a<=6;_a++){_th=Math.PI*(1.5+0.5*_a/6);_ip.push([_z+_wi-_nr+_nr*Math.cos(_th),_r+_nr+_nr*Math.sin(_th)]);}_ip.push([_z+_wi,_top]);c.beginPath();c.moveTo(S2.PX(_ip[0][0]),S2.PY(_ip[0][1]));for(_a=1;_a<_ip.length;_a++)c.lineTo(S2.PX(_ip[_a][0]),S2.PY(_ip[_a][1]));c.closePath();c.fillStyle='rgba(232,165,46,0.13)';c.strokeStyle='#e8a52e';c.lineWidth=1.4;c.fill();c.stroke();}}
 if(S2.opt.insert&&!window._gvSimProf){var _in=S2.opt.insert,_nx=S2.PX(cur[0]),_ny=S2.PY(cur[1]),_L=52,_a1=(180-_in.kr)*Math.PI/180,_a2=(180-_in.kr-_in.ia)*Math.PI/180,_u1x=Math.cos(_a1),_u1y=-Math.sin(_a1),_u2x=Math.cos(_a2),_u2y=-Math.sin(_a2);var _P1x=_nx+_L*_u1x,_P1y=_ny+_L*_u1y,_P2x=_nx+_L*_u2x,_P2y=_ny+_L*_u2y,_P3x=_nx+_L*(_u1x+_u2x),_P3y=_ny+_L*(_u1y+_u2y);var _nrmm=(_in.nr>0?_in.nr:0),_rpx=_nrmm*(S2.sc||1)*(S2.zoom||1);if(_rpx>_L*0.6)_rpx=_L*0.6;var _round=(_rpx>0.5);c.save();try{var _cfp=_tnArcExpand(tnFinPts().map(function(_q){return {x:_q.r*2,z:_q.z,arc:_q.arc,ar:_q.ar};}));if(_cfp&&_cfp.length>1){var _cR=function(z){var bb=null,_j;for(_j=0;_j<_cfp.length-1;_j++){var A=_cfp[_j],B=_cfp[_j+1];var zl=Math.min(A.z,B.z),zh=Math.max(A.z,B.z);if(z>=zl-1e-6&&z<=zh+1e-6){var t=(Math.abs(B.z-A.z)<1e-9)?0:(z-A.z)/(B.z-A.z);var r=(A.x+(B.x-A.x)*t)/2;if(bb===null||r>bb)bb=r;}}return bb;};var _pc=_cR(cur[0]);if(_pc!=null&&cur[1]>=_pc-0.5){c.beginPath();c.moveTo(S2.PX(1e5),S2.PY(_cfp[0].x/2));c.lineTo(S2.PX(_cfp[0].z),S2.PY(_cfp[0].x/2));for(var _cfi=1;_cfi<_cfp.length;_cfi++)c.lineTo(S2.PX(_cfp[_cfi].z),S2.PY(_cfp[_cfi].x/2));c.lineTo(S2.PX(-1e5),S2.PY(_cfp[_cfp.length-1].x/2));c.lineTo(S2.PX(-1e5),S2.PY(1e5));c.lineTo(S2.PX(1e5),S2.PY(1e5));c.closePath();c.clip();}}}catch(_ce){}c.beginPath();c.moveTo(_P1x,_P1y);c.lineTo(_P3x,_P3y);c.lineTo(_P2x,_P2y);if(_round)c.arcTo(_nx,_ny,_P1x,_P1y,_rpx);else c.lineTo(_nx,_ny);c.closePath();c.fillStyle='rgba(203,214,224,0.15)';c.strokeStyle='#cbd6e0';c.lineWidth=1.4;c.fill();c.stroke();c.beginPath();c.moveTo(_P1x,_P1y);if(_round)c.arcTo(_nx,_ny,_P2x,_P2y,_rpx);else c.lineTo(_nx,_ny);c.lineTo(_P2x,_P2y);c.strokeStyle='#e8a52e';c.lineWidth=2;c.stroke();c.restore();}if(S2.opt.drill){var _dr=S2.opt.drill,_ra=_dr.dia/2,_pl=_dr.ptLen,PXf=S2.PX,PYf=S2.PY;var _ci=Math.max(0,Math.min(S2.segs.length-1,full));var _cs=S2.segs[_ci]||[];var _dw=_cs[7]==='dwell',_rp=_cs[4]===0;var _stk=_dw?'#3fa9ff':(_rp?'#ffd400':'#35d95f');var _fl=_dw?'rgba(63,169,255,.32)':(_rp?'rgba(255,212,0,.22)':'rgba(53,217,95,.32)');if(_dr.turning){var _hb=null;for(var _q=0;_q<=_ci;_q++){var _sg=S2.segs[_q];if(_sg&&_sg[4]!==0){var _mz=Math.min(_sg[0],_sg[2]);if(_hb===null||_mz<_hb)_hb=_mz;}}if(_hb!==null){var _sh=_hb+_pl;c.fillStyle='rgba(53,217,95,.20)';c.strokeStyle='rgba(53,217,95,.65)';c.lineWidth=1;c.beginPath();c.moveTo(PXf(S2.mxh),PYf(_ra));c.lineTo(PXf(_sh),PYf(_ra));c.lineTo(PXf(_hb),PYf(0));c.lineTo(PXf(_sh),PYf(-_ra));c.lineTo(PXf(S2.mxh),PYf(-_ra));c.closePath();c.fill();c.stroke();}var _tz=cur[0],_bk=S2.mxh;c.fillStyle=_fl;c.strokeStyle=_stk;c.lineWidth=1.5;c.beginPath();c.moveTo(PXf(_tz),PYf(0));c.lineTo(PXf(_tz+_pl),PYf(_ra));c.lineTo(PXf(_bk),PYf(_ra));c.lineTo(PXf(_bk),PYf(-_ra));c.lineTo(PXf(_tz+_pl),PYf(-_ra));c.closePath();c.fill();c.stroke();}else{var _tx=cur[0],_tv=cur[1],_top=S2.mxv;var _hd=null;for(var _q2=0;_q2<=_ci;_q2++){var _s2=S2.segs[_q2];if(_s2&&_s2[4]!==0){var _mv=Math.min(_s2[1],_s2[3]);if(_hd===null||_mv<_hd)_hd=_mv;}}if(_hd!==null){var _shm=_hd+_pl;c.fillStyle='rgba(53,217,95,.20)';c.strokeStyle='rgba(53,217,95,.65)';c.lineWidth=1;c.beginPath();c.moveTo(PXf(_tx-_ra),PYf(_top));c.lineTo(PXf(_tx-_ra),PYf(_shm));c.lineTo(PXf(_tx),PYf(_hd));c.lineTo(PXf(_tx+_ra),PYf(_shm));c.lineTo(PXf(_tx+_ra),PYf(_top));c.closePath();c.fill();c.stroke();}c.fillStyle=_fl;c.strokeStyle=_stk;c.lineWidth=1.5;c.beginPath();c.moveTo(PXf(_tx),PYf(_tv));c.lineTo(PXf(_tx-_ra),PYf(_tv+_pl));c.lineTo(PXf(_tx-_ra),PYf(_top));c.lineTo(PXf(_tx+_ra),PYf(_top));c.lineTo(PXf(_tx+_ra),PYf(_tv+_pl));c.closePath();c.fill();c.stroke();}}}if(S2.vert)c.restore();if(!S2.playing&&cur&&curReal&&S2.fmt){var tx=S2.fmt(curReal);c.font='12px monospace';var twd=(c.measureText?c.measureText(tx).width:90)||90;c.fillStyle='rgba(10,17,24,0.85)';var _bh=(S2.vert?S2.cssH:ch);c.fillRect(8,_bh-26,twd+8,18);c.fillStyle='#ffe9a8';c.fillText(tx,12,_bh-13);}var lbl=S2.prefix&&$(S2.prefix+'_simlbl');if(lbl)lbl.textContent='Move '+Math.min(S2.segs.length,Math.ceil(S2.prog))+' / '+S2.segs.length;if(S2.opt&&S2.opt.unroll)drUnrollDraw();}
 /* Peck-depth trace: vertical = drilled depth (machine Z), each move drawn as a STRAIGHT line.
@@ -1239,6 +1314,16 @@ function s2Block(d){s2Pause();S2.prog=Math.max(0,Math.min(S2.segs.length,Math.ro
 function gvMr(){var m=matBy($('gv_mat')?$('gv_mat').value:'');var el=$('gv_mr');if(el&&m&&m[4]!=null){var c=ISO_COL[m[2]]||'#9E9E9E';el.innerHTML='<span class="isochip" style="background:'+c+'">ISO '+m[2]+'</span> Machinability '+m[4]+'%';}}
 // Build the groove profile + raw bar for the simulation background (like tnFinPts/tnRawPts).
 function gvSimProfile(){
+  if(typeof gvManOn==='function'&&gvManOn()){
+    var _gm=(typeof gvManProfileForGen==='function')?gvManProfileForGen():null;
+    if(_gm){
+      var _z=_gm.fin.map(function(p){return p.z;}),_zN=Math.max.apply(null,_z),_zF=Math.min.apply(null,_z);
+      var _rOD=_gm.D1/2,_span=Math.max(1,_zN-_zF),_m=_span*0.4+2;
+      var _Wi=_gvn('tl_wi',3),_nr=_gvn('tl_rc',0.2),_or=($('tl_off_ref')?$('tl_off_ref').value:'C'),_ro={L:0,C:_Wi/2,R:_Wi}[_or];if(_ro===undefined)_ro=_Wi/2;
+      var _fin=[{z:_zN+_m,r:_rOD}].concat(_gm.fin).concat([{z:_zF-_m,r:_rOD}]);
+      return {fin:_fin,raw:[{z:_zN+_m,r:_rOD},{z:_zF-_m,r:_rOD}],wi:_Wi,nr:_nr,rOD:_rOD,refOff:_ro};
+    }
+  }
   var D1=_gvn('D1',0), D2=_gvn('D2',0), Z1=_gvn('Z1',0), Z2=_gvn('Z2',0);
   if(!(D1>0)||!(D2>0)||Z1===Z2)return null;
   var rOD=D1/2, rFL=D2/2, zN=Math.max(Z1,Z2), zF=Math.min(Z1,Z2);
@@ -1282,7 +1367,7 @@ function mpLoad(e){var f=e.target.files&&e.target.files[0];if(!f)return;var r=ne
 function mpSave(ext){var t=$('mp_text')?$('mp_text').value:'';if(!t.trim()){alert('Nothing to save.');return;}var b=new Blob([t],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_MANUAL.'+ext;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},800);}
 function mpClear(){var t=$('mp_text');if(t){if(t.value&&!confirm('Clear the program?'))return;t.value='';mpCount();}}
 window.addEventListener('popstate',function(){window._inPop=true;try{show('home');}catch(e){}window._inPop=false;});
-function show(v){document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));$(v).classList.add('on');if(window.fabSync)fabSync(v);window.scrollTo(0,0);try{if(!window._inPop&&v!=='home')history.pushState({v:v},'');}catch(e){}try{var _mt=document.getElementById('mt-turn'),_ml=document.getElementById('mt-mill');if(_mt&&_ml){if(v==='home'){_mt.style.display='';_ml.style.display='';}else{var _cm=window._mode||'turn';_mt.style.display=(_cm==='turn')?'':'none';_ml.style.display=(_cm==='mill')?'':'none';}}}catch(e){}var sb=document.getElementById('savestepbtn');if(sb)sb.style.display=(typeof jobEditIdx!=='undefined'&&jobEditIdx!=null&&v!=='fulljob'&&v!=='home')?'block':'none';if(v==='drill'||v==='prog'){var _fi=document.getElementById(v==='drill'?'dr_d':'d');if(_fi)setTimeout(function(){try{_fi.focus();}catch(x){}},60);}}
+function show(v){document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));$(v).classList.add('on');if(v==='turnops'){try{if(!window._tnProfInit){window._tnProfInit=1;openProfileTable();}else{ppDraw();}}catch(e){}}if(window.fabSync)fabSync(v);window.scrollTo(0,0);try{if(!window._inPop&&v!=='home')history.pushState({v:v},'');}catch(e){}try{var _mt=document.getElementById('mt-turn'),_ml=document.getElementById('mt-mill');if(_mt&&_ml){if(v==='home'){_mt.style.display='';_ml.style.display='';}else{var _cm=window._mode||'turn';_mt.style.display=(_cm==='turn')?'':'none';_ml.style.display=(_cm==='mill')?'':'none';}}}catch(e){}var sb=document.getElementById('savestepbtn');if(sb)sb.style.display=(typeof jobEditIdx!=='undefined'&&jobEditIdx!=null&&v!=='fulljob'&&v!=='home')?'block':'none';if(v==='drill'||v==='prog'){var _fi=document.getElementById(v==='drill'?'dr_d':'d');if(_fi)setTimeout(function(){try{_fi.focus();}catch(x){}},60);}}
 function tog(h){const b=h.nextElementSibling;b.style.display=b.style.display==='none'?'block':'none';h.querySelector('span').textContent=b.style.display==='none'?'▸':'▾';}
 function r(n,p){return Number(n).toFixed(p);}
 function num(id,def){const v=parseFloat($(id).value);return isNaN(v)?def:v;}
@@ -1962,6 +2047,13 @@ function updateStratHint(){
   document.querySelectorAll('#stratPills .pill').forEach(function(p){p.classList.toggle('suggested', p.getAttribute('data-v')===suggested && !p.classList.contains('on'));});
   $('stratHint').innerHTML='<b>Suggested: '+({single:'Single plunge',multi:'Multi-plunge',plturn:'Plunge turning',ramp:'Ramping'})[suggested]+'</b> &mdash; '+reason;
 }
+function gvSelSet(which,val){
+  if(which==='type'){typ=val;recalc();}
+  else if(which==='rf'){rf=val;}
+  else if(which==='strat'){strat=val;updateStratHint();}
+  else if(which==='fin'){finStrat=val;}
+  else if(which==='patmode'){patMode=val;if($('pat2lbl'))$('pat2lbl').textContent=(patMode==='pitch'?'Pitch (mm)':'Total span (mm)');recalc();}
+}
 var MATERIALS=[
   {v:'steel_lc',    name:'Low carbon steel <0.55%C',    iso:'P', vc:120, fz:0.08, mach:78,  c:'#3b8bd9'},
   {v:'steel_1045',  name:'AISI 1045 medium carbon',     iso:'P', vc:100, fz:0.08, mach:65,  c:'#3b8bd9'},
@@ -2058,7 +2150,6 @@ function applyAllCorners(){
 }
 function recalc(){
   $('trapBox').style.display=$('mod_trap').checked?'block':'none';
-  $('asymBox').style.display=$('mod_asym').checked?'block':'none';
   $('angBox').style.display=$('mod_ang').checked?'block':'none';
   $('patBox').style.display=$('patOn').checked?'block':'none';
   $('peckBox').style.display=$('cs_peck').checked?'block':'none';
@@ -2068,6 +2159,7 @@ function recalc(){
   $('modeBadge').textContent=m?'manual':'auto';
   $('modeBadge').style.background=m?'rgba(255,112,67,.15)':'rgba(67,209,122,.15)';
   $('modeBadge').style.color=m?'var(--warn)':'var(--ok)';
+  if(typeof gvManSync==='function')gvManSync();
   var D1=parseFloat($('D1').value)||0, D2=parseFloat($('D2').value)||0;
   var Z1=parseFloat($('Z1').value)||0, Z2=parseFloat($('Z2').value)||0;
   $('wCalc').textContent=Math.abs(Z1-Z2).toFixed(3);
@@ -2081,10 +2173,6 @@ function recalc(){
     var botW=parseFloat($('botW').value)||Math.abs(Z1-Z2);
     var zMid=(Z1+Z2)/2, half=botW/2, dir=(Z2>Z1?1:-1);
     B.z=zMid-half*dir; C.z=zMid+half*dir;
-  }
-  if($('mod_asym').checked){
-    var dL=parseFloat($('depL').value)||0, dR=parseFloat($('depR').value)||0;
-    B.x=D1-2*dL; C.x=D1-2*dR;
   }
   if($('mod_ang').checked){
     var aL=(parseFloat($('angL').value)||0)*Math.PI/180;
@@ -2118,8 +2206,7 @@ function readCorners(){
 function updateTableAndPreview(){
   var pts=readCorners();
   renderTable(pts);
-  gvDraw();
-  pzAttach('gv_preview',gvView,gvDraw);  // ensures interactive zoom/pan on the preview SVG
+  if($('gv_preview')){ gvDraw(); pzAttach('gv_preview',gvView,gvDraw); }
 }
 function pointEdit(p){
   // User edited a corner X or Z directly - just refresh table + preview without re-syncing from geometry
@@ -2213,25 +2300,40 @@ function generate(P){
       Vc:parseFloat($('p_vc').value)||0, S:parseInt($('p_rpm').value)||0, maxRPM:parseInt($('p_maxrpm').value)||3000,
       Fr:parseFloat($('p_fr').value)||0.08, Ff:parseFloat($('p_ff').value)||0.05,
       pd:parseFloat($('cs_pd').value)||0.5, pr:parseFloat($('cs_pr').value)||0.3, dwell:parseFloat($('p_dw').value)||0,
+      rdoc:parseFloat($('cs_rdoc')?$('cs_rdoc').value:'')||0,
+      fa:(function(){var v=parseFloat($('gv_fa')?$('gv_fa').value:'');return isFinite(v)&&v>=0?v:0.1;})(),
+      plf:(function(){var v=parseFloat($('gv_plf')?$('gv_plf').value:'');return isFinite(v)&&v>0?v:100;})(),
+      rtr:parseFloat($('gv_rtr')?$('gv_rtr').value:'')||0,
+      arcfmt:($('gv_arcfmt')?$('gv_arcfmt').value:'R'),
       sX:parseFloat($('pos_sx').value)||5, sZ:parseFloat($('pos_sz').value)||3,
       mat:(function(){try{return $('gv_mat').selectedOptions[0].text;}catch(e){return '';}})(),
       offRef:($('tl_off_ref')?$('tl_off_ref').value:'C'),
       patOn:$('patOn').checked, patN:(parseInt($('patN').value)||1), pat2:(parseFloat($('pat2').value)||0), patDir:(parseInt($('patDir').value)||-1),
       patMode:(typeof patMode!=='undefined'?patMode:'pitch'),
-      strat:(function(){var p=document.querySelector('#stratPills .pill.on');return p?p.getAttribute('data-v'):'single';})(),
-      rf:(function(){var p=document.querySelector('#rfPills .pill.on');return p?p.getAttribute('data-v'):'both';})(),
+      strat:(function(){var e=$('gv_strat');return e?e.value:(typeof strat!=='undefined'?strat:'single');})(),
+      rf:(function(){var e=$('gv_rf');return e?e.value:(typeof rf!=='undefined'?rf:'both');})(),
       peck:($('cs_peck')?$('cs_peck').checked:true), incr:($('cs_incr')?$('cs_incr').checked:false),
       tipPos:($('tl_tip')?$('tl_tip').value:'3'), compSet:($('tl_comp')?$('tl_comp').value:'auto'),
       corners:(function(){var c={};['A','B','C','D'].forEach(function(k){c[k]={t:$(k+'_t').value,s1:parseFloat($(k+'_s1').value)||0,s2:$('indepLegs').checked?(parseFloat($(k+'_s2').value)||0):(parseFloat($(k+'_s1').value)||0)};});return c;})()
     };
   }
   var ctrl=P.ctrl,D1=P.D1,D2=P.D2,Z1=P.Z1,Z2=P.Z2,Wi=P.Wi,rIns=P.rIns,T=P.T,TD=P.TD,Vc=P.Vc,S=P.S,maxRPM=P.maxRPM,Fr=P.Fr,Ff=P.Ff,pd=P.pd,pr=P.pr,dwell=P.dwell,sX=P.sX,sZ=P.sZ,mat=P.mat,strat=P.strat,rf=P.rf,tipPos=P.tipPos,compSet=P.compSet,corners=P.corners;
+  var rdoc=P.rdoc||0;
+  var fa=(P.fa!=null?P.fa:0.1), plf=(P.plf||100), rtr=P.rtr||0, arcfmt=(P.arcfmt||'R');
+  var plungeF=Fr*plf/100;              // radial plunge feed = rough feed x plunge%
+  var _rghD2=D2+2*fa;                   // rough floor leaves finish allowance (fa) radial
+  var _mtp=null;
+  if(typeof gvManOn==='function'&&gvManOn()){
+    _mtp=(typeof gvManToolpath==='function')?gvManToolpath():null;
+    if(_mtp){ D1=_mtp.D1; D2=_mtp.D2; Z1=_mtp.Z1; Z2=_mtp.Z2; }
+  }
   var W=(D1-D2)/2, GW=Math.abs(Z2-Z1);
   var origin=P.offRef, originShift={L:-Wi/2,C:0,R:+Wi/2}[origin], originLabel={L:'LEFT corner',C:'CENTER',R:'RIGHT corner'}[origin];
   // refOff = distance from the insert's LEFT corner to the offset-reference (touch-off) point.
   // L(left edge)=0, C(centre)=Wi/2, R(right edge)=Wi. All emitted Z reference this point.
   var refOff={L:0,C:Wi/2,R:Wi}[origin]; if(refOff===undefined)refOff=Wi/2;
   var safeX=D1+sX*2;
+  var _retX=(rtr>0)?(D1+2*rtr):safeX;   // between-plunge retract clearance (blank/0 = full Safe X)
   var patOn=P.patOn, N=patOn?(P.patN||1):1, p2=P.pat2, dir=P.patDir, pitch=patOn?(P.patMode==='pitch'?p2:(N>1?p2/(N-1):p2)):0;
   var stratLabel={single:'Single plunge',multi:'Multi-plunge',plturn:'Plunge turning',ramp:'Ramping'}[strat];
   var offRef=origin, offShift=originShift, offLbl={L:'Left edge (-Z)',C:'Center',R:'Right edge (+Z)'}[offRef];
@@ -2263,6 +2365,12 @@ function generate(P){
   for(var g=0;g<N;g++){
     var z1g=Z1+g*pitch*dir, z2g=Z2+g*pitch*dir;
     if(N>1)mv.push({t:'cmt', txt:'-- Groove '+(g+1)+'/'+N+' at Z='+z1g.toFixed(3)+' --'});
+    if(_mtp&&g===0){
+      // Manual mode: gouge-safe rough + finish following the actual profile envelope.
+      if(doRgh)gvManRough(mv, _mtp, _retX, pd, pr, plungeF, dwell, peck, fa, rIns);
+      if(doFin)gvManFinish(mv, _mtp, safeX, Ff);
+      continue;
+    }
     if(doRgh){
       // Compute insert-center Z positions
       var zLeftWall=Math.min(z1g,z2g), zRightWall=Math.max(z1g,z2g);
@@ -2272,7 +2380,7 @@ function generate(P){
         var zc=(zLeftWall+zRightWall)/2;
         var zp=zc - Wi/2 + refOff;   // insert-centre -> left corner -> reference point
         mv.push({t:'g0', Z:zp});
-        pluneRough(mv, D1, D2, zp, safeX, pd, pr, Fr, dwell, peck);
+        pluneRough(mv, D1, _rghD2, zp, _retX, pd, pr, plungeF, dwell, peck);
       } else if(strat==='multi'){
         // Multi-plunge: insert-center steps from (zLeftWall+Wi/2) to (zRightWall-Wi/2)
         // Step size = Wi - 2*rIns (leaves lands smaller than insert width for finish clean-up)
@@ -2288,35 +2396,46 @@ function generate(P){
           // centres clamped inside the walls; emit at the offset-reference point
           var zp=zc - Wi/2 + refOff;
           mv.push({t:'g0', Z:zp});
-          pluneRough(mv, D1, D2, zp, safeX, pd, pr, Fr, dwell, peck);
+          pluneRough(mv, D1, _rghD2, zp, _retX, pd, pr, plungeF, dwell, peck);
         });
       } else if(strat==='plturn'){
-        // Plunge one end first, then turn to opposite. Practical Machinist rule: turn one direction only.
-        // Start-side plunge insert-center at (zLeftWall + Wi/2)
-        var zcStart=zLeftWall+Wi/2, zcEnd=zRightWall-Wi/2;
-        var zpStart=zcStart-Wi/2+refOff, zpEnd=zcEnd-Wi/2+refOff;   // offset-reference point
-        mv.push({t:'cmt', txt:'Plunge one end (leaves right shoulder for turn)'});
-        mv.push({t:'g0', Z:zpStart});
-        pluneRough(mv, D1, D2+0.2, zpStart, safeX, pd, pr, Fr, dwell, peck);
-        mv.push({t:'cmt', txt:'Turn axially between shoulders to opposite Z'});
-        mv.push({t:'g1', X:D2+0.2, Z:zpStart, F:Fr});
-        mv.push({t:'g1', Z:zpEnd, F:Fr*1.3});
-        mv.push({t:'g1', X:D2, F:Ff});
-        mv.push({t:'g1', Z:zpStart, F:Ff});
-        mv.push({t:'g0', X:safeX});
+        // Plunge-turn roughing: plunge the tailstock-side wall, then turn toward the spindle,
+        // stepping down radially by rdoc each level. Insert centres stay Wi/2 inside each wall,
+        // so the outer Wi/2 of each wall is left as plunged steps for the finish pass to clean.
+        // Toward spindle = toward -Z (chuck side = zLeftWall); tailstock side = zRightWall.
+        var zcPlunge=zRightWall-Wi/2, zcFar=zLeftWall+Wi/2;         // tailstock-side / spindle-side insert centres
+        var zpPlunge=zcPlunge-Wi/2+refOff, zpFar=zcFar-Wi/2+refOff; // offset-reference points
+        var _rdoc=(rdoc>0?rdoc:pd);
+        var _levels=[];
+        for(var _xl=D1-2*_rdoc; _xl>_rghD2+1e-4; _xl-=2*_rdoc)_levels.push(_xl);
+        _levels.push(_rghD2);
+        mv.push({t:'cmt', txt:'Plunge-turn roughing: plunge tailstock wall, turn toward spindle | radial DOC '+_rdoc.toFixed(3)+' mm x '+_levels.length+' level(s)'});
+        var _prevX=D1;
+        for(var _li=0;_li<_levels.length;_li++){
+          var _xLvl=_levels[_li];
+          mv.push({t:'g0', X:safeX});
+          mv.push({t:'g0', Z:zpPlunge});
+          mv.push({t:'g0', X:_prevX+2});                            // rapid to 1 mm above last cut depth (tailstock column already clear)
+          plungeSteps(mv, _prevX, _xLvl, zpPlunge, pd, pr, plungeF, peck); // peck-plunge to this level, no retract
+          mv.push({t:'g1', X:_xLvl, Z:zpFar, F:Fr});                // turn toward spindle at depth
+          if(dwell>0)mv.push({t:'dwell', p:dwell});
+          mv.push({t:'g0', X:safeX});                              // retract clear
+          _prevX=_xLvl;
+        }
       } else if(strat==='ramp'){
         // Ramp entry — simultaneous X-Z at an angle, then clean the bottom
         var zcStart=zLeftWall+Wi/2, zcEnd=zRightWall-Wi/2;
         var zpStart=zcStart-Wi/2+refOff, zpEnd=zcEnd-Wi/2+refOff;   // offset-reference point
         mv.push({t:'cmt', txt:'Ramp entry (simultaneous X-Z)'});
         mv.push({t:'g0', Z:zpStart});
-        mv.push({t:'g1', X:D2, Z:zpEnd, F:Fr});
+        mv.push({t:'g1', X:_rghD2, Z:zpEnd, F:plungeF});
         mv.push({t:'g1', Z:zpStart, F:Fr});
         mv.push({t:'g0', X:safeX});
       }
     }
     if(doFin){
       // Finish mode from tl_comp: 'off'=baked-in manual nose-R (default), else G41/G42 two half-pass.
+      // Manual mode reuses the same gouge-safe groove finish on the derived bounding groove.
       if(compSet==='auto'||compSet==='G41'||compSet==='G42'){
         finishTNRCcomp(mv, D1, D2, z1g, z2g, corners, rIns, Wi, safeX, Ff, refOff, compSet);
       } else if(compSet==='twoblk'){
@@ -2335,7 +2454,7 @@ function generate(P){
   // dedup consecutive identical X-only rapids
   mv=mv.filter(function(m,i){return !(m.t==='g0'&&m.X!==undefined&&m.Z===undefined&&i>0&&mv[i-1].t==='g0'&&mv[i-1].X===m.X&&mv[i-1].Z===undefined);});
   // === Emit ===
-  var out=emitMoves(mv, ctrl, P.incr);
+  var out=emitMoves(mv, ctrl, P.incr, arcfmt);
   if(_T)return {out:out, mv:mv};
   var cyc='Long-form G-code (G0/G1/G2/G3) - '+stratLabel;
   $('outputArea').style.display='block';
@@ -2367,6 +2486,21 @@ function pluneRough(mv, xTop, xBot, z, safeX, pd, pr, F, dwell, peck){
   }
   if(dwell>0)mv.push({t:'dwell', p:dwell});
   mv.push({t:'g0', X:safeX});
+}
+// Peck-plunge from xTop diameter to xBot diameter at Z=z, leaving the tool AT xBot
+// (no dwell, no safe retract) so the caller can turn from that depth. Used by plunge-turn roughing.
+function plungeSteps(mv, xTop, xBot, z, pd, pr, F, peck){
+  if(peck===false){ mv.push({t:'g1', X:xBot, Z:z, F:F}); return; }
+  var d=0, totalD=(xTop-xBot)/2;
+  while(d < totalD - 0.0001){
+    var next=Math.min(totalD, d+pd);
+    mv.push({t:'g1', X:xTop-2*next, Z:z, F:F});
+    if(next < totalD){
+      mv.push({t:'g1', X:xTop-2*next+2*pr});  // chip-break retract
+      mv.push({t:'g1', X:xTop-2*next});
+    }
+    d=next;
+  }
 }
 // ===== Fanuc Tool-Nose-Radius Compensation engine (B-62554E section 15.2) =====
 // Computes the tool-nose-CENTRE path from the finished profile. point={z,x} (x=radius).
@@ -2805,7 +2939,7 @@ function cornerEmit(mv, pt, dirOut, dirIn, corner, F){}
 // Emit moves as G-code strings.
 // incr=true -> after the first positioning move, X/Z become incremental U/W deltas
 // (Fanuc-style). Siemens/Heidenhain keep absolute (their incremental syntax differs).
-function emitMoves(mv, ctrl, incr){
+function emitMoves(mv, ctrl, incr, arcFmt){
   var lines=[];
   var cmtOpen=(ctrl==='Siemens'||ctrl==='Heidenhain')?';':'(';
   var cmtClose=(ctrl==='Siemens'||ctrl==='Heidenhain')?'':')';
@@ -2842,11 +2976,28 @@ function emitMoves(mv, ctrl, incr){
       if(m.cmt) s+=' '+cmtOpen+' '+m.cmt+' '+cmtClose;
       lines.push(s);
     } else if(m.t==='g2'||m.t==='g3'){
+      // capture start point (radius,z) BEFORE axes() advances px,pz
+      var _sr=(px!=null?px/2:(m.X!=null?m.X/2:0)), _sz=(pz!=null?pz:(m.Z!=null?m.Z:0));
       var s=(m.t==='g2'?'G02':'G03')+axes(m);
       // I/K are already incremental-to-centre on Fanuc, so they are unaffected by U/W mode.
-      if(m.R!==undefined)s+=' R'+m.R.toFixed(3);
-      if(m.I!==undefined)s+=' I'+fmt(m.I);
-      if(m.K!==undefined)s+=' K'+fmt(m.K);
+      var _wantIK=(arcFmt==='IK' && m.R!==undefined && m.I===undefined && m.K===undefined && m.X!==undefined && m.Z!==undefined);
+      if(_wantIK){
+        var _er=m.X/2, _ez=m.Z, _R=m.R;
+        var _dz=_ez-_sz, _dr=_er-_sr, _L=Math.hypot(_dz,_dr);
+        if(_L>1e-9 && Math.abs(_R)>=_L/2-1e-9){
+          var _mz=(_sz+_ez)/2, _mr=(_sr+_er)/2, _hh=Math.sqrt(Math.max(0,_R*_R-(_L/2)*(_L/2)));
+          var _pz=-_dr/_L, _pr=_dz/_L;   // unit perpendicular to chord (in z,radius)
+          var _c1z=_mz+_hh*_pz, _c1r=_mr+_hh*_pr, _c2z=_mz-_hh*_pz, _c2r=_mr-_hh*_pr;
+          var _isCW=function(cz,cr){var az=_sz-cz,ar=_sr-cr,bz=_ez-cz,br=_er-cr;return (az*br-ar*bz)<0;};
+          var _cz,_cr;
+          if(_isCW(_c1z,_c1r)===(m.t==='g2')){_cz=_c1z;_cr=_c1r;}else{_cz=_c2z;_cr=_c2r;}
+          s+=' I'+fmt(_cr-_sr)+' K'+fmt(_cz-_sz);
+        } else { s+=' R'+m.R.toFixed(3); }
+      } else {
+        if(m.R!==undefined)s+=' R'+m.R.toFixed(3);
+        if(m.I!==undefined)s+=' I'+fmt(m.I);
+        if(m.K!==undefined)s+=' K'+fmt(m.K);
+      }
       if(m.F!==undefined)s+=' F'+m.F;
       if(m.cmt) s+=' '+cmtOpen+' '+m.cmt+' '+cmtClose;
       lines.push(s);
@@ -3330,6 +3481,7 @@ drawInsertRef();
 recalc();
 window.gv_toggle = toggle;
 window.gv_recalc = recalc;
+window.gv_selset = gvSelSet;
 window.gv_matChange = matChange;
 window.gv_applyAllCorners = applyAllCorners;
 window.gv_generate = generate;
