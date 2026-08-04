@@ -360,8 +360,8 @@
       <div class="sec turn-only"><div class="st" onclick="tog(this)">PARAMETERS <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Stability %</label><input id="t_stab" type="number" value="50" inputmode="numeric" oninput="matChange()"></div><div><label>Vc (m/min)</label><input id="t_vc" type="number" value="120" inputmode="decimal" oninput="recalcT()"></div></div>
         <div class="row2"><div><label>RPM (auto)</label><input id="t_rpm" readonly></div><div><label>Max RPM</label><input id="t_maxrpm" type="number" value="5000" inputmode="numeric" oninput="recalcT()"></div></div>
-        <div class="row2"><div><label>First DOC (mm)</label><input id="t_first" type="number" value="0.25" inputmode="decimal" oninput="recalcT()"></div><div><label>End DOC at 50% (mm)</label><input id="t_e50" type="number" value="0.12" inputmode="decimal" oninput="recalcT()"></div></div>
-        <div class="row2"><div><label>End DOC at 80% (mm)</label><input id="t_e80" type="number" value="0.08" inputmode="decimal" oninput="recalcT()"></div><div><label>End DOC at 100% (mm)</label><input id="t_e100" type="number" value="0.05" inputmode="decimal" oninput="recalcT()"></div></div>
+        <div class="row2"><div><label>First DOC / 0% (mm)</label><input id="t_first" type="number" value="0.25" inputmode="decimal" oninput="recalcT()"></div><div><label>Last DOC / 100% (mm)</label><input id="t_e100" type="number" value="0.05" inputmode="decimal" oninput="recalcT()"></div></div>
+        <div id="t_zoneRows"></div>
         <div class="row2"><div><label>Idle (spring) passes</label><input id="t_idle" type="number" value="2" inputmode="numeric"></div><div><label>Total passes (auto)</label><input id="t_total" readonly></div></div>
       </div></div>
       <div class="sec turn-only"><div class="st" onclick="tog(this)">CUSTOMISATION <span>&#9656;</span></div><div class="sb" style="display:none">
@@ -376,7 +376,9 @@
         <div class="row2"><div><label>M-code</label><select id="t_mcode"><option>M03</option><option>M04</option></select></div><div><label>Minor dia</label><input id="t_minor" type="number" inputmode="decimal" placeholder="auto"></div></div>
         <div class="row2"><div><label>Major dia +/- (mm)</label><input id="t_majadj" type="number" value="0" inputmode="decimal"></div><div><label>Infeed type</label><select id="t_infeed" onchange="updateSubs()"><option>Flank</option><option>Radial</option><option>Alternate flank</option></select></div></div>
         <div class="row2" id="tFlank"><div><label>Flank angle (deg)</label><input id="t_flank" type="number" value="30" inputmode="decimal"></div><div><label>Modified flank (deg)</label><input id="t_modflank" type="number" value="1" inputmode="decimal"></div></div>
-        <div class="row2"><div><label>Zone pattern (%)</label><input id="t_zone" value="50,80"></div><div><label>Transition</label><select id="t_trans" onchange="recalcT()"><option>Linear</option><option>Stepped</option><option>Degressive</option></select></div></div>
+        <div class="row2"><div><label>Zone pattern (%)</label><input id="t_zone" value="" placeholder="e.g. 50,80 (optional)" oninput="syncZoneRows()"></div><div><label>Transition <span onclick="tTransHelpTog()" title="Explain modes" style="cursor:pointer;display:inline-block;width:14px;height:14px;line-height:13px;text-align:center;border:1px solid var(--acc);border-radius:50%;font-size:10px;color:var(--acc);vertical-align:middle">?</span></label><select id="t_trans" onchange="recalcT();transVis()"><option value="Stepped">Equal depth</option><option value="Linear" selected>Equal reduction MM</option><option value="Degressive">Equal load</option><option value="Pctreduce">Equal reduction %</option></select></div></div>
+        <div id="tTransHelp" class="note" style="display:none;text-align:left;margin-top:4px"><b>Transition = how DOC changes across passes:</b><br><b>Equal depth</b> &mdash; same bite every pass (uses Last DOC; First DOC ignored).<br><b>Equal reduction MM</b> &mdash; bite drops the same mm each pass (First &rarr; Last).<br><b>Equal load</b> &mdash; bite shrinks to keep chip load constant, floors at Last DOC.<br><b>Equal reduction %</b> &mdash; bite is a fixed % smaller each pass. Set the % and the anchor: <i>First</i> = big cut first, floors at Last DOC; <i>Last</i> = pins the finishing cut = Last DOC, grows cuts backward, capped at First DOC.</div>
+        <div class="row2" id="tPctRed" style="display:none"><div><label>Reduction % per pass</label><input id="t_pctred" type="number" value="20" inputmode="decimal" oninput="recalcT()"></div><div><label>Anchor DOC</label><select id="t_pctanchor" onchange="recalcT()"><option value="first">First</option><option value="last">Last</option></select></div></div>
         <label>Thread taper</label><select id="t_thtaper" onchange="updateSubs()"><option>None</option><option>NPT</option><option>BSPT</option><option>Manual</option></select>
         <div id="tTaper" style="display:none"><label>Taper degree</label><input id="t_taperdeg" type="number" value="0" inputmode="decimal"><label>Dia diff at end of thread (mm)</label><input id="t_diadiff" type="number" value="0" inputmode="decimal"></div>
         <label>Pre-size (bore/turn first)</label><select id="t_presize"><option>No</option><option>Yes</option></select>
@@ -1418,18 +1420,25 @@ function buildTurnPasses(){
   var internal=$('side').value==='Internal';var D=num('D',16),P=num('P',2);
   var mf=$('t_minor');var minor=(mf&&parseFloat(mf.value)>0)?parseFloat(mf.value):stdMinor(D,P,internal);var td=(D-minor)/2;if(td<=0)return [];
   var first=Math.max(0.01,num('t_first',0.2));var trans=$('t_trans')?$('t_trans').value:'Linear';
-  var zones=[[0.5,Math.max(0.01,num('t_e50',0.12))],[0.8,Math.max(0.01,num('t_e80',0.08))],[1.0,Math.max(0.01,num('t_e100',0.05))]];
+  var zones=tnZoneList();
   var out=[],prevPct=0,prevDoc=first;
   for(var z=0;z<zones.length;z++){var pct=zones[z][0],doc=zones[z][1];var cs=td*prevPct,ce=td*pct,depth=ce-cs;if(depth<=1e-9){prevPct=pct;prevDoc=doc;continue;}
     var raw=[];
     if(trans==='Stepped'){var stp=Math.max(1e-6,doc);var nn=Math.max(1,Math.ceil(depth/stp-1e-9));for(var k=0;k<nn;k++)raw.push(stp);raw[nn-1]=depth-(nn-1)*stp;if(raw[nn-1]<=1e-9&&nn>1){raw.pop();raw[raw.length-1]=depth-raw.slice(0,-1).reduce(function(a,b){return a+b;},0);}}
     else if(trans==='Degressive'){var d1=Math.max(1e-6,prevDoc),fl=Math.max(1e-6,doc),c2=0,i2=1;while(depth-c2>1e-9&&raw.length<2000){var dcv=d1*(Math.sqrt(i2)-Math.sqrt(i2-1));var dc=dcv>=fl?dcv:fl;if(dc>depth-c2)dc=depth-c2;raw.push(dc);c2+=dc;i2++;}}
+    else if(trans==='Pctreduce'){var R=Math.max(1,Math.min(90,num('t_pctred',20)));var rr=1-R/100;var anc=($('t_pctanchor')?$('t_pctanchor').value:'first');var F=Math.max(1e-6,prevDoc),L=Math.max(1e-6,doc);if(anc==='last'){var seq=[],c9=0,d9=L;while(depth-c9>1e-9&&seq.length<2000){var dd9=d9<=F?d9:F;if(dd9>depth-c9)dd9=depth-c9;seq.push(dd9);c9+=dd9;d9=d9/rr;}if(seq.length>1&&seq[seq.length-1]<0.5*seq[seq.length-2]&&seq[seq.length-1]+seq[seq.length-2]<=F+1e-9){var t9=seq.pop();seq[seq.length-1]+=t9;}seq.reverse();raw=seq;}else{var c8=0,d8=F;while(depth-c8>1e-9&&raw.length<2000){var dd8=d8>=L?d8:L;if(dd8>depth-c8)dd8=depth-c8;raw.push(dd8);c8+=dd8;d8=d8*rr;}if(raw.length>1&&raw[raw.length-1]<0.5*raw[raw.length-2]){var t8=raw.pop();raw[raw.length-1]+=t8;}}}
     else{var avg=(prevDoc+doc)/2;var n3=Math.max(1,Math.round(depth/avg));if(n3===1)raw=[depth];else{for(var k3=0;k3<n3;k3++)raw.push(prevDoc-k3*(prevDoc-doc)/(n3-1));var sum=raw.reduce(function(a,b){return a+b;},0);raw=raw.map(function(x){return x*depth/sum;});}}
     var cum=cs;for(var j=0;j<raw.length;j++){cum+=raw[j];out.push(+cum.toFixed(4));}out[out.length-1]=+ce.toFixed(4);
     prevPct=pct;prevDoc=doc;}
   return out;
 }
-function recalcT(){var Vc=num('t_vc',120),D=num('D',16),mx=num('t_maxrpm',5000);var rpm=Math.round(Vc*1000/(Math.PI*D));if(mx>0&&rpm>mx)rpm=mx;$('t_rpm').value=rpm;if($('t_total'))$('t_total').value=buildTurnPasses().length;}
+function tnZones(){var raw=($('t_zone')?$('t_zone').value:'')||'';var a=raw.split(/[^0-9.]+/).map(function(x){return parseFloat(x);}).filter(function(v){return isFinite(v)&&v>0&&v<100;});a=a.filter(function(v,i){return a.indexOf(v)===i;}).sort(function(x,y){return x-y;});return a;}
+function tnPctLbl(p){return (Math.round(p*100)/100).toString();}
+function tnZoneList(){var bps=tnZones();var first=Math.max(0.01,num('t_first',0.25));var last=Math.max(0.01,num('t_e100',0.05));var host=$('t_zoneRows');var out=[];for(var i=0;i<bps.length;i++){var p=bps[i];var inp=host?host.querySelector('input[data-pct="'+tnPctLbl(p)+'"]'):null;var d=inp?parseFloat(inp.value):NaN;if(!isFinite(d)||d<=0)d=first+(last-first)*(p/100);out.push([p/100,Math.max(0.01,d)]);}out.push([1.0,last]);return out;}
+function syncZoneRows(){var host=$('t_zoneRows');if(!host)return;var bps=tnZones();var first=Math.max(0.01,num('t_first',0.25));var last=Math.max(0.01,num('t_e100',0.05));var prev={};Array.prototype.forEach.call(host.querySelectorAll('input[data-pct]'),function(inp){prev[inp.getAttribute('data-pct')]=inp.value;});var html='';for(var i=0;i<bps.length;i++){var p=bps[i];var key=tnPctLbl(p);var val=(prev[key]!==undefined&&prev[key]!=='')?prev[key]:(first+(last-first)*(p/100)).toFixed(3);html+='<div class="row2"><div><label>End DOC at '+key+'% (mm)</label><input class="t_ez" data-pct="'+key+'" type="number" value="'+val+'" inputmode="decimal" oninput="recalcT()"></div><div></div></div>';}host.innerHTML=html;recalcT();}
+function transVis(){var v=($('t_trans')?$('t_trans').value:'');var e=$('tPctRed');if(e)e.style.display=(v==='Pctreduce')?'':'none';}
+function tTransHelpTog(){var e=$('tTransHelp');if(e)e.style.display=(!e.style.display||e.style.display==='none')?'block':'none';}
+function recalcT(){var Vc=num('t_vc',120),D=num('D',16),mx=num('t_maxrpm',5000);var rpm=Math.round(Vc*1000/(Math.PI*D));if(mx>0&&rpm>mx)rpm=mx;$('t_rpm').value=rpm;if($('t_total'))$('t_total').value=buildTurnPasses().length;transVis();}
 function updateTeeth(){var il=$('insl'),tt=$('teeth');if(!il||!tt)return;var t=parseFloat(il.value),P=num('P',0);
   if(il.value.trim()&&t>0&&P>0){tt.value=Math.max(1,Math.floor(t/P));tt.readOnly=true;tt.style.color='var(--acc)';tt.style.background='#101a25';}
   else{tt.readOnly=false;tt.style.color='';tt.style.background='';}matChange();}
@@ -1702,10 +1711,10 @@ function genTurn(){
   var mfld=$('t_minor');var minor=(mfld&&parseFloat(mfld.value)>0)?parseFloat(mfld.value):stdMinor(D,P,internal);
   var P0={D:D,L:L,P:P,minor_dia:minor,side:internal?'Internal':'External',angle_deg:60,hand:$('hand').value,
     safe_x:num('t_safex',1),safe_z:num('t_safez',5),Vc:num('t_vc',120),first_doc:num('t_first',0.25),
-    end_doc_50:num('t_e50',0.12),end_doc_80:num('t_e80',0.08),end_doc_100:num('t_e100',0.05),
+    end_doc_100:num('t_e100',0.05),zones:tnZoneList(),
     idle_passes:Math.max(0,Math.round(num('t_idle',2))),taper:(LOCK_ADV?'None':$('t_thtaper').value),dia_end_offset:toff,
     infeed:(LOCK_ADV?'Flank':$('t_infeed').value),flank_angle:(LOCK_ADV?29:Math.max(0,num('t_flank',30)-num('t_modflank',1))),
-    zone_transition:(LOCK_ADV?'linear':$('t_trans').value.toLowerCase()),num_starts:Math.max(1,Math.round(num('starts',1))),
+    zone_transition:(LOCK_ADV?'linear':$('t_trans').value.toLowerCase()),pct_reduce:num('t_pctred',20),pct_anchor:($('t_pctanchor')?$('t_pctanchor').value:'first'),num_starts:Math.max(1,Math.round(num('starts',1))),
     max_rpm:num('t_maxrpm',5000),start_angle:(LOCK_ADV?0:num('t_startang',0))};
   try{
     py.globals.set('JS',py.toPy(P0));
