@@ -161,7 +161,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.45 &middot; 5 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.46 &middot; 5 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -355,7 +355,7 @@
         <div class="row2"><div><label>RCTF comp (%)</label><input id="rctf" type="number" value="0" inputmode="numeric"></div><div><label>Requirement</label><select id="req"><option>Standard</option><option>Finishing</option><option>Productivity</option><option>Weak setup</option><option>Tool life</option></select></div></div>
         <div class="row2"><div><label>Entry angle (deg)</label><input id="entryang" type="number" value="0" inputmode="decimal"></div><div><label>Tool axis</label><select id="toolaxis"><option>Z- (default)</option><option>Z+</option><option>X-</option><option>X+</option><option>Y-</option><option>Y+</option></select></div></div>
         <div class="row2"><div><label>Toolpath</label><select id="toolpath"><option>Tool centre (default)</option><option>Tool OD</option></select></div><div></div></div>
-        <label>Find / Replace</label><div class="row2"><input id="findr" placeholder="find..."><input id="repl" placeholder="replace with..."></div>
+        <label>Find / Replace</label><div class="row2"><input id="findr" placeholder="find..."><input id="repl" placeholder="replace with..."></div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><button class="btn btn2" type="button" onclick="frApply('findr','repl','fr_msg')" style="margin:0">&#8646; Replace in program</button><span id="fr_msg" class="note" style="text-align:left"></span></div>
         <p class="note" style="text-align:left">Specials editor &amp; Drill&rarr;Thread converter: desktop Pro.</p>
       </div></div>
       <div class="sec turn-only"><div class="st" onclick="tog(this)">PARAMETERS <span>&#9656;</span></div><div class="sb" style="display:none">
@@ -386,7 +386,7 @@
       </div></div>
       <div class="sec turn-only"><div class="st" onclick="tog(this)">HIGHLY ADVANCED &mdash; TURNING <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Requirement</label><select id="t_req"><option>Standard</option><option>Finishing</option><option>Productivity</option><option>Weak setup</option><option>Tool life</option></select></div><div><label>Thread start angle (deg)</label><input id="t_startang" type="number" value="0" inputmode="decimal"></div></div>
-        <label>Find / Replace</label><div class="row2"><input id="t_findr" placeholder="find..."><input id="t_repl" placeholder="replace with..."></div>
+        <label>Find / Replace</label><div class="row2"><input id="t_findr" placeholder="find..."><input id="t_repl" placeholder="replace with..."></div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><button class="btn btn2" type="button" onclick="frApply('t_findr','t_repl','t_fr_msg')" style="margin:0">&#8646; Replace in program</button><span id="t_fr_msg" class="note" style="text-align:left"></span></div>
         <button class="btn btn2" type="button" onclick="var _e=$('sp_feat');if(_e)_e.value='Thread';var _p=$('sp_ptype');if(_p)_p.value='V (sharp / round root)';spOpen();" style="margin-top:6px">&#9881;&#65039; Specials &mdash; Profile + Insert</button>
       </div></div>
       <div id="engineStatus" class="note" style="text-align:center;margin-top:8px">Loading engine... (first time needs internet)</div>
@@ -1766,6 +1766,7 @@ function buildPcts(){
   return pcts;
 }
 function applyFR(t){var f=$('findr')?$('findr').value:'';if(f)t=t.split(f).join($('repl')?$('repl').value:'');var f2=$('t_findr')?$('t_findr').value:'';if(f2)t=t.split(f2).join($('t_repl')?$('t_repl').value:'');return t;}
+function frApply(fId,rId,msgId){var m=$(msgId);function say(x){if(m)m.textContent=x;}var f=$(fId)?$(fId).value:'';if(typeof lastProg!=='string'||!lastProg){say('Generate a program first.');return;}if(!f){say('Type the text to find.');return;}var r=$(rId)?$(rId).value:'';var n=lastProg.split(f).length-1;if(n===0){say('\u201c'+f+'\u201d not found.');return;}lastProg=lastProg.split(f).join(r);lastAnyProg=lastProg;renderProg();say('Replaced '+n+'\u00d7 \u2014 you can run another.');}
 function _sv(a,l){var ts=l.split(/\s+/);for(var i=0;i<ts.length;i++){if(ts[i]&&ts[i][0]===a){var n=parseFloat(ts[i].slice(1));if(!isNaN(n))return n;}}return null;}
 function parseSim(){
   var L=lastProg.split('\n');var turning=/%1001/.test(lastProg)||/G92/.test(lastProg);
