@@ -161,7 +161,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.46 &middot; 5 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.47 &middot; 5 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1980,7 +1980,7 @@ function genMill(){
   try{
     py.globals.set('JS',py.toPy(P0));
     var prog=py.runPython(MILLPY); var t=py.runPython(MILLTIME);lastCycleSec=t;
-    prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));if(!LOCK_ADV)prog=applyFR(prog);if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
+    prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
     $('cyc').innerHTML='<div class="cyc">CYCLE \u2248 '+mm+'m '+ss+'s &middot; matches desktop engine</div>';
     output(prog,'');
@@ -2002,7 +2002,7 @@ function genTurn(){
   try{
     py.globals.set('JS',py.toPy(P0));
     var res=py.runPython(TURNPY).toJs();lastCycleSec=res[1];
-    var _tt=($('t_toff')&&$('t_toff').value==='Yes'&&$('t_tool'))?$('t_tool').value.trim():'0101';var prog=res[0].replace('T0101','T'+_tt);prog=applyHeader(prog,($('t_msg')?$('t_msg').value.trim():''),($('t_username')?$('t_username').value.trim():''));if(!LOCK_ADV)prog=applyFR(prog);if($('t_subprog')&&$('t_subprog').value==='Yes')prog=applySubprogram(prog);
+    var _tt=($('t_toff')&&$('t_toff').value==='Yes'&&$('t_tool'))?$('t_tool').value.trim():'0101';var prog=res[0].replace('T0101','T'+_tt);prog=applyHeader(prog,($('t_msg')?$('t_msg').value.trim():''),($('t_username')?$('t_username').value.trim():''));if($('t_subprog')&&$('t_subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(res[1]),mm=Math.floor(sec/60),ss=sec%60;
     $('cyc').innerHTML='<div class="cyc">CYCLE \u2248 '+mm+'m '+ss+'s &middot; RPM '+res[2]+' (G97) &middot; '+res[3]+' cut passes</div>';
     output(prog,'');
