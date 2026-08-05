@@ -6,10 +6,14 @@ import tolerance_data as td
 
 def compute(family, ext_class, int_class, P, D):
     P = float(P); D = float(D)
+    fam = (family or '').upper()
+    is_un = fam.startswith('UN') or fam == 'MJ'
     H = (3 ** 0.5) / 2.0 * P                       # 0.866*P
-    d2 = round(D - 0.6495 * P, 3)                  # pitch dia basic
-    D1 = round(D - 1.0825 * P, 3)                  # minor basic (int) = ext d1
-    d1 = D1
+    d2 = round(D - 0.6495 * P, 3)                  # pitch dia basic (both)
+    D1 = round(D - 1.0825 * P, 3)                  # internal minor basic
+    # External minor basic: Metric ISO reports D1 (= D-1.0825P); UN/ASME
+    # reports the deeper external root = D - 17H/12 (= D-1.2269P).
+    d1 = round(D - 17.0 * H / 12.0, 3) if is_un else D1
     h_int = round(0.5 * (D - D1), 3)               # 0.5413*P
     h_ext = round(17.0 * H / 24.0, 3)              # 0.6134*P
 
@@ -58,7 +62,8 @@ def compute(family, ext_class, int_class, P, D):
          'Not specified by ISO 68-1'],
     ]
     return {
-        'standard': 'Metric, ISO 261 / ISO 965',
+        'standard': ('UN, ANSI/ASME B1.1' if is_un
+                     else 'Metric, ISO 261 / ISO 965'),
         'H': round(H, 4),
         'ext_class': ext_class, 'int_class': int_class,
         'ext': ext, 'int': intr,
