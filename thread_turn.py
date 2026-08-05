@@ -1,31 +1,12 @@
-
-Cloud
-/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Thread turn · PY
 """Thread Turning G-code generator — G92 pass-by-pass with 3-step DOC + flank infeed.
- 
+
 External direction: tool starts near MAJOR dia, cuts INWARD to MINOR.
 Internal direction: tool starts near MINOR dia (pilot), cuts OUTWARD to MAJOR.
 Final cutting pass is forced to land at EXACT target diameter.
 """
 import math
- 
- 
+
+
 def fmt(v, d=3):
     """N22: trim trailing zeros - '15.6' not '15.600'; keep at least one decimal."""
     s = f'{v:.{d}f}'
@@ -34,8 +15,8 @@ def fmt(v, d=3):
         if '.' not in s:
             s += '.0'
     return s
- 
- 
+
+
 def _build_zone(cum_start, cum_end, doc_start, doc_end, zone_transition,
                 pct_reduce=20.0, pct_anchor='first'):
     """Return list of (doc, cum_after) passes that cover [cum_start, cum_end].
@@ -56,7 +37,7 @@ def _build_zone(cum_start, cum_end, doc_start, doc_end, zone_transition,
     depth = cum_end - cum_start
     if depth <= 1e-9:
         return []
- 
+
     if zone_transition == 'stepped':
         # Constant DOC = doc_end throughout the zone.  Last pass
         # shortened to land exactly on the boundary.
@@ -144,7 +125,7 @@ def _build_zone(cum_start, cum_end, doc_start, doc_end, zone_transition,
             s = sum(raw)
             if s > 0:
                 raw = [r * depth / s for r in raw]
- 
+
     out = []
     cum = cum_start
     for r in raw:
@@ -155,8 +136,8 @@ def _build_zone(cum_start, cum_end, doc_start, doc_end, zone_transition,
         prev = sum(d for d, _ in out[:-1])
         out[-1] = (cum_end - (cum_start + prev), cum_end)
     return out
- 
- 
+
+
 def pass_schedule(thread_depth, first_doc, zones, zone_transition='linear',
                   pct_reduce=20.0, pct_anchor='first'):
     """List of (doc, cum_after) cutting passes — the SAME schedule the
@@ -173,8 +154,8 @@ def pass_schedule(thread_depth, first_doc, zones, zone_transition='linear',
         prev_pct = pct
         prev_doc = doc
     return out
- 
- 
+
+
 def generate(D, L, P, minor_dia=None, side='External', angle_deg=60, hand='RH',
              safe_x=1.0, safe_z=5.0, Vc=120,
              first_doc=0.05, end_doc_50=0.04, end_doc_80=0.03, end_doc_100=0.02,
@@ -185,12 +166,12 @@ def generate(D, L, P, minor_dia=None, side='External', angle_deg=60, hand='RH',
              max_rpm=5000, start_angle=0.0,
              pct_reduce=20.0, pct_anchor='first'):
     """Returns (program_string, total_time_sec, N_rpm, total_cutting_passes).
- 
+
     U109: flank_angle is now THE infeed angle (auto from profile in UI =
     included/2 - 1° give-back, operator-overridable).  flank_deg kept as
     backward-compat: if only flank_deg is supplied, derive flank_angle the
     old way (= angle/2 - flank_deg) so legacy callers still work.
- 
+
     U118: zones = configurable DOC zone pattern.  Format:
         [(pct_fraction, doc_at_end_mm), ...]   last entry MUST end at 1.0
     e.g. default 50/80/100: [(0.5, 0.04), (0.8, 0.03), (1.0, 0.02)]
@@ -211,19 +192,19 @@ def generate(D, L, P, minor_dia=None, side='External', angle_deg=60, hand='RH',
     # synchronises spindle phase to the correct start.
     num_starts = max(1, int(num_starts))
     lead = num_starts * P
- 
+
     # U138: Respect Max RPM cap (default 5000) so emitted S value matches
     # what the UI displays for RPM.  Previously the G-code used the
     # uncapped theoretical RPM = Vc * 1000 / (pi * D).
     N_rpm = round(Vc * 1000 / (math.pi * D))
     if max_rpm and max_rpm > 0 and N_rpm > max_rpm:
         N_rpm = int(max_rpm)
- 
+
     if minor_dia is None or minor_dia <= 0:
         minor_dia = (D - P) if side == 'Internal' else (D - 1.226 * P)
- 
+
     thread_depth = (D - minor_dia) / 2
- 
+
     # === N21 (B66): each zone ends EXACTLY at its target % of thread_depth ===
     # Zone 1: cum goes from 0    -> 50% of thread_depth (DOC ramps first_doc -> end_doc_50)
     # Zone 2: cum goes from 50%  -> 80%                 (DOC ramps end_doc_50 -> end_doc_80)
@@ -231,13 +212,13 @@ def generate(D, L, P, minor_dia=None, side='External', angle_deg=60, hand='RH',
     # We use the DOC values as caps for step size, not as literal step sizes.
     # Inside each zone, passes get progressively smaller but distributed so that
     # the LAST pass of the zone lands exactly on the boundary.
- 
+
     def build_zone(cum_start, cum_end, doc_start, doc_end):
         # delegates to module-level _build_zone (single source of
         # truth, shared with pass_schedule() for the live panel).
         return _build_zone(cum_start, cum_end, doc_start, doc_end,
                            zone_transition, pct_reduce, pct_anchor)
- 
+
     # U118: build passes from the configurable zones list.  Each entry of
     # `zones` is (pct_fraction, doc_at_end).  The DOC ramps from the
     # PREVIOUS zone's doc_end (or first_doc for the very first zone) down
@@ -254,20 +235,20 @@ def generate(D, L, P, minor_dia=None, side='External', angle_deg=60, hand='RH',
             passes.append((f'STEP {i+1}', d, cum))
         prev_pct = pct
         prev_doc = doc
- 
+
     total_cutting_passes = len(passes)
- 
+
     # Idle/spring passes at final depth
     for _ in range(int(idle_passes)):
         passes.append(('SPRING', 0.0, thread_depth))
- 
+
     # N4 / B60: dia_end_offset is the AUTHORITATIVE dia change over L
     # (positive = grows toward deep, negative = shrinks).
     # U33: External NPT positive, Internal NPT negative (fallback matches U33 sign).
     eff_end_offset = dia_end_offset
     if abs(eff_end_offset) < 1e-9 and (taper.startswith('NPT') or taper.startswith('BSPT')):
         eff_end_offset = (+L / 16.0) if side == 'External' else (-L / 16.0)
- 
+
     # U38: G92 R must account for the full Z-travel (safe_z -> z_end = safe_z + L),
     # not just L. Otherwise the taper slope is stretched and the thread does not
     # match NPT 1:16 over the real thread length.
@@ -290,10 +271,10 @@ def generate(D, L, P, minor_dia=None, side='External', angle_deg=60, hand='RH',
         taper_R = 0.0
         x_end_shift = 0.0
     R_str = f' R{fmt(taper_R, 4)}' if abs(taper_R) > 1e-6 else ''
- 
+
     # Retract X
     retract_x = minor_dia - 0.5 * P if side == 'Internal' else D + 2 * safe_x
- 
+
     # === FIX #62: L in header comment ===
     lines = []
     lines.append('%1001')
@@ -309,9 +290,9 @@ def generate(D, L, P, minor_dia=None, side='External', angle_deg=60, hand='RH',
     lines.append(f'G00 X{fmt(retract_x)} Z10.000')
     lines.append(f'G00 X{fmt(retract_x)} Z{fmt(safe_z)}')
     lines.append('')
- 
+
     z_end = -L
- 
+
     # U15/U17 + U109: 0 deg included angle = radial plunge (no Z shift).
     # Otherwise infeed angle = flank_angle (set by UI from profile, with
     # the standard 1° give-back already applied; operator can override).
@@ -320,7 +301,7 @@ def generate(D, L, P, minor_dia=None, side='External', angle_deg=60, hand='RH',
     else:
         infeed_ang_deg = max(0.0, float(flank_angle))
     tan_ang = math.tan(math.radians(infeed_ang_deg)) if infeed_ang_deg > 0 else 0.0
- 
+
     # === Pass generation ===
     # External: X = D - 2*cum_depth (starts near MAJOR, decreases toward MINOR)
     # Internal: X = minor + 2*cum_depth (starts near MINOR, increases toward MAJOR)
@@ -351,14 +332,14 @@ def generate(D, L, P, minor_dia=None, side='External', angle_deg=60, hand='RH',
             # Force the FINAL cutting pass X to exact target (extra safety)
             is_last_cut = (idx == total_cutting_passes - 1)
             cd_use = thread_depth if is_last_cut else cd
- 
+
             # U38: shift X_end so the tool reaches the correct dia at Z_end
             # (D is the FACE dia; at Z_end the surface dia = D + eff_end_offset).
             if side == 'External':
                 x_val = D - 2 * cd_use + x_end_shift
             else:
                 x_val = minor_dia + 2 * cd_use + x_end_shift
- 
+
             # Flank infeed Z shift per pass
             if infeed == 'Flank':
                 z_start = safe_z - tan_ang * cd_use
@@ -366,21 +347,21 @@ def generate(D, L, P, minor_dia=None, side='External', angle_deg=60, hand='RH',
                 z_start = safe_z - ((1 if idx % 2 == 0 else -1) * tan_ang * cd_use)
             else:   # Radial
                 z_start = safe_z
- 
+
             # N2/N51: no inline comments + no per-pass block numbers
             lines.append(f'G00 Z{fmt(z_start, 4)}')
             lines.append(f'G92 X{fmt(x_val)} Z{fmt(z_end)} F{f_field}{R_str}{q_str}')
- 
+
     lines.append('')
     lines.append(f'G00 X{fmt(retract_x)} M09')
     lines.append(f'G00 Z{fmt(safe_z + 50)} M05')
     lines.append('M30')
     lines.append('%')
- 
+
     # U124: multi-start runs the pass list N times, and feed per spindle
     # rev = LEAD (= N*P), so each pass takes L/(rpm*lead) rev.  Total
     # cutting time = N starts × len(passes) × L/(rpm*lead).
     time_per_pass = (L / (N_rpm * lead)) * 60 + 2
     total_time = 5 + num_starts * len(passes) * time_per_pass
- 
+
     return '\n'.join(lines), total_time, N_rpm, total_cutting_passes
