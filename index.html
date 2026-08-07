@@ -161,7 +161,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.52 &middot; 5 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.53 &middot; 5 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -372,6 +372,8 @@
         <div id="t_zoneRows"></div>
         <div class="row2"><div><label>Idle (spring) passes</label><input id="t_idle" type="number" value="2" inputmode="numeric"></div><div><label>Total passes (auto)</label><input id="t_total" readonly onclick="showPassTable()" style="cursor:pointer" title="Click for per-pass table"></div></div>
         <button type="button" class="btn btn2" onclick="showPassTable()" style="margin-top:4px">&#9636; Pass details (per-pass table)</button>
+        <div class="row2" style="margin-top:10px"><div><label>Taper pre-turn &mdash; NPT (highly advanced)</label><select id="tp_on"><option value="No" selected>No</option><option value="Yes">Yes</option></select></div><div><label>Taper turning length (mm)</label><input id="tp_len" type="number" value="10" inputmode="decimal"></div></div>
+        <p class="note" style="text-align:left"><b>NPT profile only.</b> When Yes, a finish taper (OD turned to the major cone / ID bored to the minor cone, NPT 1:16) plus a 45&deg; lead chamfer is written ABOVE the thread program, separated by <b>M01</b>. The chamfer starts 0.5&nbsp;mm (dia) below the minor at the face for OD, or 0.5&nbsp;mm above the major for ID. Only the turning length is needed &mdash; all diameters, the chamfer and feeds are computed. Uses tool T0303 (OD) / T0505 (ID) and a 0.1&nbsp;mm/rev finish feed.</p>
       </div></div>
       <div class="sec turn-only"><div class="st" onclick="tog(this)">CUSTOMISATION <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Control</label><select id="t_ctrl"><option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Siemens</option></select></div><div><label>Tool offset</label><select id="t_toff" onchange="updateSubs()"><option>No</option><option>Yes</option></select></div></div>
@@ -1993,6 +1995,47 @@ function genMill(){
     output(prog,'');
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
+function _tpfmt(v){return (Math.round(v*1000)/1000).toFixed(3);}
+function buildTaperPreturn(){
+  if(typeof isPipe!=='function'||!isPipe())return null;
+  if(!($('tp_on')&&$('tp_on').value==='Yes'))return null;
+  var Ltp=num('tp_len',0);if(!(Ltp>0))return null;
+  var internal=$('side').value==='Internal';
+  var D=num('D',16),P=num('P',2);
+  var mf=$('t_minor');var minor=(mf&&parseFloat(mf.value)>0)?parseFloat(mf.value):(D-1.6*P);
+  var Vc=num('t_vc',120),feed=0.1,tpr=1/16;
+  var refDia=internal?minor:D;
+  var rpm=Math.max(100,Math.min(num('t_maxrpm',5000),Math.round(1000*Vc/(Math.PI*refDia))));
+  var L=[];
+  L.push('(=== TAPER FINISH TURN - NPT '+(internal?'ID':'OD')+' ===)');
+  L.push('N1 G40 G99');
+  L.push('G00 T'+(internal?'0505':'0303')+' M08');
+  L.push('G97 S'+rpm+' (M03/M04)');
+  if(internal){
+    var chBig=D+0.5,minFace=minor,minEnd=minor-Ltp*tpr;
+    var chL=(chBig-minFace)/1.9375,minChL=minFace-chL*tpr,clr=minEnd-1;
+    L.push('G00 X'+_tpfmt(clr)+' Z2.000');
+    L.push('G00 X'+_tpfmt(chBig)+' Z2.000');
+    L.push('G01 Z0.000 F'+feed);
+    L.push('G01 X'+_tpfmt(minChL)+' Z-'+_tpfmt(chL)+' F'+feed);
+    L.push('G01 X'+_tpfmt(minEnd)+' Z-'+_tpfmt(Ltp));
+    L.push('G00 X'+_tpfmt(clr));
+    L.push('G00 Z5.000 M09');
+  }else{
+    var chSmall=minor-0.5,majFace=D,majEnd=D+Ltp*tpr;
+    var chL2=(majFace-chSmall)/1.9375,majChL=majFace+chL2*tpr,clr2=majEnd+4;
+    L.push('G00 X'+_tpfmt(clr2)+' Z2.000');
+    L.push('G00 X'+_tpfmt(chSmall)+' Z2.000');
+    L.push('G01 Z0.000 F'+feed);
+    L.push('G01 X'+_tpfmt(majChL)+' Z-'+_tpfmt(chL2)+' F'+feed);
+    L.push('G01 X'+_tpfmt(majEnd)+' Z-'+_tpfmt(Ltp));
+    L.push('G00 X'+_tpfmt(clr2));
+    L.push('G00 Z5.000 M09');
+  }
+  L.push('M01');
+  L.push('(=== NPT THREAD TURN ===)');
+  return L.join('\n');
+}
 function genTurn(){
   if(!pyReady){notReady();return;}
   var internal=$('side').value==='Internal';
@@ -2009,7 +2052,7 @@ function genTurn(){
   try{
     py.globals.set('JS',py.toPy(P0));
     var res=py.runPython(TURNPY).toJs();lastCycleSec=res[1];
-    var _tt=($('t_toff')&&$('t_toff').value==='Yes'&&$('t_tool'))?$('t_tool').value.trim():'0101';var prog=res[0].replace('T0101','T'+_tt);prog=applyHeader(prog,($('t_msg')?$('t_msg').value.trim():''),($('t_username')?$('t_username').value.trim():''));if($('t_subprog')&&$('t_subprog').value==='Yes')prog=applySubprogram(prog);
+    var _tt=($('t_toff')&&$('t_toff').value==='Yes'&&$('t_tool'))?$('t_tool').value.trim():'0101';var prog=res[0].replace('T0101','T'+_tt);var _tpb=(typeof buildTaperPreturn==='function')?buildTaperPreturn():null;if(_tpb)prog=prog.replace('N1 G40 G99',_tpb+'\nG40 G99');prog=applyHeader(prog,($('t_msg')?$('t_msg').value.trim():''),($('t_username')?$('t_username').value.trim():''));if($('t_subprog')&&$('t_subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(res[1]),mm=Math.floor(sec/60),ss=sec%60;
     $('cyc').innerHTML='<div class="cyc">CYCLE \u2248 '+mm+'m '+ss+'s &middot; RPM '+res[2]+' (G97) &middot; '+res[3]+' cut passes</div>';
     output(prog,'');
@@ -3863,3 +3906,4 @@ window.gv_init = function(){ try{ initMaterials(); recalc(); }catch(e){ console.
 <script>window.addEventListener('load',function(){setTimeout(function(){if(window.gv_init)window.gv_init();},500);});</script>
 </body>
 </html>
+
