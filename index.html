@@ -161,7 +161,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.55 &middot; 5 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.56 &middot; 5 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1778,7 +1778,7 @@ function frApply(fId,rId,msgId){var m=$(msgId);function say(x){if(m)m.textConten
 function _sv(a,l){var ts=l.split(/\s+/);for(var i=0;i<ts.length;i++){if(ts[i]&&ts[i][0]===a){var n=parseFloat(ts[i].slice(1));if(!isNaN(n))return n;}}return null;}
 function parseSim(){
   var L=lastProg.split('\n');var turning=/%1001/.test(lastProg)||/G92/.test(lastProg);
-  if(turning){var passes=[],cZ=null;L.forEach(function(l){var u=l.trim();if(!u||u[0]==='(')return;var X=_sv('X',u),Z=_sv('Z',u);if(u.indexOf('G92')>=0){if(X!=null)passes.push([X/2,(Z!=null?Z:(cZ!=null?cZ:0)),(cZ!=null?cZ:(Z!=null?Z:0))]);if(Z!=null)cZ=Z;}else{if(Z!=null)cZ=Z;}});return {turning:true,passes:passes};}
+  if(turning){var passes=[],cZ=null,cX=null,profile=[],pre=true;L.forEach(function(l){var u=l.trim();if(!u||u[0]==='(')return;var X=_sv('X',u),Z=_sv('Z',u);if(u.indexOf('G92')>=0){pre=false;if(X!=null)passes.push([X/2,(Z!=null?Z:(cZ!=null?cZ:0)),(cZ!=null?cZ:(Z!=null?Z:0))]);if(Z!=null)cZ=Z;if(X!=null)cX=X;}else{if(X!=null)cX=X;if(Z!=null)cZ=Z;if(pre&&u.indexOf('G01')>=0&&cX!=null&&cZ!=null)profile.push([cZ,cX/2]);}});return {turning:true,passes:passes,profile:profile};}
   var pts=[],blk=[],x=0,y=0,z=100,rel=false,b=0;
   L.forEach(function(l){var u=l.trim();if(!u||u[0]==='(')return;
     if(/\bG91\b/.test(u))rel=true;if(/\bG90\b/.test(u))rel=false;
@@ -1802,7 +1802,7 @@ function _bounds(arr){var mn=[1e9,1e9,1e9],mx=[-1e9,-1e9,-1e9];arr.forEach(funct
 function runSim(){if(!lastProg)return;var cv=$('simcv');if(!cv)return;cv.style.display='block';if($('simctrls'))$('simctrls').style.display='flex';
   SIM.cv=cv;SIM.ctx=cv.getContext('2d');SIM.W=cv.width;SIM.H=cv.height;
   var d=parseSim();SIM.turning=d.turning;var all;
-  if(d.turning){SIM.passes=d.passes;all=[];d.passes.forEach(function(p){all.push([p[1],p[0],0],[p[2],p[0],0],[p[2],-p[0],0],[p[1],-p[0],0]);});if(!all.length)all=[[0,0,0]];}
+  if(d.turning){SIM.passes=d.passes;SIM.profile=d.profile||[];all=[];d.passes.forEach(function(p){all.push([p[1],p[0],0],[p[2],p[0],0],[p[2],-p[0],0],[p[1],-p[0],0]);});SIM.profile.forEach(function(q){all.push([q[0],q[1],0],[q[0],-q[1],0]);});if(!all.length)all=[[0,0,0]];}
   else{SIM.pts=d.pts;SIM.blk=d.blk;SIM.blocks=d.blocks;var fit=d.pts.filter(function(pp){return pp[2]<=5;});all=(fit.length?fit:d.pts);if(!all.length)all=[[0,0,0]];}
   var bb=_bounds(all);SIM.c=bb.c;var ext=Math.max(bb.mx[0]-bb.mn[0],bb.mx[1]-bb.mn[1],bb.mx[2]-bb.mn[2])||1;
   SIM.base=Math.min(SIM.W,SIM.H)/(ext*1.7);SIM.zoom=1;SIM.panX=0;SIM.panY=0;SIM.pd=0;
@@ -1824,7 +1824,7 @@ function renderSim(){var ctx=SIM.ctx,W=SIM.W,H=SIM.H;if(!ctx)return;ctx.clearRec
       var A=_proj([p[2],p[0],0]),B=_proj([p[1],p[0],0]);ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();
       var A2=_proj([p[2],-p[0],0]),B2=_proj([p[1],-p[0],0]);ctx.beginPath();ctx.moveTo(A2[0],A2[1]);ctx.lineTo(B2[0],B2[1]);ctx.stroke();
       ctx.fillStyle=cur?'#ffb300':'#7fd4ff';ctx.beginPath();ctx.arc(A[0],A[1],2.3,0,2*Math.PI);ctx.fill();ctx.beginPath();ctx.arc(A2[0],A2[1],2.3,0,2*Math.PI);ctx.fill();}
-    var pcc=SIM.passes[cb-1];if(pcc){var tpc=_proj([pcc[1],pcc[0],0]);ctx.fillStyle='#ff5252';ctx.beginPath();ctx.arc(tpc[0],tpc[1],5,0,2*Math.PI);ctx.fill();}
+    if(SIM.profile&&SIM.profile.length>1){ctx.strokeStyle='#00e676';ctx.lineWidth=2;ctx.beginPath();for(var pi=0;pi<SIM.profile.length;pi++){var q=SIM.profile[pi],pp=_proj([q[0],q[1],0]);if(pi===0)ctx.moveTo(pp[0],pp[1]);else ctx.lineTo(pp[0],pp[1]);}ctx.stroke();ctx.beginPath();for(var pj=0;pj<SIM.profile.length;pj++){var q2=SIM.profile[pj],pn=_proj([q2[0],-q2[1],0]);if(pj===0)ctx.moveTo(pn[0],pn[1]);else ctx.lineTo(pn[0],pn[1]);}ctx.stroke();}var pcc=SIM.passes[cb-1];if(pcc){var tpc=_proj([pcc[1],pcc[0],0]);ctx.fillStyle='#ff5252';ctx.beginPath();ctx.arc(tpc[0],tpc[1],5,0,2*Math.PI);ctx.fill();}
     var posT=$('simpos');if(posT)posT.textContent=pcc?('X '+(pcc[0]*2).toFixed(3)+' (dia)    Z '+pcc[1].toFixed(3)):'';
     if(lbl)lbl.textContent='Pass '+cb+' / '+SIM.passes.length;
   } else {
@@ -2010,25 +2010,28 @@ function buildTaperPreturn(){
   L.push('N1 G40 G99');
   L.push('G00 T'+(internal?'0505':'0303')+' M08');
   L.push('G97 S'+rpm+' (M03/M04)');
+  var zs=0.5;
   if(internal){
     var chBig=D+0.5,minFace=minor,minEnd=minor-Ltp*tpr;
     var chL=(chBig-minFace)/1.9375,minChL=minFace-chL*tpr,clr=minEnd-1;
+    var chStart=chBig+2*zs;
     L.push('G00 X'+_tpfmt(clr)+' Z2.000');
-    L.push('G00 X'+_tpfmt(chBig)+' Z2.000');
-    L.push('G01 Z0.000 F'+feed);
+    L.push('G00 X'+_tpfmt(chStart)+' Z2.000');
+    L.push('G41 G01 Z'+_tpfmt(zs)+' F'+feed);
     L.push('G01 X'+_tpfmt(minChL)+' Z-'+_tpfmt(chL)+' F'+feed);
     L.push('G01 X'+_tpfmt(minEnd)+' Z-'+_tpfmt(Ltp));
-    L.push('G00 X'+_tpfmt(clr));
+    L.push('G40 G00 X'+_tpfmt(clr));
     L.push('G00 Z5.000 M09');
   }else{
     var chSmall=minor-0.5,majFace=D,majEnd=D+Ltp*tpr;
     var chL2=(majFace-chSmall)/1.9375,majChL=majFace+chL2*tpr,clr2=majEnd+4;
+    var chStart2=chSmall-2*zs;
     L.push('G00 X'+_tpfmt(clr2)+' Z2.000');
-    L.push('G00 X'+_tpfmt(chSmall)+' Z2.000');
-    L.push('G01 Z0.000 F'+feed);
+    L.push('G00 X'+_tpfmt(chStart2)+' Z2.000');
+    L.push('G42 G01 Z'+_tpfmt(zs)+' F'+feed);
     L.push('G01 X'+_tpfmt(majChL)+' Z-'+_tpfmt(chL2)+' F'+feed);
     L.push('G01 X'+_tpfmt(majEnd)+' Z-'+_tpfmt(Ltp));
-    L.push('G00 X'+_tpfmt(clr2));
+    L.push('G40 G00 X'+_tpfmt(clr2));
     L.push('G00 Z5.000 M09');
   }
   L.push('M01');
