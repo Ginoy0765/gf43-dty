@@ -169,9 +169,58 @@ def _profile(inc, P, spec, is_flat):
     return ext, [r[:] for r in ext]
 
 
-def compute(family, ext_class, int_class, P, D):
+try:
+    import npt_data as _npt
+except Exception:
+    _npt = None
+
+
+def _compute_taper_pipe(fam, P, D, size, side):
+    """NPT/BSPT taper pipe — dims at the gauge plane (L1) AND at the face
+    (L0), from the Baker-verified npt_data table.  No tolerance bands."""
+    K = 1.0 / 16.0
+    internal = str(side).lower().startswith('int')
+    row = _npt.lookup(str(size)) if (_npt and size) else None
+    if row:
+        M = row['M_L1']; m = row['m_L1']; L1 = row['L1']
+        tpi = row['tpi']; Pn = row['pitch']
+    else:
+        # fallback for a custom size: D is the external face major
+        M = D; m = round(D - 1.6 * P, 3); L1 = None
+        tpi = round(25.4 / P, 3) if P else None; Pn = P
+    pf = (M + m) / 2.0                 # pitch dia at E0 (external face)
+    shift = (L1 * K) if L1 else 0.0
+    if internal:                       # face=opening (large); gauge=L1 deeper (smaller)
+        maj_f, pit_f, min_f = M + shift, pf + shift, m + shift
+        maj_g, pit_g, min_g = M, pf, m
+    else:                              # face=pipe end (small); gauge=L1 deeper (larger)
+        maj_f, pit_f, min_f = M, pf, m
+        maj_g, pit_g, min_g = M + shift, pf + shift, m + shift
+
+    def r3(v):
+        return None if v is None else round(v, 3)
+    rows = [
+        ['Major Dia', r3(maj_g), r3(maj_f)],
+        ['Pitch Dia', r3(pit_g), r3(pit_f)],
+        ['Minor Dia', r3(min_g), r3(min_f)],
+    ]
+    return {
+        'taper_pipe': True,
+        'standard': _std(fam),
+        'group': _fam_group(fam),
+        'tpi': tpi,
+        'L1': r3(L1),
+        'side': 'Internal' if internal else 'External',
+        'rows': rows,
+    }
+
+
+def compute(family, ext_class, int_class, P, D, size=None, side='External'):
     P = float(P); D = float(D)
     fam = family or 'M_coarse'
+    fu = fam.upper()
+    if fu.startswith('NPT'):        # NPT / NPTF taper pipe (npt_data table)
+        return _compute_taper_pipe(fam, P, D, size, side)
     spec = None
     if tl is not None and not (fam.upper().startswith('M') and not fam.upper().startswith('MJ')) \
             and not fam.upper().startswith('UN') and fam != 'MJ' \
