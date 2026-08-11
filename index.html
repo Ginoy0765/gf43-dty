@@ -161,7 +161,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.61 &middot; 10 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.62 &middot; 10 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1400,7 +1400,7 @@
     <section id="mill_op" class="view"><div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2 id="mill_op_title">Milling</h2></div><p class="note" style="text-align:left">Skeleton &mdash; tell me the fields &amp; tool-path rules for this operation and I'll build it (like turning / grooving).</p></section>
   </main>
   <button id="savestepbtn" onclick="addToJob()" style="display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:60;background:#3fcf86;color:#06243a;border:none;font-weight:700;padding:11px 18px;border-radius:24px;box-shadow:0 6px 20px rgba(0,0,0,.4);cursor:pointer">&#10003; Save to step</button>
-  <button class="fab" onclick="sendMsg()" title="Send message / request a feature" aria-label="Send message" style="width:auto;padding:9px 12px;font-size:17px;border-radius:50%">&#9993;&#65039;</button>
+  <button id="msgFab" class="fab" onclick="sendMsg()" title="Send message / request a feature" aria-label="Send message" style="width:auto;padding:9px 12px;font-size:17px;border-radius:50%">&#9993;&#65039;</button>
 </div>
 <script>
 window.onerror=function(m,src,l){var e=document.getElementById('engineStatus');if(e){e.textContent='Startup error: '+m+' (line '+l+')';e.style.color='var(--pro)';}return false;};
@@ -2193,7 +2193,22 @@ function mpLoad(e){var f=e.target.files&&e.target.files[0];if(!f)return;var r=ne
 function mpSave(ext){var t=$('mp_text')?$('mp_text').value:'';if(!t.trim()){alert('Nothing to save.');return;}var b=new Blob([t],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_MANUAL.'+ext;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},800);}
 function mpClear(){var t=$('mp_text');if(t){if(t.value&&!confirm('Clear the program?'))return;t.value='';mpCount();}}
 window.addEventListener('popstate',function(){window._inPop=true;try{show('home');}catch(e){}window._inPop=false;});
-function show(v){document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));$(v).classList.add('on');if(v==='turnops'){try{if(!window._tnProfInit){window._tnProfInit=1;openProfileTable();}else{ppDraw();}}catch(e){}}if(window.fabSync)fabSync(v);window.scrollTo(0,0);try{if(!window._inPop&&v!=='home')history.pushState({v:v},'');}catch(e){}try{var _mt=document.getElementById('mt-turn'),_ml=document.getElementById('mt-mill');if(_mt&&_ml){if(v==='home'){_mt.style.display='';_ml.style.display='';}else{var _cm=window._mode||'turn';_mt.style.display=(_cm==='turn')?'':'none';_ml.style.display=(_cm==='mill')?'':'none';}}}catch(e){}var sb=document.getElementById('savestepbtn');if(sb)sb.style.display=(typeof jobEditIdx!=='undefined'&&jobEditIdx!=null&&v!=='fulljob'&&v!=='home')?'block':'none';if(v==='drill'||v==='prog'){var _fi=document.getElementById(v==='drill'?'dr_d':'d');if(_fi)setTimeout(function(){try{_fi.focus();}catch(x){}},60);}}
+function crumbSync(v){try{
+  var cb=document.getElementById('crumb');if(!cb)return;
+  var mf=document.getElementById('msgFab');
+  if(v==='home'){cb.style.display='none';if(mf)mf.style.display='';return;}
+  if(mf)mf.style.display='none';
+  var nm='';
+  var mo=document.getElementById('mill_op_title');
+  if(v==='mill_op'&&mo)nm=mo.textContent.trim();
+  else if(v==='prog'){var ph=document.getElementById('prog_h2');if(ph)nm=ph.textContent.trim();}
+  if(!nm){var sec=document.getElementById(v);var tt=sec?sec.querySelector('.vhead h2, .fmhead h3, h2, h3'):null;
+    if(tt)nm=tt.textContent.replace(/[‹›←<>]/g,'').split('—')[0].trim();}
+  var cn=document.getElementById('crumbName');if(cn)cn.textContent=nm;
+  cb.style.display=nm?'flex':'none';
+}catch(e){}}
+function crumbGo(){try{if(window.history.length>1){history.back();return;}}catch(e){}try{show('home');}catch(e){}}
+function show(v){document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));$(v).classList.add('on');try{crumbSync(v);}catch(e){}if(v==='turnops'){try{if(!window._tnProfInit){window._tnProfInit=1;openProfileTable();}else{ppDraw();}}catch(e){}}if(window.fabSync)fabSync(v);window.scrollTo(0,0);try{if(!window._inPop&&v!=='home')history.pushState({v:v},'');}catch(e){}try{var _mt=document.getElementById('mt-turn'),_ml=document.getElementById('mt-mill');if(_mt&&_ml){if(v==='home'){_mt.style.display='';_ml.style.display='';}else{var _cm=window._mode||'turn';_mt.style.display=(_cm==='turn')?'':'none';_ml.style.display=(_cm==='mill')?'':'none';}}}catch(e){}var sb=document.getElementById('savestepbtn');if(sb)sb.style.display=(typeof jobEditIdx!=='undefined'&&jobEditIdx!=null&&v!=='fulljob'&&v!=='home')?'block':'none';if(v==='drill'||v==='prog'){var _fi=document.getElementById(v==='drill'?'dr_d':'d');if(_fi)setTimeout(function(){try{_fi.focus();}catch(x){}},60);}}
 function tog(h){const b=h.nextElementSibling;b.style.display=b.style.display==='none'?'block':'none';var sp=h.querySelector(':scope > span:last-child');if(sp)sp.textContent=b.style.display==='none'?'▸':'▾';}
 function r(n,p){return Number(n).toFixed(p);}
 function num(id,def){const v=parseFloat($(id).value);return isNaN(v)?def:v;}
