@@ -161,7 +161,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.60 &middot; 10 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.61 &middot; 10 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -422,6 +422,25 @@
         <span id="fmc_cyc" class="cap"></span>
       </div>
       <pre id="fmc_out" style="margin-top:10px;min-height:40px">Set values and press Generate.</pre>
+    </div>
+
+    <div class="card" style="margin-top:4px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px">
+        <h2 style="margin:0">Toolpath simulation</h2>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn" id="fmsim_play" onclick="fmSimPlay()">▶ Play</button>
+          <button class="btn ghost" id="fmsim_reset" onclick="fmSimReset()">↻ Reset</button>
+          <label style="width:auto;color:var(--mut);font-size:12px">speed <input type="range" id="fmsim_spd" min="40" max="1500" value="400" style="width:110px;vertical-align:middle"></label>
+        </div>
+      </div>
+      <canvas id="fmsim" style="width:100%;display:block;background:var(--panel2);border:1px solid var(--line);border-radius:10px;touch-action:none"></canvas>
+      <div class="legend">
+        <span><i class="sw" style="background:rgba(55,211,154,.45)"></i> cut (material removed)</span>
+        <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter (Ø)</span>
+        <span><i class="sw" style="background:var(--avoid);border-radius:50%"></i> avoid</span>
+        <span><i class="sw" style="background:repeating-linear-gradient(90deg,#ff9f43 0 6px,transparent 6px 10px);height:3px;border-radius:0"></i> barrier</span>
+      </div>
+      <p class="hint">Press <b>Generate</b> first, then <b>Play</b>. Green swath = full cutter width; watch it clear the face, hop the avoid zone, and stay off the do-not-cross line.</p>
     </div>
   </div>
 </div>
@@ -2478,15 +2497,13 @@ function genTurnMill(){
   if($('simbtn'))$('simbtn').style.display='none';
   if($('cyc'))$('cyc').innerHTML='<div class="cyc">TURN-MILL polar G12.1 · '+pcts.length+' pass'+(pcts.length>1?'es':'')+' · '+turns+' turns/pass · F'+feed+'</div>';
 }
-function genFace(){
-  var out=document.getElementById('fmc_out');
-  if(!pyReady){out.textContent='Engine still loading (first time, ~10–30s) — press Generate again in a moment.';return;}
-  if(!window.faceModel){out.textContent='Area model not ready.';return;}
+function faceParams(){
+  if(!window.faceModel)return null;
   var fm=window.faceModel.model();
   function v(id,d){var e=document.getElementById(id);var x=e?parseFloat(e.value):NaN;return isNaN(x)?d:x;}
   function s(id,d){var e=document.getElementById(id);return e?e.value:d;}
   var sweep=s('fmc_sweep','auto');
-  var P={
+  return {
     area:fm.area, avoid:fm.avoid, noCross:fm.noCross,
     D:v('fmc_D',50), rpm:v('fmc_rpm',1200), feed:v('fmc_feed',600),
     spindle:s('fmc_sp','M03'), coolant:'M08', control:s('fmc_ctrl','Fanuc I & J'),
@@ -2498,6 +2515,11 @@ function genFace(){
     pattern:{kind:'raster', direction:s('fmc_dir','bothWays'), sweepAngle:(sweep==='auto'?'auto':parseFloat(sweep)), passExtension:v('fmc_ext',2)},
     finish:{enabled:document.getElementById('fmc_fin').checked, stepover:{mode:'pctDia', pctDia:v('fmc_fstep',50)}}
   };
+}
+function genFace(){
+  var out=document.getElementById('fmc_out');
+  if(!pyReady){out.textContent='Engine still loading (first time, ~10–30s) — press Generate again in a moment.';return;}
+  var P=faceParams(); if(!P){out.textContent='Area model not ready.';return;}
   try{
     py.globals.set('FJSON', JSON.stringify(P));
     var prog=py.runPython('import webpost,json\nwebpost.post_face(json.loads(FJSON))');
@@ -2505,8 +2527,97 @@ function genFace(){
     out.textContent=prog;
     var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
     document.getElementById('fmc_cyc').textContent='CYCLE ≈ '+mm+'m '+ss+'s';
+    var pj=py.runPython('import webpost,json\njson.dumps(webpost.face_path(json.loads(FJSON)))');
+    fmSimBuild(JSON.parse(pj), P);
   }catch(e){out.textContent='Cannot generate:\n'+((e&&e.message)?e.message:e);}
 }
+/* ---------- face-mill toolpath simulator ---------- */
+var FMS={moves:[],dia:50,topZ:0,pts:[],total:0,pos:0,drawn:0,playing:false,last:0,view:null,mat:null};
+function fmSimBuild(data,P){
+  var cv=document.getElementById('fmsim'); if(!cv)return;
+  FMS.moves=data.moves||[]; FMS.dia=data.dia||50; FMS.topZ=data.topZ||0; FMS.model=(P||faceParams());
+  var W=760,H=460; cv.width=W; cv.height=H;
+  // cumulative points
+  var pts=[],tot=0,prev=null;
+  for(var i=0;i<FMS.moves.length;i++){var m=FMS.moves[i];var x=m[1],y=m[2],z=m[3],k=m[0];
+    if(prev){var d=Math.hypot(x-prev[0],y-prev[1]);tot+=d;}
+    pts.push({x:x,y:y,z:z,k:k,acc:tot}); prev=[x,y];}
+  FMS.pts=pts; FMS.total=tot; FMS.pos=0; FMS.drawn=0; FMS.playing=false;
+  // world bbox
+  var minx=1e9,miny=1e9,maxx=-1e9,maxy=-1e9;
+  function ext(x,y){minx=Math.min(minx,x);miny=Math.min(miny,y);maxx=Math.max(maxx,x);maxy=Math.max(maxy,y);}
+  pts.forEach(function(p){ext(p.x,p.y);});
+  var fm=FMS.model; if(fm){var a=fm.area; if(a.shape==='rect'){ext(a.x,a.y);ext(a.x+a.w,a.y+a.l);} else {ext(a.x-a.dia/2,a.y-a.dia/2);ext(a.x+a.dia/2,a.y+a.dia/2);}}
+  if(minx>maxx){minx=0;maxx=120;miny=0;maxy=80;}
+  var pad=40, bw=Math.max(1,maxx-minx), bh=Math.max(1,maxy-miny);
+  var sc=Math.min((W-2*pad)/bw,(H-2*pad)/bh);
+  FMS.view={sc:sc,minx:minx,maxy:maxy,offx:(W-bw*sc)/2,offy:(H-bh*sc)/2,W:W,H:H,minY:miny};
+  // material layer
+  var mat=document.createElement('canvas'); mat.width=W; mat.height=H; FMS.mat=mat;
+  document.getElementById('fmsim_play').textContent='▶ Play';
+  fmSimDraw();
+}
+function fmSX(x){var v=FMS.view;return v.offx+(x-v.minx)*v.sc;}
+function fmSY(y){var v=FMS.view;return v.offy+(v.maxy-y)*v.sc;}
+function fmSimPaint(fromD,toD){ // paint cut swaths on material layer between distances
+  var mc=FMS.mat.getContext('2d'),pts=FMS.pts,r=FMS.dia/2*FMS.view.sc;
+  mc.strokeStyle='rgba(55,211,154,.5)';mc.lineWidth=2*r;mc.lineCap='round';mc.lineJoin='round';
+  for(var i=1;i<pts.length;i++){var a=pts[i-1],b=pts[i];
+    var s0=a.acc,s1=b.acc; if(s1<=fromD||s0>=toD)continue;
+    if(b.k!=='feed'||b.z>=FMS.topZ-1e-4)continue; // only cutting feed moves
+    mc.beginPath();mc.moveTo(fmSX(a.x),fmSY(a.y));mc.lineTo(fmSX(b.x),fmSY(b.y));mc.stroke();}
+}
+function fmPointAt(dist){var pts=FMS.pts;if(!pts.length)return{x:0,y:0};
+  for(var i=1;i<pts.length;i++){if(dist<=pts[i].acc){var a=pts[i-1],b=pts[i];var seg=b.acc-a.acc;var f=seg>0?(dist-a.acc)/seg:0;return{x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f};}}
+  var l=pts[pts.length-1];return{x:l.x,y:l.y};}
+function fmSimDraw(){
+  var cv=document.getElementById('fmsim');if(!cv||!FMS.view)return;var c=cv.getContext('2d'),v=FMS.view;
+  c.clearRect(0,0,v.W,v.H);
+  // material (cleared)
+  c.drawImage(FMS.mat,0,0);
+  var fm=FMS.model;
+  // area outline
+  c.strokeStyle='#4f8cff';c.lineWidth=1.5;c.setLineDash([6,4]);
+  if(fm){var a=fm.area;
+    if(a.shape==='rect'){var cs=fmRect(a);c.beginPath();cs.forEach(function(p,i){var X=fmSX(p[0]),Y=fmSY(p[1]);i?c.lineTo(X,Y):c.moveTo(X,Y);});c.closePath();c.stroke();}
+    else{c.beginPath();c.arc(fmSX(a.x),fmSY(a.y),a.dia/2*v.sc,0,7);c.stroke();}
+    c.setLineDash([]);
+    // avoids
+    (fm.avoid||[]).forEach(function(z){c.fillStyle='rgba(255,107,107,.35)';c.strokeStyle='#ff6b6b';c.lineWidth=1.5;
+      if(z.shape==='circle'){c.beginPath();c.arc(fmSX(z.x),fmSY(z.y),z.dia/2*v.sc,0,7);c.fill();c.stroke();}
+      else{var cs=fmRect(z);c.beginPath();cs.forEach(function(p,i){var X=fmSX(p[0]),Y=fmSY(p[1]);i?c.lineTo(X,Y):c.moveTo(X,Y);});c.closePath();c.fill();c.stroke();}});
+    // barriers
+    c.strokeStyle='#ff9f43';c.lineWidth=2.4;c.setLineDash([8,5]);
+    (fm.noCross||[]).forEach(function(ln){c.beginPath();ln.pts.forEach(function(p,i){var X=fmSX(p[0]),Y=fmSY(p[1]);i?c.lineTo(X,Y):c.moveTo(X,Y);});c.stroke();});
+    c.setLineDash([]);
+  }
+  // cutter
+  var p=fmPointAt(FMS.pos),r=FMS.dia/2*v.sc;
+  c.fillStyle='rgba(169,139,255,.28)';c.strokeStyle='#a98bff';c.lineWidth=1.6;
+  c.beginPath();c.arc(fmSX(p.x),fmSY(p.y),r,0,7);c.fill();c.stroke();
+  c.fillStyle='#a98bff';c.beginPath();c.arc(fmSX(p.x),fmSY(p.y),2.6,0,7);c.fill();
+}
+function fmRect(a){var x=a.x,y=a.y,w=a.w,l=a.l,rot=a.rot||0;var x0,y0;
+  if(a.ref==='center'){x0=x-w/2;y0=y-l/2;}else{x0=x;y0=y;}
+  var pts=[[x0,y0],[x0+w,y0],[x0+w,y0+l],[x0,y0+l]];
+  return pts.map(function(pp){var dx=pp[0]-x,dy=pp[1]-y,ar=rot*Math.PI/180;return [x+dx*Math.cos(ar)-dy*Math.sin(ar), y+dx*Math.sin(ar)+dy*Math.cos(ar)];});}
+function fmSimStep(t){
+  if(!FMS.playing)return;
+  if(!FMS.last)FMS.last=t;var dt=(t-FMS.last)/1000;FMS.last=t;
+  var spd=parseFloat(document.getElementById('fmsim_spd').value)||400;
+  var nxt=Math.min(FMS.total,FMS.pos+spd*dt);
+  fmSimPaint(FMS.drawn,nxt);FMS.drawn=nxt;FMS.pos=nxt;
+  fmSimDraw();
+  if(FMS.pos>=FMS.total){FMS.playing=false;document.getElementById('fmsim_play').textContent='▶ Replay';return;}
+  if(typeof requestAnimationFrame!=='undefined')requestAnimationFrame(fmSimStep);
+}
+function fmSimPlay(){
+  if(!FMS.pts.length){document.getElementById('fmc_out').textContent='Press Generate first, then Play.';return;}
+  if(FMS.pos>=FMS.total){FMS.pos=0;FMS.drawn=0;var m=FMS.mat.getContext('2d');m.clearRect(0,0,FMS.view.W,FMS.view.H);}
+  FMS.playing=!FMS.playing;document.getElementById('fmsim_play').textContent=FMS.playing?'❚❚ Pause':'▶ Play';FMS.last=0;
+  if(FMS.playing&&typeof requestAnimationFrame!=='undefined')requestAnimationFrame(fmSimStep);
+}
+function fmSimReset(){FMS.playing=false;FMS.pos=0;FMS.drawn=0;if(FMS.mat){var m=FMS.mat.getContext('2d');m.clearRect(0,0,FMS.view.W,FMS.view.H);}document.getElementById('fmsim_play').textContent='▶ Play';fmSimDraw();}
 function genMill(){
   if(!pyReady){notReady();return;}
   if(!$('d').value.trim()){$('p_res').innerHTML='<p class="warn">Enter Tool dia d (required).</p>';$('cyc').innerHTML='';if($('simbtn'))$('simbtn').style.display='none';if($('editbtn'))$('editbtn').style.display='none';if($('savebtn'))$('savebtn').style.display='none';return;}

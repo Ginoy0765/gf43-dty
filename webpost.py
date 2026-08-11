@@ -103,3 +103,8 @@ def post_face(p):
 
 def face_time(p):
     return face_mill.cycle_time(**_face_kwargs(p))
+
+
+def face_path(p):
+    """Tool-centre moves for the simulator: {dia, topZ, moves:[[kind,x,y,z],...]}."""
+    return face_mill.sim_moves(**_face_kwargs(p))
