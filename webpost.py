@@ -1,7 +1,7 @@
 """Web glue: replicate main.py post-processing around the engine modules.
 Engine files (thread_mill/thread_turn/mill_post/axis_transform) are unchanged."""
 import re
-import thread_mill, mill_post, axis_transform
+import thread_mill, mill_post, axis_transform, face_mill
 
 _EX = ('control', 'safez', 'sx', 'sy', 'sz', 'toolaxis', 'finishing', 'tnum', 'hnum', 'dnum')
 _ORD = re.compile(r'^\((\d+)(?:ST|ND|RD|TH) PASS\)$')
@@ -75,3 +75,31 @@ def post_mill(p):
 
 def mill_time(p):
     return thread_mill.cycle_time(**_gen_kwargs(p))
+
+
+# --------------------------------------------------------------------------- #
+# FACE MILLING (face_mill.py) — same post pipeline as thread milling
+# --------------------------------------------------------------------------- #
+def _face_kwargs(p):
+    return {k: p[k] for k in p if k not in _EX}
+
+
+def post_face(p):
+    face_mill.SAFE_Z = p.get('safez', 20)
+    prog = face_mill.generate(**_face_kwargs(p))
+    t = str(int(round(p.get('tnum', 1))))
+    h = str(int(round(p.get('hnum', 1))))
+    dd = str(int(round(p.get('dnum', 1))))
+    prog = prog.replace('M06 T1', 'M06 T' + t).replace('G43 H1 ', 'G43 H' + h + ' ').replace(' D1 ', ' D' + dd + ' ')
+    prog = mill_post.format_for_control(prog, p.get('control', 'Fanuc I & J'))
+    ax = p.get('toolaxis', 'Z-')
+    if ax and ax not in ('Z-', 'Z'):
+        try:
+            prog = axis_transform.transform_program(prog, ax)
+        except Exception:
+            pass
+    return prog
+
+
+def face_time(p):
+    return face_mill.cycle_time(**_face_kwargs(p))

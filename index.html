@@ -161,7 +161,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.59 &middot; 10 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.60 &middot; 10 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -376,6 +376,52 @@
         <pre id="fm_jsonout"></pre>
         <p class="cap">This is the structure we'll feed YANTRA. X→right, Y→up, origin = part zero (G54), mm.</p>
       </div>
+    </div>
+
+    <div class="card" style="margin-top:4px">
+      <h2>Cutting</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <div style="font-size:11px;letter-spacing:.5px;color:var(--mut);font-weight:700;margin:2px 0 6px">TOOL &amp; SPEEDS</div>
+          <div class="row"><label>Cutter Ø</label><input type="number" id="fmc_D" value="50"></div>
+          <div class="row"><label>RPM</label><input type="number" id="fmc_rpm" value="1200"></div>
+          <div class="row"><label>Feed mm/min</label><input type="number" id="fmc_feed" value="600"></div>
+          <div class="row"><label>Plunge feed</label><input type="number" id="fmc_pf" value="300"></div>
+          <div style="font-size:11px;letter-spacing:.5px;color:var(--mut);font-weight:700;margin:12px 0 6px">DEPTH (Z)</div>
+          <div class="row"><label>Top Z</label><input type="number" id="fmc_topz" value="0"></div>
+          <div class="row"><label>Face Z</label><input type="number" id="fmc_facez" value="-2"></div>
+          <div class="row"><label>Max ap</label><input type="number" id="fmc_ap" value="1"></div>
+          <div class="row"><label>Safe Z</label><input type="number" id="fmc_safez" value="20"></div>
+          <div class="row"><label>Feed plane</label><input type="number" id="fmc_fplane" value="2"></div>
+        </div>
+        <div>
+          <div style="font-size:11px;letter-spacing:.5px;color:var(--mut);font-weight:700;margin:2px 0 6px">PATTERN &amp; STEPOVER</div>
+          <div class="row"><label>Direction</label>
+            <select id="fmc_dir" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px">
+              <option value="bothWays">Both ways (zigzag)</option><option value="climb">One-way climb</option><option value="conventional">One-way conventional</option></select></div>
+          <div class="row"><label>Sweep</label>
+            <select id="fmc_sweep" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px">
+              <option value="auto">Auto (longest side)</option><option value="0">Along X (0°)</option><option value="90">Along Y (90°)</option></select></div>
+          <div class="row"><label>Stepover %Ø</label><input type="number" id="fmc_step" value="70"></div>
+          <div class="row"><label>Pass ext.</label><input type="number" id="fmc_ext" value="2"></div>
+          <div class="row"><label>Avoid clr.</label><input type="number" id="fmc_clr" value="0"></div>
+          <div style="font-size:11px;letter-spacing:.5px;color:var(--mut);font-weight:700;margin:12px 0 6px">FINISH &amp; MACHINE</div>
+          <div class="row"><label>Finish skim</label><label style="width:auto;color:var(--ink)"><input type="checkbox" id="fmc_fin"> leave <input type="number" id="fmc_ffloor" value="0.3" style="width:56px"> mm floor</label></div>
+          <div class="row"><label>Finish %Ø</label><input type="number" id="fmc_fstep" value="50"></div>
+          <div class="row"><label>Control</label>
+            <select id="fmc_ctrl" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px">
+              <option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Haas</option><option>Siemens I &amp; J</option><option>Siemens R</option><option>Heidenhain</option></select></div>
+          <div class="row"><label>Spindle</label>
+            <select id="fmc_sp" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px">
+              <option>M03</option><option>M04</option></select></div>
+          <div class="row"><label>Tool T/H/D</label><input type="number" id="fmc_t" value="1" style="width:33%"><input type="number" id="fmc_h" value="1" style="width:33%"><input type="number" id="fmc_d" value="1" style="width:33%"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+        <button class="btn" id="fmc_gen" onclick="genFace()" style="padding:9px 18px;font-size:14px">▶ Generate</button>
+        <span id="fmc_cyc" class="cap"></span>
+      </div>
+      <pre id="fmc_out" style="margin-top:10px;min-height:40px">Set values and press Generate.</pre>
     </div>
   </div>
 </div>
@@ -1367,9 +1413,9 @@ async function initPy(){
     catch(_pe){py=await loadPyodide({indexURL:"https://cdn.jsdelivr.net/pyodide/v0.26.4/full/"});}
     S('Loading engine \u2014 thread modules\u2026');
     async function rd(n){var r=await fetch(n+'?'+Date.now());if(!r.ok)throw new Error(n+' HTTP '+r.status);return await r.text();}
-    var FILES=['thread_mill.py','thread_turn.py','mill_post.py','axis_transform.py','webpost.py','tolerance_data.py','thread_library.py','npt_data.py','thread_info_web.py'];
+    var FILES=['thread_mill.py','thread_turn.py','mill_post.py','axis_transform.py','webpost.py','tolerance_data.py','thread_library.py','npt_data.py','thread_info_web.py','face_mill.py'];
     for(var fi=0;fi<FILES.length;fi++){py.FS.writeFile(FILES[fi], await rd(FILES[fi]));}
-    py.runPython('import thread_mill, thread_turn, mill_post, axis_transform, webpost, tolerance_data, thread_info_web');
+    py.runPython('import thread_mill, thread_turn, mill_post, axis_transform, webpost, tolerance_data, thread_info_web, face_mill');
     pyReady=true; clearTimeout(wd);
     S('\u2713 Engine ready \u2014 output matches desktop','var(--ok)');
     if(pendingGen){pendingGen=false;genProg();}if(typeof calcTolData==='function')calcTolData();
@@ -2431,6 +2477,35 @@ function genTurnMill(){
   output(g.join('\n'),'');
   if($('simbtn'))$('simbtn').style.display='none';
   if($('cyc'))$('cyc').innerHTML='<div class="cyc">TURN-MILL polar G12.1 · '+pcts.length+' pass'+(pcts.length>1?'es':'')+' · '+turns+' turns/pass · F'+feed+'</div>';
+}
+function genFace(){
+  var out=document.getElementById('fmc_out');
+  if(!pyReady){out.textContent='Engine still loading (first time, ~10–30s) — press Generate again in a moment.';return;}
+  if(!window.faceModel){out.textContent='Area model not ready.';return;}
+  var fm=window.faceModel.model();
+  function v(id,d){var e=document.getElementById(id);var x=e?parseFloat(e.value):NaN;return isNaN(x)?d:x;}
+  function s(id,d){var e=document.getElementById(id);return e?e.value:d;}
+  var sweep=s('fmc_sweep','auto');
+  var P={
+    area:fm.area, avoid:fm.avoid, noCross:fm.noCross,
+    D:v('fmc_D',50), rpm:v('fmc_rpm',1200), feed:v('fmc_feed',600),
+    spindle:s('fmc_sp','M03'), coolant:'M08', control:s('fmc_ctrl','Fanuc I & J'),
+    tnum:v('fmc_t',1), hnum:v('fmc_h',1), dnum:v('fmc_d',1), toolaxis:'Z-', safez:v('fmc_safez',20),
+    entry:{heights:{safeZ:v('fmc_safez',20), feedPlane:v('fmc_fplane',2), retractZ:v('fmc_fplane',2), depthZ:v('fmc_facez',-2)}, plungeFeed:v('fmc_pf',300)},
+    depth:{topZ:v('fmc_topz',0), faceZ:v('fmc_facez',-2), mode:'maxAp', maxAp:v('fmc_ap',1), even:true, finishFloorStock:(document.getElementById('fmc_fin').checked?v('fmc_ffloor',0):0)},
+    stepover:{mode:'pctDia', pctDia:v('fmc_step',70), even:true},
+    toolSide:{comp:'computer', area:{side:'outside', overhang:0}, avoid:{clearance:v('fmc_clr',0)}},
+    pattern:{kind:'raster', direction:s('fmc_dir','bothWays'), sweepAngle:(sweep==='auto'?'auto':parseFloat(sweep)), passExtension:v('fmc_ext',2)},
+    finish:{enabled:document.getElementById('fmc_fin').checked, stepover:{mode:'pctDia', pctDia:v('fmc_fstep',50)}}
+  };
+  try{
+    py.globals.set('FJSON', JSON.stringify(P));
+    var prog=py.runPython('import webpost,json\nwebpost.post_face(json.loads(FJSON))');
+    var t=py.runPython('import webpost,json\nwebpost.face_time(json.loads(FJSON))');
+    out.textContent=prog;
+    var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
+    document.getElementById('fmc_cyc').textContent='CYCLE ≈ '+mm+'m '+ss+'s';
+  }catch(e){out.textContent='Cannot generate:\n'+((e&&e.message)?e.message:e);}
 }
 function genMill(){
   if(!pyReady){notReady();return;}
