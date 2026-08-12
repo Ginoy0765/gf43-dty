@@ -110,6 +110,10 @@
   .pfr .go.sec{background:#1b2540;border:1px solid #2b3856;color:#dfe8f7}
   .paddjob{width:100%;margin-top:10px;border:1px solid #2b3856;background:#1b2540;color:#dfe8f7;border-radius:12px;padding:13px;font-weight:800;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
   #savebtn,#simbtn,#editbtn,#addjobbtn,#copybtn,#dr_savebtn,#dr_simbtn{display:none!important}
+  .modeseg{display:inline-flex;background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:3px;gap:3px}
+  .modeseg button{border:none;background:transparent;color:var(--mut);font-size:13px;font-weight:700;padding:7px 16px;border-radius:16px;cursor:pointer}
+  .modeseg button.on{background:#26324f;color:#fff;box-shadow:inset 0 0 0 1px #3a4a70}
+  .reqbad{border-color:#e0574d !important;box-shadow:0 0 0 1px rgba(224,87,77,.5) !important}
   .histrow{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 40px 12px 14px;margin-top:10px;cursor:pointer}
   .histrow:active{border-color:var(--acc)}
   .histrow .hn{font-weight:700;font-size:14px;word-break:break-all}
@@ -189,7 +193,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.68 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.69 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -891,6 +895,11 @@
     </section>
     <section id="prog" class="view">
       <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2 id="prog_h2">Programming</h2><button class="back" style="margin-left:auto;width:auto;padding:0 12px;font-size:12.5px" onclick="show('data');calcData()">Thread data</button></div>
+      <div id="prog_modebar" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 12px">
+        <span style="font-size:11px;color:var(--mut);letter-spacing:.6px;font-weight:700">MODE</span>
+        <div class="modeseg"><button type="button" id="pm_sample" class="on" onclick="setProgMode('sample')">&#128218; Sample</button><button type="button" id="pm_new" onclick="setProgMode('new')">&#10133; New</button></div>
+        <span id="pm_hint" class="note" style="margin:0;text-align:left;flex:1;min-width:180px"></span>
+      </div>
       <div class="sec"><div class="st" onclick="tog(this)">THREAD DETAILS <span>&#9662;</span></div><div class="sb"><div style="display:none"><select id="opsel" onchange="setMethodSel()"><option>Milling</option><option>Turning</option></select></div><div class="row2"><div><label>Internal / External</label><select id="side" onchange="minorEdited=false;clearD();recalc();recalcT();tmVis();entryVis();fdUpd()"><option>Internal</option><option>External</option></select></div><div><label>Thread profile</label><select id="profile" onchange="profChange();fdUpd()"><option>ISO Metric</option><option>UN (TPI)</option><option>NPT (Taper)</option><option>Custom</option></select></div></div><div class="row2"><div><label id="fd_ptlabel">Pitch P (mm)</label><input id="P" type="number" value="2" inputmode="decimal" oninput="syncTpi();clearD();recalc();recalcT();updateTeeth();setDefaultPasses();fdUpd();sizeFill()"><div id="fd_tpibox" style="display:none"><select id="tpi" onchange="tpiPick()"></select><input id="tpiother" type="number" inputmode="decimal" placeholder="TPI" style="display:none;margin-top:6px" oninput="tpiPick()"></div><div id="fd_pbox" style="display:none"><select id="psel" onchange="pPick()"></select><input id="pother" type="number" inputmode="decimal" placeholder="pitch mm" style="display:none;margin-top:6px" oninput="pPick()"></div></div><div><label>Thread standard</label><select id="size" onchange="sizeChange();fdUpd()"></select></div></div><div class="row2"><div><label>Major Dia D (mm)</label><input id="D" type="number" value="16" inputmode="decimal" oninput="minorEdited=false;recalc();recalcT();fdUpd()"></div><div><label>Minor dia (auto, editable)</label><input id="minor" type="number" inputmode="decimal" oninput="minorEdited=true;var t=$('t_minor');if(t)t.value=this.value;fdUpd()"></div></div><div><label>Thread length (mm)</label><input id="L" type="number" value="20" inputmode="decimal" oninput="clearD()"></div><div class="row2"><div><label>LH / RH</label><select id="hand" onchange="clearD()"><option>RH</option><option>LH</option></select></div><div><label>No. of starts</label><input id="starts" type="number" value="1" inputmode="numeric" oninput="clearD();fdUpd()"></div></div><div class="row2"><div><label id="fd_derivlabel">TPI (auto)</label><input id="fd_deriv" readonly></div><div><label>Helix / lead angle (auto)</label><input id="fd_helix" readonly></div></div><label>Material</label><select id="mat" onchange="clearD();matChange()"></select><div id="mrinfo" class="mrinfo"></div></div></div>
       <div class="sec mill-only"><div class="st" onclick="tog(this)">TOOL DATA <span>&#9662;</span></div><div class="sb">
         <div class="row2"><div><label>Tool dia d (mm)</label><input id="d" type="number" value="" placeholder="required" inputmode="decimal" oninput="matChange()"></div><div><label>Flutes Z</label><input id="Z" type="number" value="3" inputmode="numeric"></div></div>
@@ -2251,6 +2260,7 @@ function setMethod(m){method=m;
   document.querySelectorAll('.turn-only').forEach(e=>e.style.display=m==='Turn'?'block':'none');
   if(m==='Mill'){recalc();renderPassPcts();updateTeeth();} else recalcT();
   updateSubs();
+  try{if(typeof refreshReq==='function')refreshReq();}catch(e){}
   $('p_res').innerHTML='';$('cyc').innerHTML='';if($('copybtn'))$('copybtn').style.display='none';if($('savebtn'))$('savebtn').style.display='none';if($('simbtn'))$('simbtn').style.display='none';if($('editbtn'))$('editbtn').style.display='none';
 }
 function _threadOpen(mode){show('prog');var _h=$('prog_h2');if(_h)_h.textContent=(mode==='Turn'?'Thread turning':'Thread milling');var o=$('opsel');if(o){o.value=(mode==='Turn'?'Turning':'Milling');if(o.parentNode)o.parentNode.style.display='none';}if(typeof setMethod==='function')setMethod(mode);}function openThreadTurn(){_threadOpen('Turn');}function openThreadMill(){_threadOpen('Mill');}
@@ -2445,7 +2455,7 @@ function bindSim(cv){if(SIM.bound)return;SIM.bound=true;var T={};cv.style.touchA
   cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);cv.addEventListener('pointerleave',end);
   cv.addEventListener('wheel',function(e){e.preventDefault();SIM.zoom*=(e.deltaY<0?1.1:0.9);renderSim();},{passive:false});
 }
-function genProg(){ if(method!=='Turn'&&$('ctrl')&&$('ctrl').value.indexOf('Turn-mill')>=0&&$('side')&&$('side').value==='Internal') return genTurnMill(); if(!pyReady){pendingGen=true;$('p_res').innerHTML='<p class="warn">Engine loading (first time only, ~10\u201330s on phone)\u2026 it will generate automatically once ready.</p>';return;} pendingGen=false; if(method==='Turn') return genTurn(); return genMill(); }
+function genProg(){ if(progMode==='new'){var _miss=threadMandatoryMissing();if(_miss.length){$('p_res').innerHTML='<p class="warn" style="text-align:left">Required for a New program: '+_miss.join(', ')+'. Fill the fields marked in red, then Generate.</p>';try{refreshReq();}catch(e){}return;}} if(method!=='Turn'&&$('ctrl')&&$('ctrl').value.indexOf('Turn-mill')>=0&&$('side')&&$('side').value==='Internal') return genTurnMill(); if(!pyReady){pendingGen=true;$('p_res').innerHTML='<p class="warn">Engine loading (first time only, ~10\u201330s on phone)\u2026 it will generate automatically once ready.</p>';return;} pendingGen=false; if(method==='Turn') return genTurn(); return genMill(); }
 function computeVcFz(stab){var m=matBy($('mat').value);var vc=m[1],fzb=m[3];var s=Math.max(0,Math.min(100,stab));var vcF=Math.max(0.33,s/50);var fzF=s>=50?(0.5+s/100):Math.max(0.5,s/50);var d=num('d',0),nt=Math.max(1,Math.round(num('teeth',1)));var nf=Math.max(0.1,1-0.08*Math.min(9,nt-1)-0.02*Math.max(0,nt-10));return {vc:Math.round(vc*vcF),fz:d>0?(fzb*Math.min(d,40)/10*nf*fzF):0};}
 function applyHeader(prog,msg,uname){var L=prog.split('\n');var ins=[];if(msg)ins.push('('+msg+')');if(uname)ins.push('(BY '+uname+')');if(!ins.length)return prog;for(var i=0;i<L.length;i++){if(/^\s*O\d/.test(L[i])||/^\s*%1001/.test(L[i])){L.splice.apply(L,[i+1,0].concat(ins));return L.join('\n');}}L.splice.apply(L,[1,0].concat(ins));return L.join('\n');}
 function applySubprogram(prog){var L=prog.split('\n'),o=[];for(var i=0;i<L.length;i++){var ln=L[i],t=ln.trim();
@@ -2835,12 +2845,14 @@ function pbState(ns){return PB_ST[ns]||(PB_ST[ns]={edit:false,frOpen:false,find:
 function pbReg(ns,cfg){PB_CFG[ns]=cfg;}
 function pbTheme(ns,t){try{localStorage.setItem('ya_progtheme',t);}catch(e){}pbRender(ns);}
 function pbSim(ns){var c=PB_CFG[ns];if(c&&c.sim)c.sim();}
-function pbSave(ns){var c=PB_CFG[ns];if(c&&c.save)c.save();}
-function pbEdit(ns){var s=pbState(ns);s.edit=!s.edit;pbRender(ns);}
+function pbNote(ns,msg){var e=$(ns+'_note');if(e)e.textContent=msg||'';}
+function pbBlocked(ns){var c=PB_CFG[ns];if(c&&c.guard){var g=c.guard();if(g){pbNote(ns,g);return true;}}pbNote(ns,'');return false;}
+function pbSave(ns){if(pbBlocked(ns))return;var c=PB_CFG[ns];if(c&&c.save)c.save();}
+function pbEdit(ns){if(pbBlocked(ns))return;var s=pbState(ns);s.edit=!s.edit;pbRender(ns);}
 function pbFR(ns){var s=pbState(ns);s.frOpen=!s.frOpen;pbRender(ns);}
 function pbSetF(ns,v){pbState(ns).find=v;}
 function pbSetR(ns,v){pbState(ns).repl=v;}
-function pbAdd(ns){var c=PB_CFG[ns];if(!c)return;var pr=c.get()||'';if(!pr){alert('Generate a program first.');return;}lastAnyProg=pr;if(typeof addToJob==='function')addToJob();}
+function pbAdd(ns){if(pbBlocked(ns))return;var c=PB_CFG[ns];if(!c)return;var pr=c.get()||'';if(!pr){alert('Generate a program first.');return;}lastAnyProg=pr;if(typeof addToJob==='function')addToJob();}
 function pbFRdo(ns){var c=PB_CFG[ns];if(!c)return;var s=pbState(ns);function say(x){var m=$(ns+'_frmsg');if(m)m.textContent=x;}var txt=c.get()||'';if(!txt){say('Generate a program first.');return;}var f=s.find||'';if(!f){say('Type the text to find.');return;}var n=txt.split(f).length-1;if(n===0){say('“'+f+'” not found.');return;}c.set(txt.split(f).join(s.repl||''));pbRender(ns);say('Replaced '+n+'× — you can run another.');}
 function pbRender(ns){var c=PB_CFG[ns];if(!c)return;var host=$(c.host);if(!host)return;
   var s=pbState(ns);var text=c.get()||'';var th=progTheme();var open=s.frOpen?' open':'';
@@ -2864,6 +2876,7 @@ function pbRender(ns){var c=PB_CFG[ns];if(!c)return;var host=$(c.host);if(!host)
       '<button class="go sec" type="button" onclick="pbFR(\''+ns+'\')">Close</button>'+
       '<span class="note" id="'+ns+'_frmsg" style="text-align:left;margin:0"></span></div></div>'+
     '<button class="paddjob" type="button" onclick="pbAdd(\''+ns+'\')">🧰 Add to full job</button>'+
+    '<div class="note" id="'+ns+'_note" style="text-align:center;margin:8px 0 0;color:#f0b429"></div>'+
   '</div>';
   if(s.edit){var ta=$(ns+'_edit');ta.value=text;ta.oninput=function(){c.set(ta.value);};}
   else{var gc=$(ns+'_code');if(gc)gc.innerHTML=pHi(text);}
@@ -2872,9 +2885,17 @@ function pbRender(ns){var c=PB_CFG[ns];if(!c)return;var host=$(c.host);if(!host)
 function fmSaveProg(){if(!lastFaceProg)return;var b=new Blob([lastFaceProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_FACEMILL.'+((typeof progExt==='function')?progExt():'nc');document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},600);}
 pbReg('dr2',{host:'dr_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof drSim==='function')drSim();},save:function(){if(typeof saveDrill==='function')saveDrill();}});
 pbReg('fm',{host:'fm_block',get:function(){return lastFaceProg||'';},set:function(v){lastFaceProg=v;lastAnyProg=v;},sim:function(){if(typeof fmSimPlay==='function')fmSimPlay();},save:function(){fmSaveProg();}});
-pbReg('p',{host:'p_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof runSim==='function')runSim();},save:function(){if(typeof saveProg==='function')saveProg();}});
+pbReg('p',{host:'p_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof runSim==='function')runSim();},save:function(){if(typeof saveProg==='function')saveProg();},guard:function(){return progMode==='sample'?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
 pbReg('gv',{host:'gv_block',get:function(){return lastGrooveProg;},set:function(v){lastGrooveProg=v;lastAnyProg=v;var g=$('gcode');if(g)g.textContent=v;},sim:function(){if(typeof gvSim==='function')gvSim();},save:function(){if(typeof gv_saveProg==='function')gv_saveProg();}});
 function toggleEdit(){pbEdit('p');}
+/* ---- Sample / New mode (thread turning + thread milling) ---- */
+var progMode='sample';
+function threadMandatory(){var a=[['side','Int/Ext'],['profile','Thread profile'],['P','Pitch'],['size','Thread standard'],['L','Thread length']];if(method!=='Turn')a=a.concat([['d','Tool dia'],['Z','Flutes']]);return a;}
+function threadMandatoryMissing(){var miss=[];threadMandatory().forEach(function(f){var el=$(f[0]);if(!el)return;if(((el.value||'')+'').trim()==='')miss.push(f[1]);});return miss;}
+function clearThreadMandatory(){['P','L','d','Z'].forEach(function(id){var el=$(id);if(el&&el.tagName==='INPUT')el.value='';});}
+function refreshReq(){var on=(progMode==='new');['side','profile','P','size','L','d','Z'].forEach(function(id){var el=$(id);if(el)el.classList.remove('reqbad');});if(on){threadMandatory().forEach(function(f){var el=$(f[0]);if(el&&((el.value||'')+'').trim()==='')el.classList.add('reqbad');});}}
+function setProgMode(m){progMode=m;var s=$('pm_sample'),n=$('pm_new');if(s)s.classList.toggle('on',m==='sample');if(n)n.classList.toggle('on',m==='new');var h=$('pm_hint');if(m==='new'){clearThreadMandatory();if(h)h.textContent='New program — fill the fields marked in red, then Generate and Save.';}else{if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}try{pbNote('p','');}catch(e){}refreshReq();}
+(function initProgMode(){try{['side','profile','P','size','L','d','Z'].forEach(function(id){var el=$(id);if(el){el.addEventListener('input',refreshReq);el.addEventListener('change',refreshReq);}});var h=$('pm_hint');if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}catch(e){}})();
 function output(x,extra){lastProg=Array.isArray(x)?x.join('\n'):x;lastAnyProg=lastProg;lastExtra=extra||'';renderProg();if($('copybtn'))$('copybtn').style.display='block';$('savebtn').style.display='block';if($('simbtn'))$('simbtn').style.display='block';if($('editbtn'))$('editbtn').style.display='block';if(typeof updateSaveLabels==='function')updateSaveLabels();if($('addjobbtn'))$('addjobbtn').style.display='block';if($('simcv'))$('simcv').style.display='none';}
 var HKEY='yantra_hist';
 function getHist(){try{return JSON.parse(localStorage.getItem(HKEY)||'[]');}catch(e){return [];}}
