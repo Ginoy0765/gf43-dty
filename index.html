@@ -109,7 +109,7 @@
   .pfr .go{border:none;background:#2f4fb0;color:#fff;border-radius:8px;padding:9px 14px;font-weight:700;font-size:12.5px;cursor:pointer}
   .pfr .go.sec{background:#1b2540;border:1px solid #2b3856;color:#dfe8f7}
   .paddjob{width:100%;margin-top:10px;border:1px solid #2b3856;background:#1b2540;color:#dfe8f7;border-radius:12px;padding:13px;font-weight:800;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
-  #savebtn,#simbtn,#editbtn,#addjobbtn,#copybtn{display:none!important}
+  #savebtn,#simbtn,#editbtn,#addjobbtn,#copybtn,#dr_savebtn,#dr_simbtn{display:none!important}
   .histrow{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 40px 12px 14px;margin-top:10px;cursor:pointer}
   .histrow:active{border-color:var(--acc)}
   .histrow .hn{font-weight:700;font-size:14px;word-break:break-all}
@@ -189,7 +189,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.66 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.68 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -449,7 +449,8 @@
         <button class="btn" id="fmc_gen" onclick="genFace()" style="padding:9px 18px;font-size:14px">▶ Generate</button>
         <span id="fmc_cyc" class="cap"></span>
       </div>
-      <pre id="fmc_out" style="margin-top:10px;min-height:40px">Set values and press Generate.</pre>
+      <div id="fmc_out" class="cap" style="margin-top:10px">Set values and press Generate.</div>
+      <div id="fm_block"></div>
     </div>
 
     <div class="card" style="margin-top:4px">
@@ -2329,7 +2330,7 @@ function applyLockUI(){
   if(LOCK_ADV){document.querySelectorAll('.sec').forEach(function(sec){var t=sec.querySelector('.st');if(!t)return;if(t.textContent.toUpperCase().indexOf('ADVANCED')<0)return;var b=document.createElement('span');b.className='advbadge';b.style.marginLeft='6px';b.style.background='#37506a';b.textContent='PREVIEW';t.appendChild(b);var body=t.nextElementSibling;if(body){body.classList.add('locked-sb');body.querySelectorAll('input,select,textarea,button').forEach(function(el){el.disabled=true;});}});}
 }
 function setDefaultPasses(){var P=num('P',0);if(P<=0)return;var n=P<=1.6?1:(P<=2?2:3);if($('passes'))$('passes').value=n;renderPassPcts();}
-function resetAll(){editOn=false;
+function resetAll(){editOn=false;try{if(PB_ST&&PB_ST.p)PB_ST.p.edit=false;}catch(e){}
   $('opsel').value='Milling';method='Mill';$('side').value='Internal';$('hand').value='RH';$('starts').value='1';
   $('mat').value='Stainless 316 austenitic';$('stab').value='50';$('dir').value='Top to Bottom';$('spring').value='No';$('eqvol').value='Yes';
   $('Z').value='3';$('teeth').value='1';$('insl').value='';$('path').value='Helical';$('safez').value='20';if($('msg'))$('msg').value='';if($('username'))$('username').value='';
@@ -2561,7 +2562,8 @@ function genFace(){
     py.globals.set('FJSON', JSON.stringify(P));
     var prog=py.runPython('import webpost,json\nwebpost.post_face(json.loads(FJSON))');
     var t=py.runPython('import webpost,json\nwebpost.face_time(json.loads(FJSON))');
-    out.textContent=prog;
+    out.textContent='';
+    lastFaceProg=prog;lastAnyProg=prog;pbRender('fm');
     var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
     document.getElementById('fmc_cyc').textContent='CYCLE ≈ '+mm+'m '+ss+'s';
     var pj=py.runPython('import webpost,json\njson.dumps(webpost.face_path(json.loads(FJSON)))');
@@ -2823,75 +2825,56 @@ function formatForControl(code,ctrl){var name=ctrl||'Fanuc I & J',out;
   for(var i=0;i<L.length;i++){if(/^\s*O\d/.test(L[i])){L.splice(i+1,0,idLine(name,sie));return L.join('\n');}}
   L.splice(0,0,idLine(name,sie));return L.join('\n');}
 function progTheme(){try{return localStorage.getItem('ya_progtheme')||'paper';}catch(e){return 'paper';}}
-function setProgTheme(t){try{localStorage.setItem('ya_progtheme',t);}catch(e){}var c=$('progCard');if(c)c.setAttribute('data-th',t);var p=$('pthPaper'),d=$('pthDark');if(p)p.classList.toggle('on',t==='paper');if(d)d.classList.toggle('on',t==='dark');}
 function pEsc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function pHiWord(w){var m=w.match(/^([A-Za-z]+)([-+]?[\d.]+.*)?$/);if(!m)return '<span class="k-pu">'+pEsc(w)+'</span>';var lc=/^[GM]$/i.test(m[1])?'k-gm':'k-al';return '<span class="'+lc+'">'+pEsc(m[1])+'</span>'+(m[2]?'<span class="k-nm">'+pEsc(m[2])+'</span>':'');}
 function pHi(text){return String(text).split('\n').map(function(line){var t=line.trim();if(t.charAt(0)==='(')return '<span class="k-cm">'+pEsc(line)+'</span>';if(t==='%')return '<span class="k-pu">'+pEsc(line)+'</span>';return line.split(/(\s+)/).map(function(w){return /^\s+$/.test(w)?w:pHiWord(w);}).join('');}).join('\n');}
-function progFRtoggle(){var b=$('pfrBar'),btn=$('pfrBtn');if(!b)return;var open=b.classList.toggle('open');if(btn)btn.classList.toggle('on',open);window._progFROpen=open;if(open){var f=$('p_findr');if(f)f.focus();}}
-function progFRdo(){frApply('p_findr','p_repl','p_frmsg');}
-function renderProg(){var pp=$('p_res');if(!pp)return;
-  var th=progTheme();var open=window._progFROpen?' open':'';
-  var codeHtml=editOn?'<textarea id="gedit" class="pedit" spellcheck="false"></textarea>':'<div class="pcode" id="gtext"></div>';
-  var editLabel=editOn?'✓ Editing':'✎ Edit';
-  pp.innerHTML='<div class="progcard" id="progCard" data-th="'+th+'">'+
+function renderProg(){pbRender('p');}
+/* ---- generic shared PROGRAM block (drilling + face-mill) ---- */
+var lastFaceProg='';var PB_CFG={};var PB_ST={};
+function pbState(ns){return PB_ST[ns]||(PB_ST[ns]={edit:false,frOpen:false,find:'',repl:''});}
+function pbReg(ns,cfg){PB_CFG[ns]=cfg;}
+function pbTheme(ns,t){try{localStorage.setItem('ya_progtheme',t);}catch(e){}pbRender(ns);}
+function pbSim(ns){var c=PB_CFG[ns];if(c&&c.sim)c.sim();}
+function pbSave(ns){var c=PB_CFG[ns];if(c&&c.save)c.save();}
+function pbEdit(ns){var s=pbState(ns);s.edit=!s.edit;pbRender(ns);}
+function pbFR(ns){var s=pbState(ns);s.frOpen=!s.frOpen;pbRender(ns);}
+function pbSetF(ns,v){pbState(ns).find=v;}
+function pbSetR(ns,v){pbState(ns).repl=v;}
+function pbAdd(ns){var c=PB_CFG[ns];if(!c)return;var pr=c.get()||'';if(!pr){alert('Generate a program first.');return;}lastAnyProg=pr;if(typeof addToJob==='function')addToJob();}
+function pbFRdo(ns){var c=PB_CFG[ns];if(!c)return;var s=pbState(ns);function say(x){var m=$(ns+'_frmsg');if(m)m.textContent=x;}var txt=c.get()||'';if(!txt){say('Generate a program first.');return;}var f=s.find||'';if(!f){say('Type the text to find.');return;}var n=txt.split(f).length-1;if(n===0){say('“'+f+'” not found.');return;}c.set(txt.split(f).join(s.repl||''));pbRender(ns);say('Replaced '+n+'× — you can run another.');}
+function pbRender(ns){var c=PB_CFG[ns];if(!c)return;var host=$(c.host);if(!host)return;
+  var s=pbState(ns);var text=c.get()||'';var th=progTheme();var open=s.frOpen?' open':'';
+  var code=s.edit?'<textarea id="'+ns+'_edit" class="pedit" spellcheck="false"></textarea>':'<div class="pcode" id="'+ns+'_code"></div>';
+  var editLabel=s.edit?'✓ Editing':'✎ Edit';
+  host.innerHTML='<div class="progcard" id="'+ns+'_card" data-th="'+th+'">'+
     '<div class="ptop"><b>PROGRAM</b><div class="pseg">'+
-      '<button id="pthPaper" type="button" class="'+(th==='paper'?'on':'')+'" onclick="setProgTheme(\'paper\')">☀️ Light</button>'+
-      '<button id="pthDark" type="button" class="'+(th==='dark'?'on':'')+'" onclick="setProgTheme(\'dark\')">🌙 Dark</button>'+
-    '</div></div>'+
-    codeHtml+lastExtra+
-    '<div class="prow">'+
-      '<button class="pgbtn" type="button" onclick="runSim()">▶ Simulate</button>'+
-      '<button class="pgbtn" type="button" onclick="saveProg()">💾 Save</button>'+
-      '<button class="pgbtn'+(editOn?' on':'')+'" type="button" onclick="toggleEdit()">'+editLabel+'</button>'+
-      '<button class="pgbtn'+(window._progFROpen?' on':'')+'" id="pfrBtn" type="button" onclick="progFRtoggle()">⇆ Find / Replace</button>'+
-    '</div>'+
-    '<div class="pfr'+open+'" id="pfrBar"><div class="pf">'+
-      '<input id="p_findr" placeholder="find..." oninput="window._pFind=this.value">'+
-      '<input id="p_repl" placeholder="replace with..." oninput="window._pRepl=this.value"></div>'+
-      '<div class="pa"><button class="go" type="button" onclick="progFRdo()">Replace all</button>'+
-      '<button class="go sec" type="button" onclick="progFRtoggle()">Close</button>'+
-      '<span class="note" id="p_frmsg" style="text-align:left;margin:0"></span></div></div>'+
-    '<button class="paddjob" type="button" onclick="addToJob()">🧰 Add to full job</button>'+
-  '</div>';
-  if(editOn){var ta=$('gedit');ta.value=lastProg;ta.oninput=function(){lastProg=ta.value;};}
-  else{var gt=$('gtext');if(gt)gt.innerHTML=pHi(lastProg);}
-  var f=$('p_findr');if(f)f.value=window._pFind||'';var r=$('p_repl');if(r)r.value=window._pRepl||'';
-}
-/* ---- shared PROGRAM block for the grooving/parting screen (reuses the same look) ---- */
-var gvEditOn=false;
-function setGvTheme(t){try{localStorage.setItem('ya_progtheme',t);}catch(e){}var c=$('gvCard');if(c)c.setAttribute('data-th',t);var p=$('gvthPaper'),d=$('gvthDark');if(p)p.classList.toggle('on',t==='paper');if(d)d.classList.toggle('on',t==='dark');}
-function gvEditToggle(){gvEditOn=!gvEditOn;gvRender();}
-function gvFRtoggle(){var b=$('gvfrBar'),btn=$('gvfrBtn');if(!b)return;var open=b.classList.toggle('open');if(btn)btn.classList.toggle('on',open);window._gvFROpen=open;if(open){var f=$('gv_findr');if(f)f.focus();}}
-function gvFRdo(){function say(x){var m=$('gv_frmsg');if(m)m.textContent=x;}var f=window._gvFind||'';if(!lastGrooveProg){say('Generate a program first.');return;}if(!f){say('Type the text to find.');return;}var r=window._gvRepl||'';var n=lastGrooveProg.split(f).length-1;if(n===0){say('“'+f+'” not found.');return;}lastGrooveProg=lastGrooveProg.split(f).join(r);lastAnyProg=lastGrooveProg;var g=$('gcode');if(g)g.textContent=lastGrooveProg;gvRender();say('Replaced '+n+'× — you can run another.');}
-function gvAddJob(){var pr=lastGrooveProg||'';if(!pr){alert('Generate a program first.');return;}lastAnyProg=pr;if(typeof addToJob==='function')addToJob();}
-function gvRender(){var host=$('gv_block');if(!host)return;
-  var text=lastGrooveProg||'';var th=progTheme();var open=window._gvFROpen?' open':'';
-  var code=gvEditOn?'<textarea id="gv_edit" class="pedit" spellcheck="false"></textarea>':'<div class="pcode" id="gv_code"></div>';
-  var editLabel=gvEditOn?'✓ Editing':'✎ Edit';
-  host.innerHTML='<div class="progcard" id="gvCard" data-th="'+th+'">'+
-    '<div class="ptop"><b>PROGRAM</b><div class="pseg">'+
-      '<button id="gvthPaper" type="button" class="'+(th==='paper'?'on':'')+'" onclick="setGvTheme(\'paper\')">☀️ Light</button>'+
-      '<button id="gvthDark" type="button" class="'+(th==='dark'?'on':'')+'" onclick="setGvTheme(\'dark\')">🌙 Dark</button>'+
+      '<button type="button" class="'+(th==='paper'?'on':'')+'" onclick="pbTheme(\''+ns+'\',\'paper\')">☀️ Light</button>'+
+      '<button type="button" class="'+(th==='dark'?'on':'')+'" onclick="pbTheme(\''+ns+'\',\'dark\')">🌙 Dark</button>'+
     '</div></div>'+code+
     '<div class="prow">'+
-      '<button class="pgbtn" type="button" onclick="gvSim()">▶ Simulate</button>'+
-      '<button class="pgbtn" type="button" onclick="gv_saveProg()">💾 Save</button>'+
-      '<button class="pgbtn'+(gvEditOn?' on':'')+'" type="button" onclick="gvEditToggle()">'+editLabel+'</button>'+
-      '<button class="pgbtn'+(window._gvFROpen?' on':'')+'" id="gvfrBtn" type="button" onclick="gvFRtoggle()">⇆ Find / Replace</button>'+
+      '<button class="pgbtn" type="button" onclick="pbSim(\''+ns+'\')">▶ Simulate</button>'+
+      '<button class="pgbtn" type="button" onclick="pbSave(\''+ns+'\')">💾 Save</button>'+
+      '<button class="pgbtn'+(s.edit?' on':'')+'" type="button" onclick="pbEdit(\''+ns+'\')">'+editLabel+'</button>'+
+      '<button class="pgbtn'+(s.frOpen?' on':'')+'" type="button" onclick="pbFR(\''+ns+'\')">⇆ Find / Replace</button>'+
     '</div>'+
-    '<div class="pfr'+open+'" id="gvfrBar"><div class="pf">'+
-      '<input id="gv_findr" placeholder="find..." oninput="window._gvFind=this.value">'+
-      '<input id="gv_repl" placeholder="replace with..." oninput="window._gvRepl=this.value"></div>'+
-      '<div class="pa"><button class="go" type="button" onclick="gvFRdo()">Replace all</button>'+
-      '<button class="go sec" type="button" onclick="gvFRtoggle()">Close</button>'+
-      '<span class="note" id="gv_frmsg" style="text-align:left;margin:0"></span></div></div>'+
-    '<button class="paddjob" type="button" onclick="gvAddJob()">🧰 Add to full job</button>'+
+    '<div class="pfr'+open+'" id="'+ns+'_frbar"><div class="pf">'+
+      '<input id="'+ns+'_find" placeholder="find..." oninput="pbSetF(\''+ns+'\',this.value)">'+
+      '<input id="'+ns+'_repl" placeholder="replace with..." oninput="pbSetR(\''+ns+'\',this.value)"></div>'+
+      '<div class="pa"><button class="go" type="button" onclick="pbFRdo(\''+ns+'\')">Replace all</button>'+
+      '<button class="go sec" type="button" onclick="pbFR(\''+ns+'\')">Close</button>'+
+      '<span class="note" id="'+ns+'_frmsg" style="text-align:left;margin:0"></span></div></div>'+
+    '<button class="paddjob" type="button" onclick="pbAdd(\''+ns+'\')">🧰 Add to full job</button>'+
   '</div>';
-  if(gvEditOn){var ta=$('gv_edit');ta.value=text;ta.oninput=function(){lastGrooveProg=ta.value;lastAnyProg=ta.value;var g=$('gcode');if(g)g.textContent=ta.value;};}
-  else{var gc=$('gv_code');if(gc)gc.innerHTML=pHi(text);}
-  var f=$('gv_findr');if(f)f.value=window._gvFind||'';var r=$('gv_repl');if(r)r.value=window._gvRepl||'';
+  if(s.edit){var ta=$(ns+'_edit');ta.value=text;ta.oninput=function(){c.set(ta.value);};}
+  else{var gc=$(ns+'_code');if(gc)gc.innerHTML=pHi(text);}
+  var ff=$(ns+'_find');if(ff)ff.value=s.find||'';var rr=$(ns+'_repl');if(rr)rr.value=s.repl||'';
 }
-function toggleEdit(){editOn=!editOn;var e=$('editbtn');if(e)e.textContent=editOn?'\u270E Edit: ON (sim uses edits)':'\u270E Edit: OFF';renderProg();}
+function fmSaveProg(){if(!lastFaceProg)return;var b=new Blob([lastFaceProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_FACEMILL.'+((typeof progExt==='function')?progExt():'nc');document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},600);}
+pbReg('dr2',{host:'dr_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof drSim==='function')drSim();},save:function(){if(typeof saveDrill==='function')saveDrill();}});
+pbReg('fm',{host:'fm_block',get:function(){return lastFaceProg||'';},set:function(v){lastFaceProg=v;lastAnyProg=v;},sim:function(){if(typeof fmSimPlay==='function')fmSimPlay();},save:function(){fmSaveProg();}});
+pbReg('p',{host:'p_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof runSim==='function')runSim();},save:function(){if(typeof saveProg==='function')saveProg();}});
+pbReg('gv',{host:'gv_block',get:function(){return lastGrooveProg;},set:function(v){lastGrooveProg=v;lastAnyProg=v;var g=$('gcode');if(g)g.textContent=v;},sim:function(){if(typeof gvSim==='function')gvSim();},save:function(){if(typeof gv_saveProg==='function')gv_saveProg();}});
+function toggleEdit(){pbEdit('p');}
 function output(x,extra){lastProg=Array.isArray(x)?x.join('\n'):x;lastAnyProg=lastProg;lastExtra=extra||'';renderProg();if($('copybtn'))$('copybtn').style.display='block';$('savebtn').style.display='block';if($('simbtn'))$('simbtn').style.display='block';if($('editbtn'))$('editbtn').style.display='block';if(typeof updateSaveLabels==='function')updateSaveLabels();if($('addjobbtn'))$('addjobbtn').style.display='block';if($('simcv'))$('simcv').style.display='none';}
 var HKEY='yantra_hist';
 function getHist(){try{return JSON.parse(localStorage.getItem(HKEY)||'[]');}catch(e){return [];}}
@@ -3022,7 +3005,7 @@ function genCentreApp(op){var _onum=(($('tn_onum')||{}).value)||'0001';var depth
   if(op==='Tapping'){var pitch=num('dr_tp_pitch',0);var desig=($('dr_tp_size')&&$('dr_tp_size').value)?$('dr_tp_size').value:'';if(!(pitch>0)){$('dr_res').innerHTML='<p class="warn">Pick a thread (or type a pitch) for tapping.</p>';return;}var dia=drTapMajor();if(!(dia>0))dia=num('dr_d',6)||6;var rpm=Math.max(50,Math.min(1500,Math.round(1000*8/(Math.PI*dia))));g.push('%','O'+_onum+' (TAP '+desig+' P'+px(pitch)+' DEPTH'+px(depth)+' RIGID FANUC)');g.push('N1 G40 G99');g.push('G00 T0101 '+coolOn);g.push('G97 S'+rpm+' M03');g.push('G00 X0.');g.push('G00 Z'+px(R));g.push('M29 S'+rpm);g.push('G84 Z-'+px(depth)+' R'+px(R)+' F'+px(pitch));g.push('G80');g.push('G00 Z'+px(safeZ)+(coolOff?(' '+coolOff):''));g.push('M05','M30','%');}
   else if(op==='Reaming'){var d=num('dr_d',0);if(!(d>0)){$('dr_res').innerHTML='<p class="warn">Enter ream diameter.</p>';return;}var vc=(typeof drVc==='function'?drVc():40)*0.6;var rpm=Math.max(50,Math.min(5000,Math.round(1000*vc/(Math.PI*d))));var feed=Math.max(0.03,(typeof drFpr==='function'?drFpr(d):0.1)*2);g.push('%','O'+_onum+' (REAM D'+px(d)+' DEPTH'+px(depth)+' LATHE)');g.push('N1 G40 G99');g.push('G00 T0101 '+coolOn);g.push('G97 S'+rpm+' M03');g.push('G00 X0.');g.push('G00 Z'+px(R));g.push('G01 Z-'+px(depth)+' F'+px(feed));g.push('G04 X0.2');g.push('G01 Z'+px(R)+' F'+px(feed));g.push('G00 Z'+px(safeZ)+(coolOff?(' '+coolOff):''));g.push('M05','M30','%');}
   else{var dc=num('dr_d',0);if(!(dc>0)){$('dr_res').innerHTML='<p class="warn">Enter centre-drill diameter.</p>';return;}var vc2=(typeof drVc==='function'?drVc():45);var rpm2=Math.max(50,Math.min(5000,Math.round(1000*vc2/(Math.PI*dc))));var feed2=Math.max(0.02,(typeof drFpr==='function'?drFpr(dc):0.08));g.push('%','O'+_onum+' (CENTRE DRILL D'+px(dc)+' DEPTH'+px(depth)+' LATHE)');g.push('N1 G40 G99');g.push('G00 T0101 '+coolOn);g.push('G97 S'+rpm2+' M03');g.push('G00 X0.');g.push('G00 Z'+px(R));g.push('G01 Z-'+px(depth)+' F'+px(feed2));g.push('G04 X0.1');g.push('G00 Z'+px(safeZ)+(coolOff?(' '+coolOff):''));g.push('M05','M30','%');}
-  lastProg=g.join('\n');$('dr_res').innerHTML='<pre></pre>';$('dr_res').querySelector('pre').textContent=lastProg;lastAnyProg=lastProg;$('dr_savebtn').style.display='block';if($('dr_simbtn'))$('dr_simbtn').style.display='block';if($('dr_simcv'))$('dr_simcv').style.display='none';if($('dr_simctrls'))$('dr_simctrls').style.display='none';}
+  lastProg=g.join('\n');lastAnyProg=lastProg;pbRender('dr2');if($('dr_simcv'))$('dr_simcv').style.display='none';if($('dr_simctrls'))$('dr_simctrls').style.display='none';}
 function genDrill(){var _op=($('dr_op')?$('dr_op').value:'Drilling');if((window._mode==='turn')&&_op!=='Drilling'){return genCentreApp(_op);}var d=parseFloat($('dr_d').value);if(!(d>0)){$('dr_res').innerHTML='<p class="warn">Enter drill dia.</p>';return;}var POS=drPositions();if(!POS.length){$('dr_res').innerHTML='<p class="warn">No hole positions.</p>';return;}var px=function(v){return (+v).toFixed(3);};
  var depth=num('dr_depth',20),rpm=parseInt($('dr_rpm').value)||1000,fpr=drFpr(d),fmin=Math.max(1,Math.round(fpr*rpm));
  var cyc=drAutoCycle(d),R=num('dr_r',3),safeZ=num('dr_safez',20),tc=$('dr_tc').value==='Yes';var _defc=(($('def_cool')||{}).value)||'M08',coolOn=(($('dr_cool_on')||{}).value)||(_defc==='None'?'':_defc),coolOff=(($('dr_cool_off')||{}).value)||(_defc==='None'?'':'M09');
@@ -3035,7 +3018,7 @@ function genDrill(){var _op=($('dr_op')?$('dr_op').value:'Drilling');if((window.
  else if(_adv.indexOf('zones')>=0){if(!drZones().length){$('dr_res').innerHTML='<p class="warn">Add at least one zone end depth.</p>';return;}g.push(turning?'(AXIAL ZONES FEED/REV)':'(CUSTOM ZONES G00/G01 x'+POS.length+')');for(var mi=0;mi<POS.length;mi++){if(!turning)g.push('(HOLE '+(mi+1)+')');drZoneMoves(g,POS[mi][0],POS[mi][1],depth,R,feed,d,turning);}}
  else{g.push(turning?'(AXIAL DRILL FEED/REV)':'(DRILL LAYERED G00/G01 x'+POS.length+')');for(var mj=0;mj<POS.length;mj++){if(!turning)g.push('(HOLE '+(mj+1)+')');drLayeredMoves(g,POS[mj][0],POS[mj][1],depth,R,feed,turning,d);}}
  if(turning){g.push('G00 Z'+r(safeZ,1)+' '+coolOff,'M05','M30','%');}else{g.push('G00 Z'+r(safeZ,1)+' '+coolOff,'M30','%');}lastProg=g.join('\n');
- $('dr_res').innerHTML='<pre></pre>';$('dr_res').querySelector('pre').textContent=lastProg;lastAnyProg=lastProg;$('dr_savebtn').style.display='block';if(typeof updateSaveLabels==='function')updateSaveLabels();if($('dr_simbtn'))$('dr_simbtn').style.display='block';if($('dr_simcv'))$('dr_simcv').style.display='none';if($('dr_simctrls'))$('dr_simctrls').style.display='none';}
+ lastAnyProg=lastProg;pbRender('dr2');if(typeof updateSaveLabels==='function')updateSaveLabels();if($('dr_simcv'))$('dr_simcv').style.display='none';if($('dr_simctrls'))$('dr_simctrls').style.display='none';}
 function saveDrill(){if(!lastProg)return;var nm='YANTRA_DRILL_D'+($('dr_d').value||'')+'.'+progExt();var b=new Blob([lastProg],{type:'text/plain'});var u=URL.createObjectURL(b);var x=document.createElement('a');x.href=u;x.download=nm;document.body.appendChild(x);x.click();setTimeout(function(){URL.revokeObjectURL(u);x.remove();},800);}
 function progExt(){var e=$('def_fmt')?$('def_fmt').value:'';return e||'txt';}
 function updateSaveLabels(){var e=(typeof progExt==='function')?progExt():'txt';var b;b=$('savebtn');if(b)b.innerHTML='&#128190;  Save .'+e+' to Downloads';b=$('dr_savebtn');if(b)b.innerHTML='&#128190;  Save .'+e;b=$('job_savebtn');if(b)b.innerHTML='&#128190;  Save job .'+e;}
@@ -3604,7 +3587,7 @@ function generate(P){
   if($('cycLabel'))$('cycLabel').textContent='Long-form G-code (G0/G1/G2/G3) - '+stratLabel;
   if($('cycBadge'))$('cycBadge').textContent=ctrl;
   try{if($('gv_res'))$('gv_res').innerHTML=_gvAlm?('<p class="warn" style="text-align:left">⚠ '+_gvAlm+'</p>'):'';}catch(e){}
-  try{if(typeof gvRender==='function')gvRender();}catch(e){}
+  try{if(typeof pbRender==='function')pbRender('gv');}catch(e){}
   try{$('outputArea').scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}
   simReset();
   return out;
