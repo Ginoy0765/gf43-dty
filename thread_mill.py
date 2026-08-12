@@ -57,11 +57,12 @@ def _build(D, L, P, d, Z, Vc, fz, hand, direction, mode,
         raise ValueError(
             f"Invalid cutting parameters: Vc={Vc}, fz={fz}, flutes Z={Z}. All must be > 0."
         )
-    if not is_external and d >= D:
+    if not is_external and d >= D and tool_offset_mode != 'od':
         raise ValueError(
             f"Tool diameter d={d} mm cannot be >= thread major diameter D={D} mm for internal threading. "
             f"The tool must fit inside the hole and orbit within it. "
-            f"Try a tool of ~{max(2, int(D * 0.65))} mm or smaller."
+            f"Try a tool of ~{max(2, int(D * 0.65))} mm or smaller, "
+            f"or switch Toolpath to 'Tool OD' (control cutter-comp handles the fit)."
         )
     # U138: Respect Max RPM cap (default 5000) when computing RPM and the
     # downstream lateral feed F1.  Previously the G-code used the uncapped
