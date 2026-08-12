@@ -99,8 +99,8 @@
   .progcard[data-th="paper"] .pedit{background:#f5f7fb;border:1px solid #d7deea;color:#1c2333}
   .progcard[data-th="dark"] .pedit{background:#0f1626;border:1px solid #26324f;color:#e6edf3}
   .prow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
-  .pbtn{border:1px solid #2b3856;background:#1b2540;color:#dfe8f7;border-radius:11px;padding:11px 8px;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
-  .pbtn.on{border-color:#4f8cff;color:#fff;box-shadow:0 0 0 1px #4f8cff}
+  .pgbtn{border:1px solid #2b3856;background:#1b2540;color:#dfe8f7;border-radius:11px;padding:11px 8px;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
+  .pgbtn.on{border-color:#4f8cff;color:#fff;box-shadow:0 0 0 1px #4f8cff}
   .pfr{display:none;margin-top:9px;background:#0e1526;border:1px solid #2b3856;border-radius:11px;padding:10px}
   .pfr.open{display:block}
   .pfr .pf{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -189,7 +189,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.64 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.65 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1365,16 +1365,10 @@
   <!-- ============ GENERATE + OUTPUT ============ -->
   <button class="genbtn" onclick="gv_generate()">&#9881; GENERATE G-CODE</button>
   <div id="outputArea" style="display:none;margin-top:14px">
-    <div class="sec open"><div class="st" onclick="gv_toggle(this)">PROGRAM <span class="badge live" id="cycBadge">-</span> <span class="caret">&#9656;</span></div><div class="sb">
-      <div class="gcodehead"><span class="cyc" id="cycLabel">Cycle: -</span></div>
-      <div class="gcode" id="gcode"></div>
-      <div class="postbtns">
-        <button class="pbtn primary" onclick="gvSim()">&#9654; Simulate</button>
-        <button class="pbtn save" onclick="gv_saveProg()">&#128190; Save</button>
-        <button class="pbtn" onclick="gv_copyGcode()">&#128203; Copy</button>
-      </div>
-      <div id="saveConfirm" class="hint" style="display:none;color:var(--ok);font-weight:600;margin-top:8px"></div>
-    </div></div>
+    <div id="gv_res"></div>
+    <div id="gcode" style="display:none"></div>
+    <div id="gv_block"></div>
+    <div id="saveConfirm" class="hint" style="display:none;color:var(--ok);font-weight:600;margin-top:8px"></div>
   </div>
 </div>
 </section>
@@ -2846,10 +2840,10 @@ function renderProg(){var pp=$('p_res');if(!pp)return;
     '</div></div>'+
     codeHtml+lastExtra+
     '<div class="prow">'+
-      '<button class="pbtn" type="button" onclick="runSim()">▶ Simulate</button>'+
-      '<button class="pbtn" type="button" onclick="saveProg()">💾 Save</button>'+
-      '<button class="pbtn'+(editOn?' on':'')+'" type="button" onclick="toggleEdit()">'+editLabel+'</button>'+
-      '<button class="pbtn'+(window._progFROpen?' on':'')+'" id="pfrBtn" type="button" onclick="progFRtoggle()">⇆ Find / Replace</button>'+
+      '<button class="pgbtn" type="button" onclick="runSim()">▶ Simulate</button>'+
+      '<button class="pgbtn" type="button" onclick="saveProg()">💾 Save</button>'+
+      '<button class="pgbtn'+(editOn?' on':'')+'" type="button" onclick="toggleEdit()">'+editLabel+'</button>'+
+      '<button class="pgbtn'+(window._progFROpen?' on':'')+'" id="pfrBtn" type="button" onclick="progFRtoggle()">⇆ Find / Replace</button>'+
     '</div>'+
     '<div class="pfr'+open+'" id="pfrBar"><div class="pf">'+
       '<input id="p_findr" placeholder="find..." oninput="window._pFind=this.value">'+
@@ -2862,6 +2856,40 @@ function renderProg(){var pp=$('p_res');if(!pp)return;
   if(editOn){var ta=$('gedit');ta.value=lastProg;ta.oninput=function(){lastProg=ta.value;};}
   else{var gt=$('gtext');if(gt)gt.innerHTML=pHi(lastProg);}
   var f=$('p_findr');if(f)f.value=window._pFind||'';var r=$('p_repl');if(r)r.value=window._pRepl||'';
+}
+/* ---- shared PROGRAM block for the grooving/parting screen (reuses the same look) ---- */
+var gvEditOn=false;
+function setGvTheme(t){try{localStorage.setItem('ya_progtheme',t);}catch(e){}var c=$('gvCard');if(c)c.setAttribute('data-th',t);var p=$('gvthPaper'),d=$('gvthDark');if(p)p.classList.toggle('on',t==='paper');if(d)d.classList.toggle('on',t==='dark');}
+function gvEditToggle(){gvEditOn=!gvEditOn;gvRender();}
+function gvFRtoggle(){var b=$('gvfrBar'),btn=$('gvfrBtn');if(!b)return;var open=b.classList.toggle('open');if(btn)btn.classList.toggle('on',open);window._gvFROpen=open;if(open){var f=$('gv_findr');if(f)f.focus();}}
+function gvFRdo(){function say(x){var m=$('gv_frmsg');if(m)m.textContent=x;}var f=window._gvFind||'';if(!lastGrooveProg){say('Generate a program first.');return;}if(!f){say('Type the text to find.');return;}var r=window._gvRepl||'';var n=lastGrooveProg.split(f).length-1;if(n===0){say('“'+f+'” not found.');return;}lastGrooveProg=lastGrooveProg.split(f).join(r);lastAnyProg=lastGrooveProg;var g=$('gcode');if(g)g.textContent=lastGrooveProg;gvRender();say('Replaced '+n+'× — you can run another.');}
+function gvAddJob(){var pr=lastGrooveProg||'';if(!pr){alert('Generate a program first.');return;}lastAnyProg=pr;if(typeof addToJob==='function')addToJob();}
+function gvRender(){var host=$('gv_block');if(!host)return;
+  var text=lastGrooveProg||'';var th=progTheme();var open=window._gvFROpen?' open':'';
+  var code=gvEditOn?'<textarea id="gv_edit" class="pedit" spellcheck="false"></textarea>':'<div class="pcode" id="gv_code"></div>';
+  var editLabel=gvEditOn?'✓ Editing':'✎ Edit';
+  host.innerHTML='<div class="progcard" id="gvCard" data-th="'+th+'">'+
+    '<div class="ptop"><b>PROGRAM</b><div class="pseg">'+
+      '<button id="gvthPaper" type="button" class="'+(th==='paper'?'on':'')+'" onclick="setGvTheme(\'paper\')">☀️ Light</button>'+
+      '<button id="gvthDark" type="button" class="'+(th==='dark'?'on':'')+'" onclick="setGvTheme(\'dark\')">🌙 Dark</button>'+
+    '</div></div>'+code+
+    '<div class="prow">'+
+      '<button class="pgbtn" type="button" onclick="gvSim()">▶ Simulate</button>'+
+      '<button class="pgbtn" type="button" onclick="gv_saveProg()">💾 Save</button>'+
+      '<button class="pgbtn'+(gvEditOn?' on':'')+'" type="button" onclick="gvEditToggle()">'+editLabel+'</button>'+
+      '<button class="pgbtn'+(window._gvFROpen?' on':'')+'" id="gvfrBtn" type="button" onclick="gvFRtoggle()">⇆ Find / Replace</button>'+
+    '</div>'+
+    '<div class="pfr'+open+'" id="gvfrBar"><div class="pf">'+
+      '<input id="gv_findr" placeholder="find..." oninput="window._gvFind=this.value">'+
+      '<input id="gv_repl" placeholder="replace with..." oninput="window._gvRepl=this.value"></div>'+
+      '<div class="pa"><button class="go" type="button" onclick="gvFRdo()">Replace all</button>'+
+      '<button class="go sec" type="button" onclick="gvFRtoggle()">Close</button>'+
+      '<span class="note" id="gv_frmsg" style="text-align:left;margin:0"></span></div></div>'+
+    '<button class="paddjob" type="button" onclick="gvAddJob()">🧰 Add to full job</button>'+
+  '</div>';
+  if(gvEditOn){var ta=$('gv_edit');ta.value=text;ta.oninput=function(){lastGrooveProg=ta.value;lastAnyProg=ta.value;var g=$('gcode');if(g)g.textContent=ta.value;};}
+  else{var gc=$('gv_code');if(gc)gc.innerHTML=pHi(text);}
+  var f=$('gv_findr');if(f)f.value=window._gvFind||'';var r=$('gv_repl');if(r)r.value=window._gvRepl||'';
 }
 function toggleEdit(){editOn=!editOn;var e=$('editbtn');if(e)e.textContent=editOn?'\u270E Edit: ON (sim uses edits)':'\u270E Edit: OFF';renderProg();}
 function output(x,extra){lastProg=Array.isArray(x)?x.join('\n'):x;lastAnyProg=lastProg;lastExtra=extra||'';renderProg();if($('copybtn'))$('copybtn').style.display='block';$('savebtn').style.display='block';if($('simbtn'))$('simbtn').style.display='block';if($('editbtn'))$('editbtn').style.display='block';if(typeof updateSaveLabels==='function')updateSaveLabels();if($('addjobbtn'))$('addjobbtn').style.display='block';if($('simcv'))$('simcv').style.display='none';}
@@ -3570,12 +3598,13 @@ function generate(P){
   // === Emit ===
   var out=emitMoves(mv, ctrl, P.incr, arcfmt);
   if(_T)return {out:out, mv:mv};
-  var cyc='Long-form G-code (G0/G1/G2/G3) - '+stratLabel;
   $('outputArea').style.display='block';
   $('gcode').textContent=out;
-  $('cycLabel').textContent=cyc;
-  $('cycBadge').textContent=ctrl;
+  try{lastGrooveProg=out;lastAnyProg=out;}catch(e){}
+  if($('cycLabel'))$('cycLabel').textContent='Long-form G-code (G0/G1/G2/G3) - '+stratLabel;
+  if($('cycBadge'))$('cycBadge').textContent=ctrl;
   try{if($('gv_res'))$('gv_res').innerHTML=_gvAlm?('<p class="warn" style="text-align:left">⚠ '+_gvAlm+'</p>'):'';}catch(e){}
+  try{if(typeof gvRender==='function')gvRender();}catch(e){}
   try{$('outputArea').scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}
   simReset();
   return out;
