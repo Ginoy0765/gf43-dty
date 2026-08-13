@@ -194,7 +194,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.82 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.83 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -2973,8 +2973,16 @@ function tnMillPattern(prog){try{
   if(preEnd<0||m30<0||m30<=preEnd+1)return prog;
   var pre=L.slice(0,preEnd+1),body=L.slice(preEnd+1,m30),foot=L.slice(m30);
   var fx=function(v){v=Math.round(v*1000)/1000;var s=''+v;if(s.indexOf('.')<0)s+='.0';return s;};
+  function offsetBody(dx,dy){var mode='G90',res=[];
+    for(var b=0;b<body.length;b++){var ln=body[b],t=ln.trim();
+      if(/\bG91\b/.test(ln))mode='G91'; if(/\bG90\b/.test(ln))mode='G90';
+      if(t.charAt(0)!=='('&&t!==''&&mode==='G90'&&/[XY]\s*-?[\d.]/.test(ln)){
+        ln=ln.replace(/X(-?[\d.]+)/g,function(_,v){return 'X'+fx(parseFloat(v)+dx);}).replace(/Y(-?[\d.]+)/g,function(_,v){return 'Y'+fx(parseFloat(v)+dy);});
+      }
+      res.push(ln);}
+    return res;}
   var o=pre.slice();
-  for(var k=0;k<pos.length;k++){o.push('( POSITION '+(k+1)+' OF '+pos.length+' )');o.push('G52 X'+fx(pos[k][0])+' Y'+fx(pos[k][1]));o=o.concat(body);o.push('G52 X0. Y0.');}
+  for(var k=0;k<pos.length;k++){o.push('( POSITION '+(k+1)+' OF '+pos.length+' - X'+fx(pos[k][0])+' Y'+fx(pos[k][1])+' )');o=o.concat(offsetBody(pos[k][0],pos[k][1]));}
   return o.concat(foot).join('\n');
 }catch(e){return prog;}}
 /* ---- Face-milling: Sample/New mode + coolant + spindle post-process ---- */
