@@ -194,7 +194,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.81 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.82 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -914,6 +914,15 @@
         <div id="repWrap" style="display:none"><div class="row2"><div><label>Repass threads (pitches)</label><input id="repp" type="number" value="1" inputmode="numeric"></div><div><label>Repass offset dia (mm)</label><input id="repoff" type="number" value="0" inputmode="decimal"></div></div></div>
         <div class="row2"><div><label>Requirement</label><select id="req"><option>Standard</option><option>Finishing</option><option>Productivity</option><option>Weak setup</option><option>Tool life</option></select></div><div></div></div>
         <label>Subprogram (M99, no tool call)</label><select id="subprog"><option>No</option><option>Yes</option></select>
+      </div></div>
+      <div class="sec mill-only"><div class="st" onclick="tog(this)">PATTERN <span>&#9656;</span></div><div class="sb" style="display:none">
+        <label>Pattern</label><select id="mt_pat" onchange="mtPosChange()"><option>Point</option><option>Line</option><option>Rows (grid)</option><option>PCD circle</option><option>Manual coords</option></select>
+        <div class="row2"><div><label>Origin X</label><input id="mt_x0" type="number" value="0" inputmode="decimal" oninput="mtPosChange()"></div><div><label>Origin Y</label><input id="mt_y0" type="number" value="0" inputmode="decimal" oninput="mtPosChange()"></div></div>
+        <div id="mt_line" style="display:none"><div class="row3"><div><label>Holes</label><input id="mt_ln" type="number" value="4" oninput="mtPosChange()"></div><div><label>Pitch</label><input id="mt_lp" type="number" value="20" oninput="mtPosChange()"></div><div><label>Angle&deg;</label><input id="mt_la" type="number" value="0" oninput="mtPosChange()"></div></div></div>
+        <div id="mt_grid" style="display:none"><div class="row2"><div><label>X count</label><input id="mt_nx" type="number" value="3" oninput="mtPosChange()"></div><div><label>Y count</label><input id="mt_ny" type="number" value="2" oninput="mtPosChange()"></div></div><div class="row2"><div><label>X pitch</label><input id="mt_px" type="number" value="20" oninput="mtPosChange()"></div><div><label>Y pitch</label><input id="mt_py" type="number" value="20" oninput="mtPosChange()"></div></div></div>
+        <div id="mt_pcd" style="display:none"><div class="row3"><div><label>PCD dia</label><input id="mt_pd" type="number" value="50" oninput="mtPosChange()"></div><div><label>Holes</label><input id="mt_pn" type="number" value="6" oninput="mtPosChange()"></div><div><label>Start&deg;</label><input id="mt_pa" type="number" value="0" oninput="mtPosChange()"></div></div></div>
+        <div id="mt_man" style="display:none"><label>Coordinates (X,Y per line)</label><textarea id="mt_mc" class="gedit" style="min-height:90px" spellcheck="false" oninput="mtPosChange()"></textarea></div>
+        <div id="mt_poscount" class="note" style="text-align:left">1 position &mdash; single thread at origin</div>
       </div></div>
       <div class="sec mill-only"><div class="st" onclick="tog(this)">POSITIONING <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Start XYZ</label><select id="startxyz" onchange="updateSubs()"><option>No</option><option>Yes</option></select></div><div><label>Safe Z (mm)</label><input id="safez" type="number" value="20" inputmode="decimal"></div></div>
@@ -2716,7 +2725,7 @@ function genMill(){
   try{
     py.globals.set('JS',py.toPy(P0));
     var prog=py.runPython(MILLPY); var t=py.runPython(MILLTIME);lastCycleSec=t;
-    prog=tnPostMill(prog);
+    prog=tnPostMill(prog);prog=tnMillPattern(prog);
     prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
     $('cyc').innerHTML='<div class="cyc">CYCLE \u2248 '+mm+'m '+ss+'s &middot; matches desktop engine</div>';
@@ -2946,6 +2955,28 @@ function tnPostTurn(prog){try{
 function mCoolVis(){var s=$('mcool');var w=$('mcoolCustWrap');if(w)w.style.display=(s&&s.value==='Custom')?'':'none';}
 function mnMachineSeed(){function sv(id,val){var e=$(id);if(e&&val!=null&&val!=='')e.value=val;}var dc=($('def_ctrl')&&$('def_ctrl').value)||'';var map={'Fanuc':'Fanuc I & J','Siemens':'Siemens I & J','Heidenhain':'Heidenhain','Haas':'Haas'};if(map[dc])sv('ctrl',map[dc]);var ax=($('def_toolaxis')&&$('def_toolaxis').value)||'Z';var dr=($('def_tooldir')&&$('def_tooldir').value)||'-';var taMap={'Z-':'Z- (default)','Z+':'Z+','X-':'X-','X+':'X+','Y-':'Y-','Y+':'Y+'};if(taMap[ax+dr])sv('toolaxis',taMap[ax+dr]);sv('m_tooldir',dr);sv('m_spindledef',($('def_spindle')&&$('def_spindle').value));sv('m_cooldef',($('def_cool')&&$('def_cool').value));sv('m_onum',($('tn_onum')&&$('tn_onum').value));sv('m_fmt',($('def_fmt')&&$('def_fmt').value));}
 function tnPostMill(prog){try{var mc=($('mcode')&&$('mcode').value)||'M03';prog=prog.replace(/(S\d+) \(M03\/M04\)/g,'$1 '+mc);var cv=($('mcool')&&$('mcool').value)||'M08';var coolOn=(cv==='Custom')?((($('mcoolcustom')&&$('mcoolcustom').value)||'').trim()||'M08'):cv;if(coolOn!=='M08')prog=prog.replace(/\bM08\b/g,coolOn);}catch(e){}return prog;}
+/* ---- Thread-milling PATTERN (repeat the thread at multiple XY, like drilling) ---- */
+function mtPositions(){var pt=$('mt_pat')?$('mt_pat').value:'Point';var x0=num('mt_x0',0),y0=num('mt_y0',0),out=[];
+  if(pt==='Line'){var nn=Math.max(1,Math.round(num('mt_ln',1))),pit=num('mt_lp',20),a=num('mt_la',0)*Math.PI/180;for(var i=0;i<nn;i++)out.push([x0+i*pit*Math.cos(a),y0+i*pit*Math.sin(a)]);}
+  else if(pt==='Rows (grid)'){var nx=Math.max(1,Math.round(num('mt_nx',1))),ny=Math.max(1,Math.round(num('mt_ny',1))),pxx=num('mt_px',20),pyy=num('mt_py',20);for(var iy=0;iy<ny;iy++)for(var ix=0;ix<nx;ix++)out.push([x0+ix*pxx,y0+iy*pyy]);}
+  else if(pt==='PCD circle'){var rr=num('mt_pd',50)/2,pn=Math.max(1,Math.round(num('mt_pn',1))),pa=num('mt_pa',0);for(var k=0;k<pn;k++){var ang=(pa+360*k/pn)*Math.PI/180;out.push([x0+rr*Math.cos(ang),y0+rr*Math.sin(ang)]);}}
+  else if(pt==='Manual coords'){var t=$('mt_mc')?$('mt_mc').value:'';t.split('\n').forEach(function(ln){var mm=ln.split(/[ ,\t]+/).filter(function(z){return z!=='';});if(mm.length>=2){var xx=parseFloat(mm[0]),yy=parseFloat(mm[1]);if(!isNaN(xx)&&!isNaN(yy))out.push([xx,yy]);}});}
+  else{out.push([x0,y0]);}
+  if(!out.length)out.push([x0,y0]);return out;}
+function mtActive(){var p=mtPositions();return !(p.length===1&&Math.abs(p[0][0])<1e-9&&Math.abs(p[0][1])<1e-9);}
+function mtPosChange(){var pt=$('mt_pat')?$('mt_pat').value:'Point';['mt_line','mt_grid','mt_pcd','mt_man'].forEach(function(id){var e=$(id);if(e)e.style.display='none';});var map={'Line':'mt_line','Rows (grid)':'mt_grid','PCD circle':'mt_pcd','Manual coords':'mt_man'};if(map[pt]){var e=$(map[pt]);if(e)e.style.display='';}var n=mtPositions().length;var c=$('mt_poscount');if(c)c.textContent=n+' position'+(n===1?'':'s')+(mtActive()?' (thread repeated at each)':' — single thread at origin');}
+function tnMillPattern(prog){try{
+  if(!mtActive())return prog;
+  var pos=mtPositions();var L=prog.split('\n');
+  var preEnd=-1;for(var i=0;i<L.length;i++){if(/G90 G40 G17 G94/.test(L[i])){preEnd=i;break;}}
+  var m30=-1;for(var j=L.length-1;j>=0;j--){if(/^\s*M30\b/.test(L[j])){m30=j;break;}}
+  if(preEnd<0||m30<0||m30<=preEnd+1)return prog;
+  var pre=L.slice(0,preEnd+1),body=L.slice(preEnd+1,m30),foot=L.slice(m30);
+  var fx=function(v){v=Math.round(v*1000)/1000;var s=''+v;if(s.indexOf('.')<0)s+='.0';return s;};
+  var o=pre.slice();
+  for(var k=0;k<pos.length;k++){o.push('( POSITION '+(k+1)+' OF '+pos.length+' )');o.push('G52 X'+fx(pos[k][0])+' Y'+fx(pos[k][1]));o=o.concat(body);o.push('G52 X0. Y0.');}
+  return o.concat(foot).join('\n');
+}catch(e){return prog;}}
 /* ---- Face-milling: Sample/New mode + coolant + spindle post-process ---- */
 var fmMode='sample';
 function fmCoolVis(){var s=$('fmc_cool');var w=$('fmc_coolCustWrap');if(w)w.style.display=(s&&s.value==='Custom')?'':'none';}
