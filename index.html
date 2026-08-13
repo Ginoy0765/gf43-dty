@@ -194,7 +194,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.84 &middot; 13 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.85 &middot; 13 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -933,6 +933,7 @@
       </div></div>
       <div class="sec mill-only"><div class="st" onclick="tog(this)">MACHINE <span>&#9656;</span></div><div class="sb" style="display:none">
         <p class="note" style="text-align:left">Seeded from <b>Defaults</b>. Edit here to override for this operation only.</p>
+        <label>Operator / User</label><input id="m_user" type="text" placeholder="name &mdash; used in file name &amp; header" autocomplete="off">
         <div class="row2"><div><label>Control</label><select id="ctrl"><option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Siemens I &amp; J</option><option>Siemens R</option><option>Heidenhain</option><option>Haas</option><option>Turn-mill (polar)</option></select></div><div><label>Max RPM</label><input id="maxrpm" type="number" value="5000" inputmode="numeric" oninput="recalc()"></div></div>
         <div class="row2"><div><label>Tool axis</label><select id="toolaxis"><option>Z- (default)</option><option>Z+</option><option>X-</option><option>X+</option><option>Y-</option><option>Y+</option></select></div><div><label>Cutting direction</label><select id="m_tooldir"><option value="-">Into work</option><option value="+">Out of work</option></select></div></div>
         <div class="row2"><div><label>Spindle direction (default)</label><select id="m_spindledef"><option>M03 CW</option><option>M04 CCW</option></select></div><div><label>Coolant (default)</label><select id="m_cooldef"><option value="M08">M08 flood</option><option value="M07">M07 mist</option><option value="None">None</option></select></div></div>
@@ -984,6 +985,7 @@
       </div></div>
       <div class="sec turn-only"><div class="st" onclick="tog(this)">MACHINE <span>&#9656;</span></div><div class="sb" style="display:none">
         <p class="note" style="text-align:left">Seeded from <b>Defaults</b>. Edit here to override for this operation only.</p>
+        <label>Operator / User</label><input id="t_user" type="text" placeholder="name &mdash; used in file name &amp; header" autocomplete="off">
         <label>Control</label><select id="t_ctrl" onchange="updateSubs()"><option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Siemens</option></select>
         <label>Tool change position</label><input id="t_tcp" value="G28 U0 W0">
         <label>Program no. (O)</label><input id="t_onum" type="number" value="2003" inputmode="numeric">
@@ -3180,7 +3182,70 @@ function genDrill(){var _op=($('dr_op')?$('dr_op').value:'Drilling');if((window.
 function saveDrill(){if(!lastProg)return;var nm='YANTRA_DRILL_D'+($('dr_d').value||'')+'.'+progExt();var b=new Blob([lastProg],{type:'text/plain'});var u=URL.createObjectURL(b);var x=document.createElement('a');x.href=u;x.download=nm;document.body.appendChild(x);x.click();setTimeout(function(){URL.revokeObjectURL(u);x.remove();},800);}
 function progExt(){try{var cur=document.querySelector('.view.on');if(cur&&cur.id==='prog'&&typeof method!=='undefined'){if(method==='Turn'){var t=$('t_fmt');if(t&&t.value)return t.value;}else if(method==='Mill'){var mm=$('m_fmt');if(mm&&mm.value)return mm.value;}}}catch(e){}var e=$('def_fmt')?$('def_fmt').value:'';return e||'txt';}
 function updateSaveLabels(){var e=(typeof progExt==='function')?progExt():'txt';var b;b=$('savebtn');if(b)b.innerHTML='&#128190;  Save .'+e+' to Downloads';b=$('dr_savebtn');if(b)b.innerHTML='&#128190;  Save .'+e;b=$('job_savebtn');if(b)b.innerHTML='&#128190;  Save job .'+e;}
-function saveProg(){if(!lastProg)return;var D=num('D',16),P=num('P',2),side=$('side').value==='Internal'?'INT':'EXT',mth=method==='Turn'?'TURN':'MILL';var name=('YANTRA_M'+D+'x'+P+'_'+side+'_'+mth+'.'+progExt()).replace(/\s+/g,'');addHist(name,lastProg);var b=new Blob([lastProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},800);}
+function _tn(v){v=Math.round((parseFloat(v)||0)*1000)/1000;return ''+v;}
+function _threadUser(){var tu=$('t_user')?($('t_user').value||'').trim():'';var mu=$('m_user')?($('m_user').value||'').trim():'';if(typeof method!=='undefined'&&method==='Turn')return tu||mu;return mu||tu;}
+function _threadCtrl(){try{if(typeof method!=='undefined'&&method==='Turn'){var t=$('t_ctrl');if(t&&t.value)return t.value;}else{var m=$('ctrl');if(m&&m.value)return m.value;}}catch(e){}return 'Fanuc';}
+function threadDesignation(){
+  var prof=$('profile')?$('profile').value:'';
+  var lbl=$('size')?(($('size').value||'').trim()):'';
+  var D=num('D',0),P=num('P',0);
+  var tpi=(P>0)?(Math.round(25.4/P*100)/100):0;
+  function frac(s){return String(s).replace(/\s*\/\s*/g,' by ').trim();}
+  var b='';
+  if(prof==='ISO Metric'){
+    b=/x/i.test(lbl)?lbl:('M'+_tn(D)+'x'+_tn(P));
+  }else if(prof==='Trapezoidal'){
+    b='M'+_tn(D)+' x '+_tn(P)+'TR';
+  }else if(/NPT/i.test(prof)||/BSPT/i.test(prof)||prof==='NPS'){
+    var nt=/BSPT/i.test(prof)?'BSPT':(prof==='NPS'?'NPS':'NPT');
+    var szn=(lbl.split(/[\s-]/)[0]||lbl);
+    b=frac(szn)+' '+nt;
+  }else if(prof==='UN'||prof==='UNJ'){
+    var t=lbl.replace(/\bUN[CEF]?R?\b/gi,'').replace(/\bJ\b/gi,'').trim();
+    var parts=t.split('-');
+    var sz2=(parts[0]||'').trim();
+    var tp=(parts[1]||'').trim();
+    if(!tp&&tpi)tp=_tn(tpi);
+    b=frac(sz2)+(tp?(' x '+tp+'UN'):' UN');
+  }else{
+    b=lbl?frac(lbl).replace(/\u00d7/g,'x'):('M'+_tn(D)+'x'+_tn(P));
+  }
+  return b;
+}
+function _sanitizeName(s){return String(s).replace(/[<>:"\\|?*]/g,'-').replace(/\//g,' by ').replace(/\u00d7/g,'x').replace(/\s{2,}/g,' ').trim();}
+function threadFileBase(){return _sanitizeName(threadComment())||'YANTRA_THREAD';}
+function threadComment(){var d=threadDesignation();var u=_threadUser();return d+(u?(', '+u):'');}
+function _injectHeader(prog,comment){
+  var lines=String(prog).split('\n');
+  for(var i=0;i<lines.length;i++){
+    var m=lines[i].match(/^(\s*O\d+)\b.*$/i);
+    if(m){lines[i]=m[1]+' ('+comment+')';return lines.join('\n');}
+  }
+  var hd=/Heidenhain/i.test(_threadCtrl());var j=0;while(j<lines.length&&lines[j].trim()==='')j++;
+  lines.splice(j+1,0,hd?('; '+comment):('( '+comment+' )'));return lines.join('\n');
+}
+function threadFooter(){
+  var mill=(typeof method!=='undefined'&&method==='Mill');
+  function selText(id){var e=$(id);if(!e)return '';try{if(e.selectedOptions&&e.selectedOptions[0])return e.selectedOptions[0].text;}catch(_){}return e.value||'';}
+  function v(id){var e=$(id);return e?(''+(e.value||'')):'';}
+  var told=mill?(num('d',0)>0?_tn(num('d',0))+' mm':'-'):'-';
+  var vc=(mill?v('vc'):v('t_vc'))||'-';
+  var fz=mill?(v('fz')||'-'):'-';
+  var passes=(mill?v('passes'):v('t_total'))||'-';
+  var cyc='-';try{if(typeof lastCycleSec!=='undefined'&&lastCycleSec>0)cyc=Math.floor(lastCycleSec/60)+'m '+Math.round(lastCycleSec%60)+'s';}catch(_){}
+  var rows=['Major Dia     : '+_tn(num('D',0))+' mm','Minor Dia     : '+_tn(num('minor',0))+' mm','Tool Dia      : '+told,'Thread Length : '+_tn(num('L',0))+' mm','Material      : '+(selText('mat')||'-'),'Vc            : '+vc+(vc==='-'?'':' m/min'),'Fz            : '+fz+(fz==='-'?'':' mm/tooth'),'Passes        : '+passes,'Cycle Time    : '+cyc];
+  var hd=/Heidenhain/i.test(_threadCtrl());
+  var bar=hd?'; ------------------------------':'( ------------------------------ )';
+  return [bar].concat(rows.map(function(x){return hd?('; '+x):('( '+x+' )');})).join('\n');
+}
+function _appendFooter(prog,footer){
+  var lines=String(prog).split('\n');var idx=-1;
+  for(var i=lines.length-1;i>=0;i--){if(/\bM0?30\b/.test(lines[i])){idx=i;break;}}
+  if(idx<0)for(var j=lines.length-1;j>=0;j--){if(/\bM0?2\b/.test(lines[j])){idx=j;break;}}
+  if(idx<0){lines.push(footer);return lines.join('\n');}
+  lines.splice(idx+1,0,footer);return lines.join('\n');
+}
+function saveProg(){if(!lastProg)return;var base=threadFileBase();var content=_injectHeader(lastProg,threadComment());content=_appendFooter(content,threadFooter());var name=base+'.'+progExt();addHist(name,content);var b=new Blob([content],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},800);}
 function copyProg(){if(navigator.clipboard&&lastProg){navigator.clipboard.writeText(lastProg);$('copybtn').textContent='✓ Copied';setTimeout(function(){$('copybtn').textContent='📋  Copy program';},1500);}}
 function fillSizes(){opt($('d_size'),SERIES[$('d_series').value].map(x=>x[0]));calcData();}
 function _tdStyle(){if(document.getElementById('tdstyle'))return;var s=document.createElement('style');s.id='tdstyle';s.textContent='.tdcard{background:#0e1a26;border:1px solid #2a3f52;border-radius:12px;padding:12px;margin:8px 0}.tdhdr{font-size:12.5px;color:#cfe0ee;margin-bottom:8px;line-height:1.5}.tdh{color:#5fd0ff;font-size:13px;margin:12px 0 4px;border-bottom:1px solid #24384a;padding-bottom:3px}.tdtab{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:6px}.tdtab td,.tdtab th{padding:3px 6px;text-align:left;border-bottom:1px solid #1c2c3a}.tdtab td.b{font-weight:700;color:#e8eef4}.tdtab td.mm{color:#9fc4e6}.tdprof th{color:#8aa2b4;font-size:10.5px;font-weight:600}.tdprof td{font-size:11px;color:#cfe0ee}.tdprof td.st{color:#7f97a8;font-style:italic;font-size:10px}#d_res{display:none}';document.head.appendChild(s);}
