@@ -1316,7 +1316,8 @@ def generate(D, L, P, d, Z, Vc, fz, hand='RH', direction='Bottom to Top',
              entry_feed_reduction=50.0, max_rpm=5000,
              stepped_style='Modified', is_external=False,
              strategy='Standard', entry_angle=0.0,
-             tool_offset_mode='centre', rctf_strength=0.0):
+             tool_offset_mode='centre', rctf_strength=0.0,
+             taper_arcs=4):
     program, _ = _build(D, L, P, d, Z, Vc, fz, hand, direction, mode,
                         num_passes, pcts, repass_pitches, repass_offset,
                         num_teeth, bottom_offset, spindle,
@@ -1327,7 +1328,8 @@ def generate(D, L, P, d, Z, Vc, fz, hand='RH', direction='Bottom to Top',
                         is_external=is_external, strategy=strategy,
                         entry_angle=entry_angle,
                         tool_offset_mode=tool_offset_mode,
-                        rctf_strength=rctf_strength)
+                        rctf_strength=rctf_strength,
+                        taper_arcs=taper_arcs)
     return program
 
 
@@ -1339,7 +1341,8 @@ def cycle_time(D, L, P, d, Z, Vc, fz, hand='RH', direction='Bottom to Top',
                entry_feed_reduction=50.0, max_rpm=5000,
                stepped_style='Modified', is_external=False,
                strategy='Standard', entry_angle=0.0,
-               tool_offset_mode='centre', rctf_strength=0.0):
+               tool_offset_mode='centre', rctf_strength=0.0,
+               taper_arcs=4):
     _, t = _build(D, L, P, d, Z, Vc, fz, hand, direction, mode,
                   num_passes, pcts, repass_pitches, repass_offset,
                   num_teeth, bottom_offset, spindle,
@@ -1350,5 +1353,6 @@ def cycle_time(D, L, P, d, Z, Vc, fz, hand='RH', direction='Bottom to Top',
                   is_external=is_external, strategy=strategy,
                   entry_angle=entry_angle,
                   tool_offset_mode=tool_offset_mode,
-                  rctf_strength=rctf_strength)
+                  rctf_strength=rctf_strength,
+                  taper_arcs=taper_arcs)
     return t

@@ -1,10 +1,27 @@
 """Web glue: replicate main.py post-processing around the engine modules.
 Engine files (thread_mill/thread_turn/mill_post/axis_transform) are unchanged."""
 import re
+import inspect
 import thread_mill, mill_post, axis_transform, face_mill
 
 _EX = ('control', 'safez', 'sx', 'sy', 'sz', 'toolaxis', 'finishing', 'tnum', 'hnum', 'dnum')
 _ORD = re.compile(r'^\((\d+)(?:ST|ND|RD|TH) PASS\)$')
+
+
+def _accepted(fn, kwargs):
+    """Drop kwargs the target function does not accept.
+
+    Guards against an out-of-sync engine file (e.g. an old thread_mill.py that
+    predates a new UI parameter like taper_arcs): rather than raising
+    TypeError, unsupported keys are silently ignored so generation still runs.
+    If the function takes **kwargs, everything is passed through unchanged."""
+    try:
+        params = inspect.signature(fn).parameters
+    except (TypeError, ValueError):
+        return kwargs
+    if any(p.kind == inspect.Parameter.VAR_KEYWORD for p in params.values()):
+        return kwargs
+    return {k: v for k, v in kwargs.items() if k in params}
 
 
 def _gen_kwargs(p):
@@ -39,7 +56,7 @@ def _finishing(prog):
 
 def post_mill(p):
     thread_mill.SAFE_Z = p['safez']
-    prog = thread_mill.generate(**_gen_kwargs(p))
+    prog = thread_mill.generate(**_accepted(thread_mill.generate, _gen_kwargs(p)))
     t = str(int(round(p.get('tnum', 1)))); h = str(int(round(p.get('hnum', 1)))); dd = str(int(round(p.get('dnum', 1))))
     prog = prog.replace('M06 T1', 'M06 T' + t).replace('G43 H1 ', 'G43 H' + h + ' ').replace(' D1 ', ' D' + dd + ' ')
     prog = mill_post.format_for_control(prog, p['control'])
@@ -74,7 +91,7 @@ def post_mill(p):
 
 
 def mill_time(p):
-    return thread_mill.cycle_time(**_gen_kwargs(p))
+    return thread_mill.cycle_time(**_accepted(thread_mill.cycle_time, _gen_kwargs(p)))
 
 
 # --------------------------------------------------------------------------- #
@@ -86,7 +103,7 @@ def _face_kwargs(p):
 
 def post_face(p):
     face_mill.SAFE_Z = p.get('safez', 20)
-    prog = face_mill.generate(**_face_kwargs(p))
+    prog = face_mill.generate(**_accepted(face_mill.generate, _face_kwargs(p)))
     t = str(int(round(p.get('tnum', 1))))
     h = str(int(round(p.get('hnum', 1))))
     dd = str(int(round(p.get('dnum', 1))))
@@ -102,9 +119,9 @@ def post_face(p):
 
 
 def face_time(p):
-    return face_mill.cycle_time(**_face_kwargs(p))
+    return face_mill.cycle_time(**_accepted(face_mill.cycle_time, _face_kwargs(p)))
 
 
 def face_path(p):
     """Tool-centre moves for the simulator: {dia, topZ, moves:[[kind,x,y,z],...]}."""
-    return face_mill.sim_moves(**_face_kwargs(p))
+    return face_mill.sim_moves(**_accepted(face_mill.sim_moves, _face_kwargs(p)))
