@@ -35,7 +35,8 @@ def _build(D, L, P, d, Z, Vc, fz, hand, direction, mode,
            entry_feed_reduction=50.0, max_rpm=5000,
            stepped_style='Modified', is_external=False,
            strategy='Standard', entry_angle=0.0,
-           tool_offset_mode='centre', rctf_strength=0.0):
+           tool_offset_mode='centre', rctf_strength=0.0,
+           taper_arcs=4):
     # U183: Tool-offset mode.
     #
     #   'centre' (default) — cutter dia is baked into orbit-radius math;
@@ -514,29 +515,32 @@ def _build(D, L, P, d, Z, Vc, fz, hand, direction, mode,
                     lines.append(f'{arc} X0.0 Y0.0 Z{fmt(zs*lead)} I{fmt(-A)} J0.0')
             R_end = A
         else:
-            # N4: tapered helix - 4 quarter-arcs per orbit, progressive radius change.
-            # U43: direction of R change depends on helix direction (is_bu) and sign
-            # of dia_taper. Over the whole helix, R goes from R_start to R_end where:
-            #   R_end - R_start = -zs * (dia_taper / 2)
-            # U124: per-quarter Z descent = lead/4 (was P/4) for multi-start.
-            dR_per_quarter = -zs * dia_taper / (n_orbits * 8)
-            dz_q = zs * (lead / 4.0)
+            # N4: tapered helix - segmented arcs per orbit, progressive radius change.
+            # taper_arcs = segments per full turn (4 quarter / 8 eighth / 16
+            # sixteenth arcs).  More segments = smoother cone on tapered (NPT)
+            # threads.  The general trig form below reproduces the exact legacy
+            # 4-quadrant output when taper_arcs == 4 (verified).
+            # U43: direction of R change depends on helix direction (is_bu) and
+            # sign of dia_taper; total R change over the helix = -zs*(dia_taper/2).
+            # U124: per-segment Z descent = lead/segs for multi-start.
+            segs = int(taper_arcs) if int(taper_arcs) in (4, 8, 16) else 4
+            total_segs = n_orbits * segs
+            dR_per_seg = -zs * dia_taper / (total_segs * 2.0)
+            dz_q = zs * (lead / float(segs))
+            sgn = 1.0 if arc == 'G03' else -1.0   # CCW = +angle, CW = -angle
+            def _sn(v):
+                return 0.0 if abs(v) < 1e-9 else v
             R_cur = A
             feed_set = False
-            for q in range(n_orbits * 4):
-                R_nxt = R_cur + dR_per_quarter
-                quad = q % 4
-                if arc == 'G03':   # CCW: +X -> +Y -> -X -> -Y -> +X
-                    if quad == 0:   dX, dY, I, J = -R_cur, +R_nxt,  -R_cur, 0
-                    elif quad == 1: dX, dY, I, J = -R_nxt, -R_cur,  0,      -R_cur
-                    elif quad == 2: dX, dY, I, J = +R_cur, -R_nxt,  +R_cur, 0
-                    else:           dX, dY, I, J = +R_nxt, +R_cur,  0,      +R_cur
-                else:              # G02 CW: +X -> -Y -> -X -> +Y -> +X
-                    # U48: fixed signs on quads 1 and 3.
-                    if quad == 0:   dX, dY, I, J = -R_cur, -R_nxt,  -R_cur, 0
-                    elif quad == 1: dX, dY, I, J = -R_nxt, +R_cur,  0,      +R_cur
-                    elif quad == 2: dX, dY, I, J = +R_cur, +R_nxt,  +R_cur, 0
-                    else:           dX, dY, I, J = +R_nxt, -R_cur,  0,      -R_cur
+            for q in range(total_segs):
+                R_nxt = R_cur + dR_per_seg
+                k = q % segs
+                a0 = sgn * k * (2 * math.pi / segs)
+                a1 = sgn * (k + 1) * (2 * math.pi / segs)
+                sx = _sn(R_cur * math.cos(a0)); sy = _sn(R_cur * math.sin(a0))
+                ex = _sn(R_nxt * math.cos(a1)); ey = _sn(R_nxt * math.sin(a1))
+                dX = _sn(ex - sx); dY = _sn(ey - sy)
+                I = _sn(-sx); J = _sn(-sy)
                 feed_tag = f' F{round(F)}' if not feed_set else ''
                 lines.append(f'{arc} X{fmt(dX)} Y{fmt(dY)} Z{fmt(dz_q)} I{fmt(I)} J{fmt(J)}{feed_tag}')
                 feed_set = True
