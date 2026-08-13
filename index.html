@@ -120,6 +120,7 @@
   .histrow .hm{color:var(--mut);font-size:11.5px;margin-top:3px}
   .histrow .hx{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:16px;cursor:pointer}
 #dr_d:placeholder-shown{background:#ffdede;border-color:#e57373;caret-color:#000}
+#d,#Z,#teeth,#insl{caret-color:#e8edf7}
 .mglabel{color:var(--mut);font-size:11px;font-weight:800;letter-spacing:1.1px;margin:2px 2px 10px}
 .mgrp{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:11px}
 .mgrp.open{border-color:#39566d}
@@ -193,7 +194,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.79 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.81 &middot; 11 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:9px;flex:none"><button id="crumbBack" type="button" onclick="crumbGo()" title="Back" aria-label="Back" style="width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-size:18px;line-height:1;cursor:pointer">&lsaquo;</button><span id="crumbName" style="font-weight:700;color:#cfe0ee;font-size:14.5px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -339,143 +340,124 @@
 .fmwrap .cap{font-size:11px;color:var(--mut)}
 </style>
 <div class="fmwrap">
-  <div class="fmhead"><button type="button" onclick="show('home')">&lsaquo;</button><h3>Face milling &mdash; machining area</h3></div>
-<div class="app">
-    <!-- ============ CONTROLS ============ -->
-    <div>
-      <div class="card">
-        <h2>Machining area</h2>
-        <div class="row"><label>Shape</label>
-          <div class="seg" id="fm_aShape">
-            <button data-v="rect" class="on">Rectangle</button>
-            <button data-v="circle">Circle</button>
-          </div>
-        </div>
-        <div id="fm_aRef" class="row"><label>Reference</label>
-          <div class="seg sm" id="fm_aRefSeg">
-            <button data-v="corner" class="on">Corner</button>
-            <button data-v="center">Center</button>
-          </div>
-        </div>
-        <div class="row"><label id="fm_lblXY">Corner X, Y</label>
-          <input type="number" id="fm_aX" value="0" step="1">
-          <input type="number" id="fm_aY" value="0" step="1">
-        </div>
-        <div class="row" id="fm_rWL"><label>Width X</label><input type="number" id="fm_aW" value="120" step="1"></div>
-        <div class="row" id="fm_rL"><label>Length Y</label><input type="number" id="fm_aL" value="80" step="1"></div>
-        <div class="row" id="fm_rDia" style="display:none"><label>Diameter</label><input type="number" id="fm_aD" value="100" step="1"></div>
-        <div class="row" id="fm_rRot"><label>Rotation°</label><input type="number" id="fm_aR" value="0" step="1"></div>
-      </div>
-
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <h2 style="margin:0">Avoid zones</h2>
-          <button class="btn" id="fm_addAv">+ Add zone</button>
-        </div>
-        <div id="fm_zones"></div>
-        <p class="hint">Tip: click a zone on the preview to select it, then drag to move.</p>
-      </div>
-
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;flex-wrap:wrap;gap:6px">
-          <h2 style="margin:0">Do-not-cross lines</h2>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <button class="btn" id="fm_addLine">+ Add</button>
-            <button class="btn ghost" id="fm_pickEdge">⊹ Pick edge</button>
-            <button class="btn ghost" id="fm_pickDraw">✎ Snap-draw</button>
-          </div>
-        </div>
-        <div id="fm_pickbar" style="display:none"></div>
-        <div id="fm_lines"></div>
-        <p class="hint">An open barrier the toolpath may not cross. Add manually, drag the handles, or <b>pick from the drawing</b> above.</p>
-      </div>
-    </div>
-
-    <!-- ============ PREVIEW + DATA ============ -->
-    <div>
-      <svg id="fm_stage" viewBox="0 0 560 460"></svg>
-      <div class="legend">
-        <span><i class="sw" style="background:rgba(79,140,255,.35);border:1px solid var(--area)"></i> machining area</span>
-        <span><i class="sw" style="background:rgba(255,107,107,.4);border:1px solid var(--avoid)"></i> avoid zone</span>
-        <span><i class="sw" style="background:repeating-linear-gradient(90deg,#ff9f43 0 6px,transparent 6px 10px);border:0;height:3px;border-radius:0"></i> do-not-cross line</span>
-        <span><i class="sw" style="background:var(--ref);border-radius:50%"></i> reference point</span>
-      </div>
-      <div class="card" style="margin-top:6px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <h2 style="margin:0">Data model</h2>
-          <button class="btn ghost" id="fm_copy">Copy JSON</button>
-        </div>
-        <pre id="fm_jsonout"></pre>
-        <p class="cap">This is the structure we'll feed YANTRA. X→right, Y→up, origin = part zero (G54), mm.</p>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:4px">
-      <h2>Cutting</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-        <div>
-          <div style="font-size:11px;letter-spacing:.5px;color:var(--mut);font-weight:700;margin:2px 0 6px">TOOL &amp; SPEEDS</div>
-          <div class="row"><label>Cutter Ø</label><input type="number" id="fmc_D" value="50"></div>
-          <div class="row"><label>RPM</label><input type="number" id="fmc_rpm" value="1200"></div>
-          <div class="row"><label>Feed mm/min</label><input type="number" id="fmc_feed" value="600"></div>
-          <div class="row"><label>Plunge feed</label><input type="number" id="fmc_pf" value="300"></div>
-          <div style="font-size:11px;letter-spacing:.5px;color:var(--mut);font-weight:700;margin:12px 0 6px">DEPTH (Z)</div>
-          <div class="row"><label>Top Z</label><input type="number" id="fmc_topz" value="0"></div>
-          <div class="row"><label>Face Z</label><input type="number" id="fmc_facez" value="-2"></div>
-          <div class="row"><label>Max ap</label><input type="number" id="fmc_ap" value="1"></div>
-          <div class="row"><label>Safe Z</label><input type="number" id="fmc_safez" value="20"></div>
-          <div class="row"><label>Feed plane</label><input type="number" id="fmc_fplane" value="2"></div>
-        </div>
-        <div>
-          <div style="font-size:11px;letter-spacing:.5px;color:var(--mut);font-weight:700;margin:2px 0 6px">PATTERN &amp; STEPOVER</div>
-          <div class="row"><label>Direction</label>
-            <select id="fmc_dir" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px">
-              <option value="bothWays">Both ways (zigzag)</option><option value="climb">One-way climb</option><option value="conventional">One-way conventional</option></select></div>
-          <div class="row"><label>Sweep</label>
-            <select id="fmc_sweep" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px">
-              <option value="auto">Auto (longest side)</option><option value="0">Along X (0°)</option><option value="90">Along Y (90°)</option></select></div>
-          <div class="row"><label>Stepover %Ø</label><input type="number" id="fmc_step" value="70"></div>
-          <div class="row"><label>Pass ext.</label><input type="number" id="fmc_ext" value="2"></div>
-          <div class="row"><label>Avoid clr.</label><input type="number" id="fmc_clr" value="0"></div>
-          <div style="font-size:11px;letter-spacing:.5px;color:var(--mut);font-weight:700;margin:12px 0 6px">FINISH &amp; MACHINE</div>
-          <div class="row"><label>Finish skim</label><label style="width:auto;color:var(--ink)"><input type="checkbox" id="fmc_fin"> leave <input type="number" id="fmc_ffloor" value="0.3" style="width:56px"> mm floor</label></div>
-          <div class="row"><label>Finish %Ø</label><input type="number" id="fmc_fstep" value="50"></div>
-          <div class="row"><label>Control</label>
-            <select id="fmc_ctrl" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px">
-              <option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Haas</option><option>Siemens I &amp; J</option><option>Siemens R</option><option>Heidenhain</option></select></div>
-          <div class="row"><label>Spindle</label>
-            <select id="fmc_sp" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px">
-              <option>M03</option><option>M04</option></select></div>
-          <div class="row"><label>Tool T/H/D</label><input type="number" id="fmc_t" value="1" style="width:33%"><input type="number" id="fmc_h" value="1" style="width:33%"><input type="number" id="fmc_d" value="1" style="width:33%"></div>
-        </div>
-      </div>
-      <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
-        <button class="btn" id="fmc_gen" onclick="genFace()" style="padding:9px 18px;font-size:14px">▶ Generate</button>
-        <span id="fmc_cyc" class="cap"></span>
-      </div>
-      <div id="fmc_out" class="cap" style="margin-top:10px">Set values and press Generate.</div>
-      <div id="fm_block"></div>
-    </div>
-
-    <div class="card" style="margin-top:4px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px">
-        <h2 style="margin:0">Toolpath simulation</h2>
-        <div style="display:flex;gap:8px;align-items:center">
-          <button class="btn" id="fmsim_play" onclick="fmSimPlay()">▶ Play</button>
-          <button class="btn ghost" id="fmsim_reset" onclick="fmSimReset()">↻ Reset</button>
-          <label style="width:auto;color:var(--mut);font-size:12px">speed <input type="range" id="fmsim_spd" min="40" max="1500" value="400" style="width:110px;vertical-align:middle"></label>
-        </div>
-      </div>
-      <canvas id="fmsim" style="width:100%;display:block;background:var(--panel2);border:1px solid var(--line);border-radius:10px;touch-action:none"></canvas>
-      <div class="legend">
-        <span><i class="sw" style="background:rgba(55,211,154,.45)"></i> cut (material removed)</span>
-        <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter (Ø)</span>
-        <span><i class="sw" style="background:var(--avoid);border-radius:50%"></i> avoid</span>
-        <span><i class="sw" style="background:repeating-linear-gradient(90deg,#ff9f43 0 6px,transparent 6px 10px);height:3px;border-radius:0"></i> barrier</span>
-      </div>
-      <p class="hint">Press <b>Generate</b> first, then <b>Play</b>. Green swath = full cutter width; watch it clear the face, hop the avoid zone, and stay off the do-not-cross line.</p>
-    </div>
+  <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2 id="fm_h2">Face milling</h2></div>
+  <div id="fm_modebar" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 12px">
+    <span style="font-size:11px;color:var(--mut);letter-spacing:.6px;font-weight:700">MODE</span>
+    <div class="modeseg"><button type="button" id="fm_pm_sample" class="on" onclick="setFmMode('sample')">&#128218; Sample</button><button type="button" id="fm_pm_new" onclick="setFmMode('new')">&#10133; New</button></div>
+    <span id="fm_pm_hint" class="note" style="margin:0;text-align:left;flex:1;min-width:180px"></span>
   </div>
+
+  <div class="sec"><div class="st" onclick="tog(this)">OPERATION <span>&#9656;</span></div><div class="sb" style="display:none">
+    <p class="note" style="text-align:left">Face milling &mdash; clear a flat area down to a set depth, sweeping the cutter across the face while staying clear of avoid zones and do-not-cross barriers.</p>
+  </div></div>
+
+  <div class="sec open"><div class="st" onclick="tog(this)">PROFILE &mdash; MACHINING AREA <span>&#9662;</span></div><div class="sb">
+    <div class="row"><label>Shape</label>
+      <div class="seg" id="fm_aShape"><button data-v="rect" class="on">Rectangle</button><button data-v="circle">Circle</button></div>
+    </div>
+    <div id="fm_aRef" class="row"><label>Reference</label>
+      <div class="seg sm" id="fm_aRefSeg"><button data-v="corner" class="on">Corner</button><button data-v="center">Center</button></div>
+    </div>
+    <div class="row"><label id="fm_lblXY">Corner X, Y</label><input type="number" id="fm_aX" value="0" step="1"><input type="number" id="fm_aY" value="0" step="1"></div>
+    <div class="row" id="fm_rWL"><label>Width X</label><input type="number" id="fm_aW" value="120" step="1"></div>
+    <div class="row" id="fm_rL"><label>Length Y</label><input type="number" id="fm_aL" value="80" step="1"></div>
+    <div class="row" id="fm_rDia" style="display:none"><label>Diameter</label><input type="number" id="fm_aD" value="100" step="1"></div>
+    <div class="row" id="fm_rRot"><label>Rotation&deg;</label><input type="number" id="fm_aR" value="0" step="1"></div>
+
+    <svg id="fm_stage" viewBox="0 0 560 460" style="margin-top:10px"></svg>
+    <div class="legend">
+      <span><i class="sw" style="background:rgba(79,140,255,.35);border:1px solid var(--area)"></i> machining area</span>
+      <span><i class="sw" style="background:rgba(255,107,107,.4);border:1px solid var(--avoid)"></i> avoid zone</span>
+      <span><i class="sw" style="background:repeating-linear-gradient(90deg,#ff9f43 0 6px,transparent 6px 10px);border:0;height:3px;border-radius:0"></i> do-not-cross line</span>
+      <span><i class="sw" style="background:var(--ref);border-radius:50%"></i> reference point</span>
+    </div>
+
+    <div class="sec"><div class="st" onclick="tog(this)">AVOID ZONES <span>&#9656;</span></div><div class="sb" style="display:none">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:4px"><button class="btn" id="fm_addAv">+ Add zone</button></div>
+      <div id="fm_zones"></div>
+      <p class="hint">Tip: click a zone on the preview to select it, then drag to move.</p>
+    </div></div>
+
+    <div class="sec"><div class="st" onclick="tog(this)">DO-NOT-CROSS LINES <span>&#9656;</span></div><div class="sb" style="display:none">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;margin-bottom:4px">
+        <button class="btn" id="fm_addLine">+ Add</button>
+        <button class="btn ghost" id="fm_pickEdge">&#8759; Pick edge</button>
+        <button class="btn ghost" id="fm_pickDraw">&#9998; Snap-draw</button>
+      </div>
+      <div id="fm_pickbar" style="display:none"></div>
+      <div id="fm_lines"></div>
+      <p class="hint">An open barrier the toolpath may not cross. Add manually, drag the handles, or <b>pick from the drawing</b>.</p>
+    </div></div>
+
+    <div class="sec"><div class="st" onclick="tog(this)">DATA MODEL <span>&#9656;</span></div><div class="sb" style="display:none">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:6px"><button class="btn ghost" id="fm_copy">Copy JSON</button></div>
+      <pre id="fm_jsonout"></pre>
+      <p class="cap">This is the structure fed to YANTRA. X&rarr;right, Y&rarr;up, origin = part zero (G54), mm.</p>
+    </div></div>
+  </div></div>
+
+  <div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9656;</span></div><div class="sb" style="display:none">
+    <div class="row"><label>Cutter &Oslash;</label><input type="number" id="fmc_D" value="50"></div>
+    <div class="row"><label>No. inserts</label><input type="number" id="fmc_teeth" value="5"></div>
+    <div class="row"><label>Spindle</label><select id="fmc_sp" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px"><option>M03</option><option>M04</option></select></div>
+    <div class="row"><label>Coolant</label><select id="fmc_cool" onchange="fmCoolVis()" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px"><option value="M08">M08 flood</option><option value="M07">M07 mist</option><option value="Custom">Custom</option></select></div>
+    <div class="row" id="fmc_coolCustWrap" style="display:none"><label>Custom</label><input type="text" id="fmc_coolcustom" placeholder="e.g. M51"></div>
+    <div class="row"><label>Tool T/H/D</label><input type="number" id="fmc_t" value="1" style="width:33%"><input type="number" id="fmc_h" value="1" style="width:33%"><input type="number" id="fmc_d" value="1" style="width:33%"></div>
+  </div></div>
+
+  <div class="sec"><div class="st" onclick="tog(this)">PARAMETERS <span>&#9656;</span></div><div class="sb" style="display:none">
+    <div class="row"><label>RPM</label><input type="number" id="fmc_rpm" value="1200"></div>
+    <div class="row"><label>Feed mm/min</label><input type="number" id="fmc_feed" value="600"></div>
+    <div class="row"><label>Plunge feed</label><input type="number" id="fmc_pf" value="300"></div>
+    <div class="row"><label>Max ap</label><input type="number" id="fmc_ap" value="1"></div>
+    <div class="row"><label>Finish skim</label><label style="width:auto;color:var(--ink)"><input type="checkbox" id="fmc_fin"> leave <input type="number" id="fmc_ffloor" value="0.3" style="width:56px"> mm floor</label></div>
+    <div class="row"><label>Finish %&Oslash;</label><input type="number" id="fmc_fstep" value="50"></div>
+  </div></div>
+
+  <div class="sec"><div class="st" onclick="tog(this)">CYCLES <span>&#9656;</span></div><div class="sb" style="display:none">
+    <div class="row"><label>Direction</label><select id="fmc_dir" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px"><option value="bothWays">Both ways (zigzag)</option><option value="climb">One-way climb</option><option value="conventional">One-way conventional</option></select></div>
+    <div class="row"><label>Sweep</label><select id="fmc_sweep" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px"><option value="auto">Auto (longest side)</option><option value="0">Along X (0&deg;)</option><option value="90">Along Y (90&deg;)</option></select></div>
+    <div class="row"><label>Stepover %&Oslash;</label><input type="number" id="fmc_step" value="70"></div>
+    <div class="row"><label>Pass ext.</label><input type="number" id="fmc_ext" value="2"></div>
+  </div></div>
+
+  <div class="sec"><div class="st" onclick="tog(this)">POSITIONING <span>&#9656;</span></div><div class="sb" style="display:none">
+    <div class="row"><label>Top Z</label><input type="number" id="fmc_topz" value="0"></div>
+    <div class="row"><label>Face Z</label><input type="number" id="fmc_facez" value="-2"></div>
+    <div class="row"><label>Safe Z</label><input type="number" id="fmc_safez" value="20"></div>
+    <div class="row"><label>Feed plane</label><input type="number" id="fmc_fplane" value="2"></div>
+  </div></div>
+
+  <div class="sec"><div class="st" onclick="tog(this)">CUT SETUP <span>&#9656;</span></div><div class="sb" style="display:none">
+    <div class="row"><label>Avoid clr.</label><input type="number" id="fmc_clr" value="0"></div>
+  </div></div>
+
+  <div class="sec"><div class="st" onclick="tog(this)">MACHINE <span>&#9656;</span></div><div class="sb" style="display:none">
+    <div class="row"><label>Control</label><select id="fmc_ctrl" style="width:100%;background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:13px"><option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Haas</option><option>Siemens I &amp; J</option><option>Siemens R</option><option>Heidenhain</option></select></div>
+  </div></div>
+
+  <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+    <button class="btn" id="fmc_gen" onclick="genFace()" style="padding:9px 18px;font-size:14px">&#9654; Generate</button>
+    <span id="fmc_cyc" class="cap"></span>
+  </div>
+  <div id="fmc_out" class="cap" style="margin-top:10px">Set values and press Generate.</div>
+  <div id="fm_block"></div>
+
+  <div class="sec open" style="margin-top:12px"><div class="st" onclick="tog(this)">TOOLPATH SIMULATION <span>&#9662;</span></div><div class="sb">
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
+      <button class="btn" id="fmsim_play" onclick="fmSimPlay()">&#9654; Play</button>
+      <button class="btn ghost" id="fmsim_reset" onclick="fmSimReset()">&#8635; Reset</button>
+      <label style="width:auto;color:var(--mut);font-size:12px">speed <input type="range" id="fmsim_spd" min="40" max="1500" value="400" style="width:110px;vertical-align:middle"></label>
+    </div>
+    <canvas id="fmsim" style="width:100%;display:block;background:var(--panel2);border:1px solid var(--line);border-radius:10px;touch-action:none"></canvas>
+    <div class="legend">
+      <span><i class="sw" style="background:rgba(55,211,154,.45)"></i> cut (material removed)</span>
+      <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter (&Oslash;)</span>
+      <span><i class="sw" style="background:var(--avoid);border-radius:50%"></i> avoid</span>
+      <span><i class="sw" style="background:repeating-linear-gradient(90deg,#ff9f43 0 6px,transparent 6px 10px);height:3px;border-radius:0"></i> barrier</span>
+    </div>
+    <p class="hint">Press <b>Generate</b> first, then <b>Play</b>.</p>
+  </div></div>
 </div>
 <script>
 
@@ -2308,7 +2290,7 @@ function pPick(){var s=$('psel'),ot=$('pother');var isOther=(s&&s.value==='other
 
 function tpiFill(){var s=$('tpi');if(!s||!s.tagName||s.tagName!=='SELECT')return;s.innerHTML=TPI_LIST.map(function(v){return '<option>'+v+'</option>';}).join('')+'<option>other</option>';}
 function tpiGet(){var s=$('tpi');if(!s)return NaN;if(s.value==='other'){var o=$('tpiother');return o?parseFloat(o.value):NaN;}return parseFloat(s.value);}
-function tpiSet(v){var s=$('tpi');if(!s||s.tagName!=='SELECT')return;var o=$('tpiother');var vr=Math.round(v*1000)/1000;var hit=null;for(var i=0;i<TPI_LIST.length;i++){if(Math.abs(TPI_LIST[i]-vr)<1e-6){hit=TPI_LIST[i];break;}}if(hit!=null){s.value=String(hit);if(o){o.style.display='none';}}else{s.value='other';if(o){o.style.display='';o.value=vr;}}}
+function tpiSet(v){var s=$('tpi');if(!s||s.tagName!=='SELECT')return;var o=$('tpiother');var vr=Math.round(v*1000)/1000;var hit=null,best=1e9;for(var i=0;i<TPI_LIST.length;i++){var dd=Math.abs(TPI_LIST[i]-vr);if(dd<0.05&&dd<best){best=dd;hit=TPI_LIST[i];}}if(hit!=null){s.value=String(hit);if(o){o.style.display='none';}}else{s.value='other';if(o){o.style.display='';o.value=vr;}}}
 function tpiPick(){var s=$('tpi'),ot=$('tpiother');if(ot)ot.style.display=(s&&s.value==='other')?'':'none';var t=tpiGet();if(t>0)$('P').value=r(25.4/t,4);clearD();recalc();recalcT();updateTeeth();setDefaultPasses();fdUpd();sizeFill();sizeChange();}
 function fdUpd(){var pf=$('profile')?$('profile').value:'';var isT=threadIsTPI(pf);var hasList=!!(PROFILES[pf]&&PROFILES[pf].length);var P=$('P'),box=$('fd_tpibox'),pbox=$('fd_pbox'),lb=$('fd_ptlabel');if(P)P.style.display=(!hasList)?'':'none';if(box)box.style.display=(hasList&&isT)?'':'none';if(pbox)pbox.style.display=(hasList&&!isT)?'':'none';if(lb)lb.textContent=isT?'TPI':'Pitch P (mm)';var pitch=isT?((tpiGet()>0)?25.4/tpiGet():0):(parseFloat(P?P.value:'')||0);var dv=$('fd_deriv'),dl=$('fd_derivlabel');if(dv&&dl){if(isT){dl.textContent='Pitch (auto, mm)';dv.value=pitch?r(pitch,3):'';}else{dl.textContent='TPI (auto)';dv.value=pitch>0?r(25.4/pitch,3):'';}}var D=parseFloat(($('D')||{}).value)||0,mn=parseFloat(($('minor')||{}).value)||0,st=parseFloat(($('starts')||{}).value)||1;var d2=(D&&mn)?(D+mn)/2:D;var hx=$('fd_helix');if(hx)hx.value=(pitch>0&&d2>0)?(Math.atan((pitch*st)/(Math.PI*d2))*180/Math.PI).toFixed(2)+'°':'';}
 function sizeFill(){var prof=$('profile')?$('profile').value:'';var list=PROFILES[prof];var sel=$('size');if(!sel)return;if(!list||!list.length){sel.innerHTML='<option>enter D + P manually</option>';sel.disabled=true;return;}sel.disabled=false;var isT=(typeof threadIsTPI==='function')&&threadIsTPI(prof);var cur=isT?tpiGet():parseFloat($('P')?$('P').value:'');var rows=list;if(cur>0){var f=list.filter(function(r){return isT?(Math.abs(25.4/r[1]-cur)<0.1):(Math.abs(r[1]-cur)<0.001);});if(f.length)rows=f;}var prev=sel.value;sel.innerHTML=((typeof progMode!=='undefined'&&progMode==='new')?'<option data-blank="1" value="">— select —</option>':'')+rows.map(function(r){return '<option>'+r[0]+'</option>';}).join('')+'<option>— Manual (enter D + P) —</option>';if(prev){for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===prev){sel.value=prev;break;}}}if(typeof progMode!=='undefined'&&progMode==='new'&&(prev===''||prev==null))sel.value='';}
@@ -2590,7 +2572,7 @@ function faceParams(){
   return {
     area:fm.area, avoid:fm.avoid, noCross:fm.noCross,
     D:v('fmc_D',50), rpm:v('fmc_rpm',1200), feed:v('fmc_feed',600),
-    spindle:s('fmc_sp','M03'), coolant:'M08', control:s('fmc_ctrl','Fanuc I & J'),
+    spindle:s('fmc_sp','M03'), coolant:(function(){var cv=s('fmc_cool','M08');return cv==='Custom'?(((s('fmc_coolcustom','')||'').trim())||'M08'):cv;})(), control:s('fmc_ctrl','Fanuc I & J'),
     tnum:v('fmc_t',1), hnum:v('fmc_h',1), dnum:v('fmc_d',1), toolaxis:'Z-', safez:v('fmc_safez',20),
     entry:{heights:{safeZ:v('fmc_safez',20), feedPlane:v('fmc_fplane',2), retractZ:v('fmc_fplane',2), depthZ:v('fmc_facez',-2)}, plungeFeed:v('fmc_pf',300)},
     depth:{topZ:v('fmc_topz',0), faceZ:v('fmc_facez',-2), mode:'maxAp', maxAp:v('fmc_ap',1), even:true, finishFloorStock:(document.getElementById('fmc_fin').checked?v('fmc_ffloor',0):0)},
@@ -2602,6 +2584,7 @@ function faceParams(){
 }
 function genFace(){
   var out=document.getElementById('fmc_out');
+  if(typeof fmMode!=='undefined'&&fmMode==='new'){var _fm=fmMissing();if(_fm.length){out.textContent='Required for a New program: '+_fm.join(', ')+'. Fill the fields marked in red, then Generate.';try{fmRefreshReq();}catch(e){}return;}}
   if(!pyReady){out.textContent='Engine still loading (first time, ~10–30s) — press Generate again in a moment.';return;}
   var P=faceParams(); if(!P){out.textContent='Area model not ready.';return;}
   try{
@@ -2921,7 +2904,7 @@ function pbRender(ns){var c=PB_CFG[ns];if(!c)return;var host=$(c.host);if(!host)
 }
 function fmSaveProg(){if(!lastFaceProg)return;var b=new Blob([lastFaceProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_FACEMILL.'+((typeof progExt==='function')?progExt():'nc');document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},600);}
 pbReg('dr2',{host:'dr_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof drSim==='function')drSim();},save:function(){if(typeof saveDrill==='function')saveDrill();}});
-pbReg('fm',{host:'fm_block',get:function(){return lastFaceProg||'';},set:function(v){lastFaceProg=v;lastAnyProg=v;},sim:function(){if(typeof fmSimPlay==='function')fmSimPlay();},save:function(){fmSaveProg();}});
+pbReg('fm',{host:'fm_block',get:function(){return lastFaceProg||'';},set:function(v){lastFaceProg=v;lastAnyProg=v;},sim:function(){if(typeof fmSimPlay==='function')fmSimPlay();},save:function(){fmSaveProg();},guard:function(){return (typeof fmMode!=='undefined'&&fmMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
 pbReg('p',{host:'p_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof runSim==='function')runSim();},save:function(){if(typeof saveProg==='function')saveProg();},guard:function(){return progMode==='sample'?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
 pbReg('gv',{host:'gv_block',get:function(){return lastGrooveProg;},set:function(v){lastGrooveProg=v;lastAnyProg=v;var g=$('gcode');if(g)g.textContent=v;},sim:function(){if(typeof gvSim==='function')gvSim();},save:function(){if(typeof gv_saveProg==='function')gv_saveProg();}});
 function toggleEdit(){pbEdit('p');}
@@ -2963,6 +2946,19 @@ function tnPostTurn(prog){try{
 function mCoolVis(){var s=$('mcool');var w=$('mcoolCustWrap');if(w)w.style.display=(s&&s.value==='Custom')?'':'none';}
 function mnMachineSeed(){function sv(id,val){var e=$(id);if(e&&val!=null&&val!=='')e.value=val;}var dc=($('def_ctrl')&&$('def_ctrl').value)||'';var map={'Fanuc':'Fanuc I & J','Siemens':'Siemens I & J','Heidenhain':'Heidenhain','Haas':'Haas'};if(map[dc])sv('ctrl',map[dc]);var ax=($('def_toolaxis')&&$('def_toolaxis').value)||'Z';var dr=($('def_tooldir')&&$('def_tooldir').value)||'-';var taMap={'Z-':'Z- (default)','Z+':'Z+','X-':'X-','X+':'X+','Y-':'Y-','Y+':'Y+'};if(taMap[ax+dr])sv('toolaxis',taMap[ax+dr]);sv('m_tooldir',dr);sv('m_spindledef',($('def_spindle')&&$('def_spindle').value));sv('m_cooldef',($('def_cool')&&$('def_cool').value));sv('m_onum',($('tn_onum')&&$('tn_onum').value));sv('m_fmt',($('def_fmt')&&$('def_fmt').value));}
 function tnPostMill(prog){try{var mc=($('mcode')&&$('mcode').value)||'M03';prog=prog.replace(/(S\d+) \(M03\/M04\)/g,'$1 '+mc);var cv=($('mcool')&&$('mcool').value)||'M08';var coolOn=(cv==='Custom')?((($('mcoolcustom')&&$('mcoolcustom').value)||'').trim()||'M08'):cv;if(coolOn!=='M08')prog=prog.replace(/\bM08\b/g,coolOn);}catch(e){}return prog;}
+/* ---- Face-milling: Sample/New mode + coolant + spindle post-process ---- */
+var fmMode='sample';
+function fmCoolVis(){var s=$('fmc_cool');var w=$('fmc_coolCustWrap');if(w)w.style.display=(s&&s.value==='Custom')?'':'none';}
+function fmShape(){var s=$('fm_aShape');if(!s)return 'rect';var on=s.querySelector('button.on');return on?on.getAttribute('data-v'):'rect';}
+function fmFields(){var a=[['fmc_D','Cutter Ø'],['fmc_teeth','No. inserts'],['fmc_facez','Depth (Face Z)',1]];if(fmShape()==='circle')a.unshift(['fm_aD','Diameter']);else{a.unshift(['fm_aL','Length']);a.unshift(['fm_aW','Width']);}return a;}
+function fmFieldMissing(f){var el=$(f[0]);if(!el)return false;var v=((el.value||'')+'').trim();return f[2]?!(Math.abs(parseFloat(v))>0):!(parseFloat(v)>0);}
+function fmMissing(){var m=[];fmFields().forEach(function(f){if(fmFieldMissing(f))m.push(f[1]);});return m;}
+function fmRefreshReq(){var on=(fmMode==='new');['fm_aW','fm_aL','fm_aD','fmc_D','fmc_teeth','fmc_facez'].forEach(function(id){var el=$(id);if(el)el.classList.remove('reqbad');});if(on){fmFields().forEach(function(f){if(fmFieldMissing(f)){var el=$(f[0]);if(el)el.classList.add('reqbad');}});}}
+function fmClearMandatory(){['fm_aW','fm_aL','fm_aD','fmc_D','fmc_teeth','fmc_facez'].forEach(function(id){var el=$(id);if(el&&el.tagName==='INPUT')el.value='';});}
+function fmSampleDefaults(){var d={fm_aW:'120',fm_aL:'80',fm_aD:'100',fmc_D:'50',fmc_teeth:'5',fmc_facez:'-2'};for(var k in d){var el=$(k);if(el&&!el.value)el.value=d[k];}}
+function setFmMode(m){fmMode=m;var s=$('fm_pm_sample'),n=$('fm_pm_new');if(s)s.classList.toggle('on',m==='sample');if(n)n.classList.toggle('on',m==='new');var h=$('fm_pm_hint');if(m==='new'){fmClearMandatory();if(h)h.textContent='New program — fill the fields marked in red, then Generate and Save.';}else{fmSampleDefaults();if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}try{pbNote('fm','');}catch(e){}fmRefreshReq();}
+function fmPostFace(prog){try{var mc=($('fmc_sp')&&$('fmc_sp').value)||'M03';prog=prog.replace(/(S\d+) \(M03\/M04\)/g,'$1 '+mc);var cv=($('fmc_cool')&&$('fmc_cool').value)||'M08';var coolOn=(cv==='Custom')?((($('fmc_coolcustom')&&$('fmc_coolcustom').value)||'').trim()||'M08'):cv;if(coolOn!=='M08')prog=prog.replace(/\bM08\b/g,coolOn);}catch(e){}return prog;}
+(function initFm(){try{['fm_aW','fm_aL','fm_aD','fmc_D','fmc_teeth','fmc_facez'].forEach(function(id){var el=$(id);if(el){el.addEventListener('input',fmRefreshReq);el.addEventListener('change',fmRefreshReq);}});var sh=$('fm_aShape');if(sh)sh.addEventListener('click',function(){setTimeout(fmRefreshReq,0);});var h=$('fm_pm_hint');if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}catch(e){}})();
 (function initTnSections(){try{['side','D','minor','P'].forEach(function(id){var el=$(id);if(el){el.addEventListener('input',tnAfterGeom);el.addEventListener('change',tnAfterGeom);}});}catch(e){}try{if(typeof spInlineInit==='function')spInlineInit();}catch(e){}try{window.addEventListener('load',function(){try{spInlineInit();}catch(e){}});}catch(e){}})();
 function output(x,extra){lastProg=Array.isArray(x)?x.join('\n'):x;lastAnyProg=lastProg;lastExtra=extra||'';renderProg();if($('copybtn'))$('copybtn').style.display='block';$('savebtn').style.display='block';if($('simbtn'))$('simbtn').style.display='block';if($('editbtn'))$('editbtn').style.display='block';if(typeof updateSaveLabels==='function')updateSaveLabels();if($('addjobbtn'))$('addjobbtn').style.display='block';if($('simcv'))$('simcv').style.display='none';}
 var HKEY='yantra_hist';
