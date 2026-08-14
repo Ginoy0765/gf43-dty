@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YANTRA · Admin</title>
+<style>
+  :root{--bg:#0f1720;--bg2:#16212e;--card:#1b2837;--line:#293a4d;--txt:#e8eef4;--mut:#90a4b8;--acc:#ffb300;--acc2:#29b6f6;--ok:#43d17a;--pro:#ff7043;--radius:14px}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;padding:22px}
+  h1{font-size:20px;margin:0 0 2px;display:flex;align-items:center;gap:10px}
+  .logo{width:34px;height:34px;border-radius:9px;background:#334559;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;box-shadow:inset 3px 0 0 var(--acc)}
+  .sub{color:var(--mut);font-size:12px;margin:0 0 18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px;max-width:900px}
+  .card h2{font-size:14px;margin:0 0 12px;color:#cfe0ee;letter-spacing:.3px}
+  input,button{font:inherit}
+  input{background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:9px 11px;font-size:14px}
+  button{background:var(--acc2);border:0;color:#04121e;font-weight:700;border-radius:8px;padding:9px 15px;cursor:pointer}
+  button.sec{background:var(--bg2);color:var(--txt);border:1px solid var(--line)}
+  button.danger{background:transparent;color:var(--pro);border:1px solid #5a3a30;padding:5px 10px;font-size:12px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:8px 8px;border-bottom:1px solid var(--line)}
+  th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+  code{background:var(--bg2);padding:2px 7px;border-radius:6px;color:#ffd98a;font-size:12.5px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .stat{display:inline-flex;flex-direction:column;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 10px 10px 0;min-width:110px}
+  .stat b{font-size:22px}.stat span{font-size:11px;color:var(--mut)}
+  .bar{height:8px;background:var(--acc2);border-radius:4px;display:inline-block;vertical-align:middle}
+  .muted{color:var(--mut)}.ok{color:var(--ok)}.warn{color:var(--pro)}
+  #app{display:none}
+  .toast{position:fixed;bottom:16px;right:16px;background:#223247;border:1px solid var(--line);padding:10px 14px;border-radius:8px;font-size:13px;opacity:0;transition:.2s}
+</style>
+</head>
+<body>
+  <h1><span class="logo">&#2351;</span> YANTRA · Admin</h1>
+  <p class="sub">Usage &amp; user management. Owner only.</p>
+
+  <!-- login -->
+  <div class="card" id="login">
+    <h2>Owner sign-in</h2>
+    <div class="row">
+      <input id="adminKey" type="password" placeholder="Admin key" style="min-width:260px">
+      <button onclick="signIn()">Open dashboard</button>
+      <span id="loginMsg" class="warn"></span>
+    </div>
+    <p class="sub" style="margin-top:10px">Your admin key is set on the server (YANTRA_ADMIN_KEY). It is stored only in this browser.</p>
+  </div>
+
+  <div id="app">
+    <!-- summary -->
+    <div class="card">
+      <h2>Overview</h2>
+      <div id="stats"><span class="muted">Loading…</span></div>
+      <div style="display:flex;gap:26px;flex-wrap:wrap;margin-top:6px">
+        <div style="flex:1;min-width:240px"><h2>By operation</h2><div id="byOp"></div></div>
+        <div style="flex:1;min-width:240px"><h2>By user</h2><div id="byUser"></div></div>
+      </div>
+    </div>
+
+    <!-- users -->
+    <div class="card">
+      <h2>Users</h2>
+      <div class="row" style="margin-bottom:12px">
+        <input id="uName" placeholder="Name (e.g. Ravi)" style="min-width:180px">
+        <input id="uCode" placeholder="Code (e.g. RAVI-7X2Q)" style="min-width:180px">
+        <button class="sec" onclick="suggest()">Suggest code</button>
+        <button onclick="addUser()">Add user</button>
+        <span id="uMsg" class="ok"></span>
+      </div>
+      <table><thead><tr><th>Name</th><th>Login code</th><th>Added</th><th></th></tr></thead>
+        <tbody id="userRows"><tr><td colspan="4" class="muted">Loading…</td></tr></tbody></table>
+    </div>
+
+    <!-- history -->
+    <div class="card">
+      <h2>Usage history <button class="sec" style="float:right;padding:5px 12px;font-size:12px" onclick="loadAll()">Refresh</button></h2>
+      <table><thead><tr><th>Time (UTC)</th><th>User</th><th>Operation</th><th>Details</th></tr></thead>
+        <tbody id="histRows"><tr><td colspan="4" class="muted">Loading…</td></tr></tbody></table>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+var API="https://yantra-api-461588483016.asia-south1.run.app";
+function key(){ try{return localStorage.getItem('yantra_admin')||''}catch(e){return ''} }
+function toast(t){var e=document.getElementById('toast');e.textContent=t;e.style.opacity=1;setTimeout(function(){e.style.opacity=0},1800);}
+
+async function api(path, opts){
+  opts=opts||{};
+  opts.headers=Object.assign({'Content-Type':'application/json','X-Admin-Key':key()}, opts.headers||{});
+  var r=await fetch(API+path, opts);
+  if(r.status===401){ throw new Error('unauthorized'); }
+  if(!r.ok){ throw new Error('HTTP '+r.status+': '+(await r.text())); }
+  return r.json();
+}
+
+async function signIn(){
+  var k=document.getElementById('adminKey').value.trim();
+  if(!k){return;}
+  try{ localStorage.setItem('yantra_admin',k); }catch(e){}
+  try{
+    await api('/admin/summary');           // validates the key
+    document.getElementById('login').style.display='none';
+    document.getElementById('app').style.display='block';
+    loadAll();
+  }catch(e){
+    document.getElementById('loginMsg').textContent='Wrong admin key.';
+    try{ localStorage.removeItem('yantra_admin'); }catch(_){}
+  }
+}
+
+function esc(s){return String(s==null?'':s).replace(/[&<>]/g,function(m){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[m];});}
+
+function suggest(){
+  var n=(document.getElementById('uName').value||'USER').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6)||'USER';
+  var chars='ABCDEFGHJKMNPQRSTUVWXYZ23456789', r='';
+  for(var i=0;i<4;i++) r+=chars[Math.floor(Math.random()*chars.length)];
+  document.getElementById('uCode').value=n+'-'+r;
+}
+
+async function addUser(){
+  var name=document.getElementById('uName').value.trim();
+  var code=document.getElementById('uCode').value.trim();
+  if(!name||!code){ document.getElementById('uMsg').textContent='Enter name and code.'; return; }
+  try{
+    await api('/admin/users',{method:'POST',body:JSON.stringify({name:name,code:code})});
+    document.getElementById('uName').value=''; document.getElementById('uCode').value='';
+    document.getElementById('uMsg').textContent='Added '+name+' ✓';
+    toast('User added: '+name+'  ('+code+')');
+    loadUsers();
+  }catch(e){ document.getElementById('uMsg').textContent='Failed: '+e.message; }
+}
+
+async function removeUser(code,name){
+  if(!confirm('Remove access for '+name+' ('+code+')?')) return;
+  await api('/admin/users/remove',{method:'POST',body:JSON.stringify({code:code,name:''})});
+  toast('Removed '+name);
+  loadUsers();
+}
+
+async function loadUsers(){
+  var d=await api('/admin/users');
+  var rows=(d.users||[]).map(function(u){
+    return '<tr><td>'+esc(u.name)+'</td><td><code>'+esc(u.code)+'</code></td><td class="muted">'+esc(u.added||'')+
+      '</td><td style="text-align:right"><button class="danger" onclick="removeUser(\''+esc(u.code)+'\',\''+esc(u.name)+'\')">Remove</button></td></tr>';
+  }).join('');
+  document.getElementById('userRows').innerHTML = rows || '<tr><td colspan="4" class="muted">No users yet. Add one above.</td></tr>';
+}
+
+function barBlock(map){
+  var keys=Object.keys(map||{}); if(!keys.length) return '<span class="muted">No activity yet.</span>';
+  var max=Math.max.apply(null,keys.map(function(k){return map[k];}))||1;
+  keys.sort(function(a,b){return map[b]-map[a];});
+  return keys.map(function(k){
+    var w=Math.round(map[k]/max*160)+8;
+    return '<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><span style="width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(k)+
+      '</span><span class="bar" style="width:'+w+'px"></span><b style="margin-left:8px">'+map[k]+'</b></div>';
+  }).join('');
+}
+
+async function loadUsage(){
+  var s=await api('/admin/summary');
+  document.getElementById('stats').innerHTML=
+    '<div class="stat"><b>'+s.total+'</b><span>total generations</span></div>'+
+    '<div class="stat"><b>'+Object.keys(s.by_user||{}).length+'</b><span>active users</span></div>'+
+    '<div class="stat"><b>'+Object.keys(s.by_op||{}).length+'</b><span>operations used</span></div>';
+  document.getElementById('byOp').innerHTML=barBlock(s.by_op);
+  document.getElementById('byUser').innerHTML=barBlock(s.by_user);
+  var h=await api('/admin/usage?limit=500');
+  var rows=(h.events||[]).map(function(e){
+    return '<tr><td class="muted">'+esc(e.when)+'</td><td>'+esc(e.name)+'</td><td>'+esc(e.op)+'</td><td class="muted">'+esc(e.detail||'')+'</td></tr>';
+  }).join('');
+  document.getElementById('histRows').innerHTML = rows || '<tr><td colspan="4" class="muted">No usage yet.</td></tr>';
+}
+
+async function loadAll(){ try{ await loadUsers(); await loadUsage(); }catch(e){ if(e.message==='unauthorized'){ location.reload(); } else { toast(e.message); } } }
+
+// auto sign-in if key already stored
+if(key()){ signIn(); }
+</script>
+</body>
+</html>
