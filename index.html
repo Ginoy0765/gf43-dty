@@ -206,7 +206,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.95 &middot; 18 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.96 &middot; 18 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1370,7 +1370,7 @@
     <div id="peckBox" style="margin-left:24px">
       <div class="row2">
         <div><label>Peck depth (mm)</label><input id="cs_pd" type="number" value="0.5" step="0.05" oninput="gv_recalc()"></div>
-        <div><label>Retract per peck (mm)</label><input id="cs_pr" type="number" value="0.3" step="0.05" oninput="gv_recalc()"></div>
+        <div><label>Retract per peck (mm)</label><input id="cs_pr" type="number" value="0.3" step="0.05" oninput="gv_recalc()"><label>Floor / layer depth (mm, blank = off)</label><input id="cs_floor" type="number" value="" placeholder="off" step="0.5" oninput="gv_recalc()"></div>
       </div>
     </div>
     <div class="row2" style="margin-top:6px">
@@ -3698,7 +3698,7 @@ function generate(P){
       Vc:parseFloat($('p_vc').value)||0, S:parseInt($('p_rpm').value)||0, maxRPM:parseInt($('p_maxrpm').value)||3000,
       Fr:parseFloat($('p_fr').value)||0.08, Ff:parseFloat($('p_ff').value)||0.05,
       pd:parseFloat($('cs_pd').value)||0.5, pr:parseFloat($('cs_pr').value)||0.3, dwell:parseFloat($('p_dw').value)||0,
-      rdoc:parseFloat($('cs_rdoc')?$('cs_rdoc').value:'')||0,
+      rdoc:parseFloat($('cs_rdoc')?$('cs_rdoc').value:'')||0,floor:(function(){var v=parseFloat($('cs_floor')?$('cs_floor').value:'');return isFinite(v)&&v>0?v:0;})(),
       fa:(function(){var v=parseFloat($('gv_fa')?$('gv_fa').value:'');return isFinite(v)&&v>=0?v:0.1;})(),
       plf:(function(){var v=parseFloat($('gv_plf')?$('gv_plf').value:'');return isFinite(v)&&v>0?v:100;})(),
       rtr:parseFloat($('gv_rtr')?$('gv_rtr').value:'')||0,
@@ -3716,7 +3716,7 @@ function generate(P){
     };
   }
   var ctrl=P.ctrl,D1=P.D1,D2=P.D2,Z1=P.Z1,Z2=P.Z2,Wi=P.Wi,rIns=P.rIns,T=P.T,TD=P.TD,Vc=P.Vc,S=P.S,maxRPM=P.maxRPM,Fr=P.Fr,Ff=P.Ff,pd=P.pd,pr=P.pr,dwell=P.dwell,sX=P.sX,sZ=P.sZ,mat=P.mat,strat=P.strat,rf=P.rf,tipPos=P.tipPos,compSet=P.compSet,corners=P.corners;
-  var rdoc=P.rdoc||0;
+  var rdoc=P.rdoc||0;var floor=P.floor||0;
   var fa=(P.fa!=null?P.fa:0.1), plf=(P.plf||100), rtr=P.rtr||0, arcfmt=(P.arcfmt||'R');
   var plungeF=Fr*plf/100;              // radial plunge feed = rough feed x plunge%
   var _rghD2=D2+2*fa;                   // rough floor leaves finish allowance (fa) radial
@@ -3790,12 +3790,32 @@ function generate(P){
         var centers=[];
         for(var iP=0;iP<N_p;iP++)centers.push(zCFirst+iP*actualStep);
         mv.push({t:'cmt', txt:N_p+' plunge(s), step '+actualStep.toFixed(3)+' mm between insert centers'});
-        centers.forEach(function(zc){
-          // centres clamped inside the walls; emit at the offset-reference point
-          var zp=zc - Wi/2 + refOff;
-          mv.push({t:'g0', Z:zp});
-          pluneRough(mv, D1, _rghD2, zp, _retX, pd, pr, plungeF, dwell, peck);
-        });
+        var _totRad=(D1-_rghD2)/2;
+        if(floor>0 && _totRad>floor+1e-6){
+          var _nFloor=Math.ceil(_totRad/floor-1e-9);
+          mv.push({t:'cmt', txt:'Floor roughing: '+_nFloor+' layer(s) x '+floor.toFixed(3)+' mm radial - full width cleared before deeper'});
+          var _xTop=D1;
+          for(var _fl=0;_fl<_nFloor;_fl++){
+            var _radBot=Math.min((_fl+1)*floor,_totRad);
+            var _xBot=D1-2*_radBot;
+            var _xt=_xTop;
+            mv.push({t:'cmt', txt:'-- Floor '+(_fl+1)+'/'+_nFloor+' : clear full width to D'+_xBot.toFixed(3)+' --'});
+            centers.forEach(function(zc){
+              var zp=zc - Wi/2 + refOff;
+              mv.push({t:'g0', Z:zp});
+              mv.push({t:'g0', X:_xt+2});
+              pluneRough(mv, _xt, _xBot, zp, _retX, pd, pr, plungeF, dwell, peck);
+            });
+            _xTop=_xBot;
+          }
+        } else {
+          centers.forEach(function(zc){
+            // centres clamped inside the walls; emit at the offset-reference point
+            var zp=zc - Wi/2 + refOff;
+            mv.push({t:'g0', Z:zp});
+            pluneRough(mv, D1, _rghD2, zp, _retX, pd, pr, plungeF, dwell, peck);
+          });
+        }
       } else if(strat==='plturn'){
         // Plunge-turn roughing: plunge the tailstock-side wall, then turn toward the spindle,
         // stepping down radially by rdoc each level. Insert centres stay Wi/2 inside each wall,
