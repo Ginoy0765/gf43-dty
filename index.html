@@ -206,7 +206,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.99 &middot; 18 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.00 &middot; 18 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -3712,6 +3712,7 @@ function generate(P){
       patMode:(typeof patMode!=='undefined'?patMode:'pitch'),
       strat:(function(){var e=$('gv_strat');return e?e.value:(typeof strat!=='undefined'?strat:'single');})(),
       rf:(function(){var e=$('gv_rf');return e?e.value:(typeof rf!=='undefined'?rf:'both');})(),
+      fin:(function(){var e=$('gv_fin');return e?e.value:(typeof finStrat!=='undefined'?finStrat:'profile');})(),
       peck:($('cs_peck')?$('cs_peck').checked:true), incr:($('cs_incr')?$('cs_incr').checked:false),
       tipPos:($('tl_tip')?$('tl_tip').value:'3'), compSet:($('tl_comp')?$('tl_comp').value:'auto'),
       corners:(function(){var c={};['A','B','C','D'].forEach(function(k){c[k]={t:$(k+'_t').value,s1:parseFloat($(k+'_s1').value)||0,s2:$('indepLegs').checked?(parseFloat($(k+'_s2').value)||0):(parseFloat($(k+'_s1').value)||0)};});return c;})()
@@ -3738,7 +3739,7 @@ function generate(P){
   var stratLabel={single:'Single plunge',multi:'Multi-plunge',plturn:'Plunge turning',ramp:'Ramping'}[strat];
   var offRef=origin, offShift=originShift, offLbl={L:'Left edge (-Z)',C:'Center',R:'Right edge (+Z)'}[offRef];
   var doFin=(rf==='finish'||rf==='both'), doRgh=(rf==='rough'||rf==='both');
-  var peck=(P.peck!==false);
+  var peck=(P.peck!==false);var finKind=(P.fin||"profile");
   // === Build a linear list of moves ===
   var mv=[];
   var _gvCool=(($('def_cool')||{}).value)||'M08',_gvCoolOn=(_gvCool!=='None')?(' '+_gvCool):'';
@@ -3864,7 +3865,9 @@ function generate(P){
     if(doFin){
       // Finish mode from tl_comp: 'off'=baked-in manual nose-R (default), else G41/G42 two half-pass.
       // Manual mode reuses the same gouge-safe groove finish on the derived bounding groove.
-      if(compSet==='auto'||compSet==='G41'||compSet==='G42'){
+      if(finKind==='walls' && compSet==='off' && typeof gvFinishWallsFloor==='function' && gvFinishWallsFloor(mv, D1, D2, z1g, z2g, corners, rIns, Wi, safeX, Ff, refOff)){
+        /* walls-then-floor finish emitted */
+      } else if(compSet==='auto'||compSet==='G41'||compSet==='G42'){
         finishTNRCcomp(mv, D1, D2, z1g, z2g, corners, rIns, Wi, safeX, Ff, refOff, compSet);
       } else if(compSet==='twoblk'){
         finishTwoBlock(mv, D1, D2, z1g, z2g, corners, rIns, Wi, safeX, Ff, refOff);
@@ -4030,6 +4033,38 @@ var TNRC=(function(){
 // Straight walls/floor are flank-cut (offset 0) with the left-corner reference shift
 // (-Wi on the near/right-edge half, 0 on the far/left-edge half); mouth chamfers/rounds are
 // nose-cut (offset R). Base corner is programmed sharp -> the nose forms an R fillet.
+function gvFinishWallsFloor(mv, D1, D2, Z1, Z2, corners, nr, Wi, safeX, F, refOff){
+  // Walls-first, floor-next finish (Sandvik/Siemens/Mazak practice). Sharp corners only;
+  // returns false for chamfer/radius corners or narrow grooves so caller uses the profile pass.
+  var cs=[corners.A,corners.B,corners.C,corners.D];
+  for(var _i=0;_i<cs.length;_i++){var c=cs[_i]; if(c&&c.t&&c.t!=="Sharp"&&(c.s1||0)>0) return false;}
+  if(refOff===undefined)refOff=Wi/2;
+  var zN=Math.max(Z1,Z2), zF=Math.min(Z1,Z2);
+  if((zN-zF) < Wi+2*nr) return false;                 // too narrow: one plunge = profile pass
+  var zNear=zN-Wi+refOff, zFar=zF+refOff, Dtop=D1+2;
+  mv.push({t:"cmt", txt:"Finish - Walls then floor (each wall plunge-finished, then floor turned across; nose R"+nr.toFixed(2)+")"});
+  // ---- NEAR wall ----
+  mv.push({t:"g0", X:safeX});
+  mv.push({t:"g0", Z:zNear});
+  mv.push({t:"g0", X:Dtop});
+  mv.push({t:"g1", X:D2, Z:zNear, F:F});              // plunge-finish near wall to floor
+  mv.push({t:"g1", Z:zNear-0.1, F:F});                // back off finished wall before lifting
+  mv.push({t:"g0", X:safeX});
+  // ---- FAR wall ----
+  mv.push({t:"g0", Z:zFar});
+  mv.push({t:"g0", X:Dtop});
+  mv.push({t:"g1", X:D2, Z:zFar, F:F});               // plunge-finish far wall to floor
+  mv.push({t:"g1", Z:zFar+0.1, F:F});
+  mv.push({t:"g0", X:safeX});
+  // ---- FLOOR (turn far -> near, blends into both finished walls) ----
+  mv.push({t:"g0", Z:zFar});
+  mv.push({t:"g0", X:D2+2});
+  mv.push({t:"g1", X:D2, Z:zFar, F:F});
+  mv.push({t:"g1", X:D2, Z:zNear, F:F});              // TURN across the floor
+  mv.push({t:"g1", X:D2+2*nr, Z:zNear+nr, F:F});      // ramp off the near corner
+  mv.push({t:"g0", X:safeX});
+  return true;
+}
 function finishTNRC(mv, D1, D2, Z1, Z2, corners, nr, Wi, safeX, F, refOff){
   if(refOff===undefined)refOff=Wi/2;
   var rOD=D1/2, rFL=D2/2, zN=Math.max(Z1,Z2), zF=Math.min(Z1,Z2);
