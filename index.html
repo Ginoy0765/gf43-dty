@@ -206,7 +206,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.97 &middot; 18 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v26.99 &middot; 18 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1258,7 +1258,22 @@
     </div></div>
   </div></div>
   <!-- ============ 3. TOOL ============ -->
-  <div class="sec"><div class="st" onclick="gv_toggle(this)">TOOL <span class="caret">&#9656;</span></div><div class="sb">
+  <div class="sec"><div class="st" onclick="gv_toggle(this)">MATERIAL <span class="caret">&#9662;</span></div><div class="sb">
+    <label>Material</label>
+    <select id="gv_mat" onchange="gv_matChange()"></select>
+    <div id="matInfo" style="display:flex;align-items:center;gap:8px;margin-top:8px;margin-bottom:14px">
+      <span id="matChip" style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:800;color:#0a1015">
+        <span id="matIso">P</span>
+      </span>
+      <span style="color:var(--mut);font-size:12.5px">Machinability <b id="matMach" style="color:var(--txt)">78%</b></span>
+      <span style="color:var(--mut);font-size:11px;margin-left:auto">rel. to AISI 1212 = 100%</span>
+    </div>
+  </div></div>
+      <div class="sec"><div class="st" onclick="gv_toggle(this)">TOOL <span class="caret">&#9656;</span></div><div class="sb">
+    <div class="row2">
+      <div><label>Insert width Wi (mm)</label><input id="tl_wi" type="number" value="3" step="0.01"></div>
+      <div><label>Corner radius r (mm)</label><input id="tl_rc" type="number" value="0.2" step="0.01"></div>
+    </div>
     <div class="row2">
       <div><label>Tool number (T)</label><input id="tl_num" type="number" value="6"></div>
       <div><label>Offset (D)</label><input id="tl_off" type="number" value="6"></div>
@@ -1267,15 +1282,12 @@
       <div><label>Spindle direction</label><select id="gv_sdir" onchange="gv_recalc()"><option value="M03">M03 (CW)</option><option value="M04">M04 (CCW)</option></select></div>
       <div></div>
     </div>
-    <div class="row2">
-      <div><label>Insert width Wi (mm)</label><input id="tl_wi" type="number" value="3" step="0.01"></div>
-      <div><label>Corner radius r (mm)</label><input id="tl_rc" type="number" value="0.2" step="0.01"></div>
-    </div>
+    
     <div>
       <label>Offset position (which point of the cutting edge is touched off)</label>
       <select id="tl_off_ref" onchange="drawInsertRef();recalc();">
-        <option value="L">Left of cutting edge (&minus;Z corner)</option>
-        <option value="C" selected>Center of cutting edge</option>
+        <option value="L" selected>Left of cutting edge (&minus;Z corner)</option>
+        <option value="C">Center of cutting edge</option>
         <option value="R">Right of cutting edge (+Z corner)</option>
       </select>
     </div>
@@ -1341,30 +1353,23 @@
     </div>
     </div></div>
   <!-- ============ PARAMETERS ============ -->
-  <div class="sec"><div class="st" onclick="gv_toggle(this)">PARAMETERS <span class="caret">&#9656;</span></div><div class="sb">
-    <label>Material</label>
-    <select id="gv_mat" onchange="gv_matChange()"></select>
-    <div id="matInfo" style="display:flex;align-items:center;gap:8px;margin-top:8px;margin-bottom:14px">
-      <span id="matChip" style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:800;color:#0a1015">
-        <span id="matIso">P</span>
-      </span>
-      <span style="color:var(--mut);font-size:12.5px">Machinability <b id="matMach" style="color:var(--txt)">78%</b></span>
-      <span style="color:var(--mut);font-size:11px;margin-left:auto">rel. to AISI 1212 = 100%</span>
-    </div>
-    <div class="row3">
-      <div><label>Vc (m/min)</label><input id="p_vc" type="number" value="120" step="1" oninput="gv_recalc()"></div>
-      <div><label>RPM (auto)</label><input id="p_rpm" type="number" value="1194" step="1" style="color:var(--acc);font-weight:700" readonly></div>
-      <div><label>Max RPM</label><input id="p_maxrpm" type="number" value="3000" step="100"></div>
-    </div>
+  <div class="sec"><div class="st" onclick="gv_toggle(this)">CYCLES <span class="caret">&#9662;</span></div><div class="sb">
+    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">STRATEGY</div>
     <div class="row2">
-      <div><label>Rough feed (mm/rev)</label><input id="p_fr" type="number" value="0.08" step="0.001" oninput="gv_recalc()"></div>
-      <div><label>Finish feed (mm/rev)</label><input id="p_ff" type="number" value="0.05" step="0.001" oninput="gv_recalc()"></div>
+      <div><label style="margin-top:0">Roughing strategy</label>
+        <select id="gv_strat" onchange="gv_selset('strat',this.value)">
+          <option value="single">Single plunge</option>
+          <option value="multi" selected>Multi-plunge</option>
+          <option value="plturn">Plunge turning</option>
+          <option value="ramp">Ramping</option>
+        </select></div>
+      <div><label style="margin-top:0">Finishing strategy</label>
+        <select id="gv_fin" onchange="gv_selset('fin',this.value)">
+          <option value="profile">Profile pass</option>
+          <option value="walls" selected>Walls-then-floor</option>
+        </select></div>
     </div>
-    <div class="row2">
-      <div><label>Dwell at bottom (rev)</label><input id="p_dw" type="number" value="0.5" step="0.1" oninput="gv_recalc()"></div>
-      <div></div>
-    </div>
-  
+    <div class="hint keep" id="stratHint" style="margin:4px 0 8px">Recommended strategy updates automatically based on the groove geometry.</div>
     <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">PECK / OUTPUT</div>
     <label class="chkrow"><input type="checkbox" id="cs_peck" onchange="gv_recalc()" checked> Peck the plunge</label>
     <div id="peckBox" style="margin-left:24px">
@@ -1380,33 +1385,6 @@
     <div class="hint">Radial depth of cut per turning pass in <b>Plunge-turning</b> roughing (plunge tailstock wall, turn toward spindle). Blank = use peck depth.</div>
     <label class="chkrow"><input type="checkbox" id="cs_incr" onchange="gv_recalc()"> Incremental output (U/W after start point)</label>
     <div class="hint">First positioning move stays absolute (X/Z); all following moves are emitted as incremental U/W deltas. Fanuc-style controls only &mdash; Siemens/Heidenhain stay absolute.</div>
-    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">STRATEGY</div>
-    <div class="row2">
-      <div><label style="margin-top:0">Roughing strategy</label>
-        <select id="gv_strat" onchange="gv_selset('strat',this.value)">
-          <option value="single">Single plunge</option>
-          <option value="multi">Multi-plunge</option>
-          <option value="plturn">Plunge turning</option>
-          <option value="ramp">Ramping</option>
-        </select></div>
-      <div><label style="margin-top:0">Finishing strategy</label>
-        <select id="gv_fin" onchange="gv_selset('fin',this.value)">
-          <option value="profile">Profile pass</option>
-          <option value="walls">Walls-then-floor</option>
-        </select></div>
-    </div>
-    <div class="hint keep" id="stratHint" style="margin:4px 0 8px">Recommended strategy updates automatically based on the groove geometry.</div>
-
-  </div></div>
-<!-- ============ 6. POSITIONING (approach/retract) ============ -->
-  <div class="sec"><div class="st" onclick="gv_toggle(this)">POSITIONING <span class="caret">&#9656;</span></div><div class="sb">
-    <div class="row2">
-      <div><label>Safe X1</label><input id="pos_sx" type="number" value="5" step="0.1" oninput="gv_recalc()"></div>
-      <div><label>Safe Z1</label><input id="pos_sz" type="number" value="3" step="0.1" oninput="gv_recalc()"></div>
-    </div>
-  </div></div>
-  <!-- ============ 7. CUT SETUP (peck / chip break) ============ -->
-  <div class="sec"><div class="st" onclick="gv_toggle(this)">CUT SETUP <span class="caret">&#9656;</span></div><div class="sb">
     <div class="row2">
       <div><label>Finish allowance (mm)</label><input id="gv_fa" type="number" value="0.1" step="0.02" oninput="gv_recalc()"></div>
       <div><label>Plunge feed %</label><input id="gv_plf" type="number" value="100" step="5" oninput="gv_recalc()"></div>
@@ -1417,6 +1395,30 @@
     </div>
     <div class="hint">Finish allowance = radial stock left by roughing for the finish pass. Plunge feed % scales the radial plunge feed. Retract clearance = &#216; above the groove to rapid between plunges (blank = Safe X). Arc output = R word or I,K centre for finish arcs.</div>
   </div></div>
+      <div class="sec"><div class="st" onclick="gv_toggle(this)">PARAMETERS <span class="caret">&#9656;</span></div><div class="sb">
+    <div class="row3">
+      <div><label>Vc (m/min)</label><input id="p_vc" type="number" value="120" step="1" oninput="gv_recalc()"></div>
+      <div><label>RPM (auto)</label><input id="p_rpm" type="number" value="1194" step="1" style="color:var(--acc);font-weight:700" readonly></div>
+      <div><label>Max RPM</label><input id="p_maxrpm" type="number" value="3000" step="100"></div>
+    </div>
+    <div class="row2">
+      <div><label>Rough feed (mm/rev)</label><input id="p_fr" type="number" value="0.08" step="0.001" oninput="gv_recalc()"></div>
+      <div><label>Finish feed (mm/rev)</label><input id="p_ff" type="number" value="0.05" step="0.001" oninput="gv_recalc()"></div>
+    </div>
+    <div class="row2">
+      <div><label>Dwell at bottom (rev)</label><input id="p_dw" type="number" value="0.5" step="0.1" oninput="gv_recalc()"></div>
+      <div></div>
+    </div>
+  </div></div>
+<!-- ============ 6. POSITIONING (approach/retract) ============ -->
+  <div class="sec"><div class="st" onclick="gv_toggle(this)">POSITIONING <span class="caret">&#9656;</span></div><div class="sb">
+    <div class="row2">
+      <div><label>Safe X1</label><input id="pos_sx" type="number" value="5" step="0.1" oninput="gv_recalc()"></div>
+      <div><label>Safe Z1</label><input id="pos_sz" type="number" value="3" step="0.1" oninput="gv_recalc()"></div>
+    </div>
+  </div></div>
+  <!-- ============ 7. CUT SETUP (peck / chip break) ============ -->
+  
   <!-- ============ MACHINE ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">MACHINE <span class="caret">&#9656;</span></div><div class="sb">
     <div class="hint" style="margin-bottom:8px">Seeded from <b>Defaults</b>. Edit here to override for this operation only.</div>
@@ -3787,8 +3789,16 @@ function generate(P){
         var span=zCLast-zCFirst;
         var N_p=(span<=0.001)?1:Math.max(2, Math.ceil(span/step)+1);
         var actualStep=(N_p>1)?span/(N_p-1):0;
+        // Wear jitter: nudge interior plunges by a deterministic, bounded amount so the
+        // same edge point is not always the leading cusp corner. Bound = min(0.25*r, slack/2)
+        // keeps overlap >= 2*r (no uncut cusp). Deterministic (golden-ratio) => same program each run.
+        var _jit=Math.max(0, Math.min(0.25*rIns, (step-actualStep)/2));
         var centers=[];
-        for(var iP=0;iP<N_p;iP++)centers.push(zCFirst+iP*actualStep);
+        for(var iP=0;iP<N_p;iP++){
+          var _zc=zCFirst+iP*actualStep;
+          if(iP>0 && iP<N_p-1 && _jit>1e-4){ var _fr=((iP*0.6180339887498949)%1); _zc+=(_fr-0.5)*2*_jit; }
+          centers.push(_zc);
+        }
         mv.push({t:'cmt', txt:N_p+' plunge(s), step '+actualStep.toFixed(3)+' mm between insert centers'});
         var _totRad=(D1-_rghD2)/2;
         if(floor>0 && _totRad>floor+1e-6){
