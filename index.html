@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.25 &middot; 20 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.27 &middot; 20 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -2475,7 +2475,7 @@ function _autoToolLabel(v){return ({single:'1 — single teeth','3m03':'3 teeth 
 function _autoHint(msg){var h=$('autoHint');if(h)h.innerHTML=msg;}
 function _autoBtn(){var b=$('autoBtn');if(!b)return;b.classList.toggle('on',!!autoActive);b.textContent=autoActive?'AUTO ✓':'AUTO';}
 function _autoSave(){try{localStorage.setItem('yantra_auto',JSON.stringify({on:autoActive,req:(($('autoReq')||{}).value)||'std',tool:(($('autoTool')||{}).value)||'single',xbd:!!($('autoXbd')&&$('autoXbd').checked),xbdv:(($('autoXbdVal')||{}).value)||''}));}catch(e){}}
-var AUTO_LOCK_ALL=['teeth','path','dir','stab','brepass','repp','repoff','mcode','thtaper','diadiff','taperdeg','engred'];
+var AUTO_LOCK_ALL=['teeth','path','dir','stab','mcode','thtaper','diadiff','taperdeg','engred'];
 function _autoLock(lockIds){AUTO_LOCK_ALL.forEach(function(id){var e=$(id);if(!e)return;var dis=!!(lockIds&&lockIds.indexOf(id)>=0);e.disabled=dis;e.style.opacity=dis?'0.55':'';e.style.cursor=dis?'not-allowed':'';});}
 function applyAuto(){
   if(!autoActive)return;
@@ -2485,28 +2485,19 @@ function applyAuto(){
   var req=_autoReqName();
   var isLH=((($('hand')||{}).value)==='LH');var isExt=((($('side')||{}).value)==='External');
   var dirXOR=((((isLH?1:0)+(isExt?1:0))%2)===0)?'Bottom to Top':'Top to Bottom';
-  var mach=_autoMach();var hardMat=(mach!=null&&mach<SS316_MACH);
   var stab=(req==='Productivity')?100:50;
   var xbd=!!($('autoXbd')&&$('autoXbd').checked);var xbdV=parseFloat(($('autoXbdVal')||{}).value)||0;
-  var teeth=1,mcode=null,dir=dirXOR,engred=null,brepass=false,repp=1,repoff=0,repassNote='';
+  var teeth=1,mcode=null,dir=dirXOR,engred=null;
   if(tool==='single'){
     teeth=1;dir=dirXOR;
-    brepass=(req==='Difficult'||hardMat);repp=1;repoff=0;if(brepass&&!(parseFloat(($('repoff')||{}).value)>0))repoff=0.03;
-    repassNote=brepass?(hardMat&&req!=='Difficult'?'1 repass (hard material)':(req==='Difficult'?'1 repass (difficult)':'1 repass')):'no repass';
   } else if(tool==='3m03'){
-    teeth=3;mcode='M03';dir=dirXOR;engred=50;brepass=true;
-    var _Pmm=num('P',1)||1,_Lmm=num('L',0)||0;repp=Math.max(1,Math.round(_Lmm/_Pmm)-4-teeth);
-    repoff=(xbd&&xbdV>0)?xbdV:0;
-    repassNote='bottom repass '+repp+' pitches (L\u22124\u2212teeth)'+(repoff>0?(' \u00b7 +'+repoff+' mm dia'):' \u00b7 0 dia');
+    teeth=3;mcode='M03';dir=dirXOR;engred=50;
   } else {
     teeth=3;mcode='M04';dir=dirXOR;
-    brepass=(req==='Difficult'||hardMat);repp=1;repoff=(xbd&&xbdV>0)?xbdV:0;
-    repassNote=brepass?'1 repass':'no repass';
   }
   _tmSetV('teeth',teeth);_tmSetV('path','Helical');_tmSetV('dir',dir);if(mcode)_tmSetV('mcode',mcode);if(engred!=null)_tmSetV('engred',engred);
   _tmSetV('stab',stab);
-  if(brepass){_tmSetV('brepass','Yes');_tmSetV('repp',repp);_tmSetV('repoff',repoff);}else{_tmSetV('brepass','No');}
-  var lockIds=['teeth','path','dir','stab','brepass','repp','repoff'];if(mcode)lockIds.push('mcode');if(engred!=null)lockIds.push('engred');
+  var lockIds=['teeth','path','dir','stab'];if(mcode)lockIds.push('mcode');if(engred!=null)lockIds.push('engred');
   var xbdTaper=false;
   if(tool==='single'){
     if(!isExt){ if(xbd&&xbdV>0){_tmSetV('thtaper','Manual');_tmSetV('taperdeg',0);_tmSetV('diadiff',xbdV);xbdTaper=true;}else{_tmSetV('thtaper','None');_tmSetV('diadiff',0);} lockIds.push('thtaper','diadiff','taperdeg'); }
@@ -2517,15 +2508,15 @@ function applyAuto(){
   _autoLock(lockIds);
   var extra='';
   if(tool==='single'){extra=xbdTaper?(', extra bottom dia +'+xbdV+' mm (taper)'):(isExt?', external: taper manual':'');}
-  else {extra=(engred!=null?', 50% entry feed':'')+((xbd&&xbdV>0)?(', bottom dia +'+xbdV+' mm (bigger thread, no taper)'):'');}
-  _autoHint('<b>'+req+' · '+_autoToolLabel(tool)+'</b> — '+dir+(mcode?(' · '+mcode):'')+', stability '+stab+'%, '+repassNote+extra+'. Passes &amp; parameters: default.');
+  else {extra=(engred!=null?', 50% entry feed':'');}
+  _autoHint('<b>'+req+' · '+_autoToolLabel(tool)+'</b> — '+dir+(mcode?(' · '+mcode):'')+', stability '+stab+'%'+extra+'. Bottom repass: set manually (Repass yes/no, pitches, offset dia are not touched by AUTO). Passes &amp; parameters: default.');
 }
 function openAuto(){var m=$('autoModal');if(!m)return;m.style.display='flex';if(autoActive)applyAuto();else _autoHint('Pick requirement + tool type, then Apply to override tool, cycle &amp; parameters.');}
 function closeAuto(){var m=$('autoModal');if(m)m.style.display='none';}
 function autoApply(){autoActive=true;_autoSave();applyAuto();_autoBtn();setTimeout(closeAuto,120);}
 function _autoManualDefaults(){
   _tmSetV('teeth',1);_tmSetV('path','Helical');_tmSetV('dir','Top to Bottom');_tmSetV('stab',50);
-  _tmSetV('mcode','M03');_tmSetV('engred',0);_tmSetV('brepass','No');_tmSetV('repp',1);_tmSetV('repoff',0);
+  _tmSetV('mcode','M03');_tmSetV('engred',0);
   _tmSetV('thtaper','None');_tmSetV('diadiff',0);_tmSetV('taperdeg',0);
   try{updateSubs();}catch(e){}try{matChange();}catch(e){}try{recalc();}catch(e){}try{renderPassPcts();}catch(e){}try{fdUpd();}catch(e){}
 }
@@ -2936,7 +2927,7 @@ async function genMill(){
     prog=tnPostMill(prog);prog=tnMillPattern(prog);
     prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
-    var _np=(typeof pcts!=='undefined'&&pcts)?pcts.length:0;var _mp=['CT '+mm+'m '+ss+'s','Vc '+Vc,'Fz '+fz,_np+' pass'+(_np==1?'':'es')];if(brepass){_mp.push('Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p');var _ro=num('repoff',0);if(_ro>0)_mp.push('+'+_ro+' mm dia');}$('cyc').innerHTML='<div class="cyc">'+_mp.join(' &middot; ')+'</div>';
+    var _np=(typeof pcts!=='undefined'&&pcts)?pcts.length:0;var _mp=['CT '+mm+'m '+ss+'s','Vc '+Vc,'Fz '+(+fz).toFixed(3),_np+' pass'+(_np==1?'':'es')];if(brepass){_mp.push('Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p');var _ro=num('repoff',0);if(_ro>0)_mp.push('+'+_ro+' mm dia');}$('cyc').innerHTML='<div class="cyc">'+_mp.join(' &middot; ')+'</div>';
     output(prog,'');
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
@@ -4085,7 +4076,7 @@ function generate(P){
       _cx=_nx;_cz=_nz;
     }
     var _gmn=Math.floor(_sec/60),_gsc=Math.round(_sec%60);
-    var _cp=['CT '+_gmn+'m '+_gsc+'s','Vc '+Vc,'Fz '+Fr,'Plunge '+pd+' mm'];
+    var _cp=['CT '+_gmn+'m '+_gsc+'s','Vc '+Vc,'Fz '+(+Fr).toFixed(3),'Plunge '+pd+' mm'];
     _cp.push(floor>0?('Floor '+floor+' mm'):'Floor off');
     if($('gv_cyc'))$('gv_cyc').innerHTML='<div class="cyc">'+_cp.join(' &middot; ')+'</div>';
   }catch(e){}
