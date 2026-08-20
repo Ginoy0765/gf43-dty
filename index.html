@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.31 &middot; 20 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.32 &middot; 20 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -958,7 +958,9 @@
         <div id="mTaper" style="display:none"><label>Taper degree</label><input id="taperdeg" type="number" value="0" inputmode="decimal"><label>Dia diff at end of thread (mm)</label><input id="diadiff" type="number" value="0" inputmode="decimal"></div>
         <label>Bottom repass</label><select id="brepass" onchange="updateSubs()"><option>No</option><option>Yes</option></select>
         <div id="repWrap" style="display:none"><div class="row2"><div><label>Repass threads (pitches)</label><input id="repp" type="number" value="1" inputmode="numeric"></div><div><label>Repass offset dia (mm)</label><input id="repoff" type="number" value="0" inputmode="decimal"></div></div></div>
-        
+        <label>Full repass</label><select id="frepass" onchange="updateSubs()"><option>No</option><option>Yes</option></select>
+        <div id="frepWrap" style="display:none"><div class="row2"><div><label>Full repass pitches</label><input id="frepp" type="number" value="0" inputmode="numeric" readonly style="color:var(--acc);background:#101a25"></div><div><label>Full repass bottom dia + (mm)</label><input id="fdia" type="number" value="0" inputmode="decimal"></div></div></div>
+
         <label>Subprogram (M99, no tool call)</label><select id="subprog"><option>No</option><option>Yes</option></select>
       </div></div>
       <div class="sec mill-only"><div class="st" onclick="tog(this)">PATTERN <span>&#9656;</span></div><div class="sb" style="display:none">
@@ -2507,25 +2509,28 @@ function applyAuto(){
   if(tool!=='single'){
     _tmSetV('thtaper','None');_tmSetV('diadiff',0);lockIds.push('thtaper','diadiff','taperdeg');
   }
-  _tmSetV('brepass',repassOn?'Yes':'No');
-  if(repassOn&&tool==='3m03'){
-    var _Pmm=num('P',1)||1,_Lmm=num('L',0)||0;
-    _tmSetV('repp',Math.max(1,Math.round(_Lmm/_Pmm)-4-teeth));
+  /* Bottom repass (brepass/repp/repoff) is 100% manual \u2014 AUTO never sets or locks it, for any tool type. */
+  _tmSetV('frepass',repassOn?'Yes':'No');
+  if(repassOn){
+    var _Pmm2=num('P',1)||1,_Lmm2=num('L',0)||0;
+    _tmSetV('frepp',Math.max(1,Math.round(_Lmm2/_Pmm2)));
+  } else {
+    _tmSetV('frepp',0);
   }
-  /* repp/repoff otherwise left exactly as the cycle cells already have them \u2014 not locked, so manual entries always stick */
+  /* frepp is AUTO-computed (full thread length in pitches) whenever frepass is on \u2014 not a manual field. fdia (bottom dia+) is a separate manual addition, never touched by AUTO. */
   try{matChange();}catch(e){}try{updateSubs();}catch(e){}try{if(typeof updateTeeth==='function')updateTeeth();}catch(e){}try{recalc();}catch(e){}try{renderPassPcts();}catch(e){}try{fdUpd();}catch(e){}
   _autoLock(lockIds);
   var extra=(engred!=null?', 50% entry feed':'');
-  var repassNote=repassOn?(hardMat&&req!=='Difficult'?'1 repass (hard material)':'1 repass (difficult)'):'no repass';
+  var repassNote=repassOn?'full repass added (Difficult/below-SS316)':'no full repass';
   var teethNote=(teeth==null)?' \u00b7 teeth = insert length \u00f7 pitch':'';
-  _autoHint('<b>'+req+' \u00b7 '+_autoToolLabel(tool)+'</b> \u2014 '+path+' \u00b7 '+dir+(mcode?(' \u00b7 '+mcode):'')+teethNote+', stability '+stab+'%'+extra+', '+repassNote+'. Repass pitches/offset and Thread taper/Dia diff: set manually (not locked by AUTO). Passes &amp; parameters: default.');
+  _autoHint('<b>'+req+' \u00b7 '+_autoToolLabel(tool)+'</b> \u2014 '+path+' \u00b7 '+dir+(mcode?(' \u00b7 '+mcode):'')+teethNote+', stability '+stab+'%'+extra+', '+repassNote+'. Bottom repass (Cycles) and full-repass bottom dia+: separate, always manual. Thread taper/Dia diff: set manually (not locked by AUTO). Passes &amp; parameters: default.');
 }
 function openAuto(){var m=$('autoModal');if(!m)return;m.style.display='flex';if(autoActive)applyAuto();else _autoHint('Pick requirement + tool type, then Apply to override tool, cycle &amp; parameters.');}
 function closeAuto(){var m=$('autoModal');if(m)m.style.display='none';}
 function autoApply(){autoActive=true;_autoSave();applyAuto();_autoBtn();setTimeout(closeAuto,120);}
 function _autoManualDefaults(){
   _tmSetV('teeth',1);_tmSetV('path','Helical');_tmSetV('dir','Top to Bottom');_tmSetV('stab',50);
-  _tmSetV('mcode','M03');_tmSetV('engred',0);_tmSetV('brepass','No');
+  _tmSetV('mcode','M03');_tmSetV('engred',0);_tmSetV('frepass','No');_tmSetV('frepp',0);
   _tmSetV('thtaper','None');_tmSetV('diadiff',0);_tmSetV('taperdeg',0);
   try{updateSubs();}catch(e){}try{matChange();}catch(e){}try{recalc();}catch(e){}try{renderPassPcts();}catch(e){}try{fdUpd();}catch(e){}
 }
@@ -2555,6 +2560,7 @@ function updateSubs(){
   var t2=$('t_thtaper');if(t2&&$('tTaper'))$('tTaper').style.display=(t2.value==='Manual')?'block':'none';
   var inf=$('t_infeed');if(inf&&$('tFlank'))$('tFlank').style.display=(inf.value==='Radial')?'none':'block';
   var bp=$('brepass');if(bp&&$('repWrap'))$('repWrap').style.display=(bp.value==='Yes')?'block':'none';
+  var fp=$('frepass');if(fp&&$('frepWrap'))$('frepWrap').style.display=(fp.value==='Yes')?'block':'none';
   var szx=$('startxyz');if(szx&&$('startWrap'))$('startWrap').style.display=(szx.value==='Yes')?'block':'none';
   var tf=$('toff');if(tf&&$('toffWrap'))$('toffWrap').style.display=(tf.value==='Yes')?'block':'none';
   var ttf=$('t_toff');if(ttf&&$('ttoffWrap'))$('ttoffWrap').style.display=(ttf.value==='Yes')?'block':'none';
@@ -2918,10 +2924,12 @@ async function genMill(){
   var tax=LOCK_ADV?'Z-':($('toolaxis')?$('toolaxis').value:'Z-');tax=tax.indexOf('Z-')===0?'Z-':tax;
   var toff=LOCK_ADV?0:taperOffset(internal,L);
   var brepass=(!LOCK_ADV)&&$('brepass').value==='Yes';
+  var frepass=(!LOCK_ADV)&&$('frepass')&&$('frepass').value==='Yes';
   var toolOD=(!LOCK_ADV)&&($('toolpath')&&$('toolpath').value.indexOf('OD')>=0);var toffY=$('toff').value==='Yes';
   var pcts=buildPcts();
   var P0={D:D,L:L,P:P,d:d,Z:num('Z',1),Vc:Vc,fz:fz,hand:$('hand').value,direction:$('dir').value,mode:$('path').value,
-    num_passes:pcts.length,pcts:pcts,repass_pitches:(brepass?Math.max(1,Math.round(num('repp',1))):0),repass_offset:num('repoff',0),num_teeth:teeth,
+    num_passes:pcts.length,pcts:pcts,repass_pitches:(brepass?Math.max(1,Math.round(num('repp',1))):0),repass_offset:num('repoff',0),
+    full_repass_pitches:(frepass?Math.max(1,Math.round(num('frepp',1))):0),full_repass_offset:(($('fdia')&&num('fdia',0))||0),num_teeth:teeth,
     bottom_offset:toff,spindle:(LOCK_ADV?'M03':$('mcode').value),dia_end_offset:toff,minor:minor,entry_style:(internal?(LOCK_ADV?'Old':$('entry').value):((!LOCK_ADV&&$('entry').value==='180')?'180':'45')),
     num_starts:Math.max(1,Math.round(num('starts',1))),entry_feed_reduction:(LOCK_ADV?0:num('engred',0)),max_rpm:(LOCK_ADV?5000:num('maxrpm',5000)),
     stepped_style:(LOCK_ADV?'Modified':($('sstyle').value.indexOf('Carmex')>=0?'Carmex':'Modified')),is_external:!internal,
