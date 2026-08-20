@@ -206,7 +206,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.00 &middot; 18 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.01 &middot; 18 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1434,6 +1434,7 @@
   <!-- ============ GENERATE + OUTPUT ============ -->
   <button class="genbtn" onclick="gv_generate()">&#9881; GENERATE G-CODE</button>
   <div id="outputArea" style="display:none;margin-top:14px">
+    <div id="gv_cyc"></div>
     <div id="gv_res"></div>
     <div id="gcode" style="display:none"></div>
     <div id="gv_block"></div>
@@ -2815,7 +2816,7 @@ async function genMill(){
     prog=tnPostMill(prog);prog=tnMillPattern(prog);
     prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
-    $('cyc').innerHTML='<div class="cyc">CYCLE \u2248 '+mm+'m '+ss+'s &middot; matches desktop engine</div>';
+    var _np=(typeof pcts!=='undefined'&&pcts)?pcts.length:0;var _mp=['CT '+mm+'m '+ss+'s','Vc '+Vc,'Fz '+fz,_np+' pass'+(_np==1?'':'es')];if(brepass){_mp.push('Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p');var _ro=num('repoff',0);if(_ro>0)_mp.push('+'+_ro+' mm dia');}$('cyc').innerHTML='<div class="cyc">'+_mp.join(' &middot; ')+'</div>';
     output(prog,'');
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
@@ -2881,7 +2882,7 @@ async function genTurn(){
     var _tr=await apiPost('/turn/program',P0); var res=_tr.result;lastCycleSec=res[1];
     var _tt=($('t_toff')&&$('t_toff').value==='Yes'&&$('t_tool'))?$('t_tool').value.trim():'0101';var prog=res[0].replace('T0101','T'+_tt);prog=tnPostTurn(prog);var _tpb=(typeof buildTaperPreturn==='function')?buildTaperPreturn():null;if(_tpb)prog=prog.replace('N1 G40 G99',_tpb+'\nG40 G99');prog=applyHeader(prog,($('t_msg')?$('t_msg').value.trim():''),($('t_username')?$('t_username').value.trim():''));if($('t_subprog')&&$('t_subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(res[1]),mm=Math.floor(sec/60),ss=sec%60;
-    $('cyc').innerHTML='<div class="cyc">CYCLE \u2248 '+mm+'m '+ss+'s &middot; RPM '+res[2]+' (G97) &middot; '+res[3]+' cut passes</div>';
+    $('cyc').innerHTML='<div class="cyc">CT '+mm+'m '+ss+'s &middot; Vc '+num('t_vc',120)+' &middot; '+res[3]+' pass'+(res[3]==1?'':'es')+'</div>';
     output(prog,'');
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
@@ -3888,6 +3889,23 @@ function generate(P){
   var out=emitMoves(mv, ctrl, P.incr, arcfmt);
   if(_T)return {out:out, mv:mv};
   $('outputArea').style.display='block';
+  try{
+    var _cx=null,_cz=null,_sec=0,_rap=8000;
+    for(var _k=0;_k<mv.length;_k++){var _mm=mv[_k];
+      if(_mm.t==='dwell'){var _rd=(Vc>0&&_cx>0)?(Vc*1000/(Math.PI*_cx)):500;_sec+=(_mm.p||0)/(_rd/60);continue;}
+      if(_mm.t!=='g0'&&_mm.t!=='g1')continue;
+      var _nx=(_mm.X!=null?_mm.X:_cx),_nz=(_mm.Z!=null?_mm.Z:_cz);
+      if(_cx==null){_cx=_nx;_cz=_nz;continue;}
+      var _rad=Math.abs(_nx-_cx)/2,_ax=Math.abs(_nz-_cz),_len=Math.hypot(_rad,_ax);
+      if(_mm.t==='g0'){_sec+=_len/_rap*60;}
+      else{var _dia=Math.max(1,(_nx+_cx)/2),_rpm=(Vc>0)?(Vc*1000/(Math.PI*_dia)):500,_f=(_mm.F||Fr||0.08),_fm=_f*_rpm;if(_fm>0)_sec+=_len/_fm*60;}
+      _cx=_nx;_cz=_nz;
+    }
+    var _gmn=Math.floor(_sec/60),_gsc=Math.round(_sec%60);
+    var _cp=['CT '+_gmn+'m '+_gsc+'s','Vc '+Vc,'Fz '+Fr,'Plunge '+pd+' mm'];
+    _cp.push(floor>0?('Floor '+floor+' mm'):'Floor off');
+    if($('gv_cyc'))$('gv_cyc').innerHTML='<div class="cyc">'+_cp.join(' &middot; ')+'</div>';
+  }catch(e){}
   $('gcode').textContent=out;
   try{lastGrooveProg=out=roundProg(out);lastAnyProg=out;}catch(e){}
   if($('cycLabel'))$('cycLabel').textContent='Long-form G-code (G0/G1/G2/G3) - '+stratLabel;
