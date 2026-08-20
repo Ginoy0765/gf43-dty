@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.32 &middot; 20 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.33 &middot; 20 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -958,8 +958,6 @@
         <div id="mTaper" style="display:none"><label>Taper degree</label><input id="taperdeg" type="number" value="0" inputmode="decimal"><label>Dia diff at end of thread (mm)</label><input id="diadiff" type="number" value="0" inputmode="decimal"></div>
         <label>Bottom repass</label><select id="brepass" onchange="updateSubs()"><option>No</option><option>Yes</option></select>
         <div id="repWrap" style="display:none"><div class="row2"><div><label>Repass threads (pitches)</label><input id="repp" type="number" value="1" inputmode="numeric"></div><div><label>Repass offset dia (mm)</label><input id="repoff" type="number" value="0" inputmode="decimal"></div></div></div>
-        <label>Full repass</label><select id="frepass" onchange="updateSubs()"><option>No</option><option>Yes</option></select>
-        <div id="frepWrap" style="display:none"><div class="row2"><div><label>Full repass pitches</label><input id="frepp" type="number" value="0" inputmode="numeric" readonly style="color:var(--acc);background:#101a25"></div><div><label>Full repass bottom dia + (mm)</label><input id="fdia" type="number" value="0" inputmode="decimal"></div></div></div>
 
         <label>Subprogram (M99, no tool call)</label><select id="subprog"><option>No</option><option>Yes</option></select>
       </div></div>
@@ -2457,8 +2455,8 @@ function buildTurnPasses(){
   return out;
 }
 function tnPassRows(){var internal=$('side').value==='Internal';var D=num('D',16),P=num('P',2);var mf=$('t_minor');var minor=(mf&&parseFloat(mf.value)>0)?parseFloat(mf.value):stdMinor(D,P,internal);var td=(D-minor)/2;var cums=buildTurnPasses();var rows=[],prev=0;for(var i=0;i<cums.length;i++){var cd=cums[i];var doc=cd-prev;prev=cd;var dia=internal?(minor+2*cd):(D-2*cd);rows.push({n:i+1,dia:dia,pct:td>0?100*cd/td:0,cum:cd,doc:doc});}return {rows:rows,D:D,P:P,minor:minor,td:td,internal:internal};}
-function millPassRows(){var internal=$('side').value==='Internal';var D0=num('D',16),P=num('P',2);var D=D0+((typeof LOCK_ADV!=='undefined'&&LOCK_ADV)?0:num('majadj',0));var mf=$('minor');var minor=(mf&&parseFloat(mf.value)>0)?parseFloat(mf.value):stdMinor(D0,P,internal);var td=(D-minor)/2;var pcts=(typeof buildPcts==='function')?buildPcts():[100];var springOn=$('spring')&&$('spring').value==='Yes';var rows=[],prev=0;for(var i=0;i<pcts.length;i++){var pct=pcts[i];var cum=td*pct/100;var doc=cum-prev;prev=cum;var dia=internal?(minor+2*cum):(D-2*cum);rows.push({n:i+1,dia:dia,pct:pct,cum:cum,doc:doc,spring:(springOn&&i===pcts.length-1)});}return {rows:rows,D:D,P:P,minor:minor,td:td,internal:internal};}
-function showMillPassTable(){ensurePassPov();var R=millPassRows();var body=$('ptbody');if(!body)return;if(!R.rows.length||!(R.td>0)){body.innerHTML='<p style="color:#8aa">Enter a valid thread first (Ø, pitch, minor).</p>';$('ptov').classList.add('on');return;}var neq=($('eqvol')&&$('eqvol').value==='Yes')?'Equal-volume':'Manual %';var cyc=(typeof lastCycleSec!=='undefined'&&lastCycleSec>0)?(' &middot; CYCLE: '+Math.floor(lastCycleSec/60)+'m '+Math.round(lastCycleSec%60)+'s'):'';var hdr='<div style="font-size:12px;color:#9fc4e6;margin-bottom:8px">&Oslash;'+R.D+' mm &times; pitch '+R.P+' &nbsp; <b>'+(R.internal?'Internal':'External')+' milling</b><br>Thread depth (radial) '+R.td.toFixed(3)+' mm &nbsp; '+(R.internal?'minor':'major')+' &Oslash;'+(R.internal?R.minor:R.D)+' &nbsp; '+R.rows.length+' passes &nbsp; '+neq+cyc+'</div>';var t='<table class="pttab"><thead><tr><th>Pass</th><th>Thread &Oslash;</th><th>Cum %</th><th>Cum DOC</th><th>DOC</th></tr></thead><tbody>';for(var i=0;i<R.rows.length;i++){var r=R.rows[i];t+='<tr><td>'+r.n+(r.spring?' <span style="color:#9fc4e6">(spring)</span>':'')+'</td><td>'+r.dia.toFixed(3)+'</td><td>'+r.pct.toFixed(1)+'%</td><td>'+r.cum.toFixed(3)+'</td><td>'+r.doc.toFixed(3)+'</td></tr>';}t+='</tbody></table>';body.innerHTML=hdr+t;$('ptov').classList.add('on');}
+function millPassRows(){var internal=$('side').value==='Internal';var D0=num('D',16),P=num('P',2);var D=D0+((typeof LOCK_ADV!=='undefined'&&LOCK_ADV)?0:num('majadj',0));var mf=$('minor');var minor=(mf&&parseFloat(mf.value)>0)?parseFloat(mf.value):stdMinor(D0,P,internal);var td=(D-minor)/2;var pcts=(typeof buildPcts==='function')?buildPcts():[100];var springOn=$('spring')&&$('spring').value==='Yes';var repassOn=(typeof _autoRepassOn==='function')&&_autoRepassOn();var extraCount=(springOn?1:0)+(repassOn?1:0);var baseCount=pcts.length-extraCount;var springIdx=springOn?baseCount:-1;var repassIdx=repassOn?(baseCount+(springOn?1:0)):-1;var rows=[],prev=0;for(var i=0;i<pcts.length;i++){var pct=pcts[i];var cum=td*pct/100;var doc=cum-prev;prev=cum;var dia=internal?(minor+2*cum):(D-2*cum);rows.push({n:i+1,dia:dia,pct:pct,cum:cum,doc:doc,spring:(i===springIdx),repass:(i===repassIdx)});}return {rows:rows,D:D,P:P,minor:minor,td:td,internal:internal};}
+function showMillPassTable(){ensurePassPov();var R=millPassRows();var body=$('ptbody');if(!body)return;if(!R.rows.length||!(R.td>0)){body.innerHTML='<p style="color:#8aa">Enter a valid thread first (Ø, pitch, minor).</p>';$('ptov').classList.add('on');return;}var neq=($('eqvol')&&$('eqvol').value==='Yes')?'Equal-volume':'Manual %';var cyc=(typeof lastCycleSec!=='undefined'&&lastCycleSec>0)?(' &middot; CYCLE: '+Math.floor(lastCycleSec/60)+'m '+Math.round(lastCycleSec%60)+'s'):'';var hdr='<div style="font-size:12px;color:#9fc4e6;margin-bottom:8px">&Oslash;'+R.D+' mm &times; pitch '+R.P+' &nbsp; <b>'+(R.internal?'Internal':'External')+' milling</b><br>Thread depth (radial) '+R.td.toFixed(3)+' mm &nbsp; '+(R.internal?'minor':'major')+' &Oslash;'+(R.internal?R.minor:R.D)+' &nbsp; '+R.rows.length+' passes &nbsp; '+neq+cyc+'</div>';var t='<table class="pttab"><thead><tr><th>Pass</th><th>Thread &Oslash;</th><th>Cum %</th><th>Cum DOC</th><th>DOC</th></tr></thead><tbody>';for(var i=0;i<R.rows.length;i++){var r=R.rows[i];t+='<tr><td>'+r.n+(r.spring?' <span style="color:#9fc4e6">(spring)</span>':'')+(r.repass?' <span style="color:#9fc4e6">(auto repass)</span>':'')+'</td><td>'+r.dia.toFixed(3)+'</td><td>'+r.pct.toFixed(1)+'%</td><td>'+r.cum.toFixed(3)+'</td><td>'+r.doc.toFixed(3)+'</td></tr>';}t+='</tbody></table>';body.innerHTML=hdr+t;$('ptov').classList.add('on');}
 function ensurePassPov(){if($('ptov'))return;var s=document.createElement('style');s.textContent='.pttab{width:100%;border-collapse:collapse;font-size:13px}.pttab th,.pttab td{border:1px solid #2a3b4d;padding:5px 8px;text-align:center}.pttab th{background:#16232f;color:#9fc4e6;position:sticky;top:0}.pttab td{color:#e8eef4}.pttab tbody tr:nth-child(even){background:#0f1a24}';document.head.appendChild(s);var d=document.createElement('div');d.id='ptov';d.className='hlpov';d.addEventListener('click',function(e){if(e.target===d)closePassTable();});d.innerHTML='<div class="hlpcard" style="max-width:540px"><h4><span>Pass details</span><button class="hx" type="button" onclick="closePassTable()">&times;</button></h4><div id="ptbody" style="max-height:62vh;overflow:auto"></div></div>';document.body.appendChild(d);}
 function closePassTable(){var o=$('ptov');if(o)o.classList.remove('on');}
 function showPassTable(){ensurePassPov();var R=tnPassRows();var body=$('ptbody');if(!R.rows.length){body.innerHTML='<p style="color:#8aa">Enter a valid thread first.</p>';$('ptov').classList.add('on');return;}var trans=$('t_trans')?$('t_trans').options[$('t_trans').selectedIndex].text:'';var cyc=(typeof lastCycleSec!=='undefined'&&lastCycleSec>0)?(' · CYCLE: '+Math.floor(lastCycleSec/60)+'m '+Math.round(lastCycleSec%60)+'s'):'';var hdr='<div style="font-size:12px;color:#9fc4e6;margin-bottom:8px">Ø'+R.D+' mm × pitch '+R.P+' &nbsp; <b>'+(R.internal?'Internal':'External')+' turning</b><br>Thread depth (radial) '+R.td.toFixed(3)+' mm &nbsp; '+(R.internal?'minor':'major')+' Ø'+(R.internal?R.minor:R.D)+' &nbsp; '+R.rows.length+' passes &nbsp; '+trans+cyc+'</div>';var t='<table class="pttab"><thead><tr><th>Pass</th><th>Thread Ø</th><th>Cum %</th><th>Cum DOC</th><th>DOC</th></tr></thead><tbody>';for(var i=0;i<R.rows.length;i++){var r=R.rows[i];t+='<tr><td>'+r.n+'</td><td>'+r.dia.toFixed(3)+'</td><td>'+r.pct.toFixed(1)+'%</td><td>'+r.cum.toFixed(3)+'</td><td>'+r.doc.toFixed(3)+'</td></tr>';}t+='</tbody></table>';body.innerHTML=hdr+t;$('ptov').classList.add('on');}
@@ -2479,6 +2477,17 @@ function _autoBtn(){var b=$('autoBtn');if(!b)return;b.classList.toggle('on',!!au
 function _autoSave(){try{localStorage.setItem('yantra_auto',JSON.stringify({on:autoActive,req:(($('autoReq')||{}).value)||'std',tool:(($('autoTool')||{}).value)||'single'}));}catch(e){}}
 var AUTO_LOCK_ALL=['teeth','path','dir','stab','mcode','thtaper','diadiff','taperdeg','engred'];
 function _autoLock(lockIds){AUTO_LOCK_ALL.forEach(function(id){var e=$(id);if(!e)return;var dis=!!(lockIds&&lockIds.indexOf(id)>=0);e.disabled=dis;e.style.opacity=dis?'0.55':'';e.style.cursor=dis?'not-allowed':'';});}
+/* AUTO's Difficult/below-SS316 repass is built in — no Cycles cell at all, same mechanism as the Spring pass checkbox:
+   one extra no-infeed pass at final size, appended live by buildPcts() whenever this is true. No engine changes needed
+   (the engine already understands repeated 100% entries in pcts[], that's how Spring pass already works). */
+function _autoRepassOn(){
+  if(typeof autoActive==='undefined'||!autoActive)return false;
+  if(typeof method!=='undefined'&&method!=='Mill')return false;
+  if(!$('autoReq'))return false;
+  var req=_autoReqName();
+  var mach=_autoMach();var hardMat=(mach!=null&&mach<SS316_MACH);
+  return (req==='Difficult'||hardMat);
+}
 function applyAuto(){
   if(!autoActive)return;
   if(typeof method!=='undefined'&&method!=='Mill')return;
@@ -2489,8 +2498,7 @@ function applyAuto(){
   var isLH=((($('hand')||{}).value)==='LH');var isExt=((($('side')||{}).value)==='External');
   var dirXOR=((((isLH?1:0)+(isExt?1:0))%2)===0)?'Bottom to Top':'Top to Bottom';
   var stab=(req==='Productivity')?100:50;
-  var mach=_autoMach();var hardMat=(mach!=null&&mach<SS316_MACH);
-  var repassOn=(req==='Difficult'||hardMat);
+  var repassOn=_autoRepassOn();
   var teeth=1,mcode=null,dir=dirXOR,engred=50,path='Helical';
   if(tool==='single'){
     teeth=1;dir=dirXOR;engred=50;path='Helical';
@@ -2509,28 +2517,22 @@ function applyAuto(){
   if(tool!=='single'){
     _tmSetV('thtaper','None');_tmSetV('diadiff',0);lockIds.push('thtaper','diadiff','taperdeg');
   }
-  /* Bottom repass (brepass/repp/repoff) is 100% manual \u2014 AUTO never sets or locks it, for any tool type. */
-  _tmSetV('frepass',repassOn?'Yes':'No');
-  if(repassOn){
-    var _Pmm2=num('P',1)||1,_Lmm2=num('L',0)||0;
-    _tmSetV('frepp',Math.max(1,Math.round(_Lmm2/_Pmm2)));
-  } else {
-    _tmSetV('frepp',0);
-  }
-  /* frepp is AUTO-computed (full thread length in pitches) whenever frepass is on \u2014 not a manual field. fdia (bottom dia+) is a separate manual addition, never touched by AUTO. */
+  /* Repass for Difficult/below-SS316 is built in \u2014 no Cycles cell, no lock. buildPcts() appends the extra full pass
+     live off _autoRepassOn(), exactly like the Spring pass checkbox does. Bottom repass (brepass/repp/repoff) in
+     Cycles stays 100% separate and manual, untouched by AUTO, for any tool type. */
   try{matChange();}catch(e){}try{updateSubs();}catch(e){}try{if(typeof updateTeeth==='function')updateTeeth();}catch(e){}try{recalc();}catch(e){}try{renderPassPcts();}catch(e){}try{fdUpd();}catch(e){}
   _autoLock(lockIds);
   var extra=(engred!=null?', 50% entry feed':'');
-  var repassNote=repassOn?'full repass added (Difficult/below-SS316)':'no full repass';
+  var repassNote=repassOn?'+1 full repass pass (Difficult/below-SS316, built in \u2014 like Spring pass)':'no extra repass pass';
   var teethNote=(teeth==null)?' \u00b7 teeth = insert length \u00f7 pitch':'';
-  _autoHint('<b>'+req+' \u00b7 '+_autoToolLabel(tool)+'</b> \u2014 '+path+' \u00b7 '+dir+(mcode?(' \u00b7 '+mcode):'')+teethNote+', stability '+stab+'%'+extra+', '+repassNote+'. Bottom repass (Cycles) and full-repass bottom dia+: separate, always manual. Thread taper/Dia diff: set manually (not locked by AUTO). Passes &amp; parameters: default.');
+  _autoHint('<b>'+req+' \u00b7 '+_autoToolLabel(tool)+'</b> \u2014 '+path+' \u00b7 '+dir+(mcode?(' \u00b7 '+mcode):'')+teethNote+', stability '+stab+'%'+extra+', '+repassNote+'. Bottom repass (Cycles): separate, always manual. Thread taper/Dia diff: set manually (not locked by AUTO). Passes &amp; parameters: default.');
 }
 function openAuto(){var m=$('autoModal');if(!m)return;m.style.display='flex';if(autoActive)applyAuto();else _autoHint('Pick requirement + tool type, then Apply to override tool, cycle &amp; parameters.');}
 function closeAuto(){var m=$('autoModal');if(m)m.style.display='none';}
 function autoApply(){autoActive=true;_autoSave();applyAuto();_autoBtn();setTimeout(closeAuto,120);}
 function _autoManualDefaults(){
   _tmSetV('teeth',1);_tmSetV('path','Helical');_tmSetV('dir','Top to Bottom');_tmSetV('stab',50);
-  _tmSetV('mcode','M03');_tmSetV('engred',0);_tmSetV('frepass','No');_tmSetV('frepp',0);
+  _tmSetV('mcode','M03');_tmSetV('engred',0);
   _tmSetV('thtaper','None');_tmSetV('diadiff',0);_tmSetV('taperdeg',0);
   try{updateSubs();}catch(e){}try{matChange();}catch(e){}try{recalc();}catch(e){}try{renderPassPcts();}catch(e){}try{fdUpd();}catch(e){}
 }
@@ -2560,7 +2562,6 @@ function updateSubs(){
   var t2=$('t_thtaper');if(t2&&$('tTaper'))$('tTaper').style.display=(t2.value==='Manual')?'block':'none';
   var inf=$('t_infeed');if(inf&&$('tFlank'))$('tFlank').style.display=(inf.value==='Radial')?'none':'block';
   var bp=$('brepass');if(bp&&$('repWrap'))$('repWrap').style.display=(bp.value==='Yes')?'block':'none';
-  var fp=$('frepass');if(fp&&$('frepWrap'))$('frepWrap').style.display=(fp.value==='Yes')?'block':'none';
   var szx=$('startxyz');if(szx&&$('startWrap'))$('startWrap').style.display=(szx.value==='Yes')?'block':'none';
   var tf=$('toff');if(tf&&$('toffWrap'))$('toffWrap').style.display=(tf.value==='Yes')?'block':'none';
   var ttf=$('t_toff');if(ttf&&$('ttoffWrap'))$('ttoffWrap').style.display=(ttf.value==='Yes')?'block':'none';
@@ -2594,6 +2595,7 @@ function buildPcts(){
   else if(n>5){for(var i=0;i<n;i++)pcts.push(+(100*(i+1)/n).toFixed(2));pcts[n-1]=100;}
   else{for(var i=1;i<=n;i++){var e=$('pp'+i);var v=e?parseFloat(e.value):NaN;if(isNaN(v))v=100*i/n;pcts.push(+v.toFixed(2));}pcts[n-1]=100;}
   if($('spring').value==='Yes')pcts.push(100);
+  if(typeof _autoRepassOn==='function'&&_autoRepassOn())pcts.push(100);
   return pcts;
 }
 function applyFR(t){var f=$('findr')?$('findr').value:'';if(f)t=t.split(f).join($('repl')?$('repl').value:'');var f2=$('t_findr')?$('t_findr').value:'';if(f2)t=t.split(f2).join($('t_repl')?$('t_repl').value:'');return t;}
@@ -2924,12 +2926,10 @@ async function genMill(){
   var tax=LOCK_ADV?'Z-':($('toolaxis')?$('toolaxis').value:'Z-');tax=tax.indexOf('Z-')===0?'Z-':tax;
   var toff=LOCK_ADV?0:taperOffset(internal,L);
   var brepass=(!LOCK_ADV)&&$('brepass').value==='Yes';
-  var frepass=(!LOCK_ADV)&&$('frepass')&&$('frepass').value==='Yes';
   var toolOD=(!LOCK_ADV)&&($('toolpath')&&$('toolpath').value.indexOf('OD')>=0);var toffY=$('toff').value==='Yes';
   var pcts=buildPcts();
   var P0={D:D,L:L,P:P,d:d,Z:num('Z',1),Vc:Vc,fz:fz,hand:$('hand').value,direction:$('dir').value,mode:$('path').value,
-    num_passes:pcts.length,pcts:pcts,repass_pitches:(brepass?Math.max(1,Math.round(num('repp',1))):0),repass_offset:num('repoff',0),
-    full_repass_pitches:(frepass?Math.max(1,Math.round(num('frepp',1))):0),full_repass_offset:(($('fdia')&&num('fdia',0))||0),num_teeth:teeth,
+    num_passes:pcts.length,pcts:pcts,repass_pitches:(brepass?Math.max(1,Math.round(num('repp',1))):0),repass_offset:num('repoff',0),num_teeth:teeth,
     bottom_offset:toff,spindle:(LOCK_ADV?'M03':$('mcode').value),dia_end_offset:toff,minor:minor,entry_style:(internal?(LOCK_ADV?'Old':$('entry').value):((!LOCK_ADV&&$('entry').value==='180')?'180':'45')),
     num_starts:Math.max(1,Math.round(num('starts',1))),entry_feed_reduction:(LOCK_ADV?0:num('engred',0)),max_rpm:(LOCK_ADV?5000:num('maxrpm',5000)),
     stepped_style:(LOCK_ADV?'Modified':($('sstyle').value.indexOf('Carmex')>=0?'Carmex':'Modified')),is_external:!internal,
