@@ -69,6 +69,8 @@
   .autohint{margin-top:12px;font-size:12px;color:var(--mut);min-height:16px;line-height:1.4}
   .autobtns{display:flex;gap:10px;margin-top:16px}
   .autobtns .btn{flex:1;margin:0}
+  .autochk{display:flex;align-items:center;gap:8px;margin-top:14px;font-weight:700;font-size:13px;color:var(--txt);cursor:pointer}
+  .autochk input{width:auto;margin:0}
   .sec>.sb{padding:4px 14px 14px}
   label{display:block;color:var(--mut);font-size:11.5px;font-weight:600;margin:12px 0 5px;letter-spacing:.2px}
   select,input{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:11px;padding:12px;font-size:16px;outline:none}input[type=number]{-moz-appearance:textfield;appearance:textfield}input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
@@ -238,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.19 &middot; 18 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.23 &middot; 18 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -956,7 +958,7 @@
         <div id="mTaper" style="display:none"><label>Taper degree</label><input id="taperdeg" type="number" value="0" inputmode="decimal"><label>Dia diff at end of thread (mm)</label><input id="diadiff" type="number" value="0" inputmode="decimal"></div>
         <label>Bottom repass</label><select id="brepass" onchange="updateSubs()"><option>No</option><option>Yes</option></select>
         <div id="repWrap" style="display:none"><div class="row2"><div><label>Repass threads (pitches)</label><input id="repp" type="number" value="1" inputmode="numeric"></div><div><label>Repass offset dia (mm)</label><input id="repoff" type="number" value="0" inputmode="decimal"></div></div></div>
-        <div class="row2"><div><label>Requirement</label><select id="req"><option>Standard</option><option>Finishing</option><option>Productivity</option><option>Weak setup</option><option>Tool life</option></select></div><div></div></div>
+        
         <label>Subprogram (M99, no tool call)</label><select id="subprog"><option>No</option><option>Yes</option></select>
       </div></div>
       <div class="sec mill-only"><div class="st" onclick="tog(this)">PATTERN <span>&#9656;</span></div><div class="sb" style="display:none">
@@ -2409,7 +2411,7 @@ function setMethod(m){method=m;
   try{if(typeof spInlineInit==='function')spInlineInit();}catch(e){}
   $('p_res').innerHTML='';$('cyc').innerHTML='';if($('copybtn'))$('copybtn').style.display='none';if($('savebtn'))$('savebtn').style.display='none';if($('simbtn'))$('simbtn').style.display='none';if($('editbtn'))$('editbtn').style.display='none';
 }
-function _threadOpen(mode){var _h=$('prog_h2');if(_h)_h.textContent=(mode==='Turn'?'Thread Turning':'Thread Milling');show('prog');var o=$('opsel');if(o){o.value=(mode==='Turn'?'Turning':'Milling');if(o.parentNode)o.parentNode.style.display='none';}if(typeof setMethod==='function')setMethod(mode);try{if(typeof dInchVis==='function')dInchVis();}catch(e){}try{if(typeof progMode!=='undefined'&&progMode==='new'){if(typeof applyNewBlanks==='function')applyNewBlanks();if(typeof refreshReq==='function')refreshReq();if(typeof yaThreadFocus==='function')setTimeout(yaThreadFocus,140);}}catch(e){}}function openThreadTurn(){_threadOpen('Turn');}function openThreadMill(){_threadOpen('Mill');}
+function _threadOpen(mode){var _h=$('prog_h2');if(_h)_h.textContent=(mode==='Turn'?'Thread Turning':'Thread Milling');show('prog');var o=$('opsel');if(o){o.value=(mode==='Turn'?'Turning':'Milling');if(o.parentNode)o.parentNode.style.display='none';}if(typeof setMethod==='function')setMethod(mode);try{if(typeof dInchVis==='function')dInchVis();}catch(e){}try{if(typeof progMode!=='undefined'&&progMode==='new'){if(typeof applyNewBlanks==='function')applyNewBlanks();if(typeof refreshReq==='function')refreshReq();if(typeof yaThreadFocus==='function')setTimeout(yaThreadFocus,140);}}catch(e){}try{if(mode==='Mill'&&typeof autoActive!=='undefined'&&autoActive&&typeof applyAuto==='function')setTimeout(applyAuto,200);else if(typeof _autoLock==='function')_autoLock([]);}catch(e){}}function openThreadTurn(){_threadOpen('Turn');}function openThreadMill(){_threadOpen('Mill');}
 function setMethodSel(){setMethod($('opsel').value==='Turning'?'Turn':'Mill');}
 var TPI_LIST=[1,2,3,4,4.5,5,6,7,8,9,10,11,11.5,12,13,14,16,18,20,24,27,28,32,36,40,44,48,56,64,72,80,100];
 function threadIsTPI(p){return /UN|BSP|Whitworth|Acme|NPT|NPS|Buttress \(US\)|API/i.test(p||'');}
@@ -2472,43 +2474,74 @@ function _autoMach(){try{var m=(typeof matBy==='function')?matBy(($('mat')||{}).
 function _autoToolLabel(v){return ({single:'1 — single teeth','3m03':'3 teeth · M03','3m04':'3 teeth · M04',multi_multi:'Multiteeth · multi axial pass',multi_single:'Multiteeth · single axial pass',alt:'Alternate teeth'})[v]||v;}
 function _autoHint(msg){var h=$('autoHint');if(h)h.innerHTML=msg;}
 function _autoBtn(){var b=$('autoBtn');if(!b)return;b.classList.toggle('on',!!autoActive);b.textContent=autoActive?'AUTO ✓':'AUTO';}
-function _autoSave(){try{localStorage.setItem('yantra_auto',JSON.stringify({on:autoActive,req:(($('autoReq')||{}).value)||'std',tool:(($('autoTool')||{}).value)||'single'}));}catch(e){}}
+function _autoSave(){try{localStorage.setItem('yantra_auto',JSON.stringify({on:autoActive,req:(($('autoReq')||{}).value)||'std',tool:(($('autoTool')||{}).value)||'single',xbd:!!($('autoXbd')&&$('autoXbd').checked),xbdv:(($('autoXbdVal')||{}).value)||''}));}catch(e){}}
+var AUTO_LOCK_ALL=['teeth','path','dir','stab','brepass','repp','repoff','mcode','thtaper','diadiff','taperdeg','engred'];
+function _autoLock(lockIds){AUTO_LOCK_ALL.forEach(function(id){var e=$(id);if(!e)return;var dis=!!(lockIds&&lockIds.indexOf(id)>=0);e.disabled=dis;e.style.opacity=dis?'0.55':'';e.style.cursor=dis?'not-allowed':'';});}
 function applyAuto(){
   if(!autoActive)return;
   if(typeof method!=='undefined'&&method!=='Mill')return;
   var tool=(($('autoTool')||{}).value)||'single';
-  if(tool!=='single'){_autoHint('“'+_autoToolLabel(tool)+'” — rule not defined yet. Nothing overridden.');return;}
+  if(tool!=='single'&&tool!=='3m03'&&tool!=='3m04'){_autoHint('“'+_autoToolLabel(tool)+'” — rule not defined yet. Nothing overridden.');_autoLock([]);return;}
   var req=_autoReqName();
   var isLH=((($('hand')||{}).value)==='LH');var isExt=((($('side')||{}).value)==='External');
-  var flips=(isLH?1:0)+(isExt?1:0);var dir=(flips%2===0)?'Bottom to Top':'Top to Bottom';
-  _tmSetV('teeth',1);_tmSetV('path','Helical');_tmSetV('dir',dir);
+  var dirXOR=((((isLH?1:0)+(isExt?1:0))%2)===0)?'Bottom to Top':'Top to Bottom';
   var mach=_autoMach();var hardMat=(mach!=null&&mach<SS316_MACH);
-  var stab=(req==='Productivity')?100:50;_tmSetV('stab',stab);
-  var repass=(req==='Difficult')||hardMat;
-  if(repass){_tmSetV('brepass','Yes');_tmSetV('repp',1);if(!(parseFloat(($('repoff')||{}).value)>0))_tmSetV('repoff',0.03);}else{_tmSetV('brepass','No');}
+  var stab=(req==='Productivity')?100:50;
+  var xbd=!!($('autoXbd')&&$('autoXbd').checked);var xbdV=parseFloat(($('autoXbdVal')||{}).value)||0;
+  var teeth=1,mcode=null,dir=dirXOR,engred=null,brepass=false,repp=1,repoff=0,repassNote='';
+  if(tool==='single'){
+    teeth=1;dir=dirXOR;
+    brepass=(req==='Difficult'||hardMat);repp=1;repoff=0;if(brepass&&!(parseFloat(($('repoff')||{}).value)>0))repoff=0.03;
+    repassNote=brepass?(hardMat&&req!=='Difficult'?'1 repass (hard material)':(req==='Difficult'?'1 repass (difficult)':'1 repass')):'no repass';
+  } else if(tool==='3m03'){
+    teeth=3;mcode='M03';dir='Bottom to Top';engred=50;brepass=true;
+    var _Pmm=num('P',1)||1,_Lmm=num('L',0)||0;repp=Math.max(1,Math.round(_Lmm/_Pmm)-4-teeth);
+    repoff=(xbd&&xbdV>0)?xbdV:0;
+    repassNote='bottom repass '+repp+' pitches (L\u22124\u2212teeth)'+(repoff>0?(' \u00b7 +'+repoff+' mm dia'):' \u00b7 0 dia');
+  } else {
+    teeth=3;mcode='M04';dir=dirXOR;
+    brepass=(req==='Difficult'||hardMat);repp=1;repoff=(xbd&&xbdV>0)?xbdV:0;
+    repassNote=brepass?'1 repass':'no repass';
+  }
+  _tmSetV('teeth',teeth);_tmSetV('path','Helical');_tmSetV('dir',dir);if(mcode)_tmSetV('mcode',mcode);if(engred!=null)_tmSetV('engred',engred);
+  _tmSetV('stab',stab);
+  if(brepass){_tmSetV('brepass','Yes');_tmSetV('repp',repp);_tmSetV('repoff',repoff);}else{_tmSetV('brepass','No');}
+  var lockIds=['teeth','path','dir','stab','brepass','repp','repoff'];if(mcode)lockIds.push('mcode');if(engred!=null)lockIds.push('engred');
+  var xbdTaper=false;
+  if(tool==='single'){
+    if(!isExt){ if(xbd&&xbdV>0){_tmSetV('thtaper','Manual');_tmSetV('taperdeg',0);_tmSetV('diadiff',xbdV);xbdTaper=true;}else{_tmSetV('thtaper','None');_tmSetV('diadiff',0);} lockIds.push('thtaper','diadiff','taperdeg'); }
+  } else {
+    _tmSetV('thtaper','None');_tmSetV('diadiff',0);lockIds.push('thtaper','diadiff','taperdeg');
+  }
   try{matChange();}catch(e){}try{updateSubs();}catch(e){}try{recalc();}catch(e){}try{renderPassPcts();}catch(e){}try{fdUpd();}catch(e){}
-  var why=repass?(hardMat&&req!=='Difficult'?' (hard material)':(req==='Difficult'?' (difficult)':'')):'';
-  _autoHint('<b>'+req+' · single-teeth</b> — '+dir+', stability '+stab+'%, '+(repass?('1 repass'+why):'no repass')+'. Passes &amp; parameters: default.');
+  _autoLock(lockIds);
+  var extra='';
+  if(tool==='single'){extra=xbdTaper?(', extra bottom dia +'+xbdV+' mm (taper)'):(isExt?', external: taper manual':'');}
+  else {extra=(engred!=null?', 50% entry feed':'')+((xbd&&xbdV>0)?(', bottom dia +'+xbdV+' mm (bigger thread, no taper)'):'');}
+  _autoHint('<b>'+req+' · '+_autoToolLabel(tool)+'</b> — '+dir+(mcode?(' · '+mcode):'')+', stability '+stab+'%, '+repassNote+extra+'. Passes &amp; parameters: default.');
 }
 function openAuto(){var m=$('autoModal');if(!m)return;m.style.display='flex';if(autoActive)applyAuto();else _autoHint('Pick requirement + tool type, then Apply to override tool, cycle &amp; parameters.');}
 function closeAuto(){var m=$('autoModal');if(m)m.style.display='none';}
 function autoApply(){autoActive=true;_autoSave();applyAuto();_autoBtn();setTimeout(closeAuto,120);}
-function autoOff(){autoActive=false;_autoSave();_autoBtn();closeAuto();if(typeof toast==='function')toast('AUTO off — manual entry');}
+function autoOff(){autoActive=false;_autoSave();_autoBtn();_autoLock([]);closeAuto();if(typeof toast==='function')toast('AUTO off — manual entry');}
 function autoChanged(){var t=(($('autoTool')||{}).value)||'single';if(t!=='single')_autoHint('“'+_autoToolLabel(t)+'” — rule not defined yet.');else _autoHint('Single-teeth rule ready. Apply to override tool, cycle &amp; parameters.');}
+function autoXbdVis(){var r=$('autoXbdRow'),c=$('autoXbd');if(r)r.style.display=(c&&c.checked)?'block':'none';}
 (function(){
   function build(){if($('autoModal'))return;var m=document.createElement('div');m.id='autoModal';m.className='automodal';m.style.display='none';
     m.innerHTML='<div class="autocard"><div class="autohd">AUTO &mdash; default cycle<button type="button" class="autox" onclick="closeAuto()">&times;</button></div>'
     +'<label>Requirement</label><select id="autoReq" onchange="autoChanged()"><option value="std">Standard</option><option value="diff">Difficult</option><option value="prod">Productivity</option></select>'
     +'<label style="display:block;margin-top:12px">Tool type</label><select id="autoTool" onchange="autoChanged()"><option value="single">1 &mdash; single teeth</option><option value="3m03">3 teeth &middot; M03</option><option value="3m04">3 teeth &middot; M04</option><option value="multi_multi">Multiteeth &middot; multi axial pass</option><option value="multi_single">Multiteeth &middot; single axial pass</option><option value="alt">Alternate teeth</option></select>'
+    +'<label class="autochk"><input type="checkbox" id="autoXbd" onchange="autoXbdVis();autoChanged()"> Extra bottom dia (taper bottom→top)</label>'
+    +'<div id="autoXbdRow" style="display:none;margin-top:6px"><label>Dia difference (mm)</label><input id="autoXbdVal" type="number" step="0.01" inputmode="decimal" placeholder="e.g. 0.20" oninput="autoChanged()"></div>'
     +'<div class="autohint" id="autoHint"></div>'
     +'<div class="autobtns"><button type="button" class="btn" onclick="autoApply()">Apply</button><button type="button" class="btn btn2" onclick="autoOff()">Turn off</button></div></div>';
     m.addEventListener('click',function(e){if(e.target===m)closeAuto();});
     document.body.appendChild(m);
   }
   if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
-  try{var st=JSON.parse(localStorage.getItem('yantra_auto')||'null');if(st){autoActive=!!st.on;var setv=function(id,v){var e=$(id);if(e&&v!=null)e.value=v;};setv('autoReq',st.req);setv('autoTool',st.tool);_autoBtn();}}catch(e){}
-  ['d','Z','teeth'].forEach(function(id){var e=$(id);if(e)e.addEventListener('input',function(){if(autoActive)setTimeout(applyAuto,0);});});
-  ['hand','side','mat'].forEach(function(id){var e=$(id);if(e)e.addEventListener('change',function(){if(autoActive)setTimeout(applyAuto,0);});});
+  try{var st=JSON.parse(localStorage.getItem('yantra_auto')||'null');if(st){autoActive=!!st.on;var setv=function(id,v){var e=$(id);if(e&&v!=null)e.value=v;};setv('autoReq',st.req);setv('autoTool',st.tool);if(st.xbd&&$('autoXbd'))$('autoXbd').checked=true;if(st.xbdv!=null)setv('autoXbdVal',st.xbdv);autoXbdVis();_autoBtn();}}catch(e){}
+  ['d','Z','teeth','L','P','pother','tpiother'].forEach(function(id){var e=$(id);if(e)e.addEventListener('input',function(){if(autoActive)setTimeout(applyAuto,0);});});
+  ['hand','side','mat','psel','tpi'].forEach(function(id){var e=$(id);if(e)e.addEventListener('change',function(){if(autoActive)setTimeout(applyAuto,0);});});
 })();
 function updateTeeth(){var il=$('insl'),tt=$('teeth');if(!il||!tt)return;var t=parseFloat(il.value),P=num('P',0);
   if(il.value.trim()&&t>0&&P>0){tt.value=Math.max(1,Math.floor(t/P));tt.readOnly=true;tt.style.color='var(--acc)';tt.style.background='#101a25';}
