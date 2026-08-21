@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.38 &middot; 21 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.40 &middot; 21 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -2472,17 +2472,11 @@ var autoActive=false;var SS316_MACH=36; /* below SS316 machinability = difficult
 function _autoReqName(){var v=(($('autoReq')||{}).value)||'std';return (v==='prod')?'Productivity':(v==='diff')?'Difficult':'Standard';}
 function _autoMach(){try{var m=(typeof matBy==='function')?matBy(($('mat')||{}).value):null;return (m&&m[4]!=null)?m[4]:null;}catch(e){return null;}}
 function _autoToolLabel(v){return ({single:'1 — single teeth','3m03':'3 teeth · M03','3m04':'3 teeth · M04',multi_multi:'Multiteeth · multi axial pass',multi_single:'Multiteeth · single axial pass',alt:'Alternate teeth'})[v]||v;}
-/* U-BTT-TEETH: real physical tooth count of the AUTO-selected tool, used
-   ONLY for the engine's Bottom-to-Top first-pitch feed reduction (separate
-   from the UI "No. of teeth" field, which AUTO forces to 1 for Helical
-   per v27.37). 3m03/3m04 are genuinely 3-tooth tools regardless of that
-   UI lock. Manual (non-AUTO) entry has no source for this yet, so it
-   defaults to 1 (no adjustment) - a known gap. */
-function _autoFeedTeeth(){
-  if(!autoActive)return 1;
-  var tool=(($('autoTool')||{}).value)||'single';
-  return (tool==='3m03'||tool==='3m04')?3:1;
-}
+/* U-TEETH-EDIT: 'feed_teeth' (used for the engine's Bottom-to-Top first-
+   pitch reduction) is no longer a separate hidden lookup - genMill() now
+   sends feed_teeth = the same 'teeth' value as num_teeth, read straight
+   from the "No. of teeth" field. Single source of truth for every
+   teeth-based calculation. (Formerly _autoFeedTeeth(), removed.) */
 function _autoHint(msg){var h=$('autoHint');if(h)h.innerHTML=msg;}
 function _autoBtn(){var b=$('autoBtn');if(!b)return;b.classList.toggle('on',!!autoActive);b.textContent=autoActive?'AUTO ✓':'AUTO';}
 function _autoSave(){try{localStorage.setItem('yantra_auto',JSON.stringify({on:autoActive,req:(($('autoReq')||{}).value)||'std',tool:(($('autoTool')||{}).value)||'single'}));}catch(e){}}
@@ -2514,9 +2508,9 @@ function applyAuto(){
   if(tool==='single'){
     teeth=1;dir=dirXOR;engred=50;path='Helical';
   } else if(tool==='3m03'){
-    teeth=1;mcode='M03';dir=dirXOR;engred=50;path='Helical';
+    teeth=3;mcode='M03';dir=dirXOR;engred=50;path='Helical';
   } else if(tool==='3m04'){
-    teeth=1;mcode='M04';dir=(dirXOR==='Bottom to Top')?'Top to Bottom':'Bottom to Top';engred=null;path='Helical';
+    teeth=3;mcode='M04';dir=(dirXOR==='Bottom to Top')?'Top to Bottom':'Bottom to Top';engred=null;path='Helical';
   } else if(tool==='multi_single'){
     teeth=null;mcode='M03';dir=dirXOR;engred=50;path='Stepped';
   } else {
@@ -2524,6 +2518,9 @@ function applyAuto(){
   }
   if(teeth!=null){_tmSetV('teeth',teeth);}_tmSetV('path',path);_tmSetV('dir',dir);if(mcode)_tmSetV('mcode',mcode);if(engred!=null)_tmSetV('engred',engred);
   _tmSetV('stab',stab);
+  /* U-TEETH-EDIT: 'single' locks teeth=1, '3m03'/'3m04' lock teeth=3 (real
+     physical tooth count). 'multi_single'/'multi_multi' (teeth=null here)
+     stay fully manual/editable — no auto-lock, no auto-derivation. */
   var lockIds=['path','dir','stab'];if(teeth!=null)lockIds.push('teeth');if(mcode)lockIds.push('mcode');if(engred!=null)lockIds.push('engred');
   if(tool!=='single'){
     _tmSetV('thtaper','None');_tmSetV('diadiff',0);lockIds.push('thtaper','diadiff','taperdeg');
@@ -2531,7 +2528,11 @@ function applyAuto(){
   /* Repass for Difficult/below-SS316 is built in \u2014 no Cycles cell, no lock. buildPcts() appends the extra full pass
      live off _autoRepassOn(), exactly like the Spring pass checkbox does. Bottom repass (brepass/repp/repoff) in
      Cycles stays 100% separate and manual, untouched by AUTO, for any tool type. */
-  try{matChange();}catch(e){}try{updateSubs();}catch(e){}try{if(typeof updateTeeth==='function')updateTeeth();}catch(e){}try{recalc();}catch(e){}try{renderPassPcts();}catch(e){}try{fdUpd();}catch(e){}
+  /* U-TEETH-EDIT: updateTeeth() (the insert-length auto-calc) deliberately
+     NOT called here anymore - it would stomp the teeth value AUTO just set
+     (locked 1/3, or left for manual entry) with a stale 'Length of insert'
+     leftover. Every AUTO branch now drives teeth by its own rule only. */
+  try{matChange();}catch(e){}try{updateSubs();}catch(e){}try{recalc();}catch(e){}try{renderPassPcts();}catch(e){}try{fdUpd();}catch(e){}
   _autoLock(lockIds);
   var extra=(engred!=null?', 50% entry feed':'');
   var repassNote=repassOn?'+1 full repass pass (Difficult/below-SS316, built in \u2014 like Spring pass)':'no extra repass pass';
@@ -2565,14 +2566,19 @@ function autoChanged(){var t=(($('autoTool')||{}).value)||'single';var AUTO_DEFI
   ['hand','side','mat','psel','tpi'].forEach(function(id){var e=$(id);if(e)e.addEventListener('change',function(){if(autoActive)setTimeout(applyAuto,0);});});
 })();
 function updateTeeth(){var il=$('insl'),tt=$('teeth');if(!il||!tt)return;
-  var pm=$('path');if(pm&&pm.value==='Helical'){tt.value=1;tt.readOnly=true;tt.style.color='var(--acc)';tt.style.background='#101a25';matChange();return;}
+  /* U-TEETH-EDIT: 'No. of teeth' stays editable at all times (never
+     readOnly/grayed except the two AUTO-lock cases handled in applyAuto()).
+     'Length of insert' is only a one-way calculator: typing it computes a
+     suggested teeth value and fills the field once — nothing else reads
+     insert length, and this never fires just because path mode changed. */
   var t=parseFloat(il.value),P=num('P',0);
-  if(il.value.trim()&&t>0&&P>0){tt.value=Math.max(1,Math.floor(t/P));tt.readOnly=true;tt.style.color='var(--acc)';tt.style.background='#101a25';}
-  else{tt.readOnly=false;tt.style.color='';tt.style.background='';}matChange();}
+  if(il.value.trim()&&t>0&&P>0){tt.value=Math.max(1,Math.floor(t/P));}
+  matChange();}
 function updateSubs(){
   var tt=$('thtaper');if(tt&&$('mTaper'))$('mTaper').style.display=(tt.value==='Manual')?'block':'none';
   var pm=$('path');if(pm){var st=pm.value==='Stepped';if($('mStepWrap'))$('mStepWrap').style.display=st?'block':'none';if($('mEntryWrap'))$('mEntryWrap').style.display=st?'none':'block';
-    var tt=$('teeth');if(tt){if(!st){tt.value=1;tt.readOnly=true;tt.style.color='var(--acc)';tt.style.background='#101a25';}else if(typeof updateTeeth==='function'){updateTeeth();}}}
+    /* U-TEETH-EDIT: path switching no longer touches 'No. of teeth' at all
+       — whatever value is entered stays, per operator instruction. */}
   var t2=$('t_thtaper');if(t2&&$('tTaper'))$('tTaper').style.display=(t2.value==='Manual')?'block':'none';
   var inf=$('t_infeed');if(inf&&$('tFlank'))$('tFlank').style.display=(inf.value==='Radial')?'none':'block';
   var bp=$('brepass');if(bp&&$('repWrap'))$('repWrap').style.display=(bp.value==='Yes')?'block':'none';
@@ -2708,7 +2714,16 @@ function bindSim(cv){if(SIM.bound)return;SIM.bound=true;var T={};cv.style.touchA
   cv.addEventListener('wheel',function(e){e.preventDefault();SIM.zoom*=(e.deltaY<0?1.1:0.9);renderSim();},{passive:false});
 }
 function genProg(){ if(progMode==='new'){var _miss=threadMandatoryMissing();if(_miss.length){$('p_res').innerHTML='<p class="warn" style="text-align:left">Required for a New program: '+_miss.join(', ')+'. Fill the fields marked in red, then Generate.</p>';try{refreshReq();}catch(e){}return;}} if(method!=='Turn'&&$('ctrl')&&$('ctrl').value.indexOf('Turn-mill')>=0&&$('side')&&$('side').value==='Internal') return genTurnMill(); if(!pyReady){pendingGen=true;$('p_res').innerHTML='<p class="warn">Engine loading (first time only, ~10\u201330s on phone)\u2026 it will generate automatically once ready.</p>';return;} pendingGen=false; if(method==='Turn') return genTurn(); return genMill(); }
-function computeVcFz(stab){var m=matBy($('mat').value);var vc=m[1],fzb=m[3];var s=Math.max(0,Math.min(100,stab));var vcF=Math.max(0.33,s/50);var fzF=s>=50?(0.5+s/100):Math.max(0.5,s/50);var d=num('d',0),nt=Math.max(1,Math.round(num('teeth',1)));var nf=Math.max(0.1,1-0.08*Math.min(9,nt-1)-0.02*Math.max(0,nt-10));return {vc:Math.round(vc*vcF),fz:d>0?(fzb*Math.min(d,40)/10*nf*fzF):0};}
+function computeVcFz(stab){var m=matBy($('mat').value);var vc=m[1],fzb=m[3];var s=Math.max(0,Math.min(100,stab));var vcF=Math.max(0.33,s/50);var fzF=s>=50?(0.5+s/100):Math.max(0.5,s/50);var d=num('d',0);
+  /* U-TEETH-EDIT: the overall running-feed teeth reduction applies ONLY in
+     Stepped mode (incl. AUTO's multiteeth/alternate-teeth types). Helical's
+     running feed always computes as single-tooth here, regardless of what's
+     in 'No. of teeth' - the ONLY place Helical's tooth count affects feed is
+     the separate first-orbit Bottom-to-Top reduction (engine-side, feed_teeth). */
+  var pmv=$('path');var isStepped=pmv&&pmv.value==='Stepped';
+  var nt=isStepped?Math.max(1,Math.round(num('teeth',1))):1;
+  var nf=Math.max(0.1,1-0.08*Math.min(9,nt-1)-0.02*Math.max(0,nt-10));
+  return {vc:Math.round(vc*vcF),fz:d>0?(fzb*Math.min(d,40)/10*nf*fzF):0};}
 function applyHeader(prog,msg,uname){var L=prog.split('\n');var ins=[];if(msg)ins.push('('+msg+')');if(uname)ins.push('(BY '+uname+')');if(!ins.length)return prog;for(var i=0;i<L.length;i++){if(/^\s*O\d/.test(L[i])||/^\s*%1001/.test(L[i])){L.splice.apply(L,[i+1,0].concat(ins));return L.join('\n');}}L.splice.apply(L,[1,0].concat(ins));return L.join('\n');}
 function applySubprogram(prog){var L=prog.split('\n'),o=[];for(var i=0;i<L.length;i++){var ln=L[i],t=ln.trim();
   if(/^O\d/.test(t)){o.push(ln+'(Sub Program)');continue;}
@@ -2948,7 +2963,7 @@ async function genMill(){
     num_starts:Math.max(1,Math.round(num('starts',1))),entry_feed_reduction:(LOCK_ADV?0:num('engred',0)),max_rpm:(LOCK_ADV?5000:num('maxrpm',5000)),
     stepped_style:(LOCK_ADV?'Modified':($('sstyle').value.indexOf('Carmex')>=0?'Carmex':'Modified')),is_external:!internal,
     strategy:'Standard',finishing:(req==='Finishing'),entry_angle:(LOCK_ADV?0:num('entryang',0)),tool_offset_mode:(toolOD?'od':'centre'),
-    rctf_strength:(LOCK_ADV?0:num('rctf',0)/100),control:$('ctrl').value,safez:num('safez',20),sx:sX,sy:sY,sz:sZ,toolaxis:tax,tnum:(toffY?num('tool_t',1):1),hnum:(toffY?num('tool_h',1):1),dnum:(toffY?num('tool_d',1):1),taper_arcs:(LOCK_ADV?4:num('taparcs',4)),feed_teeth:_autoFeedTeeth()};
+    rctf_strength:(LOCK_ADV?0:num('rctf',0)/100),control:$('ctrl').value,safez:num('safez',20),sx:sX,sy:sY,sz:sZ,toolaxis:tax,tnum:(toffY?num('tool_t',1):1),hnum:(toffY?num('tool_h',1):1),dnum:(toffY?num('tool_d',1):1),taper_arcs:(LOCK_ADV?4:num('taparcs',4)),feed_teeth:teeth};
   try{
     
     var _m=await apiPost('/mill/program',P0); var prog=_m.program, t=_m.seconds;lastCycleSec=t;
@@ -3153,7 +3168,11 @@ function threadFields(){var a=[['side','Int/Ext','sel'],['profile','Thread profi
 function fieldMissing(f){var el=$(f[0]);if(!el)return false;var v=((el.value||'')+'').trim();if(f[2]==='sel')return v==='';if(f[2]==='num')return !(parseFloat(v)>0);if(f[2]==='std')return _hasList()?(v===''):false;if(f[2]==='pit')return _hasList()?false:!(parseFloat(($('P')&&$('P').value)||'')>0);return false;}
 function threadMandatoryMissing(){var miss=[];threadFields().forEach(function(f){if(fieldMissing(f))miss.push(f[1]);});return miss;}
 function refreshReq(){var on=(progMode==='new');['side','profile','P','size','L','d','Z'].forEach(function(id){var el=$(id);if(el)el.classList.remove('reqbad');});if(on){threadFields().forEach(function(f){if(fieldMissing(f)){var el=$(f[0]);if(el)el.classList.add('reqbad');}});}}
-function applyNewBlanks(){soBlank('side');soBlank('profile');try{if(typeof profChange==='function')profChange();}catch(e){}try{if(typeof fdUpd==='function')fdUpd();}catch(e){}['P','L','d','Z'].forEach(function(id){var el=$(id);if(el&&el.tagName==='INPUT')el.value='';});}
+function applyNewBlanks(){soBlank('side');soBlank('profile');try{if(typeof profChange==='function')profChange();}catch(e){}try{if(typeof fdUpd==='function')fdUpd();}catch(e){}['P','L','d','Z'].forEach(function(id){var el=$(id);if(el&&el.tagName==='INPUT')el.value='';});
+  /* U-TEETH-DEFAULT: No. of teeth defaults back to 1 on New (and on page
+     refresh, via the input's HTML default value="1") — any other trigger
+     (path switch, material change, etc.) leaves whatever's entered alone. */
+  var ttN=$('teeth');if(ttN){ttN.value='1';ttN.readOnly=false;ttN.style.color='';ttN.style.background='';}}
 function restoreSampleDefaults(){soUnblank('side');soUnblank('profile');var sd=$('side');if(sd)sd.value='Internal';var pf=$('profile');if(pf)pf.value='ISO Metric';try{if(typeof profChange==='function')profChange();}catch(e){}var sz=$('size');if(sz){for(var i=0;i<sz.options.length;i++){if(sz.options[i].value==='M16'){sz.value='M16';break;}}}try{if(typeof sizeChange==='function')sizeChange();}catch(e){}try{if(typeof fdUpd==='function')fdUpd();}catch(e){}var dd=$('d');if(dd)dd.value='10';var zz=$('Z');if(zz&&!zz.value)zz.value='3';}
 var SAMPLE_MSG='This is a Sample — switch to New (top of the screen) to save or download.';
 function yaSampleBlock(){try{alert(SAMPLE_MSG);}catch(e){}}
