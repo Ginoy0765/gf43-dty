@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.46 &middot; 21 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.48 &middot; 21 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -290,7 +290,7 @@
       <div class="sec"><div class="st" onclick="tog(this)">MACHINE SETUP <span>&#9662;</span></div><div class="sb">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
           <div><label>Control</label><select id="def_ctrl" onchange="applyDefMachine()"><option>Fanuc</option><option>Siemens</option><option>Mazatrol</option><option>Heidenhain</option><option>Haas</option><option>Mitsubishi</option></select></div>
-          <div></div>
+          <div><label>Spindle-index Q0 in program</label><select id="def_q0"><option>Off</option><option>On</option></select></div>
         </div>
 
         <div class="js-turn-only">
@@ -3224,9 +3224,11 @@ function tnPosAuto(){var x=$('t_pos2x'),z=$('t_pos2z');var D=parseFloat(($('D')&
 function tnAfterGeom(){try{tnShankCalc();}catch(e){}try{tnPosAuto();}catch(e){}}
 function tnMachineSeed(){function sv(id,val){var e=$(id);if(e&&val!=null&&val!=='')e.value=val;}var dc=($('def_ctrl')&&$('def_ctrl').value)||'';var map={'Fanuc':'Fanuc I & J','Siemens':'Siemens'};if(map[dc])sv('t_ctrl',map[dc]);var tcp=($('def_tcp')&&$('def_tcp').value);sv('t_tcp',tcp);sv('t_pos1',tcp);sv('t_onum',($('tn_onum')&&$('tn_onum').value));sv('t_fmt',($('def_fmt')&&$('def_fmt').value));sv('t_chuck',($('def_chuck')&&$('def_chuck').value));sv('t_turret',($('def_turret')&&$('def_turret').value));sv('t_spindledef',($('def_spindle')&&$('def_spindle').value));sv('t_cooldef',($('def_cool')&&$('def_cool').value));}
 /* Stage 3: wire Tool coolant / spindle, per-op program no., Positions 1 & 2 into the turning G-code */
+function _q0ZShift(prog,P){var lines=prog.split('\n'),sh=0;for(var i=0;i<lines.length;i++){var m=lines[i].match(/^\(--- START (\d+) OF/);if(m){sh=(parseInt(m[1],10)-1)*P;continue;}if(sh){var z=lines[i].match(/^G00 Z(-?[\d.]+)\s*$/);if(z){lines[i]='G00 Z'+(Math.round((parseFloat(z[1])+sh)*10000)/10000);}}}return lines.join('\n');}
 function tnPostTurn(prog){try{
   var mc=($('t_mcode')&&$('t_mcode').value)||'M03';
   prog=prog.replace(/(G97 S\d+) \(M03\/M04\)/,'$1 '+mc);
+  var _q0on=($('def_q0')&&$('def_q0').value==='On');if(_q0on){prog=prog.split('\n').map(function(l){return (/\bG92\b/.test(l)&&!/\sQ-?\d/.test(l))?(l+' Q0'):l;}).join('\n');}else{var _ns=Math.max(1,Math.round(num('starts',1))),_P=num('P',0);if(_ns>1&&_P>0)prog=_q0ZShift(prog,_P);prog=prog.replace(/ Q-?\d+\b/g,'');}
   var cv=($('t_cool')&&$('t_cool').value)||'M08';
   var coolOn=(cv==='Custom')?((($('t_coolcustom')&&$('t_coolcustom').value)||'').trim()||'M08'):cv;
   prog=prog.replace(/(\n\s*G00 T\S+ )M08\b/,'$1'+coolOn);
