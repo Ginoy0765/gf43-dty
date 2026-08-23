@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.61 &middot; 22 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.62 &middot; 22 Aug 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -2445,7 +2445,7 @@ var tnAutoMode='Standard';
 var CARMEX_K={N:0.261,K:0.247,P:0.239,M:0.180,H:0.180,S:0.166};
 function tnCarmexFirst(){var m=(typeof matBy==='function'&&$('mat'))?matBy($('mat').value):null;var g=(m&&m[2]&&CARMEX_K[m[2]])?m[2]:'P';var P=num('P',2);if(P<=0)return 0;var internal=$('side')&&$('side').value==='Internal';return CARMEX_K[g]*Math.pow(P,0.80)*(internal?0.78:1.0);}
 function tnFreePasses(){return (tnAutoMode==='Difficult')?2:1;}
-function tnAutoDOC(){if(!tnAutoOn||!tnFirstAuto)return;var cf=tnCarmexFirst();if(tnAutoMode==='Difficult')cf*=0.75;var floor=0.01;if(cf>0){if($('t_first'))$('t_first').value=cf.toFixed(3);if($('t_trans'))$('t_trans').value=(tnAutoMode==='Productivity'?'Pctreduce':'Degressive');if($('t_e100'))$('t_e100').value=floor.toFixed(3);if($('t_idle'))$('t_idle').value=String(tnFreePasses());}}
+function tnAutoDOC(){if(!tnAutoOn||!tnFirstAuto)return;var cf=tnCarmexFirst();if(tnAutoMode==='Difficult')cf*=0.75;var floor=0.01;if(cf>0){if($('t_first'))$('t_first').value=cf.toFixed(3);if($('t_trans'))$('t_trans').value=(tnAutoMode==='Productivity'?'Pctreduce':'Degressive');if($('t_e100'))$('t_e100').value=floor.toFixed(3);if($('t_idle'))$('t_idle').value=String(tnFreePasses());if($('t_infeed'))$('t_infeed').value='Alternate flank';}}
 function _tnFmt(v){return (Math.round(v*10000)/10000).toString();}
 function _autoParams(d1){var s=(tnAutoMode==='Productivity')?(0.75*d1):(0.5*d1);return {K:2,s:s};}
 function _autoEntry(d1){return (tnAutoMode==='Productivity')?[d1,0.75*d1]:[0.5*d1,0.5*d1];}
@@ -2487,10 +2487,10 @@ function _autoCycle(prog){try{
           var nIdle=0;for(var q=0;q<cums.length;q++){if(cums[q]>TD-1e-4)nIdle++;}nIdle=Math.max(0,nIdle-1);
           var newc=_autoBuildCums(d1,TD);
           var Zp1=Zstart;if(passes[0].appr){var mz=passes[0].appr.match(/Z(-?[\d.]+)/);if(mz)Zp1=parseFloat(mz[1]);}
-          var tmpl=passes[0].g92;
-          for(var c2=0;c2<newc.length;c2++){var cc=newc[c2];var xf=internal?(minor+2*cc):(major-2*cc);var zf=Zstart-(Zstart-Zp1)*(cc/d1);out.push('G00 Z'+_tnFmt(zf));out.push(tmpl.replace(/X-?[\d.]+/,'X'+_tnFmt(xf)));}
-          var xfull=internal?(minor+2*TD):(major-2*TD);var zfull=Zstart-(Zstart-Zp1)*(TD/d1);
-          for(var idl=0;idl<nIdle;idl++){out.push('G00 Z'+_tnFmt(zfull));out.push(tmpl.replace(/X-?[\d.]+/,'X'+_tnFmt(xfull)));}
+          var tmpl=passes[0].g92;var _alt=($('t_infeed')&&$('t_infeed').value==='Alternate flank');
+          for(var c2=0;c2<newc.length;c2++){var cc=newc[c2];var xf=internal?(minor+2*cc):(major-2*cc);var off=(Zstart-Zp1)*(cc/d1);var sgn=(_alt&&(c2%2===1))?-1:1;var zf=Zstart-sgn*off;out.push('G00 Z'+_tnFmt(zf));out.push(tmpl.replace(/X-?[\d.]+/,'X'+_tnFmt(xf)));}
+          var xfull=internal?(minor+2*TD):(major-2*TD);
+          for(var idl=0;idl<nIdle;idl++){var sgi=(_alt&&(((newc.length+idl)%2)===1))?-1:1;var zfi=Zstart-sgi*(Zstart-Zp1)*(TD/d1);out.push('G00 Z'+_tnFmt(zfi));out.push(tmpl.replace(/X-?[\d.]+/,'X'+_tnFmt(xfull)));}
         }
         i=j;handled=true;
       }
