@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.75 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.76 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1249,7 +1249,7 @@
           <option value="back">Face (back)</option>
           <option value="cutoff">Parting (cut-off)</option>
         </select></div>
-      <div><label>Rough / Finish</label>
+      <div id="gvRfCell"><label>Rough / Finish</label>
         <select id="gv_rf" onchange="gv_selset('rf',this.value);gv_recalc()">
           <option value="rough">Rough only</option>
           <option value="finish">Finish only</option>
@@ -1261,12 +1261,24 @@
       <div><label>Top dia D1 (mm)</label><input id="D1" type="number" value="60" step="0.001" oninput="gv_recalc()"></div>
       <div><label>Bottom dia D2 (mm)</label><input id="D2" type="number" value="40" step="0.001" oninput="gv_recalc()"></div>
     </div>
-    <div class="row2">
+    <div class="row2" id="gvZrow">
       <div><label>Start Z1 (mm, face = 0)</label><input id="Z1" type="number" value="-35" step="0.001" oninput="gv_recalc()"></div>
       <div><label>End Z2 (mm)</label><input id="Z2" type="number" value="-55" step="0.001" oninput="gv_recalc()"></div>
     </div>
-    <div class="hint">Width = |Z1&minus;Z2| = <span id="wCalc">6</span> mm &middot; Depth = (D1&minus;D2)/2 = <span id="dCalc">3</span> mm. Face = 0, toward chuck is &minus;Z.</div>
-    <div class="sec" style="margin-top:12px"><div class="st" onclick="gv_toggle(this)">CORNER TREATMENT <span class="caret">&#9656;</span></div><div class="sb">
+    <div class="hint" id="gvWDhint">Width = |Z1&minus;Z2| = <span id="wCalc">6</span> mm &middot; Depth = (D1&minus;D2)/2 = <span id="dCalc">3</span> mm. Face = 0, toward chuck is &minus;Z.</div>
+    <div id="gvPartBox" style="display:none">
+      <div class="row2">
+        <div><label>Parting length from face (mm)</label><input id="gv_plen" type="number" value="20" step="0.1" oninput="gv_recalc()"></div>
+        <div></div>
+      </div>
+      <div class="hint keep">Part-off face is at this Z from the front face; the kerf runs from here to length + insert width (toward chuck).</div>
+      <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">CORNER &mdash; tailstock-side top</div>
+      <div class="row2">
+        <div><label>Type</label><select id="gv_pct" onchange="gv_recalc()"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select></div>
+        <div><label>Size (mm)</label><input id="gv_pcs" type="number" value="0" step="0.05" oninput="gv_recalc()"></div>
+      </div>
+    </div>
+    <div class="sec" id="gvCornerSec" style="margin-top:12px"><div class="st" onclick="gv_toggle(this)">CORNER TREATMENT <span class="caret">&#9656;</span></div><div class="sb">
       <div class="hint" style="margin-bottom:4px">Type + Size per corner (A top-L, B bot-L, C bot-R, D top-R).</div>
       <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
         <select id="A_t" onchange="gv_recalc()" style="flex:1;min-width:80px"><option>Sharp</option><option>Chamfer</option><option>Radius</option></select>
@@ -3904,7 +3916,30 @@ function applyAllCorners(){
   });
   recalc();
 }
+function gvPartingUI(){
+  var isPart=($('gv_type')?$('gv_type').value:'')==='cutoff';
+  if($('gvRfCell'))$('gvRfCell').style.display=isPart?'none':'';
+  if($('gvZrow'))$('gvZrow').style.display=isPart?'none':'';
+  if($('gvWDhint'))$('gvWDhint').style.display=isPart?'none':'';
+  if($('gvCornerSec'))$('gvCornerSec').style.display=isPart?'none':'';
+  if($('gvPartBox'))$('gvPartBox').style.display=isPart?'block':'none';
+  if(isPart){
+    if(!window._gvWasParting){ if($('D2'))$('D2').value='0'; }
+    if($('gv_rf'))$('gv_rf').value='rough';
+    if($('gv_strat'))$('gv_strat').value='single';
+    try{strat='single';}catch(e){} try{rf='rough';}catch(e){}
+    var L=parseFloat($('gv_plen')?$('gv_plen').value:'')||0;
+    var Wi=parseFloat($('tl_wi')?$('tl_wi').value:'')||3;
+    if($('Z1'))$('Z1').value=(-L).toFixed(3);
+    if($('Z2'))$('Z2').value=(-(L+Wi)).toFixed(3);
+    var pt=$('gv_pct')?$('gv_pct').value:'Sharp', ps=($('gv_pcs')&&$('gv_pcs').value!=='')?$('gv_pcs').value:'0';
+    if($('A_t'))$('A_t').value=pt; if($('A_s1'))$('A_s1').value=ps;
+    ['B','C','D'].forEach(function(c){ if($(c+'_t'))$(c+'_t').value='Sharp'; if($(c+'_s1'))$(c+'_s1').value='0'; });
+  }
+  window._gvWasParting=isPart;
+}
 function recalc(){
+  gvPartingUI();
   $('trapBox').style.display=$('mod_trap').checked?'block':'none';
   $('angBox').style.display=$('mod_ang').checked?'block':'none';
   $('patBox').style.display=$('patOn').checked?'block':'none';
@@ -4083,6 +4118,7 @@ function generate(P){
   var ctrl=P.ctrl,D1=P.D1,D2=P.D2,Z1=P.Z1,Z2=P.Z2,Wi=P.Wi,rIns=P.rIns,T=P.T,TD=P.TD,Vc=P.Vc,S=P.S,maxRPM=P.maxRPM,Fr=P.Fr,Ff=P.Ff,pd=P.pd,pr=P.pr,dwell=P.dwell,sX=P.sX,sZ=P.sZ,mat=P.mat,strat=P.strat,rf=P.rf,tipPos=P.tipPos,compSet=P.compSet,corners=P.corners;
   var rdoc=P.rdoc||0;var floor=P.floor||0;
   var fa=(P.fa!=null?P.fa:0.1), plf=(P.plf||100), rtr=P.rtr||0, arcfmt=(P.arcfmt||'R');
+  if(($('gv_type')||{}).value==='cutoff')fa=0;   // parting cuts to centre, no finish stock
   var plungeF=Fr*plf/100;              // radial plunge feed = rough feed x plunge%
   var _rghD2=D2+2*fa;                   // rough floor leaves finish allowance (fa) radial
   var _mtp=null;
