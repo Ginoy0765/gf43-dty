@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.72 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.73 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1378,19 +1378,20 @@
         </select></div>
     </div>
     <div class="hint keep" id="stratHint" style="margin:4px 0 8px">Recommended strategy updates automatically based on the groove geometry.</div>
-    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">PECK / OUTPUT</div>
-    <label class="chkrow"><input type="checkbox" id="cs_peck" onchange="gv_recalc()" checked> Peck the plunge</label>
-    <div id="peckBox" style="margin-left:24px">
+    <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">DEPTH OF CUT</div>
+    <div id="peckBox">
       <div class="row2">
         <div><label>Peck depth (mm)</label><input id="cs_pd" type="number" value="0.5" step="0.05" oninput="gv_recalc()"></div>
         <div><label>Retract per peck (mm)</label><input id="cs_pr" type="number" value="0.3" step="0.05" oninput="gv_recalc()"><label>Floor / layer depth (mm, blank = off)</label><input id="cs_floor" type="number" value="" placeholder="off" step="0.5" oninput="gv_recalc()"></div>
       </div>
     </div>
-    <div class="row2" style="margin-top:6px">
-      <div><label>Radial DOC &mdash; turn (mm)</label><input id="cs_rdoc" type="number" value="" placeholder="= peck depth" step="0.05" oninput="gv_recalc()"></div>
-      <div></div>
+    <div id="rdocBox">
+      <div class="row2" style="margin-top:6px">
+        <div><label>Radial DOC &mdash; turn (mm)</label><input id="cs_rdoc" type="number" value="" placeholder="= peck depth" step="0.05" oninput="gv_recalc()"></div>
+        <div></div>
+      </div>
+      <div class="hint">Radial depth of cut per turning pass in <b>Plunge-turning</b> / <b>Ramping</b> roughing (plunge a wall, turn toward the other). Blank = use peck depth.</div>
     </div>
-    <div class="hint">Radial depth of cut per turning pass in <b>Plunge-turning</b> roughing (plunge tailstock wall, turn toward spindle). Blank = use peck depth.</div>
     </div></div>
   <div class="sec" style="margin-top:14px"><div class="st" onclick="gv_toggle(this)">PROFILE <span class="caret">&#9656;</span></div><div class="sb">
     <!-- corner coordinates kept as hidden inputs (auto-filled by GEOMETRY, read by generator/sim) -->
@@ -3805,7 +3806,7 @@ function updateStratHint(){
 function gvSelSet(which,val){
   if(which==='type'){typ=val;recalc();}
   else if(which==='rf'){rf=val;}
-  else if(which==='strat'){strat=val;updateStratHint();}
+  else if(which==='strat'){strat=val;updateStratHint();recalc();}
   else if(which==='fin'){finStrat=val;}
   else if(which==='patmode'){patMode=val;if($('pat2lbl'))$('pat2lbl').textContent=(patMode==='pitch'?'Pitch (mm)':'Total span (mm)');recalc();}
 }
@@ -3907,7 +3908,7 @@ function recalc(){
   $('trapBox').style.display=$('mod_trap').checked?'block':'none';
   $('angBox').style.display=$('mod_ang').checked?'block':'none';
   $('patBox').style.display=$('patOn').checked?'block':'none';
-  $('peckBox').style.display=$('cs_peck').checked?'block':'none';
+  (function(){var _st=$('gv_strat')?$('gv_strat').value:'multi';var _pk=(_st==='single'||_st==='multi');if($('peckBox'))$('peckBox').style.display=_pk?'block':'none';if($('rdocBox'))$('rdocBox').style.display=_pk?'none':'block';})();
   document.querySelectorAll('.indepOnly').forEach(function(el){el.style.display=$('indepLegs').checked?'':'none';});
   if($('allcS2Box'))$('allcS2Box').style.display=$('indepLegs').checked?'block':'none';
   var m=$('gv_manual').checked;
