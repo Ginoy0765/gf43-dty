@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.68 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.72 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1250,7 +1250,7 @@
           <option value="cutoff">Parting (cut-off)</option>
         </select></div>
       <div><label>Rough / Finish</label>
-        <select id="gv_rf" onchange="gv_selset('rf',this.value)">
+        <select id="gv_rf" onchange="gv_selset('rf',this.value);gvSyncStratChecks()">
           <option value="rough">Rough only</option>
           <option value="finish">Finish only</option>
           <option value="both" selected>Rough + Finish</option>
@@ -1309,7 +1309,7 @@
   <div class="modeseg" style="margin:2px 0 8px"><button type="button" id="gv_pm_sample" onclick="setGvMode('sample')">&#128218; Sample</button><button type="button" id="gv_pm_new" class="on" onclick="setGvMode('new')">&#10133; New</button></div><span id="gv_pm_hint" class="note mhint" style="margin:0 0 10px">New program — generate, simulate, save &amp; download.</span>
   <div class="sec"><div class="st" onclick="gv_toggle(this)">TOOL <span class="caret">&#9656;</span></div><div class="sb">
     <div class="row2">
-      <div><label>Insert width Wi (mm)</label><input id="tl_wi" type="number" value="3" step="0.01"></div>
+      <div><label>Insert width Wi (mm)</label><input id="tl_wi" type="number" value="3" step="0.01" oninput="gvWiFeed()"></div>
       <div><label>Corner radius r (mm)</label><input id="tl_rc" type="number" value="0.2" step="0.01"></div>
     </div>
     <div class="row2">
@@ -1355,6 +1355,7 @@
       <div><label>Rough feed (mm/rev)</label><input id="p_fr" type="number" value="0.08" step="0.001" oninput="gv_recalc()"></div>
       <div><label>Finish feed (mm/rev)</label><input id="p_ff" type="number" value="0.05" step="0.001" oninput="gv_recalc()"></div>
     </div>
+    <div class="hint">Rough feed auto-fills from insert width (0.0442&middot;W<sup>0.545</sup> &mdash; e.g. 0.5mm&rarr;0.03, 1mm&rarr;0.045, 3mm&rarr;0.08, 25mm&rarr;0.255). It updates whenever you change insert width; edit to override.</div>
     <div class="row2">
       <div><label>Dwell at bottom (rev)</label><input id="p_dw" type="number" value="0.5" step="0.1" oninput="gv_recalc()"></div>
       <div></div>
@@ -1363,14 +1364,14 @@
   <div class="sec"><div class="st" onclick="gv_toggle(this)">CYCLES <span class="caret">&#9662;</span></div><div class="sb">
     <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">STRATEGY</div>
     <div class="row2">
-      <div><label style="margin-top:0">Roughing strategy</label>
+      <div><label style="margin-top:0;display:flex;align-items:center;gap:7px;cursor:pointer"><input type="checkbox" id="gv_roughOn" checked onchange="gvStratToggle('rough')" style="width:15px;height:15px;margin:0;accent-color:var(--acc)">Roughing strategy</label>
         <select id="gv_strat" onchange="gv_selset('strat',this.value)">
           <option value="single">Single plunge</option>
           <option value="multi" selected>Multi-plunge</option>
           <option value="plturn">Plunge turning</option>
           <option value="ramp">Ramping</option>
         </select></div>
-      <div><label style="margin-top:0">Finishing strategy</label>
+      <div><label style="margin-top:0;display:flex;align-items:center;gap:7px;cursor:pointer"><input type="checkbox" id="gv_finOn" checked onchange="gvStratToggle('fin')" style="width:15px;height:15px;margin:0;accent-color:var(--acc)">Finishing strategy</label>
         <select id="gv_fin" onchange="gv_selset('fin',this.value)">
           <option value="profile">Profile pass</option>
           <option value="walls" selected>Walls-then-floor</option>
@@ -1390,18 +1391,7 @@
       <div></div>
     </div>
     <div class="hint">Radial depth of cut per turning pass in <b>Plunge-turning</b> roughing (plunge tailstock wall, turn toward spindle). Blank = use peck depth.</div>
-    <label class="chkrow"><input type="checkbox" id="cs_incr" onchange="gv_recalc()"> Incremental output (U/W after start point)</label>
-    <div class="hint">First positioning move stays absolute (X/Z); all following moves are emitted as incremental U/W deltas. Fanuc-style controls only &mdash; Siemens/Heidenhain stay absolute.</div>
-    <div class="row2">
-      <div><label>Finish allowance (mm)</label><input id="gv_fa" type="number" value="0.1" step="0.02" oninput="gv_recalc()"></div>
-      <div><label>Plunge feed %</label><input id="gv_plf" type="number" value="100" step="5" oninput="gv_recalc()"></div>
-    </div>
-    <div class="row2">
-      <div><label>Retract clearance (mm)</label><input id="gv_rtr" type="number" value="" placeholder="to Safe X" step="0.5" oninput="gv_recalc()"></div>
-      <div><label>Arc output</label><select id="gv_arcfmt" onchange="gv_recalc()"><option value="R">R word</option><option value="IK">I,K center</option></select></div>
-    </div>
-    <div class="hint">Finish allowance = radial stock left by roughing for the finish pass. Plunge feed % scales the radial plunge feed. Retract clearance = &#216; above the groove to rapid between plunges (blank = Safe X). Arc output = R word or I,K centre for finish arcs.</div>
-  </div></div>
+    </div></div>
   <div class="sec" style="margin-top:14px"><div class="st" onclick="gv_toggle(this)">PROFILE <span class="caret">&#9656;</span></div><div class="sb">
     <!-- corner coordinates kept as hidden inputs (auto-filled by GEOMETRY, read by generator/sim) -->
     <input id="A_x" type="hidden" value="32"><input id="A_z" type="hidden" value="-4">
@@ -1455,6 +1445,19 @@
     </div>
   </div></div>
   <!-- ============ 7. CUT SETUP (peck / chip break) ============ -->
+  <div class="sec"><div class="st" onclick="gv_toggle(this)">CUT SETUP <span class="caret">&#9656;</span></div><div class="sb">
+    <label class="chkrow"><input type="checkbox" id="cs_incr" onchange="gv_recalc()"> Incremental output (U/W after start point)</label>
+    <div class="hint">First positioning move stays absolute (X/Z); all following moves are emitted as incremental U/W deltas. Fanuc-style controls only &mdash; Siemens/Heidenhain stay absolute.</div>
+    <div class="row2">
+      <div id="gv_faCell"><label>Finish allowance (mm)</label><input id="gv_fa" type="number" value="0.1" step="0.02" oninput="gv_recalc()"></div>
+      <div><label>Plunge feed %</label><input id="gv_plf" type="number" value="100" step="5" oninput="gv_recalc()"></div>
+    </div>
+    <div class="row2">
+      <div><label>Retract clearance (mm)</label><input id="gv_rtr" type="number" value="" placeholder="to Safe X" step="0.5" oninput="gv_recalc()"></div>
+      <div><label>Arc output</label><select id="gv_arcfmt" onchange="gv_recalc()"><option value="R">R word</option><option value="IK">I,K center</option></select></div>
+    </div>
+    <div class="hint">Finish allowance = radial stock left by roughing for the finish pass. Plunge feed % scales the radial plunge feed. Retract clearance = &#216; above the groove to rapid between plunges (blank = Safe X). Arc output = R word or I,K centre for finish arcs.</div>
+  </div></div>
   
   <!-- ============ MACHINE ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">MACHINE <span class="caret">&#9656;</span></div><div class="sb">
@@ -2179,10 +2182,14 @@ function gvManRough(mv,tp,safeX,pd,pr,Fr,dwell,peck,stock,rIns){
   var step=Math.max(0.2,Wi-2*(rIns||0));
   var zcFirst=zA+Wi/2,zcLast=zB-Wi/2;
   if(zcLast<zcFirst){zcFirst=zcLast=(zA+zB)/2;}
-  var span=zcLast-zcFirst,N=(span<=1e-6)?1:Math.max(2,Math.ceil(span/step)+1),dz=(N>1)?span/(N-1):0,k;
-  mv.push({t:'cmt',txt:'Gouge-safe roughing: '+N+' plunge(s) following the profile envelope (insert '+Wi.toFixed(2)+' mm)'});
+  var span=zcLast-zcFirst;
+  // Always plunge the groove CENTRE first, then expand outward toward both walls alternately.
+  var zMid=(zcFirst+zcLast)/2, halfSpan=span/2, nSide=(halfSpan<=1e-6)?0:Math.ceil(halfSpan/step), dz=(nSide>0)?halfSpan/nSide:0, k;
+  var zcs=[zMid];for(var _sd=1;_sd<=nSide;_sd++){zcs.push(zMid-_sd*dz);zcs.push(zMid+_sd*dz);}
+  var N=zcs.length;
+  mv.push({t:'cmt',txt:'Gouge-safe roughing (centre-out): '+N+' plunge(s) following the profile envelope (insert '+Wi.toFixed(2)+' mm)'});
   for(k=0;k<N;k++){
-    var zc=zcFirst+k*dz;var tr=_gvAdjR(adj,zc);if(tr===null)continue;tr=tr+(stock||0);
+    var zc=zcs[k];var tr=_gvAdjR(adj,zc);if(tr===null)continue;tr=tr+(stock||0);
     if(tr>=rMouth-1e-6)continue;
     var zp=zc-Wi/2+refOff;
     mv.push({t:'g0',X:safeX});mv.push({t:'g0',Z:zp});mv.push({t:'g0',X:2*rMouth+2});
@@ -2504,21 +2511,32 @@ function _autoCycle(prog){try{
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);else build();})();
 /* ===== Grooving AUTO cycle ===== */
 var gvAutoOn=false, gvAutoOp='Rough + Finish', gvAutoReq='Standard';
+/* Default rough feed as a function of insert width (Standard rule): fit through 0.5mm=0.03, 1mm=0.045, 3mm=0.08 */
+var GV_REQ_FEED={Standard:1.0,Difficult:0.72,Productivity:1.35};
+function gvFeedForWidth(w){if(!(w>0))return null;return Math.round(0.0442*Math.pow(w,0.545)*1000)/1000;}
+function gvWiFeed(){var wi=parseFloat($('tl_wi')?$('tl_wi').value:'');var base=gvFeedForWidth(wi);if(base==null)return;var fac=(gvAutoOn?(GV_REQ_FEED[gvAutoReq]||1):1);var e=$('p_fr');if(e)e.value=(Math.round(base*fac*1000)/1000);if(typeof gv_recalc==='function'){try{gv_recalc();}catch(err){}}}
 function gvAutoUI(){var b=$('gvAutoBtn');if(!b)return;if(gvAutoOn){b.style.background='#2e9c60';b.style.borderColor='#2e9c60';b.style.color='#04220f';b.textContent='AUTO ✓';}else{b.style.background='';b.style.borderColor='';b.style.color='';b.textContent='AUTO';}}
-function gvAutoDescUpdate(){var d=$('gvAutoDesc');if(!d)return;var opT={'Parting':'single-plunge cut-off to centre, rough only','Rough + Finish':'multi-plunge roughing then a walls-then-floor finish pass'};var rqT={Standard:'balanced peck, feed and finish allowance for general steel.',Difficult:'lighter pecks, reduced plunge feed and a larger retract for hard or unstable jobs and better chip control.',Productivity:'deeper pecks and faster feed for shorter cycle time on stable setups.'};d.innerHTML='<b>'+gvAutoOp+' · '+gvAutoReq+'</b> — '+(opT[gvAutoOp]||'')+'. '+(rqT[gvAutoReq]||'');}
+function gvAutoDescUpdate(){var d=$('gvAutoDesc');if(!d)return;var opT={'Parting':'single-plunge cut-off to centre, rough only','Rough + Finish':'multi-plunge roughing (leaving finish stock) then a walls-then-floor finish pass','Widening':'centre-out multi-plunge straight to the final walls (no finish stock); the last pass programs the corner chamfer/radius and any wall taper / profile from Corner Treatment'};var rqT={Standard:'balanced peck, feed and finish allowance for general steel.',Difficult:'lighter pecks, reduced plunge feed and a larger retract for hard or unstable jobs and better chip control.',Productivity:'deeper pecks and faster feed for shorter cycle time on stable setups.'};d.innerHTML='<b>'+gvAutoOp+' · '+gvAutoReq+'</b> — '+(opT[gvAutoOp]||'')+'. '+(rqT[gvAutoReq]||'');}
 function gvAutoOpen(){var m=$('gvAutoModal');if(!m)return;var o=$('gvAutoOp'),r=$('gvAutoReq');if(o)o.value=gvAutoOp;if(r)r.value=gvAutoReq;gvAutoDescUpdate();m.style.display='flex';}
 function gvAutoClose(){var m=$('gvAutoModal');if(m)m.style.display='none';}
 function gvAutoPick(){var o=$('gvAutoOp'),r=$('gvAutoReq');if(o)gvAutoOp=o.value;if(r)gvAutoReq=r.value;gvAutoDescUpdate();}
 function _gvAutoSel(id,v){var e=$(id);if(e){e.value=v;if(typeof e.onchange==='function')e.onchange();}}
 function _gvAutoNum(id,v){var e=$(id);if(e&&v!=null){e.value=v;}}
+function gvOpFaUI(){var c=$('gv_faCell');if(c)c.style.display=(gvAutoOn&&gvAutoOp==='Widening')?'none':'';}
+/* Roughing / finishing activate toggles in CYCLES -> drive gv_rf (rough / finish / both) */
+function gvStratEnableUI(){var ro=$('gv_roughOn'),fo=$('gv_finOn'),rs=$('gv_strat'),fs=$('gv_fin');if(rs&&ro){rs.disabled=!ro.checked;rs.style.opacity=ro.checked?'1':'0.4';}if(fs&&fo){fs.disabled=!fo.checked;fs.style.opacity=fo.checked?'1':'0.4';}}
+function gvStratToggle(src){var ro=$('gv_roughOn'),fo=$('gv_finOn');if(!ro||!fo)return;if(!ro.checked&&!fo.checked){if(src==='rough')fo.checked=true;else ro.checked=true;}var v=(ro.checked&&fo.checked)?'both':(ro.checked?'rough':'finish');var e=$('gv_rf');if(e)e.value=v;if(typeof gv_selset==='function'){try{gv_selset('rf',v);}catch(_){}}gvStratEnableUI();if(typeof gv_recalc==='function'){try{gv_recalc();}catch(e2){}}}
+function gvSyncStratChecks(){var e=$('gv_rf');if(!e)return;var v=e.value,ro=$('gv_roughOn'),fo=$('gv_finOn');if(!ro||!fo)return;ro.checked=(v==='both'||v==='rough');fo.checked=(v==='both'||v==='finish');gvStratEnableUI();}
 function gvAutoApply(){var o=$('gvAutoOp'),r=$('gvAutoReq');if(o)gvAutoOp=o.value;if(r)gvAutoReq=r.value;
   if(gvAutoOp==='Parting'){_gvAutoSel('gv_type','cutoff');_gvAutoSel('gv_rf','rough');_gvAutoSel('gv_strat','single');}
+  else if(gvAutoOp==='Widening'){_gvAutoSel('gv_rf','both');_gvAutoSel('gv_strat','multi');_gvAutoSel('gv_fin','profile');}
   else{_gvAutoSel('gv_rf','both');_gvAutoSel('gv_strat','multi');_gvAutoSel('gv_fin','walls');}
-  var R={Standard:{pd:0.5,pr:0.3,fr:0.08,ff:0.05,fa:0.1,plf:100},Difficult:{pd:0.3,pr:0.4,fr:0.05,ff:0.04,fa:0.15,plf:70},Productivity:{pd:0.8,pr:0.25,fr:0.12,ff:0.06,fa:0.1,plf:100}}[gvAutoReq]||{};
-  _gvAutoNum('cs_pd',R.pd);_gvAutoNum('cs_pr',R.pr);_gvAutoNum('p_fr',R.fr);_gvAutoNum('p_ff',R.ff);_gvAutoNum('gv_fa',R.fa);_gvAutoNum('gv_plf',R.plf);
-  gvAutoOn=true;gvAutoUI();if(typeof gv_recalc==='function'){try{gv_recalc();}catch(e){}}gvAutoClose();}
-function gvAutoOffBtn(){gvAutoOn=false;gvAutoUI();gvAutoClose();}
-(function(){function build(){if(document.getElementById('gvAutoModal'))return;var m=document.createElement('div');m.id='gvAutoModal';m.className='automodal';m.style.display='none';m.innerHTML='<div class="autocard"><div class="autohd">AUTO &mdash; default cycle<button type="button" class="autox" onclick="gvAutoClose()">&times;</button></div><label>Operation</label><select id="gvAutoOp" onchange="gvAutoPick()"><option>Parting</option><option selected>Rough + Finish</option></select><label style="margin-top:12px">Requirement</label><select id="gvAutoReq" onchange="gvAutoPick()"><option>Standard</option><option>Difficult</option><option>Productivity</option></select><div id="gvAutoDesc" style="font-size:12px;color:#9fc4e6;margin-top:12px;line-height:1.5"></div><div style="display:flex;gap:8px;margin-top:14px"><button type="button" class="btn" style="flex:1" onclick="gvAutoApply()">Apply</button><button type="button" class="btn btn2" style="flex:1" onclick="gvAutoOffBtn()">Turn off</button></div></div>';document.body.appendChild(m);}
+  var R={Standard:{pd:0.5,pr:0.3,ff:0.05,fa:0.1,plf:100},Difficult:{pd:0.3,pr:0.4,ff:0.04,fa:0.15,plf:70},Productivity:{pd:0.8,pr:0.25,ff:0.06,fa:0.1,plf:100}}[gvAutoReq]||{};
+  _gvAutoNum('cs_pd',R.pd);_gvAutoNum('cs_pr',R.pr);_gvAutoNum('p_ff',R.ff);_gvAutoNum('gv_plf',R.plf);
+  if(gvAutoOp==='Widening'){_gvAutoNum('gv_fa',0);}else{_gvAutoNum('gv_fa',R.fa);}
+  gvAutoOn=true;gvOpFaUI();gvWiFeed();gvAutoUI();gvAutoClose();}
+function gvAutoOffBtn(){gvAutoOn=false;gvOpFaUI();gvAutoUI();gvAutoClose();}
+(function(){function build(){if(document.getElementById('gvAutoModal'))return;var m=document.createElement('div');m.id='gvAutoModal';m.className='automodal';m.style.display='none';m.innerHTML='<div class="autocard"><div class="autohd">AUTO &mdash; default cycle<button type="button" class="autox" onclick="gvAutoClose()">&times;</button></div><label>Operation</label><select id="gvAutoOp" onchange="gvAutoPick()"><option>Parting</option><option selected>Rough + Finish</option><option>Widening</option></select><label style="margin-top:12px">Requirement</label><select id="gvAutoReq" onchange="gvAutoPick()"><option>Standard</option><option>Difficult</option><option>Productivity</option></select><div id="gvAutoDesc" style="font-size:12px;color:#9fc4e6;margin-top:12px;line-height:1.5"></div><div style="display:flex;gap:8px;margin-top:14px"><button type="button" class="btn" style="flex:1" onclick="gvAutoApply()">Apply</button><button type="button" class="btn btn2" style="flex:1" onclick="gvAutoOffBtn()">Turn off</button></div></div>';document.body.appendChild(m);try{gvSyncStratChecks();}catch(_){}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);else build();})();
 function buildTurnPasses(){
   var internal=$('side').value==='Internal';var D=num('D',16),P=num('P',2);
@@ -4125,18 +4143,13 @@ function generate(P){
         var step=Math.max(0.1, Wi-2*rIns);
         var zCFirst=zLeftWall+Wi/2, zCLast=zRightWall-Wi/2;
         var span=zCLast-zCFirst;
-        var N_p=(span<=0.001)?1:Math.max(2, Math.ceil(span/step)+1);
-        var actualStep=(N_p>1)?span/(N_p-1):0;
-        // Wear jitter: nudge interior plunges by a deterministic, bounded amount so the
-        // same edge point is not always the leading cusp corner. Bound = min(0.25*r, slack/2)
-        // keeps overlap >= 2*r (no uncut cusp). Deterministic (golden-ratio) => same program each run.
-        var _jit=Math.max(0, Math.min(0.25*rIns, (step-actualStep)/2));
-        var centers=[];
-        for(var iP=0;iP<N_p;iP++){
-          var _zc=zCFirst+iP*actualStep;
-          if(iP>0 && iP<N_p-1 && _jit>1e-4){ var _fr=((iP*0.6180339887498949)%1); _zc+=(_fr-0.5)*2*_jit; }
-          centers.push(_zc);
-        }
+        // Always plunge the groove CENTRE first, then expand outward toward both walls alternately.
+        var zMid=(zCFirst+zCLast)/2, halfSpan=span/2;
+        var nSide=(halfSpan<=0.001)?0:Math.ceil(halfSpan/step);
+        var actualStep=(nSide>0)?halfSpan/nSide:0;
+        var centers=[zMid];
+        for(var _sd=1;_sd<=nSide;_sd++){ centers.push(zMid-_sd*actualStep); centers.push(zMid+_sd*actualStep); }
+        var N_p=centers.length;
         mv.push({t:'cmt', txt:N_p+' plunge(s), step '+actualStep.toFixed(3)+' mm between insert centers'});
         var _totRad=(D1-_rghD2)/2;
         if(floor>0 && _totRad>floor+1e-6){
