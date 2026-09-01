@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.76 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.77 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -2329,6 +2329,26 @@ function s2Block(d){s2Pause();S2.prog=Math.max(0,Math.min(S2.segs.length,Math.ro
 function gvMr(){var m=matBy($('gv_mat')?$('gv_mat').value:'');var el=$('gv_mr');if(el&&m&&m[4]!=null){var c=ISO_COL[m[2]]||'#9E9E9E';el.innerHTML='<span class="isochip" style="background:'+c+'">ISO '+m[2]+'</span> Machinability '+m[4]+'%';}}
 // Build the groove profile + raw bar for the simulation background (like tnFinPts/tnRawPts).
 function gvSimProfile(){
+  // Parting: render the blank as a plain OD cylinder being parted off
+  // (no turning finish profile, no CNMG turning insert).
+  if(($('gv_type')||{}).value==='cutoff'){
+    var pD1=_gvn('D1',0); if(!(pD1>0))return null;
+    var pOD=pD1/2, pZ1=_gvn('Z1',0), pZ2=_gvn('Z2',0);
+    var pzN=Math.max(pZ1,pZ2), pzF=Math.min(pZ1,pZ2);   // pzN = part-off face (tailstock side)
+    var pWi=_gvn('tl_wi',3), pnr=_gvn('tl_rc',0.2);
+    var _por=($('tl_off_ref')?$('tl_off_ref').value:'C'), pRef={L:0,C:pWi/2,R:pWi}[_por]; if(pRef===undefined)pRef=pWi/2;
+    var pMg=Math.max(2,(pzN-pzF)*0.4+2);
+    var pFace=Math.max(0,pzN)+pMg, pBack=pzF-pMg;        // blank spans front face to chuck side
+    var pType=($('gv_pct')?$('gv_pct').value:'Sharp'), pSize=(parseFloat(($('gv_pcs')||{}).value)||0);
+    var pfin=[{z:pFace,r:pOD}];
+    if(pType==='Chamfer'&&pSize>0){ pfin.push({z:pzN+pSize,r:pOD}); pfin.push({z:pzN,r:pOD-pSize}); pfin.push({z:pzN,r:0}); }
+    else if(pType==='Radius'&&pSize>0){ pfin.push({z:pzN+pSize,r:pOD}); pfin.push({z:pzN,r:pOD-pSize,arc:'CCW',ar:pSize}); pfin.push({z:pzN,r:0}); }
+    else { pfin.push({z:pzN,r:pOD}); pfin.push({z:pzN,r:0}); }
+    pfin.push({z:pzF,r:0});          // floor across the kerf (cut to centre)
+    pfin.push({z:pzF,r:pOD});        // far kerf wall back up
+    pfin.push({z:pBack,r:pOD});
+    return {fin:pfin, raw:[{z:pFace,r:pOD},{z:pBack,r:pOD}], wi:pWi, nr:pnr, rOD:pOD, refOff:pRef};
+  }
   if(typeof gvManOn==='function'&&gvManOn()){
     var _gm=(typeof gvManProfileForGen==='function')?gvManProfileForGen():null;
     if(_gm){
