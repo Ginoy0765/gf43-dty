@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.73 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.75 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1250,7 +1250,7 @@
           <option value="cutoff">Parting (cut-off)</option>
         </select></div>
       <div><label>Rough / Finish</label>
-        <select id="gv_rf" onchange="gv_selset('rf',this.value);gvSyncStratChecks()">
+        <select id="gv_rf" onchange="gv_selset('rf',this.value);gv_recalc()">
           <option value="rough">Rough only</option>
           <option value="finish">Finish only</option>
           <option value="both" selected>Rough + Finish</option>
@@ -1362,22 +1362,25 @@
     </div>
   </div></div>
   <div class="sec"><div class="st" onclick="gv_toggle(this)">CYCLES <span class="caret">&#9662;</span></div><div class="sb">
+    <div id="stratBox">
     <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">STRATEGY</div>
     <div class="row2">
-      <div><label style="margin-top:0;display:flex;align-items:center;gap:7px;cursor:pointer"><input type="checkbox" id="gv_roughOn" checked onchange="gvStratToggle('rough')" style="width:15px;height:15px;margin:0;accent-color:var(--acc)">Roughing strategy</label>
+      <div id="roughStratCell"><label style="margin-top:0">Roughing strategy</label>
         <select id="gv_strat" onchange="gv_selset('strat',this.value)">
           <option value="single">Single plunge</option>
           <option value="multi" selected>Multi-plunge</option>
           <option value="plturn">Plunge turning</option>
           <option value="ramp">Ramping</option>
         </select></div>
-      <div><label style="margin-top:0;display:flex;align-items:center;gap:7px;cursor:pointer"><input type="checkbox" id="gv_finOn" checked onchange="gvStratToggle('fin')" style="width:15px;height:15px;margin:0;accent-color:var(--acc)">Finishing strategy</label>
+      <div id="finStratCell"><label style="margin-top:0">Finishing strategy</label>
         <select id="gv_fin" onchange="gv_selset('fin',this.value)">
           <option value="profile">Profile pass</option>
           <option value="walls" selected>Walls-then-floor</option>
         </select></div>
     </div>
     <div class="hint keep" id="stratHint" style="margin:4px 0 8px">Recommended strategy updates automatically based on the groove geometry.</div>
+    </div><!-- /stratBox -->
+    <div id="depthBox">
     <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">DEPTH OF CUT</div>
     <div id="peckBox">
       <div class="row2">
@@ -1392,6 +1395,7 @@
       </div>
       <div class="hint">Radial depth of cut per turning pass in <b>Plunge-turning</b> / <b>Ramping</b> roughing (plunge a wall, turn toward the other). Blank = use peck depth.</div>
     </div>
+    </div><!-- /depthBox -->
     </div></div>
   <div class="sec" style="margin-top:14px"><div class="st" onclick="gv_toggle(this)">PROFILE <span class="caret">&#9656;</span></div><div class="sb">
     <!-- corner coordinates kept as hidden inputs (auto-filled by GEOMETRY, read by generator/sim) -->
@@ -2524,20 +2528,16 @@ function gvAutoPick(){var o=$('gvAutoOp'),r=$('gvAutoReq');if(o)gvAutoOp=o.value
 function _gvAutoSel(id,v){var e=$(id);if(e){e.value=v;if(typeof e.onchange==='function')e.onchange();}}
 function _gvAutoNum(id,v){var e=$(id);if(e&&v!=null){e.value=v;}}
 function gvOpFaUI(){var c=$('gv_faCell');if(c)c.style.display=(gvAutoOn&&gvAutoOp==='Widening')?'none':'';}
-/* Roughing / finishing activate toggles in CYCLES -> drive gv_rf (rough / finish / both) */
-function gvStratEnableUI(){var ro=$('gv_roughOn'),fo=$('gv_finOn'),rs=$('gv_strat'),fs=$('gv_fin');if(rs&&ro){rs.disabled=!ro.checked;rs.style.opacity=ro.checked?'1':'0.4';}if(fs&&fo){fs.disabled=!fo.checked;fs.style.opacity=fo.checked?'1':'0.4';}}
-function gvStratToggle(src){var ro=$('gv_roughOn'),fo=$('gv_finOn');if(!ro||!fo)return;if(!ro.checked&&!fo.checked){if(src==='rough')fo.checked=true;else ro.checked=true;}var v=(ro.checked&&fo.checked)?'both':(ro.checked?'rough':'finish');var e=$('gv_rf');if(e)e.value=v;if(typeof gv_selset==='function'){try{gv_selset('rf',v);}catch(_){}}gvStratEnableUI();if(typeof gv_recalc==='function'){try{gv_recalc();}catch(e2){}}}
-function gvSyncStratChecks(){var e=$('gv_rf');if(!e)return;var v=e.value,ro=$('gv_roughOn'),fo=$('gv_finOn');if(!ro||!fo)return;ro.checked=(v==='both'||v==='rough');fo.checked=(v==='both'||v==='finish');gvStratEnableUI();}
 function gvAutoApply(){var o=$('gvAutoOp'),r=$('gvAutoReq');if(o)gvAutoOp=o.value;if(r)gvAutoReq=r.value;
   if(gvAutoOp==='Parting'){_gvAutoSel('gv_type','cutoff');_gvAutoSel('gv_rf','rough');_gvAutoSel('gv_strat','single');}
-  else if(gvAutoOp==='Widening'){_gvAutoSel('gv_rf','both');_gvAutoSel('gv_strat','multi');_gvAutoSel('gv_fin','profile');}
-  else{_gvAutoSel('gv_rf','both');_gvAutoSel('gv_strat','multi');_gvAutoSel('gv_fin','walls');}
+  else if(gvAutoOp==='Widening'){if(($('gv_type')||{}).value==='cutoff')_gvAutoSel('gv_type','od');_gvAutoSel('gv_rf','both');_gvAutoSel('gv_strat','multi');_gvAutoSel('gv_fin','profile');}
+  else{if(($('gv_type')||{}).value==='cutoff')_gvAutoSel('gv_type','od');_gvAutoSel('gv_rf','both');_gvAutoSel('gv_strat','multi');_gvAutoSel('gv_fin','walls');}
   var R={Standard:{pd:0.5,pr:0.3,ff:0.05,fa:0.1,plf:100},Difficult:{pd:0.3,pr:0.4,ff:0.04,fa:0.15,plf:70},Productivity:{pd:0.8,pr:0.25,ff:0.06,fa:0.1,plf:100}}[gvAutoReq]||{};
   _gvAutoNum('cs_pd',R.pd);_gvAutoNum('cs_pr',R.pr);_gvAutoNum('p_ff',R.ff);_gvAutoNum('gv_plf',R.plf);
   if(gvAutoOp==='Widening'){_gvAutoNum('gv_fa',0);}else{_gvAutoNum('gv_fa',R.fa);}
   gvAutoOn=true;gvOpFaUI();gvWiFeed();gvAutoUI();gvAutoClose();}
 function gvAutoOffBtn(){gvAutoOn=false;gvOpFaUI();gvAutoUI();gvAutoClose();}
-(function(){function build(){if(document.getElementById('gvAutoModal'))return;var m=document.createElement('div');m.id='gvAutoModal';m.className='automodal';m.style.display='none';m.innerHTML='<div class="autocard"><div class="autohd">AUTO &mdash; default cycle<button type="button" class="autox" onclick="gvAutoClose()">&times;</button></div><label>Operation</label><select id="gvAutoOp" onchange="gvAutoPick()"><option>Parting</option><option selected>Rough + Finish</option><option>Widening</option></select><label style="margin-top:12px">Requirement</label><select id="gvAutoReq" onchange="gvAutoPick()"><option>Standard</option><option>Difficult</option><option>Productivity</option></select><div id="gvAutoDesc" style="font-size:12px;color:#9fc4e6;margin-top:12px;line-height:1.5"></div><div style="display:flex;gap:8px;margin-top:14px"><button type="button" class="btn" style="flex:1" onclick="gvAutoApply()">Apply</button><button type="button" class="btn btn2" style="flex:1" onclick="gvAutoOffBtn()">Turn off</button></div></div>';document.body.appendChild(m);try{gvSyncStratChecks();}catch(_){}}
+(function(){function build(){if(document.getElementById('gvAutoModal'))return;var m=document.createElement('div');m.id='gvAutoModal';m.className='automodal';m.style.display='none';m.innerHTML='<div class="autocard"><div class="autohd">AUTO &mdash; default cycle<button type="button" class="autox" onclick="gvAutoClose()">&times;</button></div><label>Operation</label><select id="gvAutoOp" onchange="gvAutoPick()"><option>Parting</option><option selected>Rough + Finish</option><option>Widening</option></select><label style="margin-top:12px">Requirement</label><select id="gvAutoReq" onchange="gvAutoPick()"><option>Standard</option><option>Difficult</option><option>Productivity</option></select><div id="gvAutoDesc" style="font-size:12px;color:#9fc4e6;margin-top:12px;line-height:1.5"></div><div style="display:flex;gap:8px;margin-top:14px"><button type="button" class="btn" style="flex:1" onclick="gvAutoApply()">Apply</button><button type="button" class="btn btn2" style="flex:1" onclick="gvAutoOffBtn()">Turn off</button></div></div>';document.body.appendChild(m);try{if(typeof gv_recalc==='function')gv_recalc();}catch(_){}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);else build();})();
 function buildTurnPasses(){
   var internal=$('side').value==='Internal';var D=num('D',16),P=num('P',2);
@@ -3908,7 +3908,13 @@ function recalc(){
   $('trapBox').style.display=$('mod_trap').checked?'block':'none';
   $('angBox').style.display=$('mod_ang').checked?'block':'none';
   $('patBox').style.display=$('patOn').checked?'block':'none';
-  (function(){var _st=$('gv_strat')?$('gv_strat').value:'multi';var _pk=(_st==='single'||_st==='multi');if($('peckBox'))$('peckBox').style.display=_pk?'block':'none';if($('rdocBox'))$('rdocBox').style.display=_pk?'none':'block';})();
+  (function(){var _ip=($('gv_type')?$('gv_type').value:'')==='cutoff';var _rf=($('gv_rf')?$('gv_rf').value:'both');var _rgh=_ip||(_rf==='rough'||_rf==='both');var _st=$('gv_strat')?$('gv_strat').value:'multi';var _pk=(_st==='single'||_st==='multi');
+  if($('stratBox'))$('stratBox').style.display=_ip?'none':'block';
+  if($('roughStratCell'))$('roughStratCell').style.display=(!_ip&&(_rf==='rough'||_rf==='both'))?'':'none';
+  if($('finStratCell'))$('finStratCell').style.display=(!_ip&&(_rf==='finish'||_rf==='both'))?'':'none';
+  if($('depthBox'))$('depthBox').style.display=_rgh?'block':'none';
+  if($('peckBox'))$('peckBox').style.display=(_pk||_ip)?'block':'none';
+  if($('rdocBox'))$('rdocBox').style.display=(_pk||_ip)?'none':'block';})();
   document.querySelectorAll('.indepOnly').forEach(function(el){el.style.display=$('indepLegs').checked?'':'none';});
   if($('allcS2Box'))$('allcS2Box').style.display=$('indepLegs').checked?'block':'none';
   var m=$('gv_manual').checked;
