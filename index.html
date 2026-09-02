@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.81 &middot; 2 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.83 &middot; 2 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1489,10 +1489,10 @@
       <div id="gv_posfCell" style="display:none"><label>Positioning feed (mm/rev)</label><input id="gv_posf" type="number" value="" placeholder="= 2× cut feed" step="0.01" oninput="gv_recalc()"></div>
     </div>
     <div class="row2">
-      <div><label>Safe approach (mm)</label><input id="gv_apprd" type="number" value="0.5" step="0.1" oninput="gv_recalc()"></div>
+      <div><label>Stop before metal (mm)</label><input id="gv_apprd" type="number" value="0.5" step="0.1" oninput="gv_recalc()"></div>
       <div><label>Approach feed &times; cut</label><input id="gv_apprfx" type="number" value="2" step="0.5" oninput="gv_recalc()"></div>
     </div>
-    <div class="hint"><b>Peck retract</b> = the pull-out move after each plunge/peck (micro-peck chip-break stays in feed). <b>Plunge positioning</b> = the moves between plunges in multi-plunge grooving. Both default to rapid G0; switch to Feed to emit G1 with the feed shown (blank uses a sensible default). <b>Safe approach</b>: every wall-forming plunge and the groove-start entry rapids to this distance short (in both Z and X) then feeds the last bit in at <b>Approach feed &times; cut</b> (default 2&times; the cutting feed). Set distance to 0 to disable.</div>
+    <div class="hint"><b>Peck retract</b> = the pull-out move after each plunge/peck (micro-peck chip-break stays in feed). <b>Plunge positioning</b> = the moves between plunges in multi-plunge grooving. Both default to rapid G0; switch to Feed to emit G1 with the feed shown (blank uses a sensible default). <b>Stop before metal</b>: on the same approach line, every plunge rapids to this distance above the metal surface then feeds the last bit in at <b>Approach feed &times; cut</b> (default 2&times; the cutting feed) &mdash; radial only, the tool path itself is unchanged. Set to 0 to disable.</div>
   </div></div>
   
   <!-- ============ MACHINE ============ -->
@@ -2212,11 +2212,12 @@ function gvManToolpath(){
   return {adj:tp.adj,resid:tp.resid,fin:g.fin,Wi:Wi,refOff:refOff,rMouth:Math.max.apply(null,rs),rFloor:Math.min.apply(null,rs),D1:g.D1,D2:g.D2,Z1:g.Z1,Z2:g.Z2};
 }
 function _gvAdjR(adj,z){var best=null;for(var i=0;i<adj.length-1;i++){var a=adj[i],b=adj[i+1];var zl=Math.min(a.z,b.z),zh=Math.max(a.z,b.z);if(z>=zl-1e-9&&z<=zh+1e-9){var r=(Math.abs(b.z-a.z)<1e-9)?Math.max(a.r,b.r):(a.r+(b.r-a.r)*((z-a.z)/(b.z-a.z)));if(best===null||r>best)best=r;}}return best;}
-function gvManRough(mv,tp,safeX,pd,pr,Fr,dwell,peck,stock,rIns,wa){
+function gvManRough(mv,tp,safeX,pd,pr,Fr,dwell,peck,stock,rIns,wa,MC){
   var adj=tp.adj,Wi=tp.Wi,refOff=tp.refOff,rMouth=tp.rMouth;
   var zA=Math.min(tp.Z1,tp.Z2),zB=Math.max(tp.Z1,tp.Z2);
   var step=Math.max(0.2,Wi-2*(rIns||0));
   wa=wa||0;   // axial wall allowance left for the finish pass
+  MC=MC||{pkret:'g0',posmode:'g0',apprd:0};
   var zcFirst=zA+Wi/2+wa,zcLast=zB-Wi/2-wa;
   if(zcLast<zcFirst){zcFirst=zcLast=(zA+zB)/2;}
   var span=zcLast-zcFirst;
@@ -2228,13 +2229,16 @@ function gvManRough(mv,tp,safeX,pd,pr,Fr,dwell,peck,stock,rIns,wa){
   for(k=0;k<N;k++){
     var zc=zcs[k];var tr=_gvAdjR(adj,zc);if(tr===null)continue;tr=tr+(stock||0);
     if(tr>=rMouth-1e-6)continue;
-    var zp=zc-Wi/2+refOff;
-    mv.push({t:'g0',X:safeX});mv.push({t:'g0',Z:zp});mv.push({t:'g0',X:2*rMouth+2});
+    var zp=zc-Wi/2+refOff, xMouth=2*rMouth;
+    _mcRetract(mv,safeX,MC);
+    _mcPos(mv,{Z:zp},MC);                                          // position axially (same Z)
+    if(MC.apprd>0) _mcEnter(mv,xMouth,MC);                         // stop above the metal, feed in (radial only)
+    else _mcPos(mv,{X:xMouth+2},MC);
     var d=0,totalD=(rMouth-tr);
     if(peck===false){mv.push({t:'g1',X:2*tr,Z:zp,F:Fr});}
     else{while(d<totalD-1e-4){var nx=Math.min(totalD,d+pd);mv.push({t:'g1',X:2*(rMouth-nx),Z:zp,F:Fr});if(nx<totalD){mv.push({t:'g1',X:2*(rMouth-nx)+2*pr});mv.push({t:'g1',X:2*(rMouth-nx)});}d=nx;}}
     if(dwell>0)mv.push({t:'dwell',p:dwell});
-    mv.push({t:'g0',X:safeX});
+    _mcRetract(mv,safeX,MC);
   }
 }
 function gvManFinish(mv,tp,safeX,Ff){
@@ -4248,7 +4252,7 @@ function generate(P){
     if(N>1)mv.push({t:'cmt', txt:'-- Groove '+(g+1)+'/'+N+' at Z='+z1g.toFixed(3)+' --'});
     if(_mtp&&g===0){
       // Manual mode: gouge-safe rough + finish following the actual profile envelope.
-      if(doRgh)gvManRough(mv, _mtp, _retX, pd, pr, plungeF, dwell, peck, fa, rIns, wa);
+      if(doRgh)gvManRough(mv, _mtp, _retX, pd, pr, plungeF, dwell, peck, fa, rIns, wa, MC);
       if(doFin)gvManFinish(mv, _mtp, safeX, Ff);
       continue;
     }
@@ -4260,7 +4264,7 @@ function generate(P){
         // One plunge centred in the groove; emit at the offset-reference point.
         var zc=(zLeftWall+zRightWall)/2;
         var zp=zc - Wi/2 + refOff;   // insert-centre -> left corner -> reference point
-        _emitPlunge(mv, D1, _rghD2, zp, 'wall', -1, MC, _retX, pd, pr, plungeF, dwell, peck);   // single = wall-forming
+        _emitPlunge(mv, D1, _rghD2, zp, D1, MC, _retX, pd, pr, plungeF, dwell, peck);
       } else if(strat==='multi'){
         // Multi-plunge: insert-center steps from (zLeftWall+Wi/2) to (zRightWall-Wi/2)
         // Step size = Wi - 2*rIns (leaves lands smaller than insert width for finish clean-up)
@@ -4276,9 +4280,6 @@ function generate(P){
         var centers=[zMid];
         for(var _sd=1;_sd<=nSide;_sd++){ centers.push(zMid-_sd*actualStep); centers.push(zMid+_sd*actualStep); }
         var N_p=centers.length;
-        // Wall-forming plunges = the two outermost centres (nearest each wall). They get the safe approach;
-        // zSide tells which side to approach from (+Z wall -> come from -Z, and vice-versa).
-        function _wallSide(zc){ if(Math.abs(zc-zCLast)<1e-6)return -1; if(Math.abs(zc-zCFirst)<1e-6)return 1; return 0; }
         mv.push({t:'cmt', txt:N_p+' plunge(s), step '+actualStep.toFixed(3)+' mm between insert centers'});
         var _totRad=(D1-_rghD2)/2;
         if(floor>0 && _totRad>floor+1e-6){
@@ -4290,19 +4291,17 @@ function generate(P){
             var _xBot=D1-2*_radBot;
             var _xt=_xTop;
             mv.push({t:'cmt', txt:'-- Floor '+(_fl+1)+'/'+_nFloor+' : clear full width to D'+_xBot.toFixed(3)+' --'});
-            centers.forEach(function(zc,_ci){
+            centers.forEach(function(zc){
               var zp=zc - Wi/2 + refOff;
-              var _s=_wallSide(zc), _a=(_s!==0)?'wall':(_ci===0?'start':null);
-              _emitPlunge(mv, _xt, _xBot, zp, _a, _s, MC, _retX, pd, pr, plungeF, dwell, peck);
+              _emitPlunge(mv, _xt, _xBot, zp, _xt, MC, _retX, pd, pr, plungeF, dwell, peck);
             });
             _xTop=_xBot;
           }
         } else {
-          centers.forEach(function(zc,_ci){
+          centers.forEach(function(zc){
             // centres clamped inside the walls; emit at the offset-reference point
             var zp=zc - Wi/2 + refOff;
-            var _s=_wallSide(zc), _a=(_s!==0)?'wall':(_ci===0?'start':null);
-            _emitPlunge(mv, D1, _rghD2, zp, _a, _s, MC, _retX, pd, pr, plungeF, dwell, peck);
+            _emitPlunge(mv, D1, _rghD2, zp, D1, MC, _retX, pd, pr, plungeF, dwell, peck);
           });
         }
       } else if(strat==='plturn'){
@@ -4320,13 +4319,14 @@ function generate(P){
         var _prevX=D1;
         for(var _li=0;_li<_levels.length;_li++){
           var _xLvl=_levels[_li];
-          mv.push({t:'g0', X:safeX});
-          mv.push({t:'g0', Z:zpPlunge});
-          mv.push({t:'g0', X:_prevX+2});                            // rapid to 1 mm above last cut depth (tailstock column already clear)
+          _mcRetract(mv, safeX, MC);                                // clear before repositioning
+          _mcPos(mv, {Z:zpPlunge}, MC);                            // position axially (same Z)
+          if(MC.apprd>0) _mcEnter(mv, _prevX, MC);                 // stop apprd above the metal, feed in (radial only)
+          else _mcPos(mv, {X:_prevX+2}, MC);                        // rapid to 1 mm above last cut depth
           plungeSteps(mv, _prevX, _xLvl, zpPlunge, pd, pr, plungeF, peck); // peck-plunge to this level, no retract
           mv.push({t:'g1', X:_xLvl, Z:zpFar, F:Fr});                // turn toward spindle at depth
           if(dwell>0)mv.push({t:'dwell', p:dwell});
-          mv.push({t:'g0', X:safeX});                              // retract clear
+          _mcRetract(mv, safeX, MC);                                // retract clear
           _prevX=_xLvl;
         }
       } else if(strat==='ramp'){
@@ -4334,10 +4334,10 @@ function generate(P){
         var zcStart=zLeftWall+Wi/2, zcEnd=zRightWall-Wi/2;
         var zpStart=zcStart-Wi/2+refOff, zpEnd=zcEnd-Wi/2+refOff;   // offset-reference point
         mv.push({t:'cmt', txt:'Ramp entry (simultaneous X-Z)'});
-        mv.push({t:'g0', Z:zpStart});
-        mv.push({t:'g1', X:_rghD2, Z:zpEnd, F:plungeF});
+        _mcPos(mv, {Z:zpStart}, MC);                                // position to ramp start (same coordinate)
+        mv.push({t:'g1', X:_rghD2, Z:zpEnd, F:plungeF});            // ramp path unchanged (already a feed entry)
         mv.push({t:'g1', Z:zpStart, F:Fr});
-        mv.push({t:'g0', X:safeX});
+        _mcRetract(mv, safeX, MC);
       }
     }
     if(doFin){
@@ -4402,32 +4402,19 @@ function _mcPos(mv, o, MC){                      // Control 2: non-cutting posit
   var m; if(MC && MC.posmode==='g1'){ m={t:'g1', F:MC.posf}; } else { m={t:'g0'}; }
   if(o.X!=null)m.X=o.X; if(o.Z!=null)m.Z=o.Z; mv.push(m);
 }
-// Control 4: safe approach for a wall-forming plunge / groove-start entry.
-// Rapids to apprd short in Z (from the groove-centre side) and apprd radial above the mouth,
-// then feeds the last bit in (both axes) at the approach feed. zSide = +1 approach from +Z, -1 from -Z.
-function _mcWallApproach(mv, xMouth, zTarget, zSide, MC){
+// Control 4: stoppage before entering metal. On the SAME approach line, rapid to apprd (radial)
+// above the metal surface, then feed the last bit into the surface at the approach feed.
+// No axial (Z) change - the tool visits the exact same positions, only the feed changes.
+function _mcEnter(mv, xMetal, MC){
   var d=(MC&&MC.apprd>0)?MC.apprd:0;
-  if(!(d>0)){ _mcPos(mv,{Z:zTarget},MC); _mcPos(mv,{X:xMouth+2},MC); return; }
-  mv.push({t:'g0', Z:zTarget + zSide*d});        // rapid: stop d short in Z
-  mv.push({t:'g0', X:xMouth + 2*d});             // rapid: stop d (radial) above the mouth
-  mv.push({t:'g1', X:xMouth, Z:zTarget, F:(MC?MC.apprf:0)}); // feed the last bit in, both axes
+  if(d>0){ mv.push({t:'g0', X:xMetal+2*d}); mv.push({t:'g1', X:xMetal, F:MC.apprf}); }
 }
-// Emit one rough plunge with Control-4 approach handling.
-//   appr='wall'  -> safe approach both axes (zSide = +1/-1 side to come from)
-//   appr='start' -> groove-start entry: position Z, then feed the last radial bit into the mouth
-//   else         -> Control-2 positioning (rapid by default)
-function _emitPlunge(mv, xTop, xBot, zp, appr, zSide, MC, retX, pd, pr, F, dwell, peck){
-  var d=(MC&&MC.apprd>0)?MC.apprd:0;
-  if(d>0 && appr==='wall'){
-    _mcWallApproach(mv, xTop, zp, zSide, MC);
-  } else if(d>0 && appr==='start'){
-    _mcPos(mv, {Z:zp}, MC);
-    mv.push({t:'g0', X:xTop+2*d});                 // rapid to d (radial) above the mouth
-    mv.push({t:'g1', X:xTop, F:(MC?MC.apprf:F)});   // feed the last bit into the mouth
-  } else {
-    _mcPos(mv, {Z:zp}, MC);
-    _mcPos(mv, {X:xTop+2}, MC);
-  }
+// Emit one rough plunge: position axially (Control 2), stop above the metal + feed in (Control 4),
+// then the unchanged plunge. metalX = the surface the plunge first meets (mouth / previous depth).
+function _emitPlunge(mv, xTop, xBot, zp, metalX, MC, retX, pd, pr, F, dwell, peck){
+  _mcPos(mv, {Z:zp}, MC);
+  if(MC && MC.apprd>0) _mcEnter(mv, metalX, MC);
+  else _mcPos(mv, {X:xTop+2}, MC);
   pluneRough(mv, xTop, xBot, zp, retX, pd, pr, F, dwell, peck, MC);
 }
 function pluneRough(mv, xTop, xBot, z, safeX, pd, pr, F, dwell, peck, MC){
@@ -4577,14 +4564,16 @@ function gvFinishWallsFloor(mv, D1, D2, Z1, Z2, corners, nr, Wi, safeX, F, refOf
   if((zN-zF) < Wi+2*nr) return false;                 // too narrow: one plunge = profile pass
   var zNear=zN-Wi+refOff, zFar=zF+refOff, Dtop=D1+2;
   mv.push({t:"cmt", txt:"Finish - Walls then floor (each wall plunge-finished, then floor turned across; nose R"+nr.toFixed(2)+")"});
-  // ---- NEAR wall (wall-forming: safe approach) ----
+  // ---- NEAR wall ----
   mv.push({t:"g0", X:safeX});
-  _mcWallApproach(mv, D1, zNear, -1, MC);
+  _mcPos(mv, {Z:zNear}, MC);                          // position axially (same Z)
+  if(MC.apprd>0) _mcEnter(mv, D1, MC); else _mcPos(mv, {X:Dtop}, MC);
   mv.push({t:"g1", X:D2, Z:zNear, F:F});              // plunge-finish near wall to floor
   mv.push({t:"g1", Z:zNear-0.1, F:F});                // back off finished wall before lifting
   _ret(safeX);
-  // ---- FAR wall (wall-forming: safe approach) ----
-  _mcWallApproach(mv, D1, zFar, 1, MC);
+  // ---- FAR wall ----
+  _mcPos(mv, {Z:zFar}, MC);
+  if(MC.apprd>0) _mcEnter(mv, D1, MC); else _mcPos(mv, {X:Dtop}, MC);
   mv.push({t:"g1", X:D2, Z:zFar, F:F});               // plunge-finish far wall to floor
   mv.push({t:"g1", Z:zFar+0.1, F:F});
   _ret(safeX);
