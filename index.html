@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.87 &middot; 2 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.88 &middot; 2 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1465,9 +1465,15 @@
   <!-- ============ 6. POSITIONING (approach/retract) ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">POSITIONING <span class="caret">&#9656;</span></div><div class="sb">
     <div class="row2">
-      <div><label>Safe X1</label><input id="pos_sx" type="number" value="5" step="0.1" oninput="gv_recalc()"></div>
-      <div><label>Safe Z1</label><input id="pos_sz" type="number" value="3" step="0.1" oninput="gv_recalc()"></div>
+      <div><label>Safe X1 (cut clearance)</label><input id="pos_sx" type="number" value="5" step="0.1" oninput="gv_recalc()"></div>
+      <div><label>Safe Z1 (cut clearance)</label><input id="pos_sz" type="number" value="3" step="0.1" oninput="gv_recalc()"></div>
     </div>
+    <label style="margin-top:8px">Safe position 1 (tool change)</label><input id="gv_pos1" value="G28 U0 W0" oninput="gv_recalc()">
+    <div class="row2">
+      <div><label>Safe position 2 &mdash; X (dia)</label><input id="gv_pos2x" type="number" placeholder="auto &#216;+100" step="1" oninput="this.dataset.ed='1';gv_recalc()"></div>
+      <div><label>Safe position 2 &mdash; Z</label><input id="gv_pos2z" type="number" placeholder="auto face+50" step="1" oninput="this.dataset.ed='1';gv_recalc()"></div>
+    </div>
+    <div class="hint">Safe X1/Z1 = small clearance where rapid stops and the cut begins. <b>Position 1</b> = the tool-change / home line. <b>Position 2</b> = an intermediate park point the tool rapids to after a tool change and before returning home; it auto-fills to groove &#216; + 100 (50&nbsp;mm radial clear) and 50&nbsp;mm clear of the start face. Edit either to override; clear both to skip Position 2.</div>
   </div></div>
   <!-- ============ 7. CUT SETUP (peck / chip break) ============ -->
   <div class="sec"><div class="st" onclick="gv_toggle(this)">CUT SETUP <span class="caret">&#9656;</span></div><div class="sb">
@@ -4046,8 +4052,19 @@ function gvPartingUI(){
   }
   window._gvWasParting=isPart;
 }
+// Auto-fill Safe position 2 (mirror of turning's tnPosAuto): groove Ø + 100 radial, face + 50 axial.
+function gvPosAuto(){
+  var x=$('gv_pos2x'), z=$('gv_pos2z');
+  var d1=parseFloat($('D1')?$('D1').value:'')||0, d2=parseFloat($('D2')?$('D2').value:'')||0, D=Math.max(d1,d2);
+  var isF=(($('gv_type')||{}).value==='face'||($('gv_type')||{}).value==='back');
+  var z1=parseFloat($('Z1')?$('Z1').value:'')||0, z2=parseFloat($('Z2')?$('Z2').value:'')||0;
+  var face=Math.max(z1,z2,0);
+  if(x&&x.dataset.ed!=='1')x.value=(D>0)?(D+100):'';
+  if(z&&z.dataset.ed!=='1')z.value=(face+50);
+}
 function recalc(){
   gvPartingUI();
+  gvPosAuto();
   $('trapBox').style.display=$('mod_trap').checked?'block':'none';
   $('angBox').style.display=$('mod_ang').checked?'block':'none';
   $('patBox').style.display=$('patOn').checked?'block':'none';
@@ -4293,11 +4310,16 @@ function generate(P){
   var _faceRad=Math.abs(D1-D2)/2;   // for face grooving the "width" is the radial band
   var _gvAlm=(!isFace && Wi>GW+1e-6)?('ALARM: INSERT WIDTH '+Wi.toFixed(3)+' mm EXCEEDS GROOVE WIDTH '+GW.toFixed(3)+' mm -- INSERT CANNOT FIT, WILL OVERCUT WALLS (OVERRIDEABLE)'):((isFace && Wi>_faceRad+1e-6)?('ALARM: INSERT WIDTH '+Wi.toFixed(3)+' mm EXCEEDS RADIAL BAND '+_faceRad.toFixed(3)+' mm -- INSERT CANNOT FIT (OVERRIDEABLE)'):'');
   if(_gvAlm)mv.push({t:'cmt', txt:_gvAlm});
+  // Positioning: Safe position 1 (tool change) + optional Safe position 2 (park/index point).
+  var _pos1=($('gv_pos1')&&$('gv_pos1').value.trim())||(($('def_tcp')||{}).value)||'G28 U0 W0';
+  var _p2x=parseFloat($('gv_pos2x')?$('gv_pos2x').value:''), _p2z=parseFloat($('gv_pos2z')?$('gv_pos2z').value:'');
+  var _hasPos2=(isFinite(_p2x)&&isFinite(_p2z));
   mv.push({t:'raw', s:'G21 G18 G40 G97'});
-  mv.push({t:'raw', s:(($('def_tcp')||{}).value)||'G28 U0 W0'});
+  mv.push({t:'raw', s:_pos1});
   mv.push({t:'raw', s:'T'+T+(TD||T).toString().padStart(2,'0')});
   mv.push({t:'raw', s:'G96 S'+Vc+' '+(($('gv_sdir')&&$('gv_sdir').value)||'M03')+_gvCoolOn});
   mv.push({t:'raw', s:'G50 S'+maxRPM});
+  if(_hasPos2) mv.push({t:'g0', X:_p2x, Z:_p2z, cmt:'SAFE POS 2'});
   if(isFace) mv.push({t:'g0', Z:Math.max(Z1,Z2)+(sZ>0?sZ:3)});
   else mv.push({t:'g0', X:safeX, Z:Z1+sZ});
   for(var g=0;g<N;g++){
@@ -4477,8 +4499,10 @@ function generate(P){
       }
     }
   }
-  mv.push({t:'g0', X:safeX});
-  mv.push({t:'raw', s:(($('def_tcp')||{}).value)||'G28 U0 W0'});
+  if(isFace) mv.push({t:'g0', Z:Math.max(Z1,Z2)+(sZ>0?sZ:3)});
+  else mv.push({t:'g0', X:safeX});
+  if(_hasPos2) mv.push({t:'g0', X:_p2x, Z:_p2z, cmt:'SAFE POS 2'});
+  mv.push({t:'raw', s:_pos1});
   mv.push({t:'raw', s:(_gvCool!=='None'?'M09 M05':'M05')});
   mv.push({t:'raw', s:'M30'});
   mv.push({t:'raw', s:'%'});
@@ -5080,7 +5104,7 @@ function emitMoves(mv, ctrl, incr, arcFmt){
     } else if(m.t==='raw'){
       lines.push(m.s);
     } else if(m.t==='g0'){
-      lines.push('G00'+axes(m));
+      var s0='G00'+axes(m); if(m.cmt) s0+=' '+cmtOpen+' '+m.cmt+' '+cmtClose; lines.push(s0);
     } else if(m.t==='g1'){
       var s='G01'+axes(m);
       if(m.F!==undefined)s+=' F'+m.F;
