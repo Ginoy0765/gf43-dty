@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.84 &middot; 2 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.85 &middot; 2 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -4187,6 +4187,7 @@ function generate(P){
       sX:parseFloat($('pos_sx').value)||5, sZ:parseFloat($('pos_sz').value)||3,
       mat:(function(){try{return $('gv_mat').selectedOptions[0].text;}catch(e){return '';}})(),
       offRef:($('tl_off_ref')?$('tl_off_ref').value:'C'),
+      gtype:($('gv_type')?$('gv_type').value:'od'),
       patOn:$('patOn').checked, patN:(parseInt($('patN').value)||1), pat2:(parseFloat($('pat2').value)||0), patDir:(parseInt($('patDir').value)||-1),
       patMode:(typeof patMode!=='undefined'?patMode:'pitch'),
       strat:(function(){var e=$('gv_strat');return e?e.value:(typeof strat!=='undefined'?strat:'single');})(),
@@ -4199,6 +4200,9 @@ function generate(P){
   }
   var ctrl=P.ctrl,D1=P.D1,D2=P.D2,Z1=P.Z1,Z2=P.Z2,Wi=P.Wi,rIns=P.rIns,T=P.T,TD=P.TD,Vc=P.Vc,S=P.S,maxRPM=P.maxRPM,Fr=P.Fr,Ff=P.Ff,pd=P.pd,pr=P.pr,dwell=P.dwell,sX=P.sX,sZ=P.sZ,mat=P.mat,strat=P.strat,rf=P.rf,tipPos=P.tipPos,compSet=P.compSet,corners=P.corners;
   var rdoc=P.rdoc||0;var floor=P.floor||0;
+  var gtype=P.gtype||'od';
+  var isID=(gtype==='id');
+  var RS=isID?-1:1;   // radial sign: +1 = OD / parting (plunge toward -X), -1 = ID bore (plunge toward +X, larger dia)
   var fa=(P.fa!=null?P.fa:0.1), wa=(P.wa!=null?P.wa:0), plf=(P.plf||100), rtr=P.rtr||0, arcfmt=(P.arcfmt||'R');
   if(($('gv_type')||{}).value==='cutoff'){fa=0;wa=0;}   // parting cuts to centre, no finish stock
   // ---- Movement control (retraction / positioning / safe approach) ----
@@ -4206,7 +4210,8 @@ function generate(P){
     pkret:(P.pkret==='g1'?'g1':'g0'),
     posmode:(P.posmode==='g1'?'g1':'g0'),
     apprd:(P.apprd!=null?P.apprd:0.5),
-    apprfx:(P.apprfx>0?P.apprfx:2)
+    apprfx:(P.apprfx>0?P.apprfx:2),
+    rs:RS   // radial sign for plunge direction (OD +1 / ID -1)
   };
   // deferred until Fr/plungeF known below (feeds default)
   MC._retf=(P.pkretf>0?P.pkretf:0);
@@ -4216,19 +4221,19 @@ function generate(P){
   MC.retf=(MC._retf>0?MC._retf:plungeF);        // peck-retract feed (G1 mode) - defaults to plunge feed
   MC.posf=(MC._posf>0?MC._posf:Fr*2);           // positioning feed (G1 mode) - defaults to 2x cut feed
   MC.apprf=Fr*(MC.apprfx>0?MC.apprfx:2);        // safe-approach feed - default 2x cut feed
-  var _rghD2=D2+2*fa;                   // rough floor leaves finish allowance (fa) radial
+  var _rghD2=D2+RS*2*fa;                 // rough floor leaves finish allowance (fa) radial (sign per OD/ID)
   var _mtp=null;
   if(typeof gvManOn==='function'&&gvManOn()){
     _mtp=(typeof gvManToolpath==='function')?gvManToolpath():null;
     if(_mtp){ D1=_mtp.D1; D2=_mtp.D2; Z1=_mtp.Z1; Z2=_mtp.Z2; }
   }
-  var W=(D1-D2)/2, GW=Math.abs(Z2-Z1);
+  var W=Math.abs(D1-D2)/2, GW=Math.abs(Z2-Z1);
   var origin=P.offRef, originShift={L:-Wi/2,C:0,R:+Wi/2}[origin], originLabel={L:'LEFT corner',C:'CENTER',R:'RIGHT corner'}[origin];
   // refOff = distance from the insert's LEFT corner to the offset-reference (touch-off) point.
   // L(left edge)=0, C(centre)=Wi/2, R(right edge)=Wi. All emitted Z reference this point.
   var refOff={L:0,C:Wi/2,R:Wi}[origin]; if(refOff===undefined)refOff=Wi/2;
-  var safeX=D1+sX*2;
-  var _retX=(rtr>0)?(D1+2*rtr):safeX;   // between-plunge retract clearance (blank/0 = full Safe X)
+  var safeX=D1+RS*sX*2;                 // clear position: OD above the bar, ID inside the bore
+  var _retX=(rtr>0)?(D1+RS*2*rtr):safeX;   // between-plunge retract clearance (blank/0 = full Safe X)
   var patOn=P.patOn, N=patOn?(P.patN||1):1, p2=P.pat2, dir=P.patDir, pitch=patOn?(P.patMode==='pitch'?p2:(N>1?p2/(N-1):p2)):0;
   var stratLabel={single:'Single plunge',multi:'Multi-plunge',plturn:'Plunge turning',ramp:'Ramping'}[strat];
   var offRef=origin, offShift=originShift, offLbl={L:'Left edge (-Z)',C:'Center',R:'Right edge (+Z)'}[offRef];
@@ -4303,14 +4308,14 @@ function generate(P){
         }
         var N_p=centers.length;
         mv.push({t:'cmt', txt:N_p+' plunge(s), step '+actualStep.toFixed(3)+' mm between insert centers ('+_pdLbl+')'});
-        var _totRad=(D1-_rghD2)/2;
+        var _totRad=RS*(D1-_rghD2)/2;
         if(floor>0 && _totRad>floor+1e-6){
           var _nFloor=Math.ceil(_totRad/floor-1e-9);
           mv.push({t:'cmt', txt:'Floor roughing: '+_nFloor+' layer(s) x '+floor.toFixed(3)+' mm radial - full width cleared before deeper'});
           var _xTop=D1;
           for(var _fl=0;_fl<_nFloor;_fl++){
             var _radBot=Math.min((_fl+1)*floor,_totRad);
-            var _xBot=D1-2*_radBot;
+            var _xBot=D1-RS*2*_radBot;
             var _xt=_xTop;
             mv.push({t:'cmt', txt:'-- Floor '+(_fl+1)+'/'+_nFloor+' : clear full width to D'+_xBot.toFixed(3)+' --'});
             centers.forEach(function(zc){
@@ -4335,7 +4340,7 @@ function generate(P){
         var zpPlunge=zcPlunge-Wi/2+refOff, zpFar=zcFar-Wi/2+refOff; // offset-reference points
         var _rdoc=(rdoc>0?rdoc:pd);
         var _levels=[];
-        for(var _xl=D1-2*_rdoc; _xl>_rghD2+1e-4; _xl-=2*_rdoc)_levels.push(_xl);
+        for(var _xl=D1-RS*2*_rdoc; RS*(_xl-_rghD2)>1e-4; _xl-=RS*2*_rdoc)_levels.push(_xl);
         _levels.push(_rghD2);
         mv.push({t:'cmt', txt:'Plunge-turn roughing: plunge tailstock wall, turn toward spindle | radial DOC '+_rdoc.toFixed(3)+' mm x '+_levels.length+' level(s)'});
         var _prevX=D1;
@@ -4344,8 +4349,8 @@ function generate(P){
           _mcRetract(mv, safeX, MC);                                // clear before repositioning
           _mcPos(mv, {Z:zpPlunge}, MC);                            // position axially (same Z)
           if(MC.apprd>0) _mcEnter(mv, _prevX, MC);                 // stop apprd above the metal, feed in (radial only)
-          else _mcPos(mv, {X:_prevX+2}, MC);                        // rapid to 1 mm above last cut depth
-          plungeSteps(mv, _prevX, _xLvl, zpPlunge, pd, pr, plungeF, peck); // peck-plunge to this level, no retract
+          else _mcPos(mv, {X:_prevX+RS*2}, MC);                     // rapid to 1 mm above last cut depth
+          plungeSteps(mv, _prevX, _xLvl, zpPlunge, pd, pr, plungeF, peck, RS); // peck-plunge to this level, no retract
           mv.push({t:'g1', X:_xLvl, Z:zpFar, F:Fr});                // turn toward spindle at depth
           if(dwell>0)mv.push({t:'dwell', p:dwell});
           _mcRetract(mv, safeX, MC);                                // retract clear
@@ -4428,15 +4433,16 @@ function _mcPos(mv, o, MC){                      // Control 2: non-cutting posit
 // above the metal surface, then feed the last bit into the surface at the approach feed.
 // No axial (Z) change - the tool visits the exact same positions, only the feed changes.
 function _mcEnter(mv, xMetal, MC){
-  var d=(MC&&MC.apprd>0)?MC.apprd:0;
-  if(d>0){ mv.push({t:'g0', X:xMetal+2*d}); mv.push({t:'g1', X:xMetal, F:MC.apprf}); }
+  var d=(MC&&MC.apprd>0)?MC.apprd:0, rs=(MC&&MC.rs)?MC.rs:1;
+  if(d>0){ mv.push({t:'g0', X:xMetal+rs*2*d}); mv.push({t:'g1', X:xMetal, F:MC.apprf}); }
 }
 // Emit one rough plunge: position axially (Control 2), stop above the metal + feed in (Control 4),
 // then the unchanged plunge. metalX = the surface the plunge first meets (mouth / previous depth).
 function _emitPlunge(mv, xTop, xBot, zp, metalX, MC, retX, pd, pr, F, dwell, peck){
+  var rs=(MC&&MC.rs)?MC.rs:1;
   _mcPos(mv, {Z:zp}, MC);
   if(MC && MC.apprd>0) _mcEnter(mv, metalX, MC);
-  else _mcPos(mv, {X:xTop+2}, MC);
+  else _mcPos(mv, {X:xTop+rs*2}, MC);
   pluneRough(mv, xTop, xBot, zp, retX, pd, pr, F, dwell, peck, MC);
 }
 function pluneRough(mv, xTop, xBot, z, safeX, pd, pr, F, dwell, peck, MC){
@@ -4446,14 +4452,15 @@ function pluneRough(mv, xTop, xBot, z, safeX, pd, pr, F, dwell, peck, MC){
     _mcRetract(mv, safeX, MC);
     return;
   }
+  var rs=(MC&&MC.rs)?MC.rs:1;
   var d = 0;
-  var totalD = (xTop - xBot)/2;
+  var totalD = rs*(xTop - xBot)/2;            // radial depth to cut (positive for OD and ID)
   while(d < totalD - 0.0001){
     var next = Math.min(totalD, d+pd);
-    mv.push({t:'g1', X:xTop-2*next, Z:z, F:F});
+    mv.push({t:'g1', X:xTop-rs*2*next, Z:z, F:F});
     if(next < totalD){
-      mv.push({t:'g1', X:xTop-2*next+2*pr});  // chip-break retract (micro-peck, always in feed)
-      mv.push({t:'g1', X:xTop-2*next});
+      mv.push({t:'g1', X:xTop-rs*2*next+rs*2*pr});  // chip-break retract (micro-peck, always in feed)
+      mv.push({t:'g1', X:xTop-rs*2*next});
     }
     d = next;
   }
@@ -4462,15 +4469,16 @@ function pluneRough(mv, xTop, xBot, z, safeX, pd, pr, F, dwell, peck, MC){
 }
 // Peck-plunge from xTop diameter to xBot diameter at Z=z, leaving the tool AT xBot
 // (no dwell, no safe retract) so the caller can turn from that depth. Used by plunge-turn roughing.
-function plungeSteps(mv, xTop, xBot, z, pd, pr, F, peck){
+function plungeSteps(mv, xTop, xBot, z, pd, pr, F, peck, rs){
+  rs=rs||1;
   if(peck===false){ mv.push({t:'g1', X:xBot, Z:z, F:F}); return; }
-  var d=0, totalD=(xTop-xBot)/2;
+  var d=0, totalD=rs*(xTop-xBot)/2;
   while(d < totalD - 0.0001){
     var next=Math.min(totalD, d+pd);
-    mv.push({t:'g1', X:xTop-2*next, Z:z, F:F});
+    mv.push({t:'g1', X:xTop-rs*2*next, Z:z, F:F});
     if(next < totalD){
-      mv.push({t:'g1', X:xTop-2*next+2*pr});  // chip-break retract
-      mv.push({t:'g1', X:xTop-2*next});
+      mv.push({t:'g1', X:xTop-rs*2*next+rs*2*pr});  // chip-break retract
+      mv.push({t:'g1', X:xTop-rs*2*next});
     }
     d=next;
   }
@@ -4581,10 +4589,11 @@ function gvFinishWallsFloor(mv, D1, D2, Z1, Z2, corners, nr, Wi, safeX, F, refOf
   for(var _i=0;_i<cs.length;_i++){var c=cs[_i]; if(c&&c.t&&c.t!=="Sharp"&&(c.s1||0)>0) return false;}
   if(refOff===undefined)refOff=Wi/2;
   MC=MC||{pkret:'g0',posmode:'g0',apprd:0};
+  var rs=(MC&&MC.rs)?MC.rs:1;
   var _ret=function(X){_mcRetract(mv,X,MC);};
   var zN=Math.max(Z1,Z2), zF=Math.min(Z1,Z2);
   if((zN-zF) < Wi+2*nr) return false;                 // too narrow: one plunge = profile pass
-  var zNear=zN-Wi+refOff, zFar=zF+refOff, Dtop=D1+2;
+  var zNear=zN-Wi+refOff, zFar=zF+refOff, Dtop=D1+rs*2;
   mv.push({t:"cmt", txt:"Finish - Walls then floor (each wall plunge-finished, then floor turned across; nose R"+nr.toFixed(2)+")"});
   // ---- NEAR wall ----
   mv.push({t:"g0", X:safeX});
@@ -4601,10 +4610,10 @@ function gvFinishWallsFloor(mv, D1, D2, Z1, Z2, corners, nr, Wi, safeX, F, refOf
   _ret(safeX);
   // ---- FLOOR (turn far -> near, blends into both finished walls) ----
   _mcPos(mv, {Z:zFar}, MC);
-  _mcPos(mv, {X:D2+2}, MC);
+  _mcPos(mv, {X:D2+rs*2}, MC);
   mv.push({t:"g1", X:D2, Z:zFar, F:F});
   mv.push({t:"g1", X:D2, Z:zNear, F:F});              // TURN across the floor
-  mv.push({t:"g1", X:D2+2*nr, Z:zNear+nr, F:F});      // ramp off the near corner
+  mv.push({t:"g1", X:D2+rs*2*nr, Z:zNear+nr, F:F});   // ramp off the near corner
   _ret(safeX);
   return true;
 }
