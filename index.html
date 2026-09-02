@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.77 &middot; 1 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.78 &middot; 2 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -2366,8 +2366,11 @@ function gvSimProfile(){
   var _or=($('tl_off_ref')?$('tl_off_ref').value:'C'), refOff={L:0,C:Wi/2,R:Wi}[_or]; if(refOff===undefined)refOff=Wi/2;
   function cn(id){var e=$(id+'_t');return {t:e?e.value:'Sharp', s:(parseFloat(($(id+'_s1')||{}).value)||0)};}
   var A=cn('A'), Bc=cn('B'), Cc=cn('C'), D=cn('D');
+  var gt=($('gv_type')?$('gv_type').value:'od');
   var span=Math.max(1,zN-zF), m=span*0.4+2;
-  var fin=[{z:zN+m,r:rOD}];
+  var nearZ=zN+m, farZ=zF-m;
+  if(gt==='od'){ nearZ=Math.max(0,zN); if(nearZ-zN<1)nearZ=zN+m; farZ=zF-Math.max(10,span*1.2+6); }   // solid bar: face at Z0, extend toward chuck
+  var fin=[{z:nearZ,r:rOD}];
   if(A.t==='Chamfer'&&A.s>0){ fin.push({z:zN+A.s,r:rOD}); fin.push({z:zN,r:rOD-A.s}); }
   else if(A.t==='Radius'&&A.s>0){ fin.push({z:zN+A.s,r:rOD}); fin.push({z:zN,r:rOD-A.s,arc:'CCW',ar:A.s}); }
   else fin.push({z:zN,r:rOD});
@@ -2382,8 +2385,8 @@ function gvSimProfile(){
   if(D.t==='Chamfer'&&D.s>0){ fin.push({z:zF,r:rOD-D.s}); fin.push({z:zF-D.s,r:rOD}); }
   else if(D.t==='Radius'&&D.s>0){ fin.push({z:zF,r:rOD-D.s}); fin.push({z:zF-D.s,r:rOD,arc:'CCW',ar:D.s}); }
   else fin.push({z:zF,r:rOD});
-  fin.push({z:zF-m,r:rOD});
-  return {fin:fin, raw:[{z:zN+m,r:rOD},{z:zF-m,r:rOD}], wi:Wi, nr:nr, rOD:rOD, refOff:refOff};
+  fin.push({z:farZ,r:rOD});
+  return {fin:fin, raw:[{z:nearZ,r:rOD},{z:farZ,r:rOD}], wi:Wi, nr:nr, rOD:rOD, refOff:refOff};
 }
 var lastGrooveProg='';function gvSim(){try{if(typeof window!=='undefined'&&window.gv_generate)window.gv_generate();else if(typeof genGroove==='function')genGroove();}catch(e){}var el=$('gcode');var prog=el?(el.textContent||el.innerText||''):'';if(!prog||prog.replace(/\s/g,'').length<8){prog=(typeof lastGrooveProg!=='undefined'?lastGrooveProg:'')||'';}if(!prog||prog.replace(/\s/g,'').length<8){if($('gv_res'))$('gv_res').innerHTML='<p class="warn" style="text-align:left">Enter groove geometry (top/bottom dia + start/end Z) in the GROOVE section, then Simulate.</p>';return;}lastTurnProg=prog.split('\n').filter(function(l){return !/\bG0?4\b/.test(l);}).join('\n');if(typeof tnSim==='function')tnSim(gvSimProfile());}
 function _gvn(id,d){var e=$(id);var v=e?parseFloat(e.value):NaN;return isFinite(v)?v:d;}
