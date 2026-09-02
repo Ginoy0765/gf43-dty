@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.83 &middot; 2 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.84 &middot; 2 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1395,6 +1395,14 @@
     <div id="depthBox">
     <div style="font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px">DEPTH OF CUT</div>
     <div id="peckBox">
+      <div class="row2" id="gv_pdirCell">
+        <div><label>Plunge direction</label><select id="gv_pdir" onchange="gv_recalc()">
+          <option value="centre" selected>Centre &rarr; both walls</option>
+          <option value="chuck">Chuck side &rarr; across</option>
+          <option value="tail">Tailstock side &rarr; across</option>
+        </select></div>
+        <div></div>
+      </div>
       <div class="row2">
         <div><label>Peck depth (mm)</label><input id="cs_pd" type="number" value="0.5" step="0.05" oninput="gv_recalc()"></div>
         <div><label>Retract per peck (mm)</label><input id="cs_pr" type="number" value="0.3" step="0.05" oninput="gv_recalc()"><label>Floor / layer depth (mm, blank = off)</label><input id="cs_floor" type="number" value="" placeholder="off" step="0.5" oninput="gv_recalc()"></div>
@@ -4014,6 +4022,7 @@ function recalc(){
   if($('finStratCell'))$('finStratCell').style.display=(!_ip&&(_rf==='finish'||_rf==='both'))?'':'none';
   if($('depthBox'))$('depthBox').style.display=_rgh?'block':'none';
   if($('peckBox'))$('peckBox').style.display=(_pk||_ip)?'block':'none';
+  if($('gv_pdirCell'))$('gv_pdirCell').style.display=(_st==='multi'&&!_ip)?'':'none';   // plunge direction: multi-plunge only
   if($('rdocBox'))$('rdocBox').style.display=(_pk||_ip)?'none':'block';})();
   document.querySelectorAll('.indepOnly').forEach(function(el){el.style.display=$('indepLegs').checked?'':'none';});
   if($('allcS2Box'))$('allcS2Box').style.display=$('indepLegs').checked?'block':'none';
@@ -4169,6 +4178,7 @@ function generate(P){
       pkretf:(function(){var v=parseFloat($('gv_pkretf')?$('gv_pkretf').value:'');return isFinite(v)&&v>0?v:0;})(),
       posmode:($('gv_posmode')?$('gv_posmode').value:'g0'),
       posf:(function(){var v=parseFloat($('gv_posf')?$('gv_posf').value:'');return isFinite(v)&&v>0?v:0;})(),
+      pdir:($('gv_pdir')?$('gv_pdir').value:'centre'),
       apprd:(function(){var v=parseFloat($('gv_apprd')?$('gv_apprd').value:'');return isFinite(v)&&v>=0?v:0.5;})(),
       apprfx:(function(){var v=parseFloat($('gv_apprfx')?$('gv_apprfx').value:'');return isFinite(v)&&v>0?v:2;})(),
       plf:(function(){var v=parseFloat($('gv_plf')?$('gv_plf').value:'');return isFinite(v)&&v>0?v:100;})(),
@@ -4273,14 +4283,26 @@ function generate(P){
         var zCFirst=zLeftWall+Wi/2+wa, zCLast=zRightWall-Wi/2-wa;
         if(zCLast<zCFirst){zCFirst=zCLast=(zLeftWall+zRightWall)/2;}   // groove too narrow for the allowance
         var span=zCLast-zCFirst;
-        // Always plunge the groove CENTRE first, then expand outward toward both walls alternately.
-        var zMid=(zCFirst+zCLast)/2, halfSpan=span/2;
-        var nSide=(halfSpan<=0.001)?0:Math.ceil(halfSpan/step);
-        var actualStep=(nSide>0)?halfSpan/nSide:0;
-        var centers=[zMid];
-        for(var _sd=1;_sd<=nSide;_sd++){ centers.push(zMid-_sd*actualStep); centers.push(zMid+_sd*actualStep); }
+        // Plunge direction (default 'centre'): centre-out, or start at one wall and step across.
+        //   chuck = start at the chuck-side (zLeftWall) wall; tail = start at the tailstock-side (zRightWall) wall.
+        // Wall-start first plunge sits at zCFirst/zCLast, i.e. already wa away from the wall (leaves finish allowance).
+        var _pdir=(P.pdir||'centre'), centers=[], _pdLbl;
+        if(_pdir==='chuck'||_pdir==='tail'){
+          var _nStep=(span<=0.001)?0:Math.ceil(span/step), _st=(_nStep>0)?span/_nStep:0;
+          if(_pdir==='chuck'){ for(var _si=0;_si<=_nStep;_si++)centers.push(zCFirst+_si*_st); _pdLbl='chuck side -> across'; }
+          else               { for(var _si=0;_si<=_nStep;_si++)centers.push(zCLast-_si*_st);  _pdLbl='tailstock side -> across'; }
+          var actualStep=_st;
+        } else {
+          // Centre-out: plunge the groove CENTRE first, then expand outward toward both walls alternately.
+          var zMid=(zCFirst+zCLast)/2, halfSpan=span/2;
+          var nSide=(halfSpan<=0.001)?0:Math.ceil(halfSpan/step);
+          var actualStep=(nSide>0)?halfSpan/nSide:0;
+          centers=[zMid];
+          for(var _sd=1;_sd<=nSide;_sd++){ centers.push(zMid-_sd*actualStep); centers.push(zMid+_sd*actualStep); }
+          _pdLbl='centre -> both walls';
+        }
         var N_p=centers.length;
-        mv.push({t:'cmt', txt:N_p+' plunge(s), step '+actualStep.toFixed(3)+' mm between insert centers'});
+        mv.push({t:'cmt', txt:N_p+' plunge(s), step '+actualStep.toFixed(3)+' mm between insert centers ('+_pdLbl+')'});
         var _totRad=(D1-_rghD2)/2;
         if(floor>0 && _totRad>floor+1e-6){
           var _nFloor=Math.ceil(_totRad/floor-1e-9);
