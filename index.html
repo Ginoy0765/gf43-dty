@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.04 &middot; 3 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.08 &middot; 3 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1056,19 +1056,11 @@
       <button class="btn btn2" onclick="show('phist');renderHist()">&#128338;  Saved programs</button>
       <div id="simwrap" style="position:relative;margin-top:12px"><canvas id="simcv" width="640" height="520" style="display:none;width:100%;background:#0a1118;border:1px solid #293a4d;border-radius:12px"></canvas><div id="simsel" style="position:absolute;display:none;left:0;top:0;border:1.5px dashed #ff4d4d;background:rgba(255,77,77,0.08);pointer-events:none;border-radius:4px"></div></div>
       <div id="simctrls" style="display:none;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:8px">
-        <button class="btn btn2" id="simplay" style="width:auto;padding:8px 12px" onclick="simPlay()">&#9654; Play</button>
-        <button class="btn btn2" id="simpause" style="width:auto;padding:8px 12px" onclick="simPause()">&#9208; Pause</button>
+        <button class="btn btn2" id="simplay" style="width:auto;padding:8px 12px" onclick="simToggle()">&#9654; Play</button>
         <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="simBlock(-1)">&#9664; Block</button>
         <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="simBlock(1)">Block &#9654;</button>
-        <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="simAll()">All</button>
         <button class="btn btn2" id="simspeed" style="width:auto;padding:8px 12px" onclick="simSpeed()">Speed 5&#215;</button>
-        <button class="btn btn2" id="vtop" style="width:auto;padding:8px 12px" onclick="simView('top')">Top</button>
-        <button class="btn btn2" id="vfront" style="width:auto;padding:8px 12px" onclick="simView('front')">Front</button>
-        <button class="btn btn2" id="vleft" style="width:auto;padding:8px 12px" onclick="simView('left')">Left</button>
-        <button class="btn btn2" id="viso" style="width:auto;padding:8px 12px" onclick="simView('iso')">3D</button>
         <button class="btn btn2" id="simzoombox" style="width:auto;padding:8px 12px" onclick="simMarquee()" title="Zoom to a region — tap this, then drag a box over the area">&#128269; Area</button>
-        <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="simZoom(1.25)" title="Zoom in">Zoom +</button>
-        <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="simZoom(0.8)" title="Zoom out">Zoom &#8722;</button>
         <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="simReset()">Reset (clear)</button>
         <div id="simblklbl" class="note" style="width:100%;text-align:center;margin-top:2px"></div>
         <div id="simpos" style="width:100%;text-align:center;font-family:monospace;font-size:13px;color:#ffb300;margin-top:2px"></div>
@@ -1783,7 +1775,7 @@ function toggleHelp(){helpMode=!helpMode;document.body.classList.toggle('helpon'
 function openMillOp(n){if(n==='Face mill'||n==='Face milling'){show('facemill');return;}var t=$('mill_op_title');if(t)t.textContent=n;var nm=$('mill_op_name');if(nm)nm.textContent=n;show('mill_op');}
 function millGrp(id){var el=document.getElementById(id);if(!el)return;var op=el.classList.contains('open');['mg_c','mg_p'].forEach(function(g){var e=document.getElementById(g);if(e)e.classList.remove('open');});if(!op)el.classList.add('open');}
 function tnQuick(k){show('turnops');try{tnMachRefresh();}catch(e){}try{function _qs(id,v){var e=document.getElementById(id);if(e){e.value=v;if(typeof e.onchange==='function')e.onchange();}}if(k==='OD'){_qs('tn_odid','OD (outside)');_qs('tn_pathsel','Turning');}else if(k==='ID'){_qs('tn_odid','ID (bore)');_qs('tn_pathsel','Turning');}else if(k==='FACE'){_qs('tn_odid','OD (outside)');_qs('tn_pathsel','Facing');}}catch(e){}}
-function setMode(m){var t=document.getElementById('mt-turn'),l=document.getElementById('mt-mill');if(!t||!l)return;window._mode=m;try{document.querySelectorAll('.tile[data-mode]').forEach(function(x){var dm=x.getAttribute('data-mode');x.style.display=(dm==='both'||dm===m)?'':'none';});document.querySelectorAll('.jobop-turn').forEach(function(x){x.style.display=(m==='turn')?'':'none';});document.querySelectorAll('.jobop-mill').forEach(function(x){x.style.display=(m==='mill')?'':'none';});document.querySelectorAll('.js-turn-only').forEach(function(x){x.style.display=(m==='mill')?'none':'';});document.querySelectorAll('.js-mill-only').forEach(function(x){x.style.display=(m==='mill')?'':'none';});}catch(e){}var jt=document.getElementById('js-turn'),jm=document.getElementById('js-mill');if(m==='mill'){l.style.background='#334559';l.style.color='#e8eef4';l.style.boxShadow='inset 3px 0 0 var(--acc)';t.style.background='transparent';t.style.color='var(--mut)';t.style.boxShadow='none';if(jt)jt.style.display='none';if(jm)jm.style.display='block';}else{t.style.background='#334559';t.style.color='#e8eef4';t.style.boxShadow='inset 3px 0 0 var(--acc)';l.style.background='transparent';l.style.color='var(--mut)';l.style.boxShadow='none';if(jt)jt.style.display='block';if(jm)jm.style.display='none';}}
+function setMode(m){var t=document.getElementById('mt-turn'),l=document.getElementById('mt-mill');if(!t||!l)return;window._mode=m;try{document.querySelectorAll('.tile[data-mode]').forEach(function(x){var dm=x.getAttribute('data-mode');x.style.display=(dm==='both'||dm===m)?'':'none';});document.querySelectorAll('.jobop-turn').forEach(function(x){x.style.display=(m==='turn')?'':'none';});document.querySelectorAll('.jobop-mill').forEach(function(x){x.style.display=(m==='mill')?'':'none';});document.querySelectorAll('.js-turn-only').forEach(function(x){x.style.display=(m==='mill')?'none':'';});document.querySelectorAll('.js-mill-only').forEach(function(x){x.style.display=(m==='mill')?'':'none';});}catch(e){}var jt=document.getElementById('js-turn'),jm=document.getElementById('js-mill');if(m==='mill'){l.style.background='#334559';l.style.color='#e8eef4';l.style.boxShadow='inset 3px 0 0 var(--acc)';t.style.background='transparent';t.style.color='var(--mut)';t.style.boxShadow='none';if(jt)jt.style.display='none';if(jm)jm.style.display='block';}else{t.style.background='#334559';t.style.color='#e8eef4';t.style.boxShadow='inset 3px 0 0 var(--acc)';l.style.background='transparent';l.style.color='var(--mut)';l.style.boxShadow='none';if(jt)jt.style.display='block';if(jm)jm.style.display='none';}try{window.scrollTo(0,0);}catch(e){}}
 var jsOD=[{x:null,z:null},{x:null,z:null},{x:null,z:null}];
 var jsID=[{x:null,z:null},{x:null,z:null},{x:null,z:null}];
 function jsShape(){var v=$('js_shape')?$('js_shape').value:'Plain';var pl=$('js_plain'),pr=$('js_prof');if(v==='Plain'){if(pl)pl.style.display='block';if(pr)pr.style.display='none';}else{if(pl)pl.style.display='none';if(pr)pr.style.display='block';jsRenderTbl('od');jsRenderTbl('id');}}
@@ -2950,7 +2942,8 @@ function renderSim(){var ctx=SIM.ctx,W=SIM.W,H=SIM.H;if(!ctx)return;ctx.clearRec
   }
 }
 function simStop(){if(SIM.anim)cancelAnimationFrame(SIM.anim);SIM.playing=false;updatePlayBtn();}
-function updatePlayBtn(){var b=$('simplay');if(b)b.style.opacity=SIM.playing?'0.5':'1';}
+function updatePlayBtn(){var b=$('simplay');if(b)b.innerHTML=SIM.playing?'⏸ Pause':'▶ Play';}
+function simToggle(){if(SIM.playing){simPause();}else{simPlay();}}
 function simPause(){simStop();}
 function simSpeed(){var st=[5,20,100,1000];SIM.speed=st[(st.indexOf(SIM.speed||5)+1)%st.length];var b=$('simspeed');if(b)b.innerHTML='Speed '+SIM.speed+'×';}
 function simPlay(){var mx=SIM.turning?SIM.passes.length:SIM.blocks;
@@ -3026,7 +3019,7 @@ function _applyThreadHdr(prog,withCutter){
   }catch(e){}
   return prog;
 }
-function applyHeader(prog,msg,uname){var L=prog.split('\n');var ins=[];if(msg)ins.push('('+msg+')');if(uname)ins.push('(BY '+uname+')');if(!ins.length)return prog;for(var i=0;i<L.length;i++){if(/^\s*O\d/.test(L[i])||/^\s*%1001/.test(L[i])){L.splice.apply(L,[i+1,0].concat(ins));return L.join('\n');}}L.splice.apply(L,[1,0].concat(ins));return L.join('\n');}
+function applyHeader(prog,msg,uname){if(!uname||!(''+uname).trim())uname=(window.YANTRA_USER||'');var L=prog.split('\n');var ins=[];if(msg)ins.push('('+msg+')');if(uname)ins.push('(BY '+uname+')');if(!ins.length)return prog;for(var i=0;i<L.length;i++){if(/^\s*O\d/.test(L[i])||/^\s*%1001/.test(L[i])){L.splice.apply(L,[i+1,0].concat(ins));return L.join('\n');}}L.splice.apply(L,[1,0].concat(ins));return L.join('\n');}
 function applySubprogram(prog){var L=prog.split('\n'),o=[];for(var i=0;i<L.length;i++){var ln=L[i],t=ln.trim();
   if(/^O\d/.test(t)){o.push(ln+'(Sub Program)');continue;}
   if(/^%1001\b/.test(t)){o.push(ln+'(Sub Program)');continue;}
@@ -3768,7 +3761,7 @@ function saveDrill(){if(!lastProg)return;if(typeof drMode!=='undefined'&&drMode=
 function progExt(){try{var cur=document.querySelector('.view.on');if(cur&&cur.id==='prog'&&typeof method!=='undefined'){if(method==='Turn'){var t=$('t_fmt');if(t&&t.value)return t.value;}else if(method==='Mill'){var mm=$('m_fmt');if(mm&&mm.value)return mm.value;}}}catch(e){}var e=$('def_fmt')?$('def_fmt').value:'';return e||'txt';}
 function updateSaveLabels(){var e=(typeof progExt==='function')?progExt():'txt';var b;b=$('savebtn');if(b)b.innerHTML='&#128190;  Save .'+e+' to Downloads';b=$('dr_savebtn');if(b)b.innerHTML='&#128190;  Save .'+e;b=$('job_savebtn');if(b)b.innerHTML='&#128190;  Save job .'+e;}
 function _tn(v){v=Math.round((parseFloat(v)||0)*1000)/1000;return ''+v;}
-function _threadUser(){var tu=$('t_user')?($('t_user').value||'').trim():'';var mu=$('m_user')?($('m_user').value||'').trim():'';if(typeof method!=='undefined'&&method==='Turn')return tu||mu;return mu||tu;}
+function _threadUser(){var tu=$('t_user')?($('t_user').value||'').trim():'';var mu=$('m_user')?($('m_user').value||'').trim():'';var u=(typeof method!=='undefined'&&method==='Turn')?(tu||mu):(mu||tu);return u||(window.YANTRA_USER||'');}
 function _threadCtrl(){try{if(typeof method!=='undefined'&&method==='Turn'){var t=$('t_ctrl');if(t&&t.value)return t.value;}else{var m=$('ctrl');if(m&&m.value)return m.value;}}catch(e){}return 'Fanuc';}
 function threadDesignation(){
   var prof=$('profile')?$('profile').value:'';
@@ -3804,8 +3797,8 @@ function threadComment(){var d=threadDesignation();var u=_threadUser();return d+
 function _injectHeader(prog,comment){
   var lines=String(prog).split('\n');
   for(var i=0;i<lines.length;i++){
-    var m=lines[i].match(/^(\s*O\d+)\b.*$/i);
-    if(m){lines[i]=m[1]+' ('+comment+')';return lines.join('\n');}
+    var m=lines[i].match(/^(\s*O\d+)\b\s*(.*)$/i);
+    if(m){if(m[2]&&/^\(/.test(m[2].trim()))return prog; /* O-line already carries a heading comment (our STD,D,P,L,INT) — keep it */ lines[i]=m[1]+' ('+comment+')';return lines.join('\n');}
   }
   var hd=/Heidenhain/i.test(_threadCtrl());var j=0;while(j<lines.length&&lines[j].trim()==='')j++;
   lines.splice(j+1,0,hd?('; '+comment):('( '+comment+' )'));return lines.join('\n');
@@ -3819,7 +3812,8 @@ function threadFooter(){
   var fz=mill?(v('fz')||'-'):'-';
   var passes=(mill?v('passes'):v('t_total'))||'-';
   var cyc='-';try{if(typeof lastCycleSec!=='undefined'&&lastCycleSec>0)cyc=Math.floor(lastCycleSec/60)+'m '+Math.round(lastCycleSec%60)+'s';}catch(_){}var _dt=new Date();var dstr=('0'+_dt.getDate()).slice(-2)+'/'+('0'+(_dt.getMonth()+1)).slice(-2)+'/'+_dt.getFullYear();
-  var rows=['Major Dia     : '+_tn(num('D',0))+' mm','Minor Dia     : '+_tn(num('minor',0))+' mm','Tool Dia      : '+told,'Thread Length : '+_tn(num('L',0))+' mm','Material      : '+(selText('mat')||'-'),'Vc            : '+vc+(vc==='-'?'':' m/min'),'Fz            : '+fz+(fz==='-'?'':' mm/tooth'),'Passes        : '+passes,'Cycle Time    : '+cyc,'Date          : '+dstr];
+  var _op=(typeof _threadUser==='function'?_threadUser():'')||'-';
+  var rows=['Major Dia     : '+_tn(num('D',0))+' mm','Minor Dia     : '+_tn(num('minor',0))+' mm','Tool Dia      : '+told,'Thread Length : '+_tn(num('L',0))+' mm','Material      : '+(selText('mat')||'-'),'Vc            : '+vc+(vc==='-'?'':' m/min'),'Fz            : '+fz+(fz==='-'?'':' mm/tooth'),'Passes        : '+passes,'Cycle Time    : '+cyc,'Operator      : '+_op,'Date          : '+dstr];
   var hd=/Heidenhain/i.test(_threadCtrl());
   var bar=hd?'; ------------------------------':'( ------------------------------ )';
   return [bar].concat(rows.map(function(x){return hd?('; '+x):('( '+x+' )');})).join('\n');
