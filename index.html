@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.08 &middot; 3 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.09 &middot; 3 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -291,6 +291,7 @@
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
           <div><label>Control</label><select id="def_ctrl" onchange="applyDefMachine()"><option>Fanuc</option><option>Siemens</option><option>Mazatrol</option><option>Heidenhain</option><option>Haas</option><option>Mitsubishi</option></select></div>
           <div><label>Spindle-index Q0 in program</label><select id="def_q0"><option>Off</option><option>On</option></select></div>
+          <div><label>Operator / User</label><input id="def_operator" type="text" placeholder="e.g. Hydra" oninput="try{localStorage.setItem('yantra_operator',this.value)}catch(e){}"></div>
         </div>
 
         <div class="js-turn-only">
@@ -3001,6 +3002,7 @@ function _threadHdrComment(withCutter){
   parts.push('L='+_n(num('L',0)));
   if(withCutter)parts.push('d='+_n(num('d',0)));
   var sideEl=$('side'); parts.push((sideEl&&sideEl.value==='Internal')?'INT':'EXT');
+  var _op=(typeof _threadUser==='function'?_threadUser():'');if(_op)parts.push('User - '+_op);
   return '('+parts.join(', ')+')';
 }
 function _applyThreadHdr(prog,withCutter){
@@ -3019,7 +3021,7 @@ function _applyThreadHdr(prog,withCutter){
   }catch(e){}
   return prog;
 }
-function applyHeader(prog,msg,uname){if(!uname||!(''+uname).trim())uname=(window.YANTRA_USER||'');var L=prog.split('\n');var ins=[];if(msg)ins.push('('+msg+')');if(uname)ins.push('(BY '+uname+')');if(!ins.length)return prog;for(var i=0;i<L.length;i++){if(/^\s*O\d/.test(L[i])||/^\s*%1001/.test(L[i])){L.splice.apply(L,[i+1,0].concat(ins));return L.join('\n');}}L.splice.apply(L,[1,0].concat(ins));return L.join('\n');}
+function applyHeader(prog,msg,uname){var L=prog.split('\n');var ins=[];if(msg)ins.push('('+msg+')');if(uname)ins.push('(BY '+uname+')');if(!ins.length)return prog;for(var i=0;i<L.length;i++){if(/^\s*O\d/.test(L[i])||/^\s*%1001/.test(L[i])){L.splice.apply(L,[i+1,0].concat(ins));return L.join('\n');}}L.splice.apply(L,[1,0].concat(ins));return L.join('\n');}
 function applySubprogram(prog){var L=prog.split('\n'),o=[];for(var i=0;i<L.length;i++){var ln=L[i],t=ln.trim();
   if(/^O\d/.test(t)){o.push(ln+'(Sub Program)');continue;}
   if(/^%1001\b/.test(t)){o.push(ln+'(Sub Program)');continue;}
@@ -3761,7 +3763,7 @@ function saveDrill(){if(!lastProg)return;if(typeof drMode!=='undefined'&&drMode=
 function progExt(){try{var cur=document.querySelector('.view.on');if(cur&&cur.id==='prog'&&typeof method!=='undefined'){if(method==='Turn'){var t=$('t_fmt');if(t&&t.value)return t.value;}else if(method==='Mill'){var mm=$('m_fmt');if(mm&&mm.value)return mm.value;}}}catch(e){}var e=$('def_fmt')?$('def_fmt').value:'';return e||'txt';}
 function updateSaveLabels(){var e=(typeof progExt==='function')?progExt():'txt';var b;b=$('savebtn');if(b)b.innerHTML='&#128190;  Save .'+e+' to Downloads';b=$('dr_savebtn');if(b)b.innerHTML='&#128190;  Save .'+e;b=$('job_savebtn');if(b)b.innerHTML='&#128190;  Save job .'+e;}
 function _tn(v){v=Math.round((parseFloat(v)||0)*1000)/1000;return ''+v;}
-function _threadUser(){var tu=$('t_user')?($('t_user').value||'').trim():'';var mu=$('m_user')?($('m_user').value||'').trim():'';var u=(typeof method!=='undefined'&&method==='Turn')?(tu||mu):(mu||tu);return u||(window.YANTRA_USER||'');}
+function _threadUser(){var op=$('def_operator')?($('def_operator').value||'').trim():'';if(op)return op;var tu=$('t_user')?($('t_user').value||'').trim():'';var mu=$('m_user')?($('m_user').value||'').trim():'';return (typeof method!=='undefined'&&method==='Turn')?(tu||mu):(mu||tu);}
 function _threadCtrl(){try{if(typeof method!=='undefined'&&method==='Turn'){var t=$('t_ctrl');if(t&&t.value)return t.value;}else{var m=$('ctrl');if(m&&m.value)return m.value;}}catch(e){}return 'Fanuc';}
 function threadDesignation(){
   var prof=$('profile')?$('profile').value:'';
@@ -3812,8 +3814,7 @@ function threadFooter(){
   var fz=mill?(v('fz')||'-'):'-';
   var passes=(mill?v('passes'):v('t_total'))||'-';
   var cyc='-';try{if(typeof lastCycleSec!=='undefined'&&lastCycleSec>0)cyc=Math.floor(lastCycleSec/60)+'m '+Math.round(lastCycleSec%60)+'s';}catch(_){}var _dt=new Date();var dstr=('0'+_dt.getDate()).slice(-2)+'/'+('0'+(_dt.getMonth()+1)).slice(-2)+'/'+_dt.getFullYear();
-  var _op=(typeof _threadUser==='function'?_threadUser():'')||'-';
-  var rows=['Major Dia     : '+_tn(num('D',0))+' mm','Minor Dia     : '+_tn(num('minor',0))+' mm','Tool Dia      : '+told,'Thread Length : '+_tn(num('L',0))+' mm','Material      : '+(selText('mat')||'-'),'Vc            : '+vc+(vc==='-'?'':' m/min'),'Fz            : '+fz+(fz==='-'?'':' mm/tooth'),'Passes        : '+passes,'Cycle Time    : '+cyc,'Operator      : '+_op,'Date          : '+dstr];
+  var rows=['Major Dia     : '+_tn(num('D',0))+' mm','Minor Dia     : '+_tn(num('minor',0))+' mm','Tool Dia      : '+told,'Thread Length : '+_tn(num('L',0))+' mm','Material      : '+(selText('mat')||'-'),'Vc            : '+vc+(vc==='-'?'':' m/min'),'Fz            : '+fz+(fz==='-'?'':' mm/tooth'),'Passes        : '+passes,'Cycle Time    : '+cyc,'Date          : '+dstr];
   var hd=/Heidenhain/i.test(_threadCtrl());
   var bar=hd?'; ------------------------------':'( ------------------------------ )';
   return [bar].concat(rows.map(function(x){return hd?('; '+x):('( '+x+' )');})).join('\n');
@@ -5760,6 +5761,7 @@ window.gv_init = function(){ try{ initMaterials(); recalc(); }catch(e){ console.
     </label>
   </div>
 </div>
-<script>window.addEventListener('load',function(){setTimeout(function(){if(window.gv_init)window.gv_init();},500);});</script>
+<script>try{if('scrollRestoration' in history)history.scrollRestoration='manual';}catch(e){}
+window.addEventListener('load',function(){try{window.scrollTo(0,0);}catch(e){}try{var _o=localStorage.getItem('yantra_operator');if(_o&&document.getElementById('def_operator'))document.getElementById('def_operator').value=_o;}catch(e){}setTimeout(function(){try{window.scrollTo(0,0);}catch(e){}if(window.gv_init)window.gv_init();},500);});</script>
 </body>
 </html>
