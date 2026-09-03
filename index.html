@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.97 &middot; 3 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.98 &middot; 3 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -2994,11 +2994,22 @@ function _threadHdrComment(withCutter){
   parts.push('P='+_n(num('P',0)));
   parts.push('L='+_n(num('L',0)));
   if(withCutter)parts.push('d='+_n(num('d',0)));
+  var sideEl=$('side'); parts.push((sideEl&&sideEl.value==='Internal')?'INT':'EXT');
   return '('+parts.join(', ')+')';
 }
 function _applyThreadHdr(prog,withCutter){
   try{var hdr=_threadHdrComment(withCutter);var L=prog.split('\n');
-    for(var i=0;i<L.length;i++){var m=L[i].match(/^(\s*O\d+)\b/);if(m){L[i]=m[1]+' '+hdr;return L.join('\n');}}
+    for(var i=0;i<L.length;i++){var m=L[i].match(/^(\s*O\d+)\b/);if(m){
+      L[i]=m[1]+' '+hdr;
+      /* drop the engine's standalone thread-designation comment line(s) in the header block */
+      var j=i+1;
+      while(j<L.length){var t=L[j].trim();
+        if(t===''){j++;continue;}
+        if(t.charAt(0)==='('){ if(/X[\d.]+/.test(t)&&/(L=|Internal|External)/i.test(t)){L.splice(j,1);continue;} j++; continue; }
+        break;
+      }
+      return L.join('\n');
+    }}
   }catch(e){}
   return prog;
 }
@@ -3387,7 +3398,7 @@ function formatForControl(code,ctrl){var name=ctrl||'Fanuc I & J',out;
 function progTheme(){try{return localStorage.getItem('ya_progtheme')||'paper';}catch(e){return 'paper';}}
 function pEsc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function pHiWord(w){var m=w.match(/^([A-Za-z]+)([-+]?[\d.]+.*)?$/);if(!m)return '<span class="k-pu">'+pEsc(w)+'</span>';var lc=/^[GM]$/i.test(m[1])?'k-gm':'k-al';return '<span class="'+lc+'">'+pEsc(m[1])+'</span>'+(m[2]?'<span class="k-nm">'+pEsc(m[2])+'</span>':'');}
-function pHi(text){return String(text).split('\n').map(function(line){var t=line.trim();if(t.charAt(0)==='(')return '<span class="k-cm">'+pEsc(line)+'</span>';if(t==='%')return '<span class="k-pu">'+pEsc(line)+'</span>';return line.split(/(\s+)/).map(function(w){return /^\s+$/.test(w)?w:pHiWord(w);}).join('');}).join('\n');}
+function pHi(text){return String(text).split('\n').map(function(line){var t=line.trim();if(t.charAt(0)==='(')return '<span class="k-cm">'+pEsc(line)+'</span>';if(t==='%')return '<span class="k-pu">'+pEsc(line)+'</span>';var ci=line.indexOf('(');var codePart=ci>=0?line.slice(0,ci):line;var cmtPart=ci>=0?line.slice(ci):'';var hc=codePart.split(/(\s+)/).map(function(w){return /^\s+$/.test(w)?w:pHiWord(w);}).join('');return hc+(cmtPart?'<span class="k-cm">'+pEsc(cmtPart)+'</span>':'');}).join('\n');}
 function renderProg(){pbRender('p');}
 /* ---- generic shared PROGRAM block (drilling + face-mill) ---- */
 var lastFaceProg='';var PB_CFG={};var PB_ST={};
