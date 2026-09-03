@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.93 &middot; 2 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v27.96 &middot; 3 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -2961,7 +2961,7 @@ function bindSim(cv){if(SIM.bound)return;SIM.bound=true;var T={};cv.style.touchA
     else{var _kp=cv.width/((cv.getBoundingClientRect().width)||cv.width);var dx=(e.clientX-pv.x)*_kp,dy=(e.clientY-pv.y)*_kp;SIM.panX+=dx;SIM.panY+=dy;renderSim();}});
   function end(e){delete T[e.pointerId];if(Object.keys(T).length<2)SIM.pd=0;}
   cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);cv.addEventListener('pointerleave',end);
-  cv.addEventListener('wheel',function(e){e.preventDefault();SIM.zoom*=(e.deltaY<0?1.1:0.9);renderSim();},{passive:false});
+  cv.addEventListener('wheel',function(e){e.preventDefault();SIM.zoom*=(e.deltaY<0?1.03:1/1.03);renderSim();},{passive:false});
 }
 function genProg(){ if(progMode==='new'){var _miss=threadMandatoryMissing();if(_miss.length){$('p_res').innerHTML='<p class="warn" style="text-align:left">Required for a New program: '+_miss.join(', ')+'. Fill the fields marked in red, then Generate.</p>';try{refreshReq();}catch(e){}return;}} if(method!=='Turn'&&$('ctrl')&&$('ctrl').value.indexOf('Turn-mill')>=0&&$('side')&&$('side').value==='Internal') return genTurnMill(); if(!pyReady){pendingGen=true;$('p_res').innerHTML='<p class="warn">Engine loading (first time only, ~10\u201330s on phone)\u2026 it will generate automatically once ready.</p>';return;} pendingGen=false; if(method==='Turn') return genTurn(); return genMill(); }
 function computeVcFz(stab){var m=matBy($('mat').value);var vc=m[1],fzb=m[3];var s=Math.max(0,Math.min(100,stab));var vcF=Math.max(0.33,s/50);var fzF=s>=50?(0.5+s/100):Math.max(0.5,s/50);var d=num('d',0);
@@ -2974,6 +2974,30 @@ function computeVcFz(stab){var m=matBy($('mat').value);var vc=m[1],fzb=m[3];var 
   var nt=isStepped?Math.max(1,Math.round(num('teeth',1))):1;
   var nf=Math.max(0.1,1-0.08*Math.min(9,nt-1)-0.02*Math.max(0,nt-10));
   return {vc:Math.round(vc*vcF),fz:d>0?(fzb*Math.min(d,40)/10*nf*fzF):0};}
+// Thread-detail comment for the O-line (matches thread milling, minus cutter dia d):
+//   O0001 (STD, D=.., P=.., L=..)   — STD omitted when the thread standard is Others/Custom.
+function _threadStdToken(){
+  var szEl=$('size');
+  var std=(szEl&&szEl.selectedOptions&&szEl.selectedOptions[0])?(''+szEl.selectedOptions[0].text).trim():'';
+  var prof=(($('profile')||{}).value)||'';
+  if(!std||/select|manual|other|custom|—/i.test(std)||/custom|other/i.test(prof))return '';
+  return std;
+}
+function _threadHdrComment(withCutter){
+  function _n(v){return (Math.round((parseFloat(v)||0)*1000)/1000).toString();}
+  var parts=[]; var std=_threadStdToken(); if(std)parts.push(std);
+  parts.push('D='+_n(num('D',0)));
+  parts.push('P='+_n(num('P',0)));
+  parts.push('L='+_n(num('L',0)));
+  if(withCutter)parts.push('d='+_n(num('d',0)));
+  return '('+parts.join(', ')+')';
+}
+function _applyThreadHdr(prog,withCutter){
+  try{var hdr=_threadHdrComment(withCutter);var L=prog.split('\n');
+    for(var i=0;i<L.length;i++){var m=L[i].match(/^(\s*O\d+)\b/);if(m){L[i]=m[1]+' '+hdr;return L.join('\n');}}
+  }catch(e){}
+  return prog;
+}
 function applyHeader(prog,msg,uname){var L=prog.split('\n');var ins=[];if(msg)ins.push('('+msg+')');if(uname)ins.push('(BY '+uname+')');if(!ins.length)return prog;for(var i=0;i<L.length;i++){if(/^\s*O\d/.test(L[i])||/^\s*%1001/.test(L[i])){L.splice.apply(L,[i+1,0].concat(ins));return L.join('\n');}}L.splice.apply(L,[1,0].concat(ins));return L.join('\n');}
 function applySubprogram(prog){var L=prog.split('\n'),o=[];for(var i=0;i<L.length;i++){var ln=L[i],t=ln.trim();
   if(/^O\d/.test(t)){o.push(ln+'(Sub Program)');continue;}
@@ -3218,7 +3242,7 @@ async function genMill(){
     
     var _m=await apiPost('/mill/program',P0); var prog=_m.program, t=_m.seconds;lastCycleSec=t;
     prog=tnPostMill(prog);prog=tnMillPattern(prog);
-    prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
+    prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));prog=_applyThreadHdr(prog,true);if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
     var _np=(typeof pcts!=='undefined'&&pcts)?pcts.length:0;var _mp=['CT '+mm+'m '+ss+'s','Vc '+Vc,'Fz '+(+fz).toFixed(3),_np+' pass'+(_np==1?'':'es')];if(brepass){_mp.push('Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p');var _ro=num('repoff',0);if(_ro>0)_mp.push('+'+_ro+' mm dia');}$('cyc').innerHTML='<div class="cyc">'+_mp.join(' &middot; ')+'</div>';
     output(prog,'');
@@ -3285,7 +3309,7 @@ async function genTurn(){
   try{
     
     var _tr=await apiPost('/turn/program',P0); var res=_tr.result;lastCycleSec=res[1];
-    var _tt=($('t_toff')&&$('t_toff').value==='Yes'&&$('t_tool'))?$('t_tool').value.trim():'0101';var prog=res[0].replace('T0101','T'+_tt);prog=tnPostTurn(prog);var _tpb=(typeof buildTaperPreturn==='function')?buildTaperPreturn():null;if(_tpb)prog=prog.replace('N1 G40 G99',_tpb+'\nG40 G99');prog=applyHeader(prog,($('t_msg')?$('t_msg').value.trim():''),($('t_username')?$('t_username').value.trim():''));if($('t_subprog')&&$('t_subprog').value==='Yes')prog=applySubprogram(prog);
+    var _tt=($('t_toff')&&$('t_toff').value==='Yes'&&$('t_tool'))?$('t_tool').value.trim():'0101';var prog=res[0].replace('T0101','T'+_tt);prog=tnPostTurn(prog);var _tpb=(typeof buildTaperPreturn==='function')?buildTaperPreturn():null;if(_tpb)prog=prog.replace('N1 G40 G99',_tpb+'\nG40 G99');prog=applyHeader(prog,($('t_msg')?$('t_msg').value.trim():''),($('t_username')?$('t_username').value.trim():''));prog=_applyThreadHdr(prog);if($('t_subprog')&&$('t_subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(res[1]),mm=Math.floor(sec/60),ss=sec%60;
     $('cyc').innerHTML='<div class="cyc">CT '+mm+'m '+ss+'s &middot; Vc '+num('t_vc',120)+' &middot; '+res[3]+' pass'+(res[3]==1?'':'es')+'</div>';
     output(prog,'');
