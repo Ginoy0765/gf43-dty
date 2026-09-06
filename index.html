@@ -240,7 +240,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.11 &middot; 3 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.12 &middot; 3 Sep 2026</span></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end"><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -2324,6 +2324,7 @@ function s2Carve(c){
     var rbk=function(r){var t=(r-rLo)/((rHi-rLo)||1);var b=Math.round(t*(NB-1));return b<0?0:(b>NB-1?NB-1:b);};
     var envf=[],kf;for(kf=0;kf<NB;kf++)envf[kf]=faceZ;
     for(var esf=0;esf<S2.segs.length&&esf<=ef;esf++){var sgf=S2.segs[esf];if(!sgf||sgf[4]===0)continue;var z0f=sgf[0],r0f=sgf[1],z1f=sgf[2],r1f=sgf[3];if(esf===ef&&efr<1){z1f=z0f+(z1f-z0f)*efr;r1f=r0f+(r1f-r0f)*efr;}var rA=Math.min(r0f,r1f)-rof,rB=Math.max(r0f,r1f)-rof+wf,baf=rbk(rA),bbf=rbk(rB),lof=Math.min(baf,bbf),hif=Math.max(baf,bbf),zcf=Math.min(z0f,z1f),bif;for(bif=lof;bif<=hif;bif++){if(zcf<envf[bif])envf[bif]=zcf;}}
+    if(gpf.floorZ!=null){for(var kfl=0;kfl<NB;kfl++){if(envf[kfl]<gpf.floorZ)envf[kfl]=gpf.floorZ;}}
     c.fillStyle='#0a1118';c.beginPath();var stf=false,ki;for(ki=0;ki<NB;ki++){var rrf=rLo+(rHi-rLo)*ki/(NB-1);if(!stf){c.moveTo(S2.PX(envf[ki]),S2.PY(rrf));stf=true;}else c.lineTo(S2.PX(envf[ki]),S2.PY(rrf));}for(ki=NB-1;ki>=0;ki--){var rr2=rLo+(rHi-rLo)*ki/(NB-1);c.lineTo(S2.PX(faceZ),S2.PY(rr2));}c.closePath();c.fill();
     return;
   }
@@ -2334,14 +2335,17 @@ function s2Carve(c){
   var zL=S2.mnh,zR=S2.mxh;
   var ebk=function(z){var t=(z-zL)/((zR-zL)||1);var b=Math.round(t*(NB-1));return b<0?0:(b>NB-1?NB-1:b);};
   var finOnly=(!window._gvSimProf&&S2.opt.finish&&!S2.opt.rough);
-  var profR=[],pb;for(pb=0;pb<NB;pb++)profR[pb]=NaN;
-  if(finOnly){var fp=_s2Fin()||[],fi;for(fi=1;fi<fp.length;fi++){var q0=fp[fi-1],q1=fp[fi];if(!q0||!q1||!isFinite(q0.z)||!isFinite(q1.z))continue;var p0=ebk(q0.z),p1=ebk(q1.z),plo=Math.min(p0,p1),phi=Math.max(p0,p1),pi;for(pi=plo;pi<=phi;pi++){var pr;if(p1===p0)pr=(isID?Math.min(q0.r,q1.r):Math.max(q0.r,q1.r));else{var pt=(pi-p0)/(p1-p0);pr=q0.r+(q1.r-q0.r)*pt;}if(isNaN(profR[pi]))profR[pi]=pr;else profR[pi]=(isID?Math.min(profR[pi],pr):Math.max(profR[pi],pr));}}}
+  /* finish contour per Z-bucket: the removal boundary (bore wall for ID / outer profile for OD).
+     The carve is clamped to this so no toolpath (any insert) can remove past the finished part. */
+  var finR=[],pb;for(pb=0;pb<NB;pb++)finR[pb]=NaN;
+  var fpA=_s2Fin()||[],fi;for(fi=1;fi<fpA.length;fi++){var q0=fpA[fi-1],q1=fpA[fi];if(!q0||!q1||!isFinite(q0.z)||!isFinite(q1.z))continue;var p0=ebk(q0.z),p1=ebk(q1.z),plo=Math.min(p0,p1),phi=Math.max(p0,p1),pi;for(pi=plo;pi<=phi;pi++){var pr;if(p1===p0)pr=(isID?Math.max(q0.r,q1.r):Math.min(q0.r,q1.r));else{var pt=(pi-p0)/(p1-p0);pr=q0.r+(q1.r-q0.r)*pt;}if(isNaN(finR[pi]))finR[pi]=pr;else finR[pi]=(isID?Math.max(finR[pi],pr):Math.min(finR[pi],pr));}}
   var layer=Math.max((S2.opt.allow||0),1),envInit=isID?bore:rawR,env=[],eb;
-  for(eb=0;eb<NB;eb++){env[eb]=(finOnly&&!isNaN(profR[eb]))?(profR[eb]+(isID?-layer:layer)):envInit;}
+  for(eb=0;eb<NB;eb++){env[eb]=(finOnly&&!isNaN(finR[eb]))?(finR[eb]+(isID?-layer:layer)):envInit;}
   for(var es=0;es<S2.segs.length&&es<=ef;es++){var sg=S2.segs[es];if(!sg||sg[4]===0)continue;var z0=sg[0],r0=sg[1],z1=sg[2],r1=sg[3];if(es===ef&&efr<1){z1=z0+(z1-z0)*efr;r1=r0+(r1-r0)*efr;}var gpc=window._gvSimProf;
     if(gpc&&gpc.wi){var gro=(gpc.refOff||0),gw=gpc.wi,zA=Math.min(z0,z1)-gro,zB=Math.max(z0,z1)-gro+gw,ba=ebk(zA),bc=ebk(zB),rm=(isID?Math.max(r0,r1):Math.min(r0,r1)),blo=Math.min(ba,bc),bhi=Math.max(ba,bc),bi;for(bi=blo;bi<=bhi;bi++){if(isID){if(rm>env[bi])env[bi]=rm;}else{if(rm<env[bi])env[bi]=rm;}}}
     else{var bb0=ebk(z0),bb1=ebk(z1),blo2=Math.min(bb0,bb1),bhi2=Math.max(bb0,bb1),bi2;for(bi2=blo2;bi2<=bhi2;bi2++){var rr;if(bb1===bb0)rr=(isID?Math.max(r0,r1):Math.min(r0,r1));else{var tt=(bi2-bb0)/(bb1-bb0);rr=r0+(r1-r0)*tt;}if(isID){if(rr>env[bi2])env[bi2]=rr;}else{if(rr<env[bi2])env[bi2]=rr;}}}
   }
+  for(eb=0;eb<NB;eb++){if(!isNaN(finR[eb]))env[eb]=isID?Math.min(env[eb],finR[eb]):Math.max(env[eb],finR[eb]);}
   var fillBase=isID?0:rawR;
   c.fillStyle='#0a1118';c.beginPath();c.moveTo(S2.PX(zL),S2.PY(fillBase));var ei;for(ei=0;ei<NB;ei++){var zz=zL+(zR-zL)*ei/(NB-1);c.lineTo(S2.PX(zz),S2.PY(env[ei]));}c.lineTo(S2.PX(zR),S2.PY(fillBase));c.closePath();c.fill();
   }catch(e){}
