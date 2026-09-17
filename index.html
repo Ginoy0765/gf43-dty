@@ -103,9 +103,6 @@
   .hubtabs{display:flex;gap:6px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:12px}
   .hubtabs .hubtab{flex:1;text-align:center;border:none;border-radius:10px;padding:9px 4px;font-size:11.5px;font-weight:700;letter-spacing:.2px;cursor:pointer;background:transparent;color:var(--mut)}
   .hubtabs .hubtab.on{background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)}
-  .calcsubtabs{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:2px 0 12px;padding-bottom:2px}
-  .calcsubtabs .cst{flex:none;border:1px solid var(--line);border-radius:20px;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer;background:var(--bg2);color:var(--mut);white-space:nowrap}
-  .calcsubtabs .cst.on{background:#334559;color:#e8eef4;border-color:var(--acc)}
   .calcpanel .row2{margin-top:8px}
   .calcpanel h3{font-size:13px;color:var(--acc);margin:14px 0 6px;letter-spacing:.2px}
   .calcpanel h3:first-child{margin-top:2px}
@@ -249,7 +246,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.31 &middot; 17 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.32 &middot; 17 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -901,7 +898,7 @@
         </svg>
       </div>
       <div class="grid">
-        <div class="tile" onclick="show('data');calcData()"><span class="tag free">FREE</span><div class="ic">&#128269;</div><div><div class="t">Thread Data</div><div class="s">Tap-drill, minor, pitch dia</div></div></div>
+        <div class="tile" onclick="show('data');calcSubTab('thread');calcData()"><span class="tag free">FREE</span><div class="ic">&#128269;</div><div><div class="t">Thread Data</div><div class="s">Tap-drill, minor, pitch dia</div></div></div>
         <div class="tile" data-mode="turn" onclick="(function(){show('prog');var _o=$('opsel');if(_o&&_o.parentNode)_o.parentNode.style.display='';var _h=$('prog_h2');if(_h)_h.textContent='Programming';})()"><span class="tag free">FREE</span><div class="ic">&#128196;</div><div><div class="t">Programming</div><div class="s">Milling &amp; turning G-code</div></div></div>
       </div>
     </section>
@@ -909,7 +906,18 @@
     <section id="data" class="view">
       <div class="hubtabs"><button type="button" class="hubtab" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" class="hubtab on" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div>
       <div class="vhead"><button class="back" onclick="show('prog')">&lsaquo;</button><h2>Calculator</h2></div>
-      <div class="calcsubtabs"><button type="button" class="cst on" data-cst="thread" onclick="calcSubTab('thread')">Thread Data</button><button type="button" class="cst" data-cst="speedfeed" onclick="calcSubTab('speedfeed')">Speed &amp; Feed</button><button type="button" class="cst" data-cst="tapdrill" onclick="calcSubTab('tapdrill')">Tap Drill</button><button type="button" class="cst" data-cst="convert" onclick="calcSubTab('convert')">Convert</button><button type="button" class="cst" data-cst="taper" onclick="calcSubTab('taper')">Taper &amp; Angle</button><button type="button" class="cst" data-cst="weight" onclick="calcSubTab('weight')">Bar Weight</button><button type="button" class="cst" data-cst="materials" onclick="calcSubTab('materials')">Materials</button><button type="button" class="cst" data-cst="fits" onclick="calcSubTab('fits')">Fits &amp; Tolerances</button><button type="button" class="cst" data-cst="gmcode" onclick="calcSubTab('gmcode')">G/M-Code Ref</button></div>
+      <div id="calcMenu" class="grid" style="margin-bottom:12px">
+        <div class="tile" data-cst="thread" onclick="calcSubTab('thread')"><div class="ic">&#128269;</div><div><div class="t">Thread Data</div><div class="s">Tap-drill, minor, pitch dia</div></div></div>
+        <div class="tile" data-cst="speedfeed" onclick="calcSubTab('speedfeed')"><div class="ic">&#9889;</div><div><div class="t">Speed &amp; Feed</div><div class="s">Vc, RPM, feed rate</div></div></div>
+        <div class="tile" data-cst="tapdrill" onclick="calcSubTab('tapdrill')"><div class="ic">&#128295;</div><div><div class="t">Tap Drill</div><div class="s">Drill size for a given tap</div></div></div>
+        <div class="tile" data-cst="convert" onclick="calcSubTab('convert')"><div class="ic">&#128260;</div><div><div class="t">Convert</div><div class="s">mm/in, HP/kW, hardness</div></div></div>
+        <div class="tile" data-cst="taper" onclick="calcSubTab('taper')"><div class="ic">&#128207;</div><div><div class="t">Taper &amp; Angle</div><div class="s">Taper solver &amp; sine bar</div></div></div>
+        <div class="tile" data-cst="weight" onclick="calcSubTab('weight')"><div class="ic">&#9878;&#65039;</div><div><div class="t">Bar Weight</div><div class="s">Round / square / hex / plate</div></div></div>
+        <div class="tile" data-cst="materials" onclick="calcSubTab('materials')"><div class="ic">&#128203;</div><div><div class="t">Materials</div><div class="s">Machinability &amp; properties</div></div></div>
+        <div class="tile" data-cst="fits" onclick="calcSubTab('fits')"><div class="ic">&#127919;</div><div><div class="t">Fits &amp; Tolerances</div><div class="s">ISO 286 hole/shaft limits</div></div></div>
+        <div class="tile" data-cst="gmcode" onclick="calcSubTab('gmcode')"><div class="ic">&#128187;</div><div><div class="t">G/M-Code Ref</div><div class="s">Code meanings &amp; cycles</div></div></div>
+      </div>
+      <button type="button" id="calcBackBtn" class="back" style="display:none;width:auto;padding:0 14px;font-size:13px;font-weight:700;margin-bottom:10px" onclick="calcShowMenu()">&lsaquo; Calculator</button>
 
       <div id="calcSpeedFeed" class="calcpanel" style="display:none">
         <p class="note" style="text-align:left;margin:2px 0 8px">Quick lookup &mdash; pick a material and size, get a starting Vc/RPM (and feed rate for milling/drilling). For the fine-tuned version used when generating a program, see that operation's own Parameters.</p>
@@ -920,7 +928,7 @@
         <div id="sf_res"></div>
       </div>
 
-      <div id="calcThreadData" class="calcpanel">
+      <div id="calcThreadData" class="calcpanel" style="display:none">
       <p class="note" style="text-align:left;margin:2px 0 8px">Showing the thread selected in Thread Details.</p>
       <div class="row2" style="margin-top:2px"><div><label>External class</label><select id="d_extc" onchange="calcData()"><option>4g</option><option>6e</option><option>6f</option><option selected>6g</option><option>6h</option><option>8g</option></select></div><div><label>Internal class</label><select id="d_intc" onchange="calcData()"><option>4H</option><option>5H</option><option>6G</option><option selected>6H</option><option>7G</option><option>7H</option></select></div></div>
       <button class="btn btn2" type="button" onclick="saveThreadPdf()" style="margin:2px 0 6px">&#128196; Save to PDF</button> <span id="td_pdfmsg" class="note" style="text-align:left"></span>
@@ -1013,7 +1021,7 @@
       </div></div>
     </section>
     <section id="prog" class="view">
-      <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2 id="prog_h2">Programming</h2><button class="back" style="margin-left:auto;width:auto;padding:0 12px;font-size:12.5px" onclick="show('data');calcData()">Thread data</button></div>
+      <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2 id="prog_h2">Programming</h2><button class="back" style="margin-left:auto;width:auto;padding:0 12px;font-size:12.5px" onclick="show('data');calcSubTab('thread');calcData()">Thread data</button></div>
       <div id="prog_modebar" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 12px">
         <span style="font-size:11px;color:var(--mut);letter-spacing:.6px;font-weight:700">MODE</span>
         <div class="modeseg"><button type="button" id="pm_sample" onclick="setProgMode('sample')">&#128218; Sample</button><button type="button" id="pm_new" class="on" onclick="setProgMode('new')">&#10133; New</button><button type="button" id="pm_refresh" title="Refresh values to current mode defaults" onclick="setProgMode(progMode)" style="background:transparent;border:none;box-shadow:none;padding:4px 6px;margin:0;cursor:pointer;display:inline-flex;align-items:center;line-height:0"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#60D0D0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><polyline points="3 3 3 8 8 8"/></svg></button></div>
@@ -3011,7 +3019,7 @@ function toggleFullMode(){var u=new URL(location.href);if(LOCK_ADV){u.searchPara
 function hubTab(which){
   document.querySelectorAll('.hubtabs .hubtab').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-hub')===which);});
   if(which==='generate')show('home');
-  else if(which==='calc')show('data');
+  else if(which==='calc'){show('data');calcShowMenu();}
 }
 /* ===== Speed & Feed quick calculator (a Calculator sub-tab, not tied to a job setup) ===== */
 function sfMatFill(){var s=$('sf_mat');if(!s||s.options.length)return;opt(s,MATS.map(function(x){return x[0];}),'Stainless 316 austenitic');}
@@ -3080,7 +3088,8 @@ function sfCalc(){
    approximate ASTM E140-style table for steels, clearly labeled as such. */
 var CALC_PANELS={thread:'calcThreadData',speedfeed:'calcSpeedFeed',tapdrill:'calcTapDrill',convert:'calcConvert',taper:'calcTaper',weight:'calcWeight',materials:'calcMaterials',fits:'calcFits',gmcode:'calcGMCode'};
 function calcSubTab(which){
-  document.querySelectorAll('.calcsubtabs .cst').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-cst')===which);});
+  var menu=$('calcMenu');if(menu)menu.style.display='none';
+  var back=$('calcBackBtn');if(back)back.style.display='';
   Object.keys(CALC_PANELS).forEach(function(k){var el=$(CALC_PANELS[k]);if(el)el.style.display=(k===which)?'':'none';});
   if(which==='speedfeed'){sfMatFill();sfVis();sfCalc();}
   else if(which==='tapdrill')tdSysFill();
@@ -3089,6 +3098,12 @@ function calcSubTab(which){
   else if(which==='materials')mlRender();
   else if(which==='fits')ftCalc();
   else if(which==='gmcode')gmRender();
+}
+/* Return from any open calculator panel to the full-screen tool menu (tile grid). */
+function calcShowMenu(){
+  var menu=$('calcMenu');if(menu)menu.style.display='';
+  var back=$('calcBackBtn');if(back)back.style.display='none';
+  Object.keys(CALC_PANELS).forEach(function(k){var el=$(CALC_PANELS[k]);if(el)el.style.display='none';});
 }
 function tdSysFill(){
   var sysSel=$('td_sys'),sizeSel=$('td_size');if(!sysSel||!sizeSel)return;

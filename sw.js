@@ -1,7 +1,7 @@
 // YANTRA service worker — minimal offline support for the installed app.
 // Strategy: stale-while-revalidate for the app shell, so the app opens
 // instantly (even offline) but still picks up new versions in the background.
-const CACHE = 'yantra-v28.31';
+const CACHE = 'yantra-v28.32';
 const SHELL = [
   './',
   './index.html',
