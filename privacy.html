@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YANTRA — Privacy Policy</title>
+<meta name="theme-color" content="#0f1720">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<style>
+  :root{--bg:#0f1720;--card:#1b2837;--line:#293a4d;--txt:#e8eef4;--mut:#90a4b8;--acc:#ffb300;--acc2:#29b6f6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.6 -apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:28px 16px 60px}
+  .wrap{max-width:720px;margin:0 auto}
+  h1{font-size:22px;margin:0 0 4px}
+  .updated{color:var(--mut);font-size:13px;margin-bottom:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+  h2{font-size:15px;color:var(--acc);margin:0 0 8px;letter-spacing:.2px}
+  p{margin:0 0 10px;color:var(--txt)}
+  p.mut, li.mut{color:var(--mut)}
+  ul{margin:6px 0 0;padding-left:20px}
+  li{margin-bottom:6px}
+  a{color:var(--acc2)}
+  .summary{border-left:3px solid var(--acc);background:#16212e}
+  code{background:#0f1720;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>YANTRA — Privacy Policy</h1>
+  <div class="updated">Last updated: 17 September 2026</div>
+
+  <div class="card summary">
+    <h2>In short</h2>
+    <p>YANTRA doesn't run ads, doesn't use analytics or tracking SDKs, and doesn't sell or share your data with advertisers or data brokers. It sends the minimum information needed to generate your G-code programs to its own server, and only connects to your Google Drive if you explicitly turn that on, to back up your own saved job profiles.</p>
+  </div>
+
+  <div class="card">
+    <h2>What's stored on your device</h2>
+    <p>YANTRA saves the following in your browser's local storage, on your device only:</p>
+    <ul>
+      <li>An optional operator/user name you type in</li>
+      <li>Saved job setups, machining profiles, and program history you create in the app</li>
+      <li>Display preferences (such as program view theme)</li>
+      <li>Your sign-in access code (if you've signed in), so you don't have to re-enter it every visit</li>
+    </ul>
+    <p>None of this leaves your device unless described below.</p>
+  </div>
+
+  <div class="card">
+    <h2>Access codes and program generation</h2>
+    <p>Generating a G-code program (turning, milling, drilling, threading) requires YANTRA's app to call its own server to run the calculation. Each call includes:</p>
+    <ul>
+      <li>The machining parameters needed for that calculation (material, dimensions, thread specs, and similar job settings) — used only to compute the result you asked for</li>
+      <li>An access code identifying either you personally (if you've signed in) or, in the free/public version of the app, a shared code that does not identify any individual person</li>
+    </ul>
+    <p>This information is used solely to run the requested calculation and to check that the request is permitted. It is not sold, and it is not shared with advertisers or unrelated third parties. It may be processed by our cloud hosting provider (Google Cloud) purely as infrastructure for running the server — they don't use it for their own purposes.</p>
+  </div>
+
+  <div class="card">
+    <h2>Optional Google Drive backup</h2>
+    <p>YANTRA can optionally back up your saved job profiles and history to your own Google Drive, so you can sync them across your devices. This only happens if you explicitly connect your Google account from within the app.</p>
+    <ul>
+      <li>YANTRA requests the narrow <code>drive.file</code> Google permission, which only lets it see or manage the one file it creates for this backup (<code>yantra_programs.json</code>) — it cannot see, list, or access any other file in your Drive</li>
+      <li>You can disconnect this at any time from your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account permissions page</a>, which removes YANTRA's access immediately</li>
+      <li>This data is used only to sync your own saved content between your own devices — it is never read by us or shared with anyone else</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>What we don't do</h2>
+    <ul>
+      <li>No advertising, and no ad-network SDKs</li>
+      <li>No analytics or tracking SDKs</li>
+      <li>No selling or renting your data to third parties</li>
+      <li>No access to your device's contacts, photos, location, camera, or microphone</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Children's privacy</h2>
+    <p>YANTRA is a professional/technical tool for CNC programming and is not directed at children. We do not knowingly collect information from children.</p>
+  </div>
+
+  <div class="card">
+    <h2>Your choices</h2>
+    <ul>
+      <li>Clear your saved profiles, history, and sign-in at any time via your browser's site data settings, or by using the sign-out option in the app</li>
+      <li>Disconnect Google Drive backup at any time (see above)</li>
+      <li>To request removal of your access-code account from our server, contact us below</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the "last updated" date above will change. Continued use of YANTRA after an update means you accept the revised policy.</p>
+  </div>
+
+  <div class="card">
+    <h2>Contact</h2>
+    <p>Questions about this policy or your data: <a href="mailto:ginoymanuel@gmail.com">ginoymanuel@gmail.com</a></p>
+  </div>
+</div>
+</body>
+</html>
