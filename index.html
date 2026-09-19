@@ -246,7 +246,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.38 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.39 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -712,6 +712,191 @@
     <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter</span>
   </div>
   <p class="note" style="text-align:left">Press <b>Generate</b> first, then <b>Play</b>. Top: plan view with the pocket outline. Bottom: tool height (Z) along the program.</p>
+</div></div>
+</section>
+<section id="groove_op" class="view">
+<style>
+#groove_op #gm_stage{width:100%;display:block;background:#0a1015;border:1px solid var(--line);border-radius:12px;margin-top:10px;touch-action:none}
+#groove_op .fmsub{font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px}
+#groove_op .fmbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 8px}
+#groove_op .fmb{background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer}
+#groove_op .fmb:hover{border-color:var(--acc2);color:var(--acc2)}
+#groove_op .fmbar label{margin:0;display:flex;align-items:center;gap:8px;font-size:12px}
+#groove_op .fmbar input[type=range]{width:120px;padding:0;border:none;background:none}
+#groove_op #gm_simcv{width:100%;display:block;background:#0a1015;border:1px solid var(--line);border-radius:10px;touch-action:none}
+#groove_op .fmleg{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--mut);margin:8px 2px 0}
+#groove_op .fmleg span{display:inline-flex;align-items:center;gap:6px}
+#groove_op .fmleg .sw{width:13px;height:13px;border-radius:3px;display:inline-block}
+#groove_op .gmprow{display:grid;grid-template-columns:22px 1fr 1fr 1fr 34px;gap:6px;align-items:center;margin-bottom:6px}
+#groove_op .gmprow .gmn{font-size:11px;color:var(--mut);text-align:center}
+#groove_op .gmprow input{min-width:0}
+#groove_op .gmprow button{background:var(--bg2);border:1px solid var(--line);color:var(--mut);border-radius:8px;height:36px;cursor:pointer;font-size:15px}
+#groove_op .gmprow button:hover{color:#ff6b6b;border-color:#ff6b6b}
+#groove_op .gmphead{display:grid;grid-template-columns:22px 1fr 1fr 1fr 34px;gap:6px;font-size:11px;color:#8aa2b4;font-weight:700;margin:2px 0 4px}
+</style>
+<div class="modeseg" style="margin:2px 0 8px"><button type="button" id="gm_pm_sample" onclick="setGmMode('sample')">&#128218; Sample</button><button type="button" id="gm_pm_new" class="on" onclick="setGmMode('new')">&#10133; New</button></div><span id="gm_pm_hint" class="note mhint" style="margin:0 0 10px"></span>
+<div class="zconv" style="background:rgba(67,209,122,.08);border:1px solid rgba(67,209,122,.28);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:12px;color:var(--txt)">
+  <b style="color:#43d17a">Z convention:</b> Part top = <b>Z=0</b> &middot; cutting down into the part is <b>&minus;Z</b> &middot; away from the part is <b>+Z</b>. Enter groove depths in Z as negative values. The bore / shaft / profile axis is <b>Z</b>.
+</div>
+<div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2 id="gm_h2">Groove milling</h2></div>
+
+<!-- ============ 1. OPERATION ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">OPERATION <span>&#9662;</span></div><div class="sb">
+  <div class="row2">
+    <div><label>Milled groove type</label><select id="gm_kind" onchange="setGmKind(this.value)"><option value="round">Round (ring)</option><option value="straight">Straight (axial)</option><option value="profile">Profile (shape)</option></select></div>
+    <div><label>Groove side</label><select id="gm_side" onchange="setGmSide(this.value)"><option value="internal">Internal (bore)</option><option value="external">External (shaft)</option></select></div>
+  </div>
+  <label>Groove finishing</label>
+  <select id="gm_fin" onchange="gmVis();gmDraw();gmRefreshReq()"><option value="off">Off &mdash; rough straight to size</option><option value="on">On &mdash; leave stock, then finish</option></select>
+
+  <div class="fmsub" id="gm_sub1">GROOVE</div>
+  <div data-gm="round,straight">
+    <label id="gm_lblXY">Bore centre X, Y</label>
+    <div class="row2"><input type="number" id="gm_x" value="0" step="1" inputmode="decimal" oninput="gmDraw()"><input type="number" id="gm_y" value="0" step="1" inputmode="decimal" oninput="gmDraw()"></div>
+    <div><label data-gm="int">Bore &Oslash; (mm)</label><label data-gm="ext">Shaft &Oslash; (mm)</label><input type="number" id="gm_dia" step="0.1" inputmode="decimal" oninput="gmDraw();gmRefreshReq()"></div>
+  </div>
+  <div data-gm="round"><label>Groove &Oslash; (mm)</label><input type="number" id="gm_gdia" step="0.1" inputmode="decimal" oninput="gmDraw()"></div>
+  <div data-gm="straight"><label>Groove position angle &deg;</label><input type="number" id="gm_ang" value="0" step="1" inputmode="decimal" oninput="gmDraw()"></div>
+
+  <div data-gm="profile">
+    <label>Profile points</label>
+    <div class="note" style="text-align:left;margin:0 0 6px">The wall the groove follows. X, Y in the work coordinate system; R = corner radius (0 = sharp). The shape closes automatically. Enter the points in either direction.</div>
+    <div class="gmphead"><span></span><span>X</span><span>Y</span><span>R</span><span></span></div>
+    <div id="gm_pts"></div>
+    <div class="fmbar" style="margin-top:4px">
+      <button type="button" class="fmb" onclick="gmPtAdd()">&#10133; Add point</button>
+      <button type="button" class="fmb" onclick="gmPreset('rect')">Rectangle</button>
+      <button type="button" class="fmb" onclick="gmPreset('L')">L-shape</button>
+      <button type="button" class="fmb" onclick="gmPtClear()">Clear</button>
+    </div>
+  </div>
+
+  <div data-gm="straight,profile"><label>Groove depth &mdash; radial (mm)</label><input type="number" id="gm_depth" step="0.1" inputmode="decimal" oninput="gmDraw()"></div>
+  <div class="row2" data-gm="round,profile">
+    <div><label>Groove width &mdash; axial (mm)</label><input type="number" id="gm_w" step="0.1" inputmode="decimal" oninput="gmDraw()"></div>
+    <div><label>Groove top Z (mm)</label><input type="number" id="gm_ztop" step="0.1" inputmode="decimal" oninput="gmDraw();gmRefreshReq()"></div>
+  </div>
+  <div class="row2" data-gm="straight">
+    <div><label>Groove width &mdash; across (mm)</label><input type="number" id="gm_ws" step="0.1" inputmode="decimal" oninput="gmDraw()"></div>
+    <div><label>Groove bottom Z &mdash; final depth (mm)</label><input type="number" id="gm_floorz" step="0.1" inputmode="decimal" oninput="gmDraw();gmRefreshReq()"></div>
+  </div>
+  <p class="note" id="gm_opnote" style="text-align:left"></p>
+</div></div>
+
+<!-- ============ 2. TOOL ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div class="row2">
+    <div><label data-gm="round,profile">Groove cutter &Oslash; (mm)</label><label data-gm="straight">Groove end mill &Oslash; (mm)</label><input id="gm_D" type="number" step="0.1" inputmode="decimal" oninput="gmCalc('D');gmDraw()"></div>
+    <div><label>No. of teeth</label><input id="gm_teeth" type="number" value="4" step="1" inputmode="numeric" oninput="gmCalc('teeth')"></div>
+  </div>
+  <div class="row2" data-gm="round,profile">
+    <div><label>Cutting width W (mm)</label><input id="gm_W" type="number" step="0.1" inputmode="decimal" oninput="gmDraw()"></div>
+    <div><label>Neck &Oslash; (mm)</label><input id="gm_neck" type="number" step="0.1" inputmode="decimal" placeholder="optional" oninput="gmDraw()"></div>
+  </div>
+  <div><label>Usable cutter length (mm)</label><input id="gm_reach" type="number" step="1" inputmode="decimal" placeholder="optional"></div>
+  <div class="row2">
+    <div><label>Tool no. (T)</label><input id="gm_t" type="number" value="1" inputmode="numeric"></div>
+    <div><label>Length offset (H)</label><input id="gm_h" type="number" value="1" inputmode="numeric"></div>
+  </div>
+  <div class="row2">
+    <div><label>Spindle rotation</label><select id="gm_sp"><option value="M03">M03 (CW)</option><option value="M04">M04 (CCW)</option></select></div>
+    <div><label>Coolant type</label><select id="gm_cool" onchange="gmCoolVis()"><option value="M08">M08 flood</option><option value="M07">M07 mist</option><option value="Custom">Custom</option><option value="None">None</option></select></div>
+  </div>
+  <div id="gm_coolCustWrap" style="display:none"><label>Custom coolant code</label><input type="text" id="gm_coolcustom" placeholder="e.g. M51"></div>
+  <p class="note" id="gm_toolnote" style="text-align:left"></p>
+</div></div>
+
+<!-- ============ 3. PROFILE (graph only) ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9656;</span></div><div class="sb" style="display:none">
+  <svg id="gm_stage" viewBox="0 0 560 300"></svg>
+  <p class="note" style="text-align:left;margin-top:8px">Left: plan view of the wall and the groove with the cutter drawn to scale. Right: section through the groove. It updates as you type.</p>
+</div></div>
+
+<!-- ============ 4. PARAMETERS ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">PARAMETERS <span>&#9656;</span></div><div class="sb" style="display:none">
+  <label>Material</label><select id="gm_mat" onchange="gmCalc('mat')"></select><div id="gm_mr" class="mrinfo"></div>
+  <div class="row2">
+    <div><label>Vc (m/min)</label><input id="gm_vc" type="number" step="1" inputmode="decimal" oninput="gmCalc('vc')"></div>
+    <div><label>Spindle speed (RPM)</label><input id="gm_rpm" type="number" step="1" inputmode="numeric" oninput="gmCalc('rpm')"></div>
+  </div>
+  <div class="row2">
+    <div><label>Fz (mm/tooth)</label><input id="gm_fz" type="number" step="0.001" inputmode="decimal" oninput="gmCalc('fz')"></div>
+    <div><label>Feed (mm/min)</label><input id="gm_fmin" type="number" step="1" inputmode="decimal" oninput="gmCalc('feed')"></div>
+  </div>
+  <p class="note" style="text-align:left">Vc &harr; RPM through the cutter &Oslash;; Fz &harr; Feed through teeth &times; RPM. Feed = Fz &times; teeth &times; RPM. The feed is the tool-centre feed.</p>
+</div></div>
+
+<!-- ============ 5. CYCLES ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">CYCLES <span>&#9656;</span></div><div class="sb" style="display:none">
+  <label>Milling direction</label>
+  <select id="gm_dir"><option value="climb">Climb</option><option value="conventional">Conventional</option></select>
+  <p class="note" id="gm_cycnote" style="text-align:left"></p>
+</div></div>
+
+<!-- ============ 6. POSITIONING ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">POSITIONING <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div class="row2">
+    <div><label>Part top Z (mm)</label><input id="gm_topz" type="number" value="0" step="0.1" inputmode="decimal" oninput="gmDraw()"></div>
+    <div><label>Safe Z (mm)</label><input id="gm_safez" type="number" value="20" step="1" inputmode="decimal"></div>
+  </div>
+  <p class="note" style="text-align:left">Part top Z = the top surface of the part (the cutter length and groove position are checked against it). Safe Z = the height for travelling clear of the part.</p>
+</div></div>
+
+<!-- ============ 7. CUT SETUP ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">CUT SETUP <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div class="row2" data-gm="round,profile">
+    <div><label>Max radial depth per pass (mm)</label><input id="gm_apr" type="number" value="1" step="0.1" inputmode="decimal" oninput="gmDraw()"></div>
+    <div><label>Z-level stepover (% of cutter width)</label><input id="gm_zstep" type="number" value="70" step="5" inputmode="decimal"></div>
+  </div>
+  <div class="row2" data-gm="straight">
+    <div><label>Layer depth (mm)</label><input id="gm_apz" type="number" value="2" step="0.1" inputmode="decimal" oninput="gmDraw()"></div>
+    <div><label>Stepover across (%&Oslash;)</label><input id="gm_step" type="number" value="60" step="1" inputmode="decimal"></div>
+  </div>
+  <div class="row2">
+    <div><label>Radial infeed feed (% of feed)</label><input id="gm_entry" type="number" value="50" step="5" inputmode="decimal"></div>
+    <div><label>Reposition feed (mm/min)</label><input id="gm_retf" type="number" value="1500" step="100" inputmode="decimal"></div>
+  </div>
+  <div><label>Approach clearance (mm)</label><input id="gm_clr" type="number" value="1" step="0.5" inputmode="decimal"></div>
+  <div data-gm="fin">
+    <div class="fmsub">FINISHING</div>
+    <div class="row2">
+      <div><label>Finish stock (mm)</label><input id="gm_stock" type="number" value="0.2" step="0.05" inputmode="decimal" oninput="gmDraw()"></div>
+      <div><label>Finish feed (% of feed)</label><input id="gm_ffeed" type="number" value="80" step="5" inputmode="decimal"></div>
+    </div>
+    <p class="note" style="text-align:left">Roughing leaves this much stock on the groove root and flanks; one finishing pass at every level then takes it to size.</p>
+  </div>
+</div></div>
+
+<!-- ============ 8. MACHINE ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">MACHINE <span>&#9656;</span></div><div class="sb" style="display:none">
+  <p class="note" style="text-align:left">Seeded from <b>Defaults</b>. Edit here to override for this operation only.</p>
+  <div class="row2">
+    <div><label>Control</label><select id="gm_ctrl"><option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Haas</option><option>Siemens I &amp; J</option><option>Siemens R</option><option>Heidenhain</option></select></div>
+    <div><label>Program no. (O)</label><input id="gm_onum" type="number" value="3030" inputmode="numeric"></div>
+  </div>
+</div></div>
+
+<!-- ============ GENERATE + PROGRAM ============ -->
+<button class="btn genbtn" id="gm_gen" onclick="genGroove()">&#9881;&#65039;  GENERATE G-CODE</button>
+<div id="gm_cyc" class="note" style="text-align:left;margin-top:8px;color:var(--acc);font-weight:700"></div>
+<div id="gm_out" class="note" style="text-align:left;margin-top:6px;white-space:pre-wrap">Set values and press Generate.</div>
+<div id="gm_block"></div>
+
+<div class="sec" id="gm_simsec"><div class="st" onclick="tog(this)">TOOLPATH SIMULATION <span>&#9662;</span></div><div class="sb">
+  <div class="fmbar">
+    <button type="button" class="fmb" id="gm_sim_play" onclick="gmSimPlay()">&#9654; Play</button>
+    <button type="button" class="fmb" onclick="gmSimReset()">&#8635; Reset</button>
+    <label>speed <input type="range" id="gm_sim_spd" min="20" max="900" value="220"></label>
+  </div>
+  <canvas id="gm_simcv"></canvas>
+  <div class="fmleg">
+    <span><i class="sw" style="background:rgba(55,211,154,.5)"></i> cut path (cutter &Oslash;)</span>
+    <span><i class="sw" style="background:#6b7c8c"></i> rapid / air</span>
+    <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter</span>
+    <span><i class="sw" style="background:#4f8cff"></i> wall</span>
+    <span><i class="sw" style="background:#ffb300"></i> groove root</span>
+  </div>
+  <p class="note" style="text-align:left">Press <b>Generate</b> first, then <b>Play</b>. Top: plan view with the wall and the groove root. Bottom: cutter height (Z) along the program.</p>
 </div></div>
 </section>
     <section id="fulljob" class="view">
@@ -2301,7 +2486,7 @@ function ttUpdate(){var r=tnResolve();var ce=tnGeom(r.pts).errs;for(var i=0;i<tn
 function ttAuto(i,k,val){var el=document.querySelector('#tt_body .ttf[data-i="'+i+'"][data-k="'+k+'"]');if(!el||el.tagName==='SELECT')return;var u=tnPts[i][k];if(u!==''&&u!=null&&(''+u).length>0){el.classList.remove('autof');return;}if(document.activeElement===el)return;el.value=(Math.round(val*1000)/1000).toString();el.classList.add('autof');}
 var helpMode=false;
 function toggleHelp(){helpMode=!helpMode;document.body.classList.toggle('helpon',helpMode);var b=document.getElementById('helpbtn');if(b)b.classList.toggle('on',helpMode);}
-function openMillOp(n){if(n==='Pocketing'||n==='Pocket'||n==='Pocket milling'){pkOpen();return;}if(['Tapping','Reaming','Boring','Centering','Chamfering','Counter bore'].indexOf(n)>=0){hoOpen(n);return;}if(n==='Face mill'||n==='Face milling'){show('facemill');try{fmMachineSeed();}catch(e){}return;}var t=$('mill_op_title');if(t)t.textContent=n;var nm=$('mill_op_name');if(nm)nm.textContent=n;show('mill_op');}
+function openMillOp(n){if(n==='Groove milling'){gmOpen();return;}if(n==='Pocketing'||n==='Pocket'||n==='Pocket milling'){pkOpen();return;}if(['Tapping','Reaming','Boring','Centering','Chamfering','Counter bore'].indexOf(n)>=0){hoOpen(n);return;}if(n==='Face mill'||n==='Face milling'){show('facemill');try{fmMachineSeed();}catch(e){}return;}var t=$('mill_op_title');if(t)t.textContent=n;var nm=$('mill_op_name');if(nm)nm.textContent=n;show('mill_op');}
 function millGrp(id){var el=document.getElementById(id);if(!el)return;var op=el.classList.contains('open');['mg_c','mg_p'].forEach(function(g){var e=document.getElementById(g);if(e)e.classList.remove('open');});if(!op)el.classList.add('open');}
 function tnQuick(k){show('turnops');try{tnMachRefresh();}catch(e){}try{function _qs(id,v){var e=document.getElementById(id);if(e){e.value=v;if(typeof e.onchange==='function')e.onchange();}}if(k==='OD'){_qs('tn_odid','OD (outside)');_qs('tn_pathsel','Turning');}else if(k==='ID'){_qs('tn_odid','ID (bore)');_qs('tn_pathsel','Turning');}else if(k==='FACE'){_qs('tn_odid','OD (outside)');_qs('tn_pathsel','Facing');}}catch(e){}}
 function setMode(m){var t=document.getElementById('mt-turn'),l=document.getElementById('mt-mill');if(!t||!l)return;window._mode=m;try{document.querySelectorAll('.tile[data-mode]').forEach(function(x){var dm=x.getAttribute('data-mode');x.style.display=(dm==='both'||dm===m)?'':'none';});document.querySelectorAll('.jobop-turn').forEach(function(x){x.style.display=(m==='turn')?'':'none';});document.querySelectorAll('.jobop-mill').forEach(function(x){x.style.display=(m==='mill')?'':'none';});document.querySelectorAll('.js-turn-only').forEach(function(x){x.style.display=(m==='mill')?'none':'';});document.querySelectorAll('.js-mill-only').forEach(function(x){x.style.display=(m==='mill')?'':'none';});}catch(e){}var jt=document.getElementById('js-turn'),jm=document.getElementById('js-mill');if(m==='mill'){l.style.background='#334559';l.style.color='#e8eef4';l.style.boxShadow='inset 3px 0 0 var(--acc)';t.style.background='transparent';t.style.color='var(--mut)';t.style.boxShadow='none';if(jt)jt.style.display='none';if(jm)jm.style.display='block';}else{t.style.background='#334559';t.style.color='#e8eef4';t.style.boxShadow='inset 3px 0 0 var(--acc)';l.style.background='transparent';l.style.color='var(--mut)';l.style.boxShadow='none';if(jt)jt.style.display='block';if(jm)jm.style.display='none';}try{window.scrollTo(0,0);}catch(e){}}
@@ -2316,7 +2501,7 @@ function jsMr(){var el=$('js_mr');if(!el||!$('js_mat'))return;var m=(typeof matB
 /* ===== DEFAULTS (global presets, each operation can still override locally) ===== */
 function _defSetSel(id,val){var el=document.getElementById(id);if(!el)return false;var ok=false;for(var i=0;i<el.options.length;i++){if(el.options[i].value===val||el.options[i].text===val){el.value=el.options[i].value;ok=true;break;}}if(ok){try{el.dispatchEvent(new Event('change'));}catch(e){}}return ok;}
 function defMatChip(){var el=document.getElementById('def_mat');if(!el)return;var m=(typeof matBy==='function')?matBy(el.value):null;var chip=document.getElementById('def_mr');if(!chip)return;if(m&&m[4]!=null){var c=(typeof ISO_COL!=='undefined'&&ISO_COL[m[2]])||'#9E9E9E';chip.innerHTML='<span class="isochip" style="background:'+c+'">ISO '+m[2]+'</span> Machinability '+m[4]+'%';}else{chip.textContent='';}}
-function applyDefMaterial(){var el=document.getElementById('def_mat');if(!el)return;var v=el.value;['js_mat','tn_mat','dr_mat','mat','gv_mat','ho_mat','pk_mat'].forEach(function(id){_defSetSel(id,v);});defMatChip();}
+function applyDefMaterial(){var el=document.getElementById('def_mat');if(!el)return;var v=el.value;['js_mat','tn_mat','dr_mat','mat','gv_mat','ho_mat','pk_mat','gm_mat'].forEach(function(id){_defSetSel(id,v);});defMatChip();}
 function applyDefTcp(){var lathe=document.getElementById('def_tcp');if(lathe){var m=document.getElementById('ms_tcp');if(m)m.value=lathe.value;}try{if(typeof gv_recalc==='function')gv_recalc();}catch(e){}}
 function defMachineReadouts(){var g=function(id){return document.getElementById(id);};var chuck=g('def_chuck'),turret=g('def_turret'),lf=g('def_lathefeed');if(lf&&chuck&&turret){var side=(chuck.value==='L')?'left':'right';var xdir=(turret.value==='rear')?'X+ points away from the operator (rear turret)':'X+ points toward the operator (front turret)';lf.innerHTML='Z0 at the face, <b>Z&minus; feeds toward the '+side+' chuck</b>. OD: tool sits outside and feeds <b>X&minus; inward</b> to the programmed diameter &middot; '+xdir+'.';}var mf=g('def_millfeed'),ta=g('def_toolaxis'),td=g('def_tooldir');if(mf&&ta&&td){var ax=ta.value,dir=td.value,planeTxt=(ax==='Z')?'XY plane':(ax==='X'?'YZ plane':'XZ plane');mf.innerHTML='Tool on the <b>'+ax+'</b> axis, cutting <b>'+dir+ax+'</b> into the work &middot; feed in the '+planeTxt+'.';}}
 function applyDefMachine(){var g=function(id){return document.getElementById(id);};var ctrl=g('def_ctrl'),sp=g('def_spindle'),chuck=g('def_chuck');if(ctrl)_defSetSel('ms_ctrl',ctrl.value);if(sp)_defSetSel('ms_sp',sp.value);if(chuck){var frVal=(chuck.value==='L')?'Left chuck · Rear turret · R hand':'Right chuck · Front turret · L hand';_defSetSel('ms_fr',frVal);}defMachineReadouts();try{if(typeof gv_recalc==='function')gv_recalc();}catch(e){}}
@@ -2326,6 +2511,35 @@ function showHelp(label){ensureHelpPov();var k=helpKey(label),h=HELP[k];if(!h){v
 function closeHelp(){var o=document.getElementById('hlpov');if(o)o.classList.remove('on');}
 document.addEventListener('click',function(e){if(!helpMode)return;var el=e.target;while(el&&el!==document.body){if(el.tagName==='LABEL'){e.preventDefault();e.stopPropagation();showHelp(el.textContent);return;}el=el.parentNode;}},true);
 var HELP={
+"milled groove type":{"svg": "", "text": "Round = a ring groove cut all the way round a bore or shaft (circlip, O-ring or seal groove). Straight = an axial groove along the bore or shaft, like a keyway, cut with an end mill. Profile = a groove that follows the wall of a closed shape you define with points."},
+"groove side":{"svg": "", "text": "Internal = the groove is cut into the wall of a bore or cavity, with the cutter inside it. External = the groove is cut into the outside wall of a shaft or boss, with the cutter around it."},
+"groove finishing":{"svg": "", "text": "Off = the roughing passes cut straight to the finished size. On = roughing leaves a little stock (set in Cut setup) and one finishing pass at every level then takes the groove root and flanks to size."},
+"bore ø mm":{"svg": "", "text": "Diameter of the bore the groove is cut in. The groove diameter must be larger than this."},
+"shaft ø mm":{"svg": "", "text": "Diameter of the shaft or boss the groove is cut into. The groove diameter must be smaller than this."},
+"bore centre x, y":{"svg": "", "text": "Position of the bore centre in the work coordinate system."},
+"shaft centre x, y":{"svg": "", "text": "Position of the shaft centre in the work coordinate system."},
+"groove ø mm":{"svg": "", "text": "Finished diameter at the bottom of the ring groove. Larger than the bore for an internal groove, smaller than the shaft for an external one."},
+"groove position angle":{"svg": "", "text": "Direction of the axial groove around the bore or shaft, in degrees: 0 = towards +X, 90 = towards +Y."},
+"groove depth — radial mm":{"svg": "", "text": "How far the groove goes into the wall, measured radially from the bore or shaft surface (or from the profile wall)."},
+"groove width — axial mm":{"svg": "", "text": "Height of the groove along the Z axis. If it is wider than the groove cutter, the cutter works it in several Z levels."},
+"groove top z mm":{"svg": "", "text": "Z of the upper edge of the groove. Enter a negative value when the groove is below the part top."},
+"groove width — across mm":{"svg": "", "text": "Width of the axial groove measured across it. If it is wider than the end mill it is cut in several passes across."},
+"groove bottom z — final depth mm":{"svg": "", "text": "Z of the bottom of the axial groove. Enter a negative value when it is below the top surface."},
+"groove cutter ø mm":{"svg": "", "text": "Outer diameter of the groove-mill cutter (the cutting head, not the neck). It converts Vc to RPM."},
+"groove end mill ø mm":{"svg": "", "text": "Diameter of the end mill that cuts the axial groove. It converts Vc to RPM and sets the stepover across."},
+"cutting width w mm":{"svg": "", "text": "Axial height of the cutting band of the groove cutter. The groove must be at least this wide."},
+"neck ø mm":{"svg": "", "text": "Diameter of the cutter neck behind the cutting head. Optional. When given, the program checks the neck can reach the groove depth without touching the wall."},
+"usable cutter length mm":{"svg": "", "text": "How far the cutter can reach below the holder. Optional. When given, the program checks the groove is within reach."},
+"max radial depth per pass mm":{"svg": "", "text": "How far the cutter is pushed into the wall at each radial pass around the groove."},
+"z-level stepover % of cutter width":{"svg": "", "text": "When the groove is wider than the cutter, the step between Z levels as a percent of the cutting width W. Less than 100% overlaps the levels."},
+"layer depth mm":{"svg": "", "text": "Depth of each layer of the axial groove, measured along Z."},
+"stepover across %ø":{"svg": "", "text": "Step between passes across a wide axial groove as a percent of the end mill diameter."},
+"radial infeed feed % of feed":{"svg": "", "text": "Feed used while the cutter moves into the wall at the start of each pass, as a percent of the cutting feed."},
+"reposition feed mm min":{"svg": "", "text": "Feed used for the short repositioning moves close to the wall, where the cutter is not at full rapid."},
+"approach clearance mm":{"svg": "", "text": "Gap kept between the cutter and the wall while it is lowered into the bore or beside the shaft."},
+"finish stock mm":{"svg": "", "text": "Stock left on the groove root and flanks by the roughing passes for the finishing pass to remove."},
+"part top z mm":{"svg": "", "text": "Z of the top surface of the part. Used to check the cutter length and the groove position."},
+"profile points":{"svg": "", "text": "Corner points of the wall the groove follows, as X, Y in the work coordinate system, with an optional corner radius R (0 = sharp). The shape closes automatically and may be entered in either direction."},
 "finishing":{"svg": "", "text": "Off = roughing cuts straight to the finished wall and floor. On = roughing leaves a little stock (set in Cut setup), then the wall is finished around every level and the floor is finished once at the final depth. Choose wall only or floor only if you need just one."},
 "pocket shape":{"svg": "", "text": "Shape of the pocket: a Rectangle (optionally with corner radius and rotation) or a Circle."},
 "pocket reference":{"svg": "", "text": "Which point of the rectangle the X, Y position refers to: its Corner (lower-left before rotation) or its Center. Rotation pivots about this point."},
@@ -3158,6 +3372,7 @@ if(v==='groove')return 'Groove Turning';
 if(v==='facemill')return 'Face Milling';
 if(v==='mill_holes')return 'Holes Milling';
 if(v==='pocket_op')return 'Pockets Milling';
+if(v==='groove_op')return 'Groove Milling';
 if(v==='hole_op'){try{return hoOp();}catch(e){return 'Holes';}}
 if(v==='mill_op'){var t=((document.getElementById('mill_op_title')||{}).textContent||'').trim();if(/pocket/i.test(t))return 'Pockets Milling';var root=t.replace(/\s*mill(ing)?$/i,'').trim();return (root||t)+' Milling';}
 return null;}
@@ -3183,7 +3398,7 @@ function crumbGo(){try{if(window.history.length>1){history.back();return;}}catch
 (function(){var hd=document.querySelector('header');if(hd&&!hd._backwired){hd._backwired=1;hd.addEventListener('click',function(e){if(e.target.closest('button,input,select,textarea,a'))return;if(e.target.closest('#mtoggle'))return;var h=document.getElementById('home');if(h&&h.classList.contains('on'))return;crumbGo();});}})();
 /* Entry layout: when an operation screen is entered, the sections that hold mandatory fields are open and the rest of the
    fixed defaults apply.  Only the sections named here are touched; everything else keeps whatever state it has. */
-var ENTRY_SECS={facemill:{open:['TOOL'],close:['PROFILE']},pocket_op:{open:['TOOL'],close:['PROFILE']},hole_op:{open:['TOOL'],close:['PROFILE']},groove:{open:['TOOL'],close:[]}};
+var ENTRY_SECS={facemill:{open:['TOOL'],close:['PROFILE']},pocket_op:{open:['TOOL'],close:['PROFILE']},groove_op:{open:['TOOL'],close:['PROFILE']},hole_op:{open:['TOOL'],close:['PROFILE']},groove:{open:['TOOL'],close:[]}};
 function secEntry(v){var cfg=ENTRY_SECS[v],root=document.getElementById(v);if(!cfg||!root)return;
   var set=function(title,on){root.querySelectorAll('.sec > .st').forEach(function(st){
     var t='';for(var n=st.firstChild;n;n=n.nextSibling){if(n.nodeType===3)t+=n.nodeValue;else break;}
@@ -5755,6 +5970,346 @@ function pkSimPlay(){
   var mt=$('pk_mat');if(mt){opt(mt,MATS.map(function(x){return x[0];}),'Stainless 316 austenitic');}
   var host=$('pocket_op');if(host){host.addEventListener('input',function(){pkRefreshReq();});host.addEventListener('change',function(){pkRefreshReq();});}
   pkVis();setPkMode('new');
+}catch(e){}})();
+
+/* ================= GROOVE MILLING — screen logic (engine runs on the YANTRA server: /groove/program + /groove/path) ================= */
+var gmMode='new',grooveRaw='',lastGrooveProg='',_gmSeeded=false,GMP=[];
+function gmKindV(){var e=$('gm_kind');return e?e.value:'round';}
+function gmSideV(){var e=$('gm_side');return e?e.value:'internal';}
+function gmFinOn(){var e=$('gm_fin');return !!e&&e.value==='on';}
+function gmCoolVis(){var s=$('gm_cool'),w=$('gm_coolCustWrap');if(w)w.style.display=(s&&s.value==='Custom')?'':'none';}
+
+/* ---- which fields / notes show for the chosen kind, side and finishing ---- */
+function gmVis(){
+  var k=gmKindV(),int=gmSideV()==='internal';
+  var act=[k,int?'int':'ext'];if(k==='round'||k==='profile')act.push('band');if(gmFinOn())act.push('fin');
+  document.querySelectorAll('#groove_op [data-gm]').forEach(function(el){var a=el.getAttribute('data-gm').split(','),show=false;
+    for(var i=0;i<a.length;i++){if(act.indexOf(a[i])>=0){show=true;break;}}el.style.display=show?'':'none';});
+  var l=$('gm_lblXY');if(l)l.textContent=int?'Bore centre X, Y':'Shaft centre X, Y';
+  var s1=$('gm_sub1');if(s1)s1.textContent=(k==='round'?'RING GROOVE':k==='straight'?'AXIAL GROOVE':'PROFILE GROOVE')+' · '+(int?'INTERNAL':'EXTERNAL');
+  var on=$('gm_opnote');if(on){var m={
+    round:'Ring groove: the cutter is lowered inside the bore (or beside the shaft), pushed radially into the wall and taken once round on a full circle at every radial pass. Groove Ø is the finished groove diameter; groove top Z is the upper edge of the groove.',
+    straight:'Axial groove (keyway style): cut with an end mill from the top face down, layer by layer. The cutter always starts in the bore (or outside the shaft), so it never plunges into material. The groove ends at the bottom Z; its inside corners carry the cutter radius. The position angle is measured from +X around the axis.',
+    profile:'Groove along the wall of a closed profile. Internal: the cutter runs inside the profile and the groove goes outwards into the wall. External: the cutter runs around a boss and the groove goes inwards. Inside corners come out at the cutter radius.'};on.textContent=m[k]||'';}
+  var tn=$('gm_toolnote');if(tn)tn.textContent=(k==='straight')?'The toolpath is generated at the tool centre (no G41/G42). Tool length offset (H) is measured to the tool tip.':'Tool length offset (H) is measured to the LOWEST point of the cutting band (the bottom of the cutter); the band covers Z to Z + W. The toolpath is generated at the tool centre (no G41/G42). Neck Ø and usable length are optional: when filled in, the groove depth and the reach are checked.';
+  var cn=$('gm_cycnote');if(cn){var c={
+    round:'Each Z level: radial passes from the wall out to the groove Ø, each a full circle. A groove wider than the cutter is cut in several Z levels (stepover in Cut setup). Climb = counter-clockwise inside a bore, clockwise around a shaft (M03).',
+    straight:'Each layer: the cutter goes out along the groove and returns, in several passes across when the groove is wider than the cutter; then, with finishing on, one clean pass around the root and both flanks.',
+    profile:'Same as the ring groove, but every pass follows the offset of the profile. Climb = counter-clockwise inside a cavity, clockwise around a boss (M03).'};cn.textContent=c[k]||'';}
+  gmCoolVis();
+}
+function setGmKind(v){var e=$('gm_kind');if(e)e.value=v;if(gmMode==='sample')gmSampleDefaults();gmVis();gmDraw();gmRefreshReq();}
+function setGmSide(v){var e=$('gm_side');if(e)e.value=v;if(gmMode==='sample')gmSampleDefaults();gmVis();gmDraw();gmRefreshReq();}
+
+/* ---- material -> Vc / Fz defaults, and the Vc / RPM / Fz / feed links ---- */
+function gmMat(){return matBy($('gm_mat')?$('gm_mat').value:'');}
+function gmMr(){var m=gmMat(),el=$('gm_mr');if(el&&m&&m[4]!=null){var c=(typeof ISO_COL!=='undefined'&&ISO_COL[m[2]])||'#9E9E9E';el.innerHTML='<span class="isochip" style="background:'+c+'">ISO '+m[2]+'</span> Machinability '+m[4]+'%';}}
+function gmVcDef(){var m=gmMat(),ref=m[1]||60;return pkClamp(ref*0.8,10,250);}
+function gmFzDef(D){var m=gmMat(),fzb=m[3]||0.08;return pkClamp(fzb*Math.min(D,25)/10*0.6,0.01,0.15);}
+function gmCalc(src){
+  try{gmMr();}catch(e){}
+  var D=pkN('gm_D'),z=Math.max(1,pkN('gm_teeth')),rpm=pkN('gm_rpm'),vc=pkN('gm_vc'),fz=pkN('gm_fz'),fm=pkN('gm_fmin');
+  function feedFrom(r,f){return Math.round(f*z*r);}
+  if(src==='mat'||src==='D'||src==='init'){
+    if(D>0){vc=gmVcDef();rpm=pkClamp(Math.round(1000*vc/(Math.PI*D)),20,24000);fz=gmFzDef(D);
+      pkSet('gm_vc',Math.round(Math.PI*D*rpm/1000*10)/10,1);pkSet('gm_rpm',rpm,0);pkSet('gm_fz',fz,4);pkSet('gm_fmin',feedFrom(rpm,fz),0);}
+    else{pkSet('gm_vc','');pkSet('gm_rpm','');pkSet('gm_fz','');pkSet('gm_fmin','');}
+  }else if(src==='vc'){
+    if(D>0&&vc>0){rpm=Math.round(1000*vc/(Math.PI*D));pkSet('gm_rpm',rpm,0);if(fz>0)pkSet('gm_fmin',feedFrom(rpm,fz),0);}
+  }else if(src==='rpm'){
+    if(D>0&&rpm>0)pkSet('gm_vc',Math.PI*D*rpm/1000,1);
+    if(fz>0&&rpm>0)pkSet('gm_fmin',feedFrom(rpm,fz),0);
+  }else if(src==='fz'||src==='teeth'){
+    if(fz>0&&rpm>0)pkSet('gm_fmin',feedFrom(rpm,fz),0);
+  }else if(src==='feed'){
+    if(rpm>0&&fm>0)pkSet('gm_fz',fm/(rpm*z),4);
+  }
+}
+
+/* ---- profile point table ---- */
+function gmPtsRender(){var h='';GMP.forEach(function(p,i){
+  h+='<div class="gmprow"><span class="gmn">'+(i+1)+'</span>'
+   +'<input type="number" step="any" inputmode="decimal" data-i="'+i+'" data-k="x" value="'+(p.x===undefined?'':p.x)+'">'
+   +'<input type="number" step="any" inputmode="decimal" data-i="'+i+'" data-k="y" value="'+(p.y===undefined?'':p.y)+'">'
+   +'<input type="number" step="any" min="0" inputmode="decimal" data-i="'+i+'" data-k="r" placeholder="0" value="'+(p.r===undefined||p.r===''?'':p.r)+'">'
+   +'<button type="button" onclick="gmPtDel('+i+')" title="Delete point">&times;</button></div>';});
+  var host=$('gm_pts');if(host)host.innerHTML=h;}
+function gmPtAdd(){GMP.push({x:'',y:'',r:''});gmPtsRender();gmRefreshReq();gmDraw();}
+function gmPtDel(i){GMP.splice(i,1);gmPtsRender();gmRefreshReq();gmDraw();}
+function gmPtClear(){GMP=[{x:'',y:'',r:''},{x:'',y:'',r:''},{x:'',y:'',r:''},{x:'',y:'',r:''}];gmPtsRender();gmRefreshReq();gmDraw();}
+function gmPreset(n){
+  if(n==='L')GMP=[{x:0,y:0,r:4},{x:60,y:0,r:4},{x:60,y:25,r:4},{x:30,y:25,r:0},{x:30,y:50,r:4},{x:0,y:50,r:4}];
+  else GMP=[{x:0,y:0,r:5},{x:60,y:0,r:5},{x:60,y:40,r:5},{x:0,y:40,r:5}];
+  gmPtsRender();gmRefreshReq();gmDraw();}
+function gmPtsValid(){var a=[];GMP.forEach(function(p){var x=parseFloat(p.x),y=parseFloat(p.y),r=parseFloat(p.r);
+  if(!isNaN(x)&&!isNaN(y))a.push({x:x,y:y,r:(isNaN(r)||r<0)?0:r});});return a;}
+
+/* ---- Sample / New ---- */
+function gmFields(){var k=gmKindV(),a=[];
+  if(k==='round')a.push(['gm_dia','Diameter'],['gm_gdia','Groove Ø'],['gm_w','Groove width'],['gm_ztop','Groove top Z'],['gm_D','Cutter Ø'],['gm_W','Cutting width']);
+  else if(k==='straight')a.push(['gm_dia','Diameter'],['gm_depth','Groove depth'],['gm_ws','Groove width'],['gm_floorz','Bottom Z'],['gm_D','End mill Ø']);
+  else a.push(['gm_pts','Profile points (3 or more)'],['gm_depth','Groove depth'],['gm_w','Groove width'],['gm_ztop','Groove top Z'],['gm_D','Cutter Ø'],['gm_W','Cutting width']);
+  return a;}
+function gmBad(f){var id=f[0];
+  if(id==='gm_pts')return gmPtsValid().length<3;
+  if(id==='gm_ztop')return !(pkHas('gm_ztop')&&pkN('gm_ztop')<=pkN('gm_topz'));
+  if(id==='gm_floorz')return !(pkHas('gm_floorz')&&pkN('gm_floorz')<pkN('gm_topz'));
+  var e=$(id);if(!e)return false;return !(parseFloat(e.value)>0);}
+function gmMissing(){var m=[];gmFields().forEach(function(f){if(gmBad(f))m.push(f[1]);});return m;}
+function gmRefreshReq(){var host=$('groove_op');if(!host)return;host.querySelectorAll('.reqbad').forEach(function(e){e.classList.remove('reqbad');});
+  if(gmMode!=='new')return;
+  gmFields().forEach(function(f){if(!gmBad(f))return;
+    if(f[0]==='gm_pts'){var rows=$('gm_pts')?$('gm_pts').querySelectorAll('.gmprow'):[];for(var i=0;i<Math.min(3,rows.length);i++){rows[i].querySelectorAll('input[data-k="x"],input[data-k="y"]').forEach(function(inp){if(inp.value==='')inp.classList.add('reqbad');});}}
+    else{var e=$(f[0]);if(e)e.classList.add('reqbad');}});}
+function gmOpenBad(){document.querySelectorAll('#groove_op .reqbad').forEach(function(el){_fmOpenSb(el.closest('.sb'));});}
+function gmOpenSim(){var sec=$('gm_simsec');if(sec)_fmOpenSb(sec.querySelector(':scope > .sb'));}
+function gmClearMandatory(){['gm_dia','gm_gdia','gm_depth','gm_w','gm_ws','gm_ztop','gm_floorz','gm_D','gm_W','gm_neck','gm_reach'].forEach(function(id){var e=$(id);if(e)e.value='';});
+  GMP=[{x:'',y:'',r:''},{x:'',y:'',r:''},{x:'',y:'',r:''},{x:'',y:'',r:''}];gmPtsRender();gmCalc('init');}
+function gmSampleDefaults(){function sv(id,v){var e=$(id);if(e)e.value=v;}
+  var k=gmKindV(),int=gmSideV()==='internal';
+  sv('gm_x',0);sv('gm_y',0);sv('gm_topz',0);sv('gm_neck','');sv('gm_reach','');
+  if(k==='round'){sv('gm_dia',40);sv('gm_gdia',int?44:36);sv('gm_w',3);sv('gm_ztop',-10);sv('gm_D',int?25:16);sv('gm_W',3);sv('gm_neck',int?18:10);}
+  else if(k==='straight'){sv('gm_dia',30);sv('gm_ang',30);sv('gm_ws',8);sv('gm_depth',3);sv('gm_floorz',-20);sv('gm_D',8);}
+  else{gmPreset('L');sv('gm_depth',2.5);sv('gm_w',4);sv('gm_ztop',-8);sv('gm_D',int?12:10);sv('gm_W',3);sv('gm_neck',int?5:3);}
+  gmCalc('init');}
+function setGmMode(m){gmMode=m;var s=$('gm_pm_sample'),n=$('gm_pm_new');if(s)s.classList.toggle('on',m==='sample');if(n)n.classList.toggle('on',m==='new');
+  var h=$('gm_pm_hint');
+  if(m==='new'){gmClearMandatory();if(h)h.textContent='New program — fill the fields marked in red, then Generate and Save.';}
+  else{gmSampleDefaults();if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}
+  try{pbNote('gm','');}catch(e){}
+  gmVis();gmDraw();gmRefreshReq();}
+function gmOpen(){grooveRaw='';lastGrooveProg='';
+  if($('gm_block'))$('gm_block').innerHTML='';if($('gm_cyc'))$('gm_cyc').textContent='';if($('gm_out'))$('gm_out').textContent='Set values and press Generate.';
+  try{GMS.pts=[];GMS.playing=false;}catch(e){}
+  gmMachineSeed();gmVis();setGmMode(gmMode);show('groove_op');}
+function gmMachineSeed(){if(_gmSeeded)return;_gmSeeded=true;
+  function sv(id,val){var e=$(id);if(!e||!val)return;for(var i=0;i<e.options.length;i++){if(e.options[i].value===val||e.options[i].text===val){e.value=e.options[i].value;return;}}}
+  var dc=($('def_ctrl')&&$('def_ctrl').value)||'';
+  var map={'Fanuc':'Fanuc I & J','Siemens':'Siemens I & J','Heidenhain':'Heidenhain','Haas':'Haas'};
+  if(map[dc])sv('gm_ctrl',map[dc]);
+  var sp=(($('def_spindle')&&$('def_spindle').value)||'').match(/M0[34]/);if(sp)sv('gm_sp',sp[0]);
+  sv('gm_cool',($('def_cool')&&$('def_cool').value)||'');
+  var dm=$('def_mat');if(dm&&dm.value){sv('gm_mat',dm.value);gmCalc('mat');}
+  try{gmCoolVis();}catch(e){}}
+
+/* ---- assemble the engine input ---- */
+function gmParams(){
+  var k=gmKindV(),cool=$('gm_cool').value,coolOn;
+  if(cool==='None')coolOn='None';else if(cool==='Custom')coolOn=(($('gm_coolcustom').value||'').trim())||'M08';else coolOn=cool;
+  return {
+    kind:k,side:gmSideV(),x:pkN('gm_x'),y:pkN('gm_y'),dia:pkN('gm_dia'),grooveDia:pkN('gm_gdia'),depth:pkN('gm_depth'),angle:pkN('gm_ang'),
+    width:(k==='straight'?pkN('gm_ws'):pkN('gm_w')),zTop:pkN('gm_ztop'),floorZ:pkN('gm_floorz'),topZ:pkN('gm_topz'),
+    pts:gmPtsValid().map(function(p){return [p.x,p.y,p.r];}),
+    tool:{D:pkN('gm_D'),W:pkN('gm_W'),neckD:pkN('gm_neck'),reach:pkN('gm_reach')},
+    rpm:pkN('gm_rpm'),feed:pkN('gm_fmin'),spindle:$('gm_sp').value,coolant:coolOn,
+    control:'Fanuc I & J',tnum:Math.round(pkN('gm_t'))||1,hnum:Math.round(pkN('gm_h'))||1,toolaxis:'Z-',safez:pkN('gm_safez')||20,
+    cut:{apR:pkN('gm_apr')||1,zStepPct:pkN('gm_zstep')||70,apZ:pkN('gm_apz')||2,stepPct:pkN('gm_step')||60,entryPct:pkN('gm_entry')||50,retFeed:pkN('gm_retf')||1500,clr:pkN('gm_clr')||1,direction:$('gm_dir').value},
+    finish:{enabled:gmFinOn(),stock:pkHas('gm_stock')?pkN('gm_stock'):0.2,feedPct:pkN('gm_ffeed')||80}
+  };}
+
+async function genGroove(){
+  var out=$('gm_out');
+  if(gmMode==='new'){var miss=gmMissing();if(miss.length){out.textContent='Required for a New program: '+miss.join(', ')+'. Fill the fields marked in red, then Generate.';try{gmRefreshReq();}catch(e){}try{gmOpenBad();}catch(e){}return;}}
+  var P=gmParams();
+  if(!(P.rpm>0)){out.textContent='Spindle speed is empty — pick a material or type an RPM.';try{_fmOpenSb($('gm_rpm').closest('.sb'));}catch(e){}return;}
+  if(!(P.feed>0)){out.textContent='Feed is empty — set Fz or the feed in mm/min.';try{_fmOpenSb($('gm_fmin').closest('.sb'));}catch(e){}return;}
+  out.textContent='Generating…';
+  try{
+    var res=await Promise.all([apiPost('/groove/program',P),apiPost('/groove/path',P)]);
+    var raw=String(res[0].program||'');
+    var on=String(Math.max(0,Math.round(pkN('gm_onum'))||3030));while(on.length<4)on='0'+on;
+    raw=raw.replace(/^O0001\b/m,'O'+on);
+    grooveRaw=raw;
+    var prog=raw;try{prog=formatForControl(raw,$('gm_ctrl').value);}catch(e){}
+    try{prog=roundProg(prog);}catch(e){}
+    lastGrooveProg=prog;lastAnyProg=prog;pbRender('gm');
+    var notes=[];(raw.match(/^\(NOTE: [^\n]*\)$/mg)||[]).forEach(function(n){notes.push(n.slice(7,-1).trim());});
+    out.textContent=notes.length?('⚠ '+notes.join(' · ')):'';
+    var sec=Math.round(res[0].seconds||0);
+    $('gm_cyc').textContent='CYCLE ≈ '+Math.floor(sec/60)+'m '+(sec%60)+'s';
+    try{gmOpenSim();}catch(e){}
+    gmSimBuild(res[1].path,P);
+  }catch(e){out.textContent='Cannot generate:\n'+pkErr(e);try{$('gm_cyc').textContent='';}catch(x){}try{gmOpenBad();}catch(x){}}
+}
+function gmSaveProg(){if(!lastGrooveProg)return;var b=new Blob([lastGrooveProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_GROOVE.'+((typeof progExt==='function')?progExt():'nc');document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},600);}
+function gmJobLabel(){var k=gmKindV(),nf=function(v){return Math.round(v*100)/100;},t;
+  if(k==='round')t='ring Ø'+nf(pkN('gm_gdia'));else if(k==='straight')t='axial '+nf(pkN('gm_ws'))+'×'+nf(pkN('gm_depth'));else t='profile d'+nf(pkN('gm_depth'));
+  return 'Groove '+(gmSideV()==='internal'?'int ':'ext ')+t;}
+pbReg('gm',{host:'gm_block',get:function(){return lastGrooveProg||'';},set:function(v){lastGrooveProg=v;lastAnyProg=v;},sim:function(){try{gmOpenSim();}catch(e){}gmSimPlay();},save:function(){gmSaveProg();},label:gmJobLabel,guard:function(){return (typeof gmMode!=='undefined'&&gmMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
+
+/* ---- profile graph: plan view (left) + section (right) ---- */
+function gmFilletPts(P){ /* closed polygon with corner radii -> sampled outline (for the preview only) */
+  var n=P.length,out=[];if(n<3)return P.map(function(p){return [p.x,p.y];});
+  for(var i=0;i<n;i++){var p0=P[(i+n-1)%n],p1=P[i],p2=P[(i+1)%n],r=p1.r||0;
+    if(r<=1e-9){out.push([p1.x,p1.y]);continue;}
+    var ax=p0.x-p1.x,ay=p0.y-p1.y,bx=p2.x-p1.x,by=p2.y-p1.y,la=Math.hypot(ax,ay),lb=Math.hypot(bx,by);
+    if(la<1e-9||lb<1e-9){out.push([p1.x,p1.y]);continue;}ax/=la;ay/=la;bx/=lb;by/=lb;
+    var cs=Math.max(-1,Math.min(1,ax*bx+ay*by)),phi=Math.acos(cs);
+    if(phi<1e-6||Math.abs(phi-Math.PI)<1e-6){out.push([p1.x,p1.y]);continue;}
+    var t=r/Math.tan(phi/2),h=r/Math.sin(phi/2),bxs=ax+bx,bys=ay+by,bl=Math.hypot(bxs,bys);bxs/=bl;bys/=bl;
+    var cx=p1.x+bxs*h,cy=p1.y+bys*h,t1=[p1.x+ax*t,p1.y+ay*t],t2=[p1.x+bx*t,p1.y+by*t];
+    var a0=Math.atan2(t1[1]-cy,t1[0]-cx),a1=Math.atan2(t2[1]-cy,t2[0]-cx),da=a1-a0;
+    var cr=(p1.x-p0.x)*(p2.y-p1.y)-(p1.y-p0.y)*(p2.x-p1.x);
+    if(cr>0){while(da<0)da+=2*Math.PI;}else{while(da>0)da-=2*Math.PI;}
+    for(var s=0;s<=8;s++){var an=a0+da*s/8;out.push([cx+r*Math.cos(an),cy+r*Math.sin(an)]);}}
+  return out;}
+function gmDraw(){
+  var svg=$('gm_stage');if(!svg)return;
+  var k=gmKindV(),int=gmSideV()==='internal',nf=function(v){return Math.round(v*100)/100;};
+  var lab=function(x,y,t,a,col){return '<text x="'+x+'" y="'+y+'" fill="'+(col||'#9fb0cc')+'" font-size="11.5" font-family="sans-serif" text-anchor="'+(a||'middle')+'">'+t+'</text>';};
+  var D=pkN('gm_D'),W=pkN('gm_W'),topz=pkN('gm_topz'),neck=pkN('gm_neck');
+  var Dn=pkN('gm_dia')||(k==='straight'?30:40),d,Wg,zt,zb;
+  if(k==='round'){var Dg=pkN('gm_gdia')||(int?Dn+4:Dn-4);d=Math.max(0.1,int?(Dg-Dn)/2:(Dn-Dg)/2);}
+  else d=pkN('gm_depth')||3;
+  if(k==='straight'){Wg=pkN('gm_ws')||8;zt=topz;zb=pkHas('gm_floorz')?pkN('gm_floorz'):topz-15;}
+  else{Wg=pkN('gm_w')||(W>0?W:3);zt=pkHas('gm_ztop')?pkN('gm_ztop'):topz-8;zb=zt-Wg;}
+  var rt=(D>0?D:(k==='straight'?8:20))/2;
+  var o='<defs><marker id="gmar" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 z" fill="#ffd166"/></marker><pattern id="gmhatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#2f4256" stroke-width="1"/></pattern></defs>';
+  /* ---------- plan view ---------- */
+  var PX=16,PY=26,PW=330,PH=236;
+  o+='<rect x="'+PX+'" y="'+PY+'" width="'+PW+'" height="'+PH+'" fill="#0d161e" stroke="#1e2d3a" rx="8"/>';
+  var cx0=pkN('gm_x'),cy0=pkN('gm_y'),mnx,mxx,mny,mxy,body='',cutter='';
+  function fit(mnx,mxx,mny,mxy){var bw=Math.max(1,mxx-mnx),bh=Math.max(1,mxy-mny),s=Math.min((PW-40)/bw,(PH-50)/bh);
+    var ox=PX+PW/2-((mnx+mxx)/2)*s,oy=PY+PH/2+((mny+mxy)/2)*s;return {s:s,X:function(x){return ox+x*s;},Y:function(y){return oy-y*s;}};}
+  if(k==='profile'){
+    var pv=gmPtsValid();
+    if(pv.length<3){o+=lab(PX+PW/2,PY+PH/2,'Add at least 3 profile points','middle','#7fb0d8');}
+    else{
+      var poly=gmFilletPts(pv);mnx=mny=1e9;mxx=mxy=-1e9;poly.forEach(function(p){mnx=Math.min(mnx,p[0]);mxx=Math.max(mxx,p[0]);mny=Math.min(mny,p[1]);mxy=Math.max(mxy,p[1]);});
+      var ar=0;for(var i=0;i<pv.length;i++){var a=pv[i],b=pv[(i+1)%pv.length];ar+=a.x*b.y-b.x*a.y;}
+      /* longest edge -> place the cutter beside its middle on the void side */
+      var bi=0,bl=-1;for(var j=0;j<pv.length;j++){var q=pv[j],q2=pv[(j+1)%pv.length],ll=Math.hypot(q2.x-q.x,q2.y-q.y);if(ll>bl){bl=ll;bi=j;}}
+      var e0=pv[bi],e1=pv[(bi+1)%pv.length],ex=(e1.x-e0.x)/bl,ey=(e1.y-e0.y)/bl,sg=ar>=0?1:-1,nx=ey*sg,ny=-ex*sg; /* outward normal */
+      var mx=(e0.x+e1.x)/2,my=(e0.y+e1.y)/2,off=int?(d-rt):(rt-d),tx=mx+nx*off,ty=my+ny*off;
+      mnx=Math.min(mnx,tx-rt);mxx=Math.max(mxx,tx+rt);mny=Math.min(mny,ty-rt);mxy=Math.max(mxy,ty+rt);
+      var L=fit(mnx,mxx,mny,mxy);
+      o+='<polygon points="'+poly.map(function(p){return L.X(p[0]).toFixed(1)+','+L.Y(p[1]).toFixed(1);}).join(' ')+'" fill="'+(int?'#0a1015':'rgba(255,179,0,.10)')+'" stroke="#37d39a" stroke-width="1.8" stroke-linejoin="round"/>';
+      if(D>0)o+='<circle cx="'+L.X(tx)+'" cy="'+L.Y(ty)+'" r="'+(rt*L.s)+'" fill="rgba(169,139,255,.22)" stroke="#a98bff" stroke-width="1.4"/><circle cx="'+L.X(tx)+'" cy="'+L.Y(ty)+'" r="2" fill="#a98bff"/>'+lab(L.X(tx),L.Y(ty)-rt*L.s-5,'Ø'+nf(D)+' cutter','middle','#a98bff');
+      o+=lab(PX+PW/2,PY+PH-10,pv.length+' points · groove depth '+nf(d)+(int?' outwards':' inwards'),'middle','#ffd166');
+    }
+  }else{
+    var Rw=Dn/2,Rg=(k==='round')?((int?Rw+d:Rw-d)):(int?Rw+d:Rw-d),ext=Math.max(Rw,Rg)+(int?0:2*rt);if(k==='straight')ext=Rw+(int?d:0)+Math.min(rt*1.5,Wg);
+    if(int&&k==='round')ext=Math.max(ext,Rg);
+    var L2=fit(-ext,ext,-ext,ext);var X=function(x){return L2.X(x-cx0);},Y=function(y){return L2.Y(y-cy0);}; /* draw centred */
+    var cx=L2.X(0),cy=L2.Y(0),s=L2.s;
+    if(k==='round'){
+      var ann='M'+(cx-Math.max(Rw,Rg)*s)+','+cy+' a'+(Math.max(Rw,Rg)*s)+','+(Math.max(Rw,Rg)*s)+' 0 1,0 '+(2*Math.max(Rw,Rg)*s)+',0 a'+(Math.max(Rw,Rg)*s)+','+(Math.max(Rw,Rg)*s)+' 0 1,0 -'+(2*Math.max(Rw,Rg)*s)+',0 M'+(cx-Math.min(Rw,Rg)*s)+','+cy+' a'+(Math.min(Rw,Rg)*s)+','+(Math.min(Rw,Rg)*s)+' 0 1,0 '+(2*Math.min(Rw,Rg)*s)+',0 a'+(Math.min(Rw,Rg)*s)+','+(Math.min(Rw,Rg)*s)+' 0 1,0 -'+(2*Math.min(Rw,Rg)*s)+',0';
+      o+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(Rw*s)+'" fill="'+(int?'#0a1015':'rgba(255,255,255,.04)')+'" stroke="#37d39a" stroke-width="1.8"/>';
+      o+='<path d="'+ann+'" fill="rgba(255,179,0,.30)" fill-rule="evenodd" stroke="none"/>';
+      o+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(Rg*s)+'" fill="none" stroke="#ffb300" stroke-width="1.2" stroke-dasharray="4 3"/>';
+      if(D>0){var rc=int?(Rg-rt):(Rg+rt),an=-Math.PI/4,tx2=rc*Math.cos(an),ty2=rc*Math.sin(an);
+        o+='<circle cx="'+(cx+tx2*s)+'" cy="'+(cy-ty2*s)+'" r="'+(rt*s)+'" fill="rgba(169,139,255,.22)" stroke="#a98bff" stroke-width="1.4"/><circle cx="'+(cx+tx2*s)+'" cy="'+(cy-ty2*s)+'" r="2" fill="#a98bff"/>'+lab(cx+tx2*s+rt*s*0.5,cy-ty2*s+rt*s+12,'Ø'+nf(D)+' cutter','middle','#a98bff');}
+      o+=lab(PX+PW/2,PY+PH-10,(int?'bore Ø':'shaft Ø')+nf(Dn)+' → groove Ø'+nf(Rg*2),'middle','#ffd166');
+    }else{ /* straight */
+      var th=pkN('gm_ang')*Math.PI/180,ux=Math.cos(th),uy=Math.sin(th),vx=-uy,vy=ux;
+      var u0=int?Rw-Math.min(2,Rw*0.2):Rw-d,u1=int?Rw+d:Rw+Math.min(2,Rw*0.2),hw=Wg/2;
+      function P2(u,v){return [(cx+(ux*u+vx*v)*s).toFixed(1),(cy-(uy*u+vy*v)*s).toFixed(1)];}
+      o+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(Rw*s)+'" fill="'+(int?'#0a1015':'rgba(255,255,255,.04)')+'" stroke="#37d39a" stroke-width="1.8"/>';
+      o+='<polygon points="'+[P2(u0,-hw),P2(u1,-hw),P2(u1,hw),P2(u0,hw)].map(function(p){return p.join(',');}).join(' ')+'" fill="rgba(255,179,0,.30)" stroke="#ffb300" stroke-width="1.2"/>';
+      if(D>0){var uc=int?(Rw+d-rt):(Rw-d+rt),cc=P2(uc,0);
+        o+='<circle cx="'+cc[0]+'" cy="'+cc[1]+'" r="'+(rt*s)+'" fill="rgba(169,139,255,.22)" stroke="#a98bff" stroke-width="1.4"/><circle cx="'+cc[0]+'" cy="'+cc[1]+'" r="2" fill="#a98bff"/>'+lab(+cc[0],+cc[1]+rt*s+13,'Ø'+nf(D)+' end mill','middle','#a98bff');}
+      o+=lab(PX+PW/2,PY+PH-10,(int?'bore Ø':'shaft Ø')+nf(Dn)+' · groove '+nf(Wg)+' wide × '+nf(d)+' deep @ '+nf(pkN('gm_ang'))+'°','middle','#ffd166');
+    }
+    o+=lab(PX+PW/2,PY+16,'axis at X'+nf(cx0)+' Y'+nf(cy0),'middle','#7fb0d8');
+  }
+  /* ---------- section ---------- */
+  var SX=366,SY=26,SW=178,SH=236;
+  o+='<rect x="'+SX+'" y="'+SY+'" width="'+SW+'" height="'+SH+'" fill="#0d161e" stroke="#1e2d3a" rx="8"/>';
+  var zbot=Math.min(zb,zt)-1,zspan=Math.max(1,topz-zbot);
+  var reachW=(k==='straight'?d+rt*2:d+2*rt)+2;
+  var sc=Math.min((SH-70)/zspan,(SW-40)/Math.max(reachW,d*1.6));
+  var wallX=SX+SW/2+(int?-6:6),topY=SY+30,zy=function(z){return topY+(topz-z)*sc;};
+  var mtX=int?wallX:SX+8,mtW=int?(SX+SW-8-wallX):(wallX-SX-8);
+  o+='<rect x="'+mtX+'" y="'+topY+'" width="'+mtW+'" height="'+(zy(zbot)-topY+10)+'" fill="#1c2a38" stroke="#3a4f63"/><rect x="'+mtX+'" y="'+topY+'" width="'+mtW+'" height="'+(zy(zbot)-topY+10)+'" fill="url(#gmhatch)"/>';
+  var gx0=int?wallX:wallX-d*sc,gw=d*sc,gy0=zy(zt),gh=(zt-zb)*sc;
+  o+='<rect x="'+gx0+'" y="'+gy0+'" width="'+gw+'" height="'+gh+'" fill="#0a1015" stroke="#ffb300" stroke-width="1.5"/>';
+  if(k==='straight'){var apz=pkN('gm_apz')||2,nl=Math.max(1,Math.ceil((zt-zb)/apz-1e-6)),ap2=(zt-zb)/nl;for(var i=1;i<nl;i++){var yy=zy(zt-i*ap2);o+='<line x1="'+gx0+'" y1="'+yy+'" x2="'+(gx0+gw)+'" y2="'+yy+'" stroke="#5f7a90" stroke-dasharray="3 3" stroke-width="1"/>';}
+    o+=lab(SX+SW/2,SY+SH-24,nl+' layer'+(nl>1?'s':'')+' × '+nf(ap2)+' mm','middle','#9fb0cc');}
+  else{var Wc=W>0?W:Wg,zs=pkN('gm_zstep')||70,nlev=(Wg-Wc>1e-6)?Math.ceil((Wg-Wc)/(Wc*zs/100)-1e-6)+1:1;
+    o+=lab(SX+SW/2,SY+SH-24,nlev+' Z level'+(nlev>1?'s':'')+' · '+Math.max(1,Math.ceil(d/(pkN('gm_apr')||1)-1e-6))+' radial pass'+(Math.ceil(d/(pkN('gm_apr')||1)-1e-6)>1?'es':''),'middle','#9fb0cc');}
+  /* cutter section at the groove root, bottom level */
+  if(D>0){var cw2=D*sc,rootX=int?(wallX+d*sc):(wallX-d*sc),cxL=int?(rootX-cw2):rootX,bandH=(k==='straight'?Math.min((zt-zb),D*2):Math.max(0.1,W>0?W:Wg))*sc,by0=zy(zb)-bandH;
+    if(k!=='straight'&&neck>0){var nw=neck*sc,nx0=cxL+(cw2-nw)/2;o+='<rect x="'+nx0+'" y="'+topY+'" width="'+nw+'" height="'+Math.max(0,by0-topY)+'" fill="rgba(169,139,255,.14)" stroke="#a98bff" stroke-width="1" stroke-dasharray="3 2"/>';}
+    o+='<rect x="'+cxL+'" y="'+by0+'" width="'+cw2+'" height="'+bandH+'" fill="rgba(169,139,255,.30)" stroke="#a98bff" stroke-width="1.3"/>';}
+  o+='<line x1="'+(SX+8)+'" y1="'+topY+'" x2="'+(SX+SW-8)+'" y2="'+topY+'" stroke="#7fb0d8" stroke-width="1.4"/>'+lab(SX+12,topY-5,'Z'+nf(topz)+' (top)','start','#7fb0d8');
+  o+=lab(SX+SW/2,SY+16,int?'section · void left, wall right':'section · wall left, void right','middle','#8aa2b4');
+  var dimx=int?(wallX+gw+10):(wallX-gw-10);
+  o+='<line x1="'+(int?SX+SW-14:SX+14)+'" y1="'+gy0+'" x2="'+(int?SX+SW-14:SX+14)+'" y2="'+(gy0+gh)+'" stroke="#ffd166" stroke-width="1.2" marker-start="url(#gmar)" marker-end="url(#gmar)"/>';
+  o+=lab(int?SX+SW-18:SX+18,gy0+gh/2+4,nf(zt-zb),int?'end':'start','#ffd166');
+  o+=lab(gx0+gw/2,Math.min(gy0+gh+13,SY+SH-40),'depth '+nf(d),'middle','#ffb300');
+  svg.innerHTML=o;
+}
+
+/* ---- toolpath simulation (plan view + Z trace), driven by the server's sampled path ---- */
+var GMS={pts:[],total:0,pos:0,playing:false,last:0,box:null,dia:10,topZ:0,zmin:0,zmax:0,trail:null,drawn:0,area:null};
+function gmSimBuild(path,P){
+  var cv=$('gm_simcv');if(!cv||!path)return;
+  var mv=path.moves||[],pts=[],s=0,p=null;
+  mv.forEach(function(m){var x=m[1],y=m[2],z=m[3],len=0;if(p){len=Math.hypot(x-p.x,y-p.y,z-p.z);if(m[0]==='rapid')len=Math.min(len,40)*0.3+0.5;}
+    s+=len;pts.push({s:s,k:m[0],x0:p?p.x:x,y0:p?p.y:y,z0:p?p.z:z,x:x,y:y,z:z});p={x:x,y:y,z:z};});
+  GMS.pts=pts;GMS.total=s||1;GMS.pos=0;GMS.playing=false;GMS.drawn=0;GMS.topZ=path.topZ;GMS.dia=path.dia;GMS.area=path.area;
+  var mnx=1e9,mxx=-1e9,mny=1e9,mxy=-1e9,zmin=1e9,zmax=-1e9,a=path.area||{};
+  pts.forEach(function(q){mnx=Math.min(mnx,q.x);mxx=Math.max(mxx,q.x);mny=Math.min(mny,q.y);mxy=Math.max(mxy,q.y);zmin=Math.min(zmin,q.z);zmax=Math.max(zmax,q.z);});
+  (a.wall||[]).concat(a.root||[]).forEach(function(q){mnx=Math.min(mnx,q[0]);mxx=Math.max(mxx,q[0]);mny=Math.min(mny,q[1]);mxy=Math.max(mxy,q[1]);});
+  var r=GMS.dia/2+4;GMS.box=[mnx-r,mxx+r,mny-r,mxy+r];GMS.zmin=zmin;GMS.zmax=Math.min(zmax,path.topZ+Math.max(P.safez||20,2)*0.5+6);
+  cv.width=760;cv.height=470;GMS.trail=document.createElement('canvas');GMS.trail.width=760;GMS.trail.height=340;
+  gmSimDraw();
+}
+function gmSimLayout(){var b=GMS.box,W=760,Hp=340,mg=14;var w=Math.max(1,b[1]-b[0]),h=Math.max(1,b[3]-b[2]);var s=Math.min((W-2*mg)/w,(Hp-2*mg)/h);var ox=mg+((W-2*mg)-w*s)/2-b[0]*s,oy=Hp-mg-((Hp-2*mg)-h*s)/2+b[2]*s;return {s:s,X:function(x){return ox+x*s;},Y:function(y){return oy-y*s;}};}
+function gmSimAt(sPos){var pts=GMS.pts,lo=0,hi=pts.length-1;while(lo<hi){var mid=(lo+hi)>>1;if(pts[mid].s<sPos)lo=mid+1;else hi=mid;}var i=lo,q=pts[i],sPrev=i>0?pts[i-1].s:0,t=(q.s>sPrev)?Math.max(0,Math.min(1,(sPos-sPrev)/(q.s-sPrev))):1;return {i:i,x:q.x0+(q.x-q.x0)*t,y:q.y0+(q.y-q.y0)*t,z:q.z0+(q.z-q.z0)*t,k:q.k};}
+function gmSimSeg(ctx,L,q){
+  var below=(q.k==='feed')&&(Math.min(q.z0,q.z)<GMS.topZ-0.01);
+  ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+  if(below){ctx.strokeStyle='rgba(55,211,154,.22)';ctx.lineWidth=Math.max(1.5,GMS.dia*L.s);}
+  else if(q.k==='rapid'){ctx.strokeStyle='rgba(107,124,140,.6)';ctx.lineWidth=1;ctx.setLineDash([3,4]);}
+  else{ctx.strokeStyle='rgba(200,215,230,.55)';ctx.lineWidth=1.2;}
+  ctx.beginPath();ctx.moveTo(L.X(q.x0),L.Y(q.y0));ctx.lineTo(L.X(q.x),L.Y(q.y));ctx.stroke();ctx.restore();
+}
+function gmSimOutline(ctx,L){var a=GMS.area;if(!a)return;
+  function poly(pts,col,dash){if(!pts||!pts.length)return;ctx.save();ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.setLineDash(dash);ctx.beginPath();pts.forEach(function(p,i){i?ctx.lineTo(L.X(p[0]),L.Y(p[1])):ctx.moveTo(L.X(p[0]),L.Y(p[1]));});ctx.closePath();ctx.stroke();ctx.restore();}
+  poly(a.wall,'#4f8cff',[6,4]);poly(a.root,'#ffb300',[3,3]);}
+function gmSimDraw(){
+  var cv=$('gm_simcv');if(!cv||!GMS.box||!GMS.pts.length)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height,L=gmSimLayout(),pts=GMS.pts;
+  ctx.fillStyle='#0a1015';ctx.fillRect(0,0,W,H);
+  var tc=GMS.trail.getContext('2d'),cur=gmSimAt(GMS.pos);
+  while(GMS.drawn<cur.i){gmSimSeg(tc,L,pts[GMS.drawn]);GMS.drawn++;}
+  ctx.drawImage(GMS.trail,0,0);
+  gmSimOutline(ctx,L);
+  if(cur.i<pts.length){var q2=pts[cur.i];gmSimSeg(ctx,L,{k:q2.k,x0:q2.x0,y0:q2.y0,z0:q2.z0,x:cur.x,y:cur.y,z:cur.z});}
+  ctx.beginPath();ctx.arc(L.X(cur.x),L.Y(cur.y),Math.max(3,GMS.dia/2*L.s),0,Math.PI*2);ctx.fillStyle='rgba(169,139,255,.28)';ctx.fill();ctx.strokeStyle='#a98bff';ctx.lineWidth=1.6;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(L.X(cur.x)-5,L.Y(cur.y));ctx.lineTo(L.X(cur.x)+5,L.Y(cur.y));ctx.moveTo(L.X(cur.x),L.Y(cur.y)-5);ctx.lineTo(L.X(cur.x),L.Y(cur.y)+5);ctx.stroke();
+  var y0=352,y1=H-14,x0=14,x1=W-14,zr=Math.max(0.1,GMS.zmax-GMS.zmin);
+  ctx.fillStyle='#0d161e';ctx.fillRect(x0-6,y0-8,x1-x0+12,y1-y0+18);
+  var zy=function(z){return y1-(Math.min(z,GMS.zmax)-GMS.zmin)/zr*(y1-y0);},sx=function(sv){return x0+sv/GMS.total*(x1-x0);};
+  var ztop=zy(GMS.topZ);ctx.strokeStyle='#7fb0d8';ctx.lineWidth=1;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(x0,ztop);ctx.lineTo(x1,ztop);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#7fb0d8';ctx.font='11px sans-serif';ctx.fillText('Z top',x0+2,ztop-3);
+  ctx.beginPath();ctx.strokeStyle='#3b4f61';ctx.lineWidth=1.2;var prevS=0;
+  pts.forEach(function(q,ix){var xa=sx(prevS),xb=sx(q.s);if(ix===0)ctx.moveTo(xa,zy(q.z0));ctx.lineTo(xa,zy(q.z0));ctx.lineTo(xb,zy(q.z));prevS=q.s;});ctx.stroke();
+  ctx.beginPath();ctx.strokeStyle='#37d39a';ctx.lineWidth=1.8;prevS=0;
+  for(var ix=0;ix<pts.length;ix++){var q=pts[ix],xa=sx(prevS),xb=sx(Math.min(q.s,GMS.pos));if(ix===0)ctx.moveTo(xa,zy(q.z0));ctx.lineTo(xa,zy(q.z0));ctx.lineTo(xb,zy(ix===cur.i?cur.z:q.z));prevS=q.s;if(q.s>=GMS.pos)break;}
+  ctx.stroke();
+  ctx.fillStyle='#a98bff';ctx.beginPath();ctx.arc(sx(GMS.pos),zy(cur.z),4,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#cfe0ee';ctx.font='12px sans-serif';ctx.fillText('X '+cur.x.toFixed(2)+'   Y '+cur.y.toFixed(2)+'   Z '+cur.z.toFixed(2)+'   '+(cur.k==='rapid'?'RAPID':'FEED'),16,22);
+}
+function gmSimReset(){GMS.playing=false;GMS.pos=0;GMS.drawn=0;if(GMS.trail)GMS.trail.getContext('2d').clearRect(0,0,GMS.trail.width,GMS.trail.height);var b=$('gm_sim_play');if(b)b.innerHTML='&#9654; Play';gmSimDraw();}
+function gmSimPlay(){
+  if(!GMS.pts.length){var o=$('gm_out');if(o)o.textContent='Generate a program first, then Play.';return;}
+  var b=$('gm_sim_play');
+  if(GMS.playing){GMS.playing=false;if(b)b.innerHTML='&#9654; Play';return;}
+  if(GMS.pos>=GMS.total-1e-6)gmSimReset();
+  GMS.playing=true;GMS.last=0;if(b)b.innerHTML='&#10074;&#10074; Pause';
+  function step(ts){if(!GMS.playing)return;if(!GMS.last)GMS.last=ts;var dt=Math.min(0.1,(ts-GMS.last)/1000);GMS.last=ts;
+    var spd=(parseFloat(($('gm_sim_spd')||{}).value)||220)/220*GMS.total/14;GMS.pos+=spd*dt;
+    if(GMS.pos>=GMS.total){GMS.pos=GMS.total;GMS.playing=false;if(b)b.innerHTML='&#9654; Play';}
+    gmSimDraw();if(GMS.playing)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+(function initGm(){try{
+  var mt=$('gm_mat');if(mt){opt(mt,MATS.map(function(x){return x[0];}),'Stainless 316 austenitic');}
+  var host=$('groove_op');if(host){host.addEventListener('input',function(){gmRefreshReq();});host.addEventListener('change',function(){gmRefreshReq();});}
+  var pt=$('gm_pts');if(pt){pt.addEventListener('input',function(e){var t=e.target;if(t&&t.getAttribute&&t.getAttribute('data-k')){var i=+t.getAttribute('data-i');if(GMP[i]){GMP[i][t.getAttribute('data-k')]=t.value;gmDraw();}}});}
+  GMP=[{x:'',y:'',r:''},{x:'',y:'',r:''},{x:'',y:'',r:''},{x:'',y:'',r:''}];gmPtsRender();
+  gmVis();setGmMode('new');
 }catch(e){}})();
 
 (function initFm(){try{['fm_aW','fm_aL','fm_aD','fmc_D','fmc_teeth','fmc_facez'].forEach(function(id){var el=$(id);if(el){el.addEventListener('input',fmRefreshReq);el.addEventListener('change',fmRefreshReq);}});var sh=$('fm_aShape');if(sh)sh.addEventListener('click',function(){setTimeout(fmRefreshReq,0);});var h=$('fm_pm_hint');if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}catch(e){}try{fmCalc('init');fmFinVis();}catch(e){}})();
