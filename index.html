@@ -246,7 +246,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.35 &middot; 19 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.36 &middot; 19 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -341,6 +341,213 @@
       </div>
       <p class="note" style="color:var(--mut);font-size:11px;text-align:center;margin-top:14px">More hole operations can be added later &middot; tap the settings button for Job Setup</p>
     </section>
+<section id="hole_op" class="view">
+<style>
+#hole_op #ho_stage,#hole_op #ho_patstage{width:100%;display:block;background:#0a1015;border:1px solid var(--line);border-radius:12px;margin-top:10px;touch-action:none}
+#hole_op .fmsub{font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px}
+#hole_op .fmbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 8px}
+#hole_op .fmb{background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer}
+#hole_op .fmb:hover{border-color:var(--acc2);color:var(--acc2)}
+#hole_op .fmbar label{margin:0;display:flex;align-items:center;gap:8px;font-size:12px}
+#hole_op .fmbar input[type=range]{width:120px;padding:0;border:none;background:none}
+#hole_op #ho_simcv{width:100%;display:block;background:#0a1015;border:1px solid var(--line);border-radius:10px;touch-action:none}
+#hole_op .fmleg{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--mut);margin:8px 2px 0}
+#hole_op .fmleg span{display:inline-flex;align-items:center;gap:6px}
+#hole_op .fmleg .sw{width:13px;height:13px;border-radius:3px;display:inline-block}
+</style>
+<div class="modeseg" style="margin:2px 0 8px"><button type="button" id="ho_pm_sample" onclick="setHoMode('sample')">&#128218; Sample</button><button type="button" id="ho_pm_new" class="on" onclick="setHoMode('new')">&#10133; New</button></div><span id="ho_pm_hint" class="note mhint" style="margin:0 0 10px"></span>
+<div class="zconv" style="background:rgba(67,209,122,.08);border:1px solid rgba(67,209,122,.28);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:12px;color:var(--txt)">
+  <b style="color:#43d17a">Z convention:</b> Part top = <b>Z=0</b> &middot; cutting down into the part is <b>&minus;Z</b> &middot; away from the part is <b>+Z</b>. Depths on this screen are entered as <b>positive distances below the top</b>.
+</div>
+<div class="vhead"><button class="back" onclick="show('mill_holes')">&lsaquo;</button><h2 id="ho_h2">Tapping</h2></div>
+
+<!-- ============ 1. OPERATION ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">OPERATION <span>&#9662;</span></div><div class="sb">
+  <label>Operation</label>
+  <select id="ho_op" onchange="hoOpChange()"><option>Tapping</option><option>Reaming</option><option>Boring</option><option>Centering</option><option>Chamfering</option><option>Counter bore</option></select>
+
+  <div data-ops="Boring"><label>Boring method</label>
+    <select id="ho_bmeth" onchange="hoOpChange()"><option value="head">Boring head (feed in, retract)</option><option value="interp">Circular interpolation (end mill)</option></select></div>
+  <div data-ops="Counter bore"><label>Counterbore method</label>
+    <select id="ho_cbmeth" onchange="hoOpChange()"><option value="plunge">Counterbore tool (plunge)</option><option value="interp">Circular interpolation (end mill)</option></select></div>
+  <div data-ops="Chamfering">
+    <div class="row2">
+      <div><label>Chamfer on</label><select id="ho_edge" onchange="hoOpChange()"><option value="hole">Hole edge (internal)</option><option value="boss">Boss / pin (external)</option></select></div>
+      <div><label>Chamfer method</label><select id="ho_cmeth" onchange="hoOpChange()"><option value="interp">Circular interpolation</option><option value="plunge">Plunge (centred cone)</option></select></div>
+    </div>
+  </div>
+
+  <!-- Tapping: thread -->
+  <div data-ops="Tapping">
+    <label>Thread profile</label><select id="ho_tp_prof" onchange="hoTapProf()"></select>
+    <div class="row2"><div><label>Thread size</label><select id="ho_tp_size" onchange="hoTapSize()"></select></div><div><label>Pitch (mm)</label><input id="ho_tp_pitch" type="number" step="0.01" inputmode="decimal" oninput="hoTapPitch()"></div></div>
+    <div class="row2"><div><label>Thread hand</label><select id="ho_hand"><option value="RH">Right hand</option><option value="LH">Left hand</option></select></div>
+      <div><label>Tap type</label><select id="ho_taptype" onchange="hoCalc('mat')"><option value="cut">Cutting tap</option><option value="form">Forming tap</option></select></div></div>
+    <div id="ho_tp_hint" class="note" style="text-align:left"></div>
+  </div>
+
+  <!-- diameters / depth -->
+  <div class="row2">
+    <div data-ops="Reaming,Boring,Counter bore,Chamfering"><label id="ho_d_lbl">Hole &Oslash; (mm)</label><input id="ho_d" type="number" step="0.01" inputmode="decimal" oninput="hoCalc('d')"></div>
+    <div data-ops="Tapping,Reaming,Boring,Counter bore" id="ho_w_depth"><label id="ho_depth_lbl">Depth (mm)</label><input id="ho_depth" type="number" step="0.1" inputmode="decimal" oninput="hoDraw()"></div>
+  </div>
+  <div data-ops="Boring:interp,Counter bore:interp"><label>Existing pilot hole &Oslash; (mm)</label><input id="ho_pilot" type="number" step="0.1" value="0" inputmode="decimal" oninput="hoDraw()">
+    <p class="note" style="text-align:left">Set if the centre is already drilled: the cutter then only clears the ring outside the pilot hole. 0 = solid.</p></div>
+
+  <!-- Centering -->
+  <div data-ops="Centering">
+    <label>Define by</label>
+    <select id="ho_cdef" onchange="hoOpChange()"><option value="dia">Spot diameter at the surface</option><option value="depth">Centring depth</option></select>
+    <div class="row2"><div id="ho_w_spot"><label>Spot &Oslash; at surface (mm)</label><input id="ho_spot" type="number" step="0.1" inputmode="decimal" oninput="hoDraw()"></div>
+      <div id="ho_w_cdepth"><label>Centring depth (mm)</label><input id="ho_cdepth" type="number" step="0.1" inputmode="decimal" oninput="hoDraw()"></div></div>
+  </div>
+
+  <!-- Chamfering size -->
+  <div data-ops="Chamfering"><label>Chamfer size C (mm, horizontal)</label><input id="ho_cham" type="number" step="0.05" inputmode="decimal" oninput="hoDraw()"></div>
+
+  <p class="note" id="ho_opnote" style="text-align:left"></p>
+</div></div>
+
+<!-- ============ 2. TOOL ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div class="row2">
+    <div data-ops="Centering,Chamfering,Boring:interp,Counter bore:interp"><label>Tool &Oslash; (mm)</label><input id="ho_toolD" type="number" step="0.1" inputmode="decimal" oninput="hoCalc('d')"></div>
+    <div data-ops="Boring:interp,Counter bore:interp,Chamfering:interp"><label>No. of flutes</label><input id="ho_teeth" type="number" value="4" step="1" inputmode="numeric" oninput="hoCalc('teeth')"></div>
+  </div>
+  <div class="row2">
+    <div data-ops="Centering,Chamfering"><label>Tool included angle &deg;</label><input id="ho_ang" type="number" value="90" step="1" inputmode="decimal" oninput="hoDraw()"></div>
+    <div data-ops="Chamfering:interp"><label>Tip flat &Oslash; (mm)</label><input id="ho_tipD" type="number" value="0" step="0.1" inputmode="decimal" oninput="hoDraw()"></div>
+  </div>
+  <div data-ops="Chamfering:interp"><label>Tip clearance (mm)</label><input id="ho_tipclr" type="number" value="0.3" step="0.05" inputmode="decimal">
+    <p class="note" style="text-align:left">How far the cone tip runs below the chamfer bottom, so the chamfer breaks cleanly into the wall.</p></div>
+  <div class="row2">
+    <div><label>Tool no. (T)</label><input id="ho_t" type="number" value="1" inputmode="numeric"></div>
+    <div><label>Length offset (H)</label><input id="ho_h" type="number" value="1" inputmode="numeric"></div>
+  </div>
+  <div class="row2">
+    <div><label>Spindle rotation</label><select id="ho_sp"><option value="M03">M03 (CW)</option><option value="M04">M04 (CCW)</option></select></div>
+    <div><label>Coolant type</label><select id="ho_cool" onchange="hoCoolVis()"><option value="M08">M08 flood</option><option value="M07">M07 mist</option><option value="Custom">Custom</option><option value="None">None</option></select></div>
+  </div>
+  <div id="ho_coolCustWrap" style="display:none"><label>Custom coolant code</label><input type="text" id="ho_coolcustom" placeholder="e.g. M51"></div>
+  <p class="note" data-ops="Tapping" style="text-align:left">Left-hand taps automatically run M04 (G74); the spindle rotation above applies to the other operations.</p>
+</div></div>
+
+<!-- ============ 3. PROFILE (graph only) ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9662;</span></div><div class="sb">
+  <svg id="ho_stage" viewBox="0 0 560 300"></svg>
+  <p class="note" style="text-align:left;margin-top:8px">Section through the hole (not to scale for very deep holes). It updates as you type.</p>
+</div></div>
+
+<!-- ============ 4. PATTERN ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">PATTERN <span>&#9656;</span></div><div class="sb" style="display:none">
+  <label>Pattern</label><select id="ho_pat" onchange="hoPosChange()"><option>Point</option><option>Line</option><option>Rows (grid)</option><option>PCD circle</option><option>Manual coords</option></select>
+  <div class="row2"><div><label>Origin X</label><input id="ho_x0" type="number" value="0" inputmode="decimal" oninput="hoPosChange()"></div><div><label>Origin Y</label><input id="ho_y0" type="number" value="0" inputmode="decimal" oninput="hoPosChange()"></div></div>
+  <div id="ho_line" style="display:none"><div class="row3"><div><label>Holes</label><input id="ho_ln" type="number" value="4" oninput="hoPosChange()"></div><div><label>Pitch</label><input id="ho_lp" type="number" value="20" oninput="hoPosChange()"></div><div><label>Angle&deg;</label><input id="ho_la" type="number" value="0" oninput="hoPosChange()"></div></div></div>
+  <div id="ho_grid" style="display:none"><div class="row2"><div><label>X count</label><input id="ho_nx" type="number" value="3" oninput="hoPosChange()"></div><div><label>Y count</label><input id="ho_ny" type="number" value="2" oninput="hoPosChange()"></div></div><div class="row2"><div><label>X pitch</label><input id="ho_px" type="number" value="20" oninput="hoPosChange()"></div><div><label>Y pitch</label><input id="ho_py" type="number" value="20" oninput="hoPosChange()"></div></div></div>
+  <div id="ho_pcd" style="display:none"><div class="row3"><div><label>PCD dia</label><input id="ho_pd" type="number" value="50" oninput="hoPosChange()"></div><div><label>Holes</label><input id="ho_pn" type="number" value="6" oninput="hoPosChange()"></div><div><label>Start&deg;</label><input id="ho_pa" type="number" value="0" oninput="hoPosChange()"></div></div></div>
+  <div id="ho_man" style="display:none"><label>Coordinates (X,Y per line)</label><textarea id="ho_mc" class="gedit" style="min-height:90px" spellcheck="false" oninput="hoPosChange()"></textarea></div>
+  <div id="ho_poscount" class="note" style="text-align:left">1 hole</div>
+  <svg id="ho_patstage" viewBox="0 0 560 240"></svg>
+</div></div>
+
+<!-- ============ 5. PARAMETERS ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">PARAMETERS <span>&#9656;</span></div><div class="sb" style="display:none">
+  <label>Material</label><select id="ho_mat" onchange="hoCalc('mat')"></select><div id="ho_mr" class="mrinfo"></div>
+  <div class="row2">
+    <div><label>Vc (m/min)</label><input id="ho_vc" type="number" step="1" inputmode="decimal" oninput="hoCalc('vc')"></div>
+    <div><label>Spindle speed (RPM)</label><input id="ho_rpm" type="number" step="1" inputmode="numeric" oninput="hoCalc('rpm')"></div>
+  </div>
+  <div class="row2">
+    <div><label id="ho_fpr_lbl">Feed / rev (mm)</label><input id="ho_fpr" type="number" step="0.001" inputmode="decimal" oninput="hoCalc('fpr')"></div>
+    <div><label>Feed (mm/min)</label><input id="ho_fmin" type="number" step="1" inputmode="decimal" oninput="hoCalc('feed')"></div>
+  </div>
+  <p class="note" id="ho_parnote" style="text-align:left"></p>
+</div></div>
+
+<!-- ============ 6. CYCLES ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">CYCLES <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div data-ops="Tapping"><label>Tapping feed mode</label>
+    <select id="ho_feedmode"><option value="G94">Feed per minute (G94) &mdash; F = pitch &times; RPM</option><option value="G95">Feed per rev (G95) &mdash; F = pitch</option></select></div>
+  <div data-ops="Reaming"><label>Retract</label>
+    <select id="ho_rret"><option value="feed">Feed out (same feed)</option><option value="rapid">Rapid out</option></select></div>
+  <div data-ops="Boring:head"><label>Retract</label>
+    <select id="ho_bret" onchange="hoVis()"><option value="feed">Feed out (same feed)</option><option value="rapid">Rapid out</option><option value="shift">Orient, shift off the wall, rapid out</option><option value="stop">Stop spindle, rapid out</option></select></div>
+  <div data-ops="Boring:head" id="ho_shiftbox"><div class="row3">
+    <div><label>Shift (mm)</label><input id="ho_shift" type="number" value="0.2" step="0.05" inputmode="decimal"></div>
+    <div><label>Shift axis</label><select id="ho_shaxis"><option>X</option><option>Y</option></select></div>
+    <div><label>Shift direction</label><select id="ho_shsign"><option value="+">+</option><option value="-">&minus;</option></select></div></div>
+    <p class="note" style="text-align:left">Spindle orientation (M19) then a small shift so the insert clears the finished wall on the way out. Check the direction on your machine (it depends on how the boring head is mounted).</p></div>
+  <div data-ops="Reaming,Boring:head,Centering,Chamfering:plunge,Counter bore:plunge"><label>Dwell at bottom (s)</label><input id="ho_dwell" type="number" value="0" step="0.1" inputmode="decimal"></div>
+  <div data-ops="Boring:interp,Counter bore:interp,Chamfering:interp"><label>Cutting direction</label>
+    <select id="ho_dir"><option value="climb">Climb</option><option value="conv">Conventional</option></select></div>
+  <div data-ops="Boring:interp,Counter bore:interp"><label>Finish pass</label>
+    <select id="ho_fin" onchange="hoVis()"><option value="0">Off &mdash; rough straight to size</option><option value="1">On &mdash; leave stock, then finish</option></select>
+    <div id="ho_finbox"><div class="row2">
+      <div><label>Wall finish stock (mm)</label><input id="ho_wall" type="number" value="0.2" step="0.05" inputmode="decimal"></div>
+      <div data-ops="Counter bore:interp"><label>Floor finish stock (mm)</label><input id="ho_floor" type="number" value="0.2" step="0.05" inputmode="decimal"></div></div>
+      <p class="note" style="text-align:left">Roughing leaves this much on the wall (and floor); one finishing pass then cuts the wall to size with a tangent lead-in/out at the final depth.</p></div></div>
+  <p class="note" id="ho_cycnote" style="text-align:left"></p>
+</div></div>
+
+<!-- ============ 7. POSITIONING ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">POSITIONING <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div class="row2">
+    <div><label>Top Z (mm)</label><input id="ho_topz" type="number" value="0" step="0.1" inputmode="decimal"></div>
+    <div><label>Safe Z (mm)</label><input id="ho_safez" type="number" value="20" step="1" inputmode="decimal"></div>
+  </div>
+  <div class="row2">
+    <div><label>Clearance R (mm)</label><input id="ho_r" type="number" value="3" step="0.5" inputmode="decimal"></div>
+    <div><label>Retract between holes</label><select id="ho_retbetween"><option value="R">Clearance R</option><option value="safe">Safe Z</option></select></div>
+  </div>
+  <p class="note" style="text-align:left">Top Z = the surface the holes start from. Clearance R = height above the top where rapid stops and feeding starts. Safe Z = travel height clear of the part and clamps. Between holes the tool either stays at R (fast) or lifts to Safe Z (clears clamps).</p>
+</div></div>
+
+<!-- ============ 8. CUT SETUP ============ -->
+<div class="sec" data-ops="Boring:interp,Counter bore:interp,Chamfering:interp"><div class="st" onclick="tog(this)">CUT SETUP <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div data-ops="Boring:interp,Counter bore:interp">
+    <div class="row2">
+      <div><label>Max ap &mdash; depth per level (mm)</label><input id="ho_ap" type="number" value="1" step="0.1" inputmode="decimal"></div>
+      <div><label>Stepover (%&Oslash;)</label><input id="ho_step" type="number" value="60" step="1" inputmode="decimal"></div>
+    </div>
+    <div class="row2">
+      <div><label>Helix pitch (mm / turn)</label><input id="ho_rpitch" type="number" value="1" step="0.1" inputmode="decimal"></div>
+      <div><label>Ramp feed (% of feed)</label><input id="ho_rpct" type="number" value="50" step="5" inputmode="decimal"></div>
+    </div>
+  </div>
+  <div><label>Plunge feed (mm/min)</label><input id="ho_pf" type="number" value="150" step="10" inputmode="decimal"></div>
+  <p class="note" style="text-align:left">The cutter spirals down in a helix (no straight plunge), then clears the floor in concentric rings. Plunge feed is used for the first drop to the chamfer / finish depth.</p>
+</div></div>
+
+<!-- ============ 9. MACHINE ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">MACHINE <span>&#9656;</span></div><div class="sb" style="display:none">
+  <p class="note" style="text-align:left">Seeded from <b>Defaults</b>. Edit here to override for this operation only.</p>
+  <div class="row2">
+    <div><label>Control</label><select id="ho_ctrl"><option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Haas</option><option>Siemens I &amp; J</option><option>Siemens R</option><option>Heidenhain</option></select></div>
+    <div><label>Program no. (O)</label><input id="ho_onum" type="number" value="2020" inputmode="numeric"></div>
+  </div>
+</div></div>
+
+<!-- ============ GENERATE + PROGRAM ============ -->
+<button class="btn genbtn" id="ho_gen" onclick="genHole()">&#9881;&#65039;  GENERATE G-CODE</button>
+<div id="ho_cyc" class="note" style="text-align:left;margin-top:8px;color:var(--acc);font-weight:700"></div>
+<div id="ho_out" class="note" style="text-align:left;margin-top:6px">Set values and press Generate.</div>
+<div id="ho_block"></div>
+
+<div class="sec" id="ho_simsec"><div class="st" onclick="tog(this)">TOOLPATH SIMULATION <span>&#9662;</span></div><div class="sb">
+  <div class="fmbar">
+    <button type="button" class="fmb" id="ho_sim_play" onclick="hoSimPlay()">&#9654; Play</button>
+    <button type="button" class="fmb" onclick="hoSimReset()">&#8635; Reset</button>
+    <label>speed <input type="range" id="ho_sim_spd" min="20" max="900" value="220"></label>
+  </div>
+  <canvas id="ho_simcv"></canvas>
+  <div class="fmleg">
+    <span><i class="sw" style="background:rgba(55,211,154,.5)"></i> cut path (tool &Oslash;)</span>
+    <span><i class="sw" style="background:#6b7c8c"></i> rapid / air</span>
+    <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter</span>
+  </div>
+  <p class="note" style="text-align:left">Press <b>Generate</b> first, then <b>Play</b>. Top: plan view. Bottom: tool height (Z) along the program. The simulation follows the generated Fanuc-style program.</p>
+</div></div>
+</section>
     <section id="fulljob" class="view">
       <div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2>Full Job</h2><button class="back" style="margin-left:auto;width:auto;padding:0 12px;font-size:12.5px" onclick="clearJob()">Clear</button></div>
       <p class="note" style="text-align:left">Build your sequence of operations, then open each step to create its program. Runs top-to-bottom with M01 between and M30 at the end.</p>
@@ -1928,7 +2135,7 @@ function ttUpdate(){var r=tnResolve();var ce=tnGeom(r.pts).errs;for(var i=0;i<tn
 function ttAuto(i,k,val){var el=document.querySelector('#tt_body .ttf[data-i="'+i+'"][data-k="'+k+'"]');if(!el||el.tagName==='SELECT')return;var u=tnPts[i][k];if(u!==''&&u!=null&&(''+u).length>0){el.classList.remove('autof');return;}if(document.activeElement===el)return;el.value=(Math.round(val*1000)/1000).toString();el.classList.add('autof');}
 var helpMode=false;
 function toggleHelp(){helpMode=!helpMode;document.body.classList.toggle('helpon',helpMode);var b=document.getElementById('helpbtn');if(b)b.classList.toggle('on',helpMode);}
-function openMillOp(n){if(n==='Face mill'||n==='Face milling'){show('facemill');try{fmMachineSeed();}catch(e){}return;}var t=$('mill_op_title');if(t)t.textContent=n;var nm=$('mill_op_name');if(nm)nm.textContent=n;show('mill_op');}
+function openMillOp(n){if(['Tapping','Reaming','Boring','Centering','Chamfering','Counter bore'].indexOf(n)>=0){hoOpen(n);return;}if(n==='Face mill'||n==='Face milling'){show('facemill');try{fmMachineSeed();}catch(e){}return;}var t=$('mill_op_title');if(t)t.textContent=n;var nm=$('mill_op_name');if(nm)nm.textContent=n;show('mill_op');}
 function millGrp(id){var el=document.getElementById(id);if(!el)return;var op=el.classList.contains('open');['mg_c','mg_p'].forEach(function(g){var e=document.getElementById(g);if(e)e.classList.remove('open');});if(!op)el.classList.add('open');}
 function tnQuick(k){show('turnops');try{tnMachRefresh();}catch(e){}try{function _qs(id,v){var e=document.getElementById(id);if(e){e.value=v;if(typeof e.onchange==='function')e.onchange();}}if(k==='OD'){_qs('tn_odid','OD (outside)');_qs('tn_pathsel','Turning');}else if(k==='ID'){_qs('tn_odid','ID (bore)');_qs('tn_pathsel','Turning');}else if(k==='FACE'){_qs('tn_odid','OD (outside)');_qs('tn_pathsel','Facing');}}catch(e){}}
 function setMode(m){var t=document.getElementById('mt-turn'),l=document.getElementById('mt-mill');if(!t||!l)return;window._mode=m;try{document.querySelectorAll('.tile[data-mode]').forEach(function(x){var dm=x.getAttribute('data-mode');x.style.display=(dm==='both'||dm===m)?'':'none';});document.querySelectorAll('.jobop-turn').forEach(function(x){x.style.display=(m==='turn')?'':'none';});document.querySelectorAll('.jobop-mill').forEach(function(x){x.style.display=(m==='mill')?'':'none';});document.querySelectorAll('.js-turn-only').forEach(function(x){x.style.display=(m==='mill')?'none':'';});document.querySelectorAll('.js-mill-only').forEach(function(x){x.style.display=(m==='mill')?'':'none';});}catch(e){}var jt=document.getElementById('js-turn'),jm=document.getElementById('js-mill');if(m==='mill'){l.style.background='#334559';l.style.color='#e8eef4';l.style.boxShadow='inset 3px 0 0 var(--acc)';t.style.background='transparent';t.style.color='var(--mut)';t.style.boxShadow='none';if(jt)jt.style.display='none';if(jm)jm.style.display='block';}else{t.style.background='#334559';t.style.color='#e8eef4';t.style.boxShadow='inset 3px 0 0 var(--acc)';l.style.background='transparent';l.style.color='var(--mut)';l.style.boxShadow='none';if(jt)jt.style.display='block';if(jm)jm.style.display='none';}try{window.scrollTo(0,0);}catch(e){}}
@@ -1943,7 +2150,7 @@ function jsMr(){var el=$('js_mr');if(!el||!$('js_mat'))return;var m=(typeof matB
 /* ===== DEFAULTS (global presets, each operation can still override locally) ===== */
 function _defSetSel(id,val){var el=document.getElementById(id);if(!el)return false;var ok=false;for(var i=0;i<el.options.length;i++){if(el.options[i].value===val||el.options[i].text===val){el.value=el.options[i].value;ok=true;break;}}if(ok){try{el.dispatchEvent(new Event('change'));}catch(e){}}return ok;}
 function defMatChip(){var el=document.getElementById('def_mat');if(!el)return;var m=(typeof matBy==='function')?matBy(el.value):null;var chip=document.getElementById('def_mr');if(!chip)return;if(m&&m[4]!=null){var c=(typeof ISO_COL!=='undefined'&&ISO_COL[m[2]])||'#9E9E9E';chip.innerHTML='<span class="isochip" style="background:'+c+'">ISO '+m[2]+'</span> Machinability '+m[4]+'%';}else{chip.textContent='';}}
-function applyDefMaterial(){var el=document.getElementById('def_mat');if(!el)return;var v=el.value;['js_mat','tn_mat','dr_mat','mat','gv_mat'].forEach(function(id){_defSetSel(id,v);});defMatChip();}
+function applyDefMaterial(){var el=document.getElementById('def_mat');if(!el)return;var v=el.value;['js_mat','tn_mat','dr_mat','mat','gv_mat','ho_mat'].forEach(function(id){_defSetSel(id,v);});defMatChip();}
 function applyDefTcp(){var lathe=document.getElementById('def_tcp');if(lathe){var m=document.getElementById('ms_tcp');if(m)m.value=lathe.value;}try{if(typeof gv_recalc==='function')gv_recalc();}catch(e){}}
 function defMachineReadouts(){var g=function(id){return document.getElementById(id);};var chuck=g('def_chuck'),turret=g('def_turret'),lf=g('def_lathefeed');if(lf&&chuck&&turret){var side=(chuck.value==='L')?'left':'right';var xdir=(turret.value==='rear')?'X+ points away from the operator (rear turret)':'X+ points toward the operator (front turret)';lf.innerHTML='Z0 at the face, <b>Z&minus; feeds toward the '+side+' chuck</b>. OD: tool sits outside and feeds <b>X&minus; inward</b> to the programmed diameter &middot; '+xdir+'.';}var mf=g('def_millfeed'),ta=g('def_toolaxis'),td=g('def_tooldir');if(mf&&ta&&td){var ax=ta.value,dir=td.value,planeTxt=(ax==='Z')?'XY plane':(ax==='X'?'YZ plane':'XZ plane');mf.innerHTML='Tool on the <b>'+ax+'</b> axis, cutting <b>'+dir+ax+'</b> into the work &middot; feed in the '+planeTxt+'.';}}
 function applyDefMachine(){var g=function(id){return document.getElementById(id);};var ctrl=g('def_ctrl'),sp=g('def_spindle'),chuck=g('def_chuck');if(ctrl)_defSetSel('ms_ctrl',ctrl.value);if(sp)_defSetSel('ms_sp',sp.value);if(chuck){var frVal=(chuck.value==='L')?'Left chuck · Rear turret · R hand':'Right chuck · Front turret · L hand';_defSetSel('ms_fr',frVal);}defMachineReadouts();try{if(typeof gv_recalc==='function')gv_recalc();}catch(e){}}
@@ -1953,6 +2160,49 @@ function showHelp(label){ensureHelpPov();var k=helpKey(label),h=HELP[k];if(!h){v
 function closeHelp(){var o=document.getElementById('hlpov');if(o)o.classList.remove('on');}
 document.addEventListener('click',function(e){if(!helpMode)return;var el=e.target;while(el&&el!==document.body){if(el.tagName==='LABEL'){e.preventDefault();e.stopPropagation();showHelp(el.textContent);return;}el=el.parentNode;}},true);
 var HELP={
+"operation":{"svg": "", "text": "Which hole operation this screen programs: Tapping, Reaming, Boring, Centering, Chamfering or Counter bore. The fields below change to match."},
+"boring method":{"svg": "", "text": "Boring head = the tool feeds to depth and retracts (fine-boring heads, bars). Circular interpolation = an end mill spirals down and cuts the bore, so one tool can make any size."},
+"counterbore method":{"svg": "", "text": "Counterbore tool = a piloted tool plunges to depth. Circular interpolation = an end mill helixes down and clears the counterbore, so no special tool is needed."},
+"chamfer on":{"svg": "", "text": "Hole edge = an internal chamfer at the mouth of a hole. Boss / pin = an external chamfer on the top edge of a round pin."},
+"chamfer method":{"svg": "", "text": "Circular interpolation = a V-tool circles the edge (works with any tool size). Plunge = a large V-cutter sits centred over the hole and plunges once."},
+"thread size":{"svg": "", "text": "Nominal thread size. Picking one fills the pitch. Type a pitch yourself for a custom thread."},
+"thread hand":{"svg": "", "text": "Right hand (G84, spindle M03) or left hand (G74, spindle M04 for the tap)."},
+"tap type":{"svg": "", "text": "Cutting tap removes chips (tap drill ≈ Ø − pitch). Forming tap displaces the metal (tap drill ≈ Ø − 0.5 × pitch) and runs a little slower."},
+"hole ø mm":{"svg": "", "text": "Diameter of the hole (or the finished bore). For chamfering it is the diameter the chamfer starts from."},
+"reamer hole ø mm":{"svg": "", "text": "Reamer diameter = finished hole diameter."},
+"finished bore ø mm":{"svg": "", "text": "Final diameter of the bore."},
+"counterbore ø mm":{"svg": "", "text": "Diameter of the counterbore (the larger, shallow step)."},
+"boss ø mm":{"svg": "", "text": "Diameter of the round pin whose top edge is being chamfered."},
+"thread depth mm":{"svg": "", "text": "Depth of the tapped thread below the top surface (positive number). Leave clearance below it in the tap drill hole."},
+"ream depth mm":{"svg": "", "text": "Depth the reamer travels below the top surface (positive number)."},
+"bore depth mm":{"svg": "", "text": "Depth of the bore below the top surface (positive number)."},
+"counterbore depth mm":{"svg": "", "text": "Depth of the counterbore floor below the top surface (positive number)."},
+"depth mm":{"svg": "", "text": "Depth below the top surface (positive number)."},
+"existing pilot hole ø mm":{"svg": "", "text": "Diameter of the hole already drilled through the centre. The end mill then only cuts the ring outside it. 0 = solid material."},
+"define by":{"svg": "", "text": "Centring: set how deep to go, or the diameter of the spot you want at the surface (depth is then worked out from the tool angle)."},
+"spot ø at surface mm":{"svg": "", "text": "Diameter of the conical spot at the top surface. Depth = (spot Ø / 2) ÷ tan(half the tool angle)."},
+"centring depth mm":{"svg": "", "text": "How far the centre drill goes below the top surface."},
+"chamfer size c mm, horizontal":{"svg": "", "text": "Width of the chamfer measured across the surface (a 1 mm chamfer at 45° is 1 mm across and 1 mm deep)."},
+"tool ø mm":{"svg": "", "text": "Cutter diameter. For circular interpolation it must be smaller than the hole; for a plunge chamfer at least hole Ø + 2 × chamfer."},
+"no. of flutes":{"svg": "", "text": "Number of cutting edges. Feed in mm/min = Fz × flutes × RPM."},
+"tool included angle":{"svg": "", "text": "Full angle of the point / V-tool, e.g. 90° or 120° for chamfer and spot tools."},
+"tip flat ø mm":{"svg": "", "text": "Diameter of the small flat at the tip of a V-tool (0 for a sharp point)."},
+"tip clearance mm":{"svg": "", "text": "How far the tool tip runs below the chamfer bottom so the chamfer breaks cleanly into the wall."},
+"feed rev mm":{"svg": "", "text": "Feed per spindle revolution. Feed in mm/min = feed/rev × RPM."},
+"feed rev = pitch mm":{"svg": "", "text": "For tapping the feed per rev equals the thread pitch."},
+"tapping feed mode":{"svg": "", "text": "G94: feed per minute (F = pitch × RPM). G95: feed per revolution (F = pitch). Use whichever your control's rigid-tapping cycle expects."},
+"retract":{"svg": "", "text": "How the tool leaves the hole: feed out at the same feed (best for reamers), rapid out, or (boring head) shift off the wall or stop the spindle first."},
+"shift mm":{"svg": "", "text": "Distance the boring head is shifted off the finished wall before rapid retract, so it does not scratch the bore."},
+"shift axis":{"svg": "", "text": "Axis along which the shift is made."},
+"shift direction":{"svg": "", "text": "Direction of the shift along that axis. It depends on how the boring head is oriented, so test it on your machine."},
+"dwell at bottom s":{"svg": "", "text": "Pause at the bottom of the hole to clean the floor or size the hole before retracting. 0 = none."},
+"finish pass":{"svg": "", "text": "Off = rough straight to size. On = leave a little stock on the wall (and floor), then finish it with one light pass."},
+"wall finish stock mm":{"svg": "", "text": "Stock left on the wall by roughing; removed by the finishing pass."},
+"floor finish stock mm":{"svg": "", "text": "Stock left on the floor by roughing; removed by the finishing pass."},
+"clearance r mm":{"svg": "", "text": "Height above the top where rapid stops and feeding begins."},
+"max ap — depth per level mm":{"svg": "", "text": "Largest depth per helical level when interpolating a bore or counterbore. Deeper holes are split into equal levels."},
+"helix pitch mm turn":{"svg": "", "text": "How much the cutter descends per full turn while spiralling down."},
+"ramp feed % of feed":{"svg": "", "text": "Feed used while spiralling down, as a percent of the cutting feed."},
 "finish skim":{"svg": "", "text": "Off = roughing cuts straight to the final depth. On = roughing stops a small floor stock above the final depth, then one light finishing pass (one-way climb, finer stepover) removes it for a better surface."},
 "cutter ø mm":{"svg": "", "text": "Diameter of the face mill. It sets the stepover width (stepover % × Ø) and converts Vc to RPM."},
 "no. of inserts":{"svg": "", "text": "Number of cutting inserts (teeth) on the cutter. Feed in mm/min = Fz × inserts × RPM."},
@@ -2724,6 +2974,7 @@ if(v==='drill')return 'Drilling '+M;
 if(v==='groove')return 'Groove Turning';
 if(v==='facemill')return 'Face Milling';
 if(v==='mill_holes')return 'Holes Milling';
+if(v==='hole_op'){try{return hoOp();}catch(e){return 'Holes';}}
 if(v==='mill_op'){var t=((document.getElementById('mill_op_title')||{}).textContent||'').trim();if(/pocket/i.test(t))return 'Pockets Milling';var root=t.replace(/\s*mill(ing)?$/i,'').trim();return (root||t)+' Milling';}
 return null;}
 function crumbSync(v){try{
@@ -4137,7 +4388,7 @@ function pbEdit(ns){if(pbBlocked(ns))return;var s=pbState(ns);s.edit=!s.edit;pbR
 function pbFR(ns){var s=pbState(ns);s.frOpen=!s.frOpen;pbRender(ns);}
 function pbSetF(ns,v){pbState(ns).find=v;}
 function pbSetR(ns,v){pbState(ns).repl=v;}
-function pbAdd(ns){if(pbBlocked(ns))return;var c=PB_CFG[ns];if(!c)return;var pr=c.get()||'';if(!pr){alert('Generate a program first.');return;}lastAnyProg=pr;if(typeof addToJob==='function')addToJob();}
+function pbAdd(ns){if(pbBlocked(ns))return;var c=PB_CFG[ns];if(!c)return;var pr=c.get()||'';if(!pr){alert('Generate a program first.');return;}lastAnyProg=pr;try{window._jobLbl=c.label?c.label():null;}catch(e){window._jobLbl=null;}if(typeof addToJob==='function')addToJob();}
 function pbFRdo(ns){var c=PB_CFG[ns];if(!c)return;var s=pbState(ns);function say(x){var m=$(ns+'_frmsg');if(m)m.textContent=x;}var txt=c.get()||'';if(!txt){say('Generate a program first.');return;}var f=s.find||'';if(!f){say('Type the text to find.');return;}var n=txt.split(f).length-1;if(n===0){say('“'+f+'” not found.');return;}c.set(txt.split(f).join(s.repl||''));pbRender(ns);say('Replaced '+n+'× — you can run another.');}
 function pbRender(ns){var c=PB_CFG[ns];if(!c)return;var host=$(c.host);if(!host)return;
   var s=pbState(ns);var text=c.get()||'';var th=progTheme();var open=s.frOpen?' open':'';
@@ -4169,7 +4420,7 @@ function pbRender(ns){var c=PB_CFG[ns];if(!c)return;var host=$(c.host);if(!host)
 }
 function fmSaveProg(){if(!lastFaceProg)return;var b=new Blob([lastFaceProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_FACEMILL.'+((typeof progExt==='function')?progExt():'nc');document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},600);}
 pbReg('dr2',{host:'dr_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof drSim==='function')drSim();},save:function(){if(typeof saveDrill==='function')saveDrill();},guard:function(){return (typeof drMode!=='undefined'&&drMode==='sample')?SAMPLE_MSG:null;}});
-pbReg('fm',{host:'fm_block',get:function(){return lastFaceProg||'';},set:function(v){lastFaceProg=v;lastAnyProg=v;},sim:function(){if(typeof fmSimPlay==='function')fmSimPlay();},save:function(){fmSaveProg();},guard:function(){return (typeof fmMode!=='undefined'&&fmMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
+pbReg('fm',{host:'fm_block',label:function(){return 'Face milling';},get:function(){return lastFaceProg||'';},set:function(v){lastFaceProg=v;lastAnyProg=v;},sim:function(){if(typeof fmSimPlay==='function')fmSimPlay();},save:function(){fmSaveProg();},guard:function(){return (typeof fmMode!=='undefined'&&fmMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
 pbReg('p',{host:'p_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof runSim==='function')runSim();},save:function(){if(typeof saveProg==='function')saveProg();},guard:function(){return progMode==='sample'?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
 pbReg('gv',{host:'gv_block',get:function(){return lastGrooveProg;},set:function(v){lastGrooveProg=v;lastAnyProg=v;var g=$('gcode');if(g)g.textContent=v;},sim:function(){if(typeof gvSim==='function')gvSim();},save:function(){if(typeof gv_saveProg==='function')gv_saveProg();},guard:function(){return (typeof gvMode!=='undefined'&&gvMode==='sample')?SAMPLE_MSG:null;}});
 function toggleEdit(){pbEdit('p');}
@@ -4320,6 +4571,724 @@ function fmMachineSeed(){if(_fmSeeded)return;_fmSeeded=true;
   sv('fmc_cool',($('def_cool')&&$('def_cool').value)||'');
   try{fmCoolVis();}catch(e){}
 }
+/* ===== HOLE OPERATIONS engine (pure JS, no DOM) — Tapping / Reaming / Boring / Centering / Chamfering / Counter bore =====
+   HOLE.gen(P) -> {prog, warns:[], err:''}   (Fanuc-style text; tapping is dialect-aware; formatForControl() is applied by the UI layer)
+   HOLE.parse(prog) -> [{k:'rapid'|'feed'|'dwell', x,y,z, f, sec}]   (used for the cycle-time estimate and the simulation)
+   Conventions: absolute G90, G54, tool-centre path, Z up, part top = P.topZ, depths are positive numbers below the top. */
+var HOLE=(function(){
+  function fx(v){var n=Math.round(v*1000)/1000;if(n===0)n=0;return n.toFixed(3);}
+  function fi(v){return String(Math.round(v));}
+  function clean(t){return String(t==null?'':t).replace(/[()\r\n]/g,' ').replace(/\s+/g,' ').trim();}
+  function isSie(P){return String(P.ctrl||'').indexOf('Siemens')===0;}
+  function isFanuc(P){return String(P.ctrl||'').indexOf('Fanuc')===0;}
+
+  /* ---- hole positions (same patterns as the Drilling screen) ---- */
+  function positions(p){
+    var pt=p.pat||'Point',x0=+p.x0||0,y0=+p.y0||0,out=[],i,j;
+    if(pt==='Line'){var n=Math.max(1,Math.round(p.ln||1)),pit=+p.lp||0,a=(+p.la||0)*Math.PI/180;for(i=0;i<n;i++)out.push([x0+i*pit*Math.cos(a),y0+i*pit*Math.sin(a)]);}
+    else if(pt==='Rows (grid)'){var nx=Math.max(1,Math.round(p.nx||1)),ny=Math.max(1,Math.round(p.ny||1)),px=+p.px||0,py=+p.py||0;for(j=0;j<ny;j++)for(i=0;i<nx;i++)out.push([x0+i*px,y0+j*py]);}
+    else if(pt==='PCD circle'){var r=(+p.pd||0)/2,n2=Math.max(1,Math.round(p.pn||1)),pa=+p.pa||0;for(i=0;i<n2;i++){var an=(pa+360*i/n2)*Math.PI/180;out.push([x0+r*Math.cos(an),y0+r*Math.sin(an)]);}}
+    else if(pt==='Manual coords'){String(p.mc||'').split('\n').forEach(function(ln){var m=ln.split(/[ ,\t]+/).filter(function(z){return z!=='';});if(m.length>=2){var xx=parseFloat(m[0]),yy=parseFloat(m[1]);if(!isNaN(xx)&&!isNaN(yy))out.push([xx,yy]);}});}
+    else out.push([x0,y0]);
+    return out;
+  }
+
+  function dwell(P,sec){
+    if(!(sec>0))return null;
+    if(isSie(P))return 'G04 F'+sec;
+    if(P.ctrl==='Haas')return 'G04 P'+sec;
+    return 'G04 P'+fi(sec*1000);
+  }
+
+  /* moves between holes: R-plane (feed-start plane) or full retract to Safe Z */
+  function holeStart(g,P,x,y,i){
+    if(i===0){g.push('G00 Z'+fx(P.R));}
+    else if(P.retract==='safe'){g.push('G00 X'+fx(x)+' Y'+fx(y));g.push('G00 Z'+fx(P.R));}
+    else{g.push('G00 X'+fx(x)+' Y'+fx(y));}
+  }
+  function holeEnd(g,P){if(P.retract==='safe')g.push('G00 Z'+fx(P.safeZ));}
+
+  /* ---- circular pocket by circular interpolation (counterbore, helical bore) ---- */
+  function circlePocket(g,P,cx,cy,o,warns){
+    var G=(o.dir==='conv')?'G02':'G03';
+    var top=P.topZ,tr=o.tr,finish=!!o.finish,wall=finish?(o.wall||0):0;
+    var rho0=o.Rc-tr-wall;
+    if(rho0<-1e-6){warns.push('Tool is larger than the '+fx(2*o.Rc)+' mm diameter — use a smaller tool.');return false;}
+    if(rho0<0)rho0=0;
+    var step=Math.max(0.05,(o.stepPct||65)/100*2*tr),rings=[rho0],last=rho0,pr=o.pilotR||0,guard=0;
+    while(guard++<500){
+      if(last-tr<=pr+1e-6)break;
+      var nx=last-step;
+      if(nx<=0){rings.push(0);break;}
+      rings.push(nx);last=nx;
+    }
+    var floor=finish?(o.floor||0):0;
+    var depthR=o.depth-floor;if(!(depthR>0))depthR=o.depth;
+    var ap=Math.max(0.05,Math.min(o.ap||1,depthR)),n=Math.ceil(depthR/ap-1e-9),pitch=Math.max(0.05,o.rampPitch||ap);
+    var feed=fi(o.feed),rf=fi(Math.max(1,o.feed*(o.rampPct||50)/100)),pf=fi(Math.max(1,o.plungeFeed||o.feed*0.5));
+    var zPrev=P.R,zi,i,k,firstF=true;
+    function Ff(s){return firstF?(firstF=false,' F'+s):'';}
+    g.push('G00 X'+fx(cx+rho0)+' Y'+fx(cy));
+    for(i=1;i<=n;i++){
+      zi=top-depthR*i/n;
+      if(rho0<0.05){g.push('G01 Z'+fx(zi)+' F'+pf);}
+      else{
+        var dz=zPrev-zi,revs=Math.max(1,Math.ceil(dz/pitch-1e-9));
+        for(k=1;k<=revs;k++){
+          g.push(G+' X'+fx(cx+rho0)+' Y'+fx(cy)+' Z'+fx(zPrev-dz*k/revs)+' I'+fx(-rho0)+' J0.'+(k===1&&i===1?' F'+rf:(k===1?' F'+rf:'')));
+        }
+        g.push(G+' I'+fx(-rho0)+' F'+feed);
+      }
+      for(k=1;k<rings.length;k++){
+        if(rings[k]<=0){g.push('G01 X'+fx(cx)+' Y'+fx(cy)+' F'+feed);}
+        else{g.push('G01 X'+fx(cx+rings[k])+' Y'+fx(cy)+' F'+feed);g.push(G+' I'+fx(-rings[k]));}
+      }
+      if(i<n&&rho0>=0.05)g.push('G01 X'+fx(cx+rho0)+' Y'+fx(cy)+' F'+feed);
+      zPrev=zi;
+    }
+    if(finish){
+      var zf=top-o.depth;
+      if(floor>0){g.push('G01 Z'+fx(zf)+' F'+pf);
+        for(k=rings.length-1;k>=0;k--){
+          if(rings[k]<=0)continue;
+          if(k<rings.length-1)g.push('G01 X'+fx(cx+rings[k])+' Y'+fx(cy)+' F'+feed);
+          g.push(G+' I'+fx(-rings[k])+(k===rings.length-1?' F'+feed:''));
+        }
+      }
+      var rf2=o.Rc-tr;
+      g.push('G01 X'+fx(cx)+' Y'+fx(cy)+' F'+feed);
+      if(rf2>0.02){
+        g.push(G+' X'+fx(cx+rf2)+' Y'+fx(cy)+' I'+fx(rf2/2)+' J0. F'+feed);
+        g.push(G+' I'+fx(-rf2));
+        g.push(G+' X'+fx(cx)+' Y'+fx(cy)+' I'+fx(-rf2/2)+' J0.');
+      }
+    }else{
+      g.push('G01 X'+fx(cx)+' Y'+fx(cy)+' F'+feed);
+    }
+    g.push('G00 Z'+fx(P.R));
+    return true;
+  }
+
+  /* ---- chamfer geometry (V-tool, half-angle th, flat tip radius rt) ---- */
+  function chamferGeom(P){
+    var th=(P.toolAngle/2)*Math.PI/180,tn=Math.tan(th);
+    var c=P.chamfer,D=P.d,rt=(P.tipD||0)/2,k=(P.tipClr!=null?P.tipClr:0.3);
+    var h=c/tn;                       // vertical depth of the chamfer
+    return {th:th,tn:tn,c:c,D:D,rt:rt,k:k,h:h,zTip:-(h+k)};
+  }
+
+  function gen(P){
+    var g=[],warns=[],op=P.op,pos=P.positions||[];
+    if(!pos.length)return {err:'No hole positions.'};
+    var spin=P.spin||'M03',title,i,x,y;
+    var top=P.topZ,R=P.R;
+    P.R=top+P.rClr;R=P.R;
+    var rpm=Math.round(P.rpm);
+    function feedMin(){return P.feed;}
+    function head(t){
+      g.push('%','O'+P.onum+' ('+clean(t)+')','N1 M06 T'+P.t,'G54 G90 G94 G17 G40 G80');
+      g.push('G00 X'+fx(pos[0][0])+' Y'+fx(pos[0][1])+' S'+rpm+' '+spin);
+      g.push('G43 H'+P.h+' Z'+fx(P.safeZ)+(P.coolOn?' '+P.coolOn:''));
+    }
+    function foot(){g.push('G00 Z'+fx(P.safeZ)+(P.coolOff?' '+P.coolOff:''),'M05','M30','%');}
+    var F=fi(feedMin());
+
+    if(op==='Tapping'){
+      var pitch=+P.pitch;if(!(pitch>0))return {err:'Pick a thread (or type a pitch) for tapping.'};
+      var lh=(P.hand==='LH');spin=lh?'M04':'M03';
+      var ztap=top-P.depth,dm=P.dia||0;
+      title='TAP '+clean(P.desig||('P'+pitch))+' DEPTH '+P.depth+' '+(lh?'LH ':'')+'RIGID';
+      var g95=(P.feedMode==='G95'),fval=g95?pitch:Math.round(pitch*rpm*1000)/1000;
+      if(P.ctrl==='Heidenhain'||P.ctrl==='Mazatrol')return {err:'Rigid-tapping cycle for '+P.ctrl+' is not available yet — choose Fanuc, Haas or Siemens.'};
+      if(isSie(P)){
+        head(title);
+        g.push('(RIGID TAP G331/G332 - CHECK SPOS + K SIGN ON YOUR CONTROL)');
+        var K=(lh?'-':'')+pitch;
+        for(i=0;i<pos.length;i++){
+          x=pos[i][0];y=pos[i][1];
+          g.push('G00 X'+fx(x)+' Y'+fx(y));
+          g.push('G00 Z'+fx(R));g.push('SPOS=0');
+          g.push('G331 Z'+fx(ztap)+' K'+K+' S'+rpm);
+          g.push('G332 Z'+fx(R)+' K'+K);
+        }
+        g.push('M03 S'+rpm);
+        foot();
+      }else{
+        head(title);
+        if(g95)g.push('G95');
+        if(isFanuc(P))g.push('M29 S'+rpm);
+        var cyc=lh?'G74':'G84',pl=(P.retract==='safe')?'G98':'G99';
+        for(i=0;i<pos.length;i++){
+          x=pos[i][0];y=pos[i][1];
+          if(i===0)g.push(pl+' '+cyc+' X'+fx(x)+' Y'+fx(y)+' Z'+fx(ztap)+' R'+fx(R)+' F'+(g95?fx(pitch):String(fval)));
+          else g.push('X'+fx(x)+' Y'+fx(y));
+        }
+        g.push('G80');
+        if(g95)g.push('G94');
+        foot();
+      }
+    }
+    else if(op==='Reaming'||op==='Boring'&&P.method!=='interp'){
+      var isB=(op==='Boring'),zb=top-P.depth;
+      title=(isB?'BORE D':'REAM D')+P.d+' DEPTH '+P.depth;
+      head(title);
+      var rmode=P.bretract||'feed';
+      for(i=0;i<pos.length;i++){
+        x=pos[i][0];y=pos[i][1];
+        holeStart(g,P,x,y,i);
+        g.push('G01 Z'+fx(zb)+' F'+F);
+        var dl=dwell(P,P.dwell);if(dl)g.push(dl);
+        if(isB&&rmode==='shift'){
+          var ax=(P.shiftAxis||'X'),sg=(P.shiftSign||'+'),sv=P.shift||0.2;
+          g.push('M19');
+          g.push('G91 G00 '+ax+(sg==='-'?'-':'')+fx(sv));
+          g.push('G90 G00 Z'+fx(R));
+          g.push('G91 G00 '+ax+(sg==='-'?'':'-')+fx(sv));
+          g.push('G90');
+          g.push(spin+' S'+rpm);
+        }else if(isB&&rmode==='stop'){
+          g.push('M05');g.push('G00 Z'+fx(R));g.push(spin+' S'+rpm);
+        }else if(rmode==='rapid'){g.push('G00 Z'+fx(R));}
+        else{g.push('G01 Z'+fx(R)+' F'+F);}
+        holeEnd(g,P);
+      }
+      foot();
+    }
+    else if(op==='Boring'||op==='Counter bore'&&P.method==='interp'){
+      var isBore=(op==='Boring');
+      title=(isBore?'BORE INTERP D':'CBORE INTERP D')+P.d+' DEPTH '+P.depth;
+      head(title);
+      var okAll=true;
+      for(i=0;i<pos.length;i++){
+        x=pos[i][0];y=pos[i][1];
+        holeStart(g,P,x,y,i);
+        var ok=circlePocket(g,P,x,y,{Rc:P.d/2,tr:P.toolD/2,depth:P.depth,pilotR:(P.pilot||0)/2,finish:!!P.finish,wall:P.wallStock,floor:isBore?0:P.floorStock,
+          ap:P.ap,stepPct:P.stepPct,rampPitch:P.rampPitch,feed:P.feed,rampPct:P.rampPct,plungeFeed:P.plungeFeed,dir:P.dir},warns);
+        if(!ok){okAll=false;break;}
+        holeEnd(g,P);
+      }
+      if(!okAll)return {err:warns.join(' '),warns:warns};
+      foot();
+    }
+    else if(op==='Counter bore'){
+      title='CBORE PLUNGE D'+P.d+' DEPTH '+P.depth;
+      head(title);var zc=top-P.depth;
+      for(i=0;i<pos.length;i++){
+        x=pos[i][0];y=pos[i][1];
+        holeStart(g,P,x,y,i);
+        g.push('G01 Z'+fx(zc)+' F'+F);
+        var dl2=dwell(P,P.dwell);if(dl2)g.push(dl2);
+        g.push('G01 Z'+fx(R)+' F'+F);
+        holeEnd(g,P);
+      }
+      foot();
+    }
+    else if(op==='Centering'){
+      var dep=P.depth;
+      if(P.cdef==='dia'){
+        var tan2=Math.tan((P.toolAngle/2)*Math.PI/180);
+        dep=(P.spot/2)/tan2;
+        if(P.spot>P.toolD+1e-6)warns.push('Spot diameter '+P.spot+' is larger than the tool diameter '+P.toolD+'.');
+      }
+      if(!(dep>0))return {err:'Enter a centring depth (or spot diameter).'};
+      P.depthUsed=dep;
+      title='CENTRE DRILL D'+P.toolD+' DEPTH '+fx(dep);
+      head(title);var zt=top-dep;
+      for(i=0;i<pos.length;i++){
+        x=pos[i][0];y=pos[i][1];
+        holeStart(g,P,x,y,i);
+        g.push('G01 Z'+fx(zt)+' F'+F);
+        var dl3=dwell(P,P.dwell);if(dl3)g.push(dl3);
+        g.push('G00 Z'+fx(R));
+        holeEnd(g,P);
+      }
+      foot();
+    }
+    else if(op==='Chamfering'){
+      var cg=chamferGeom(P);
+      if(!(cg.c>0))return {err:'Enter the chamfer size.'};
+      if(!(P.toolAngle>0&&P.toolAngle<180))return {err:'Enter the tool included angle.'};
+      var ext=(P.edge==='boss');
+      if(P.cmethod==='plunge'){
+        var dp=(cg.D/2+cg.c-cg.rt)/cg.tn;
+        P.depthUsed=dp;
+        if(P.toolD<cg.D+2*cg.c-1e-6)warns.push('Tool diameter '+P.toolD+' is smaller than the chamfered diameter '+fx(cg.D+2*cg.c)+' — plunge will not reach.');
+        title='CHAMFER PLUNGE D'+cg.D+' C'+cg.c;
+        head(title);
+        for(i=0;i<pos.length;i++){
+          x=pos[i][0];y=pos[i][1];
+          holeStart(g,P,x,y,i);
+          g.push('G01 Z'+fx(top-dp)+' F'+F);
+          var dl4=dwell(P,P.dwell);if(dl4)g.push(dl4);
+          g.push('G00 Z'+fx(R));
+          holeEnd(g,P);
+        }
+        foot();
+      }else{
+        var ztip=top+cg.zTip,Gc,a2;
+        var rho=ext?(cg.D/2+cg.rt+cg.k*cg.tn):(cg.D/2-cg.rt-cg.k*cg.tn);
+        if(!ext&&rho<0)return {err:'Tool tip diameter '+(2*cg.rt)+' is too large for a '+cg.D+' mm hole (needs the tip inside the hole).'};
+        // top-of-chamfer radius the tool cone reaches at Z=top must be within the tool's cutting diameter
+        var coneTop=cg.rt+cg.c+cg.k*cg.tn;   /* tool radius needed at Z=top */
+        if(P.toolD/2<coneTop-1e-6)warns.push('Tool diameter '+P.toolD+' is too small: it needs at least '+fx(2*coneTop)+' mm at the top of the chamfer (chamfer + tip clearance).');
+        var climb=(P.dir!=='conv');
+        // internal: climb = CCW (G03); external boss: climb = CW (G02)
+        Gc=ext?(climb?'G02':'G03'):(climb?'G03':'G02');
+        title='CHAMFER '+(ext?'BOSS':'HOLE')+' D'+cg.D+' C'+cg.c+' A'+P.toolAngle;
+        head(title);
+        var pf=fi(Math.max(1,P.plungeFeed||P.feed*0.5));
+        for(i=0;i<pos.length;i++){
+          x=pos[i][0];y=pos[i][1];
+          holeStart(g,P,x,y,i);
+          if(!ext){
+            var la=rho/2;
+            g.push('G00 X'+fx(x)+' Y'+fx(y));
+            g.push('G01 Z'+fx(ztip)+' F'+pf);
+            if(la>0.02){
+              // semicircle lead-in from the hole centre, tangent to the chamfer circle
+              a2=Gc;
+              g.push(a2+' X'+fx(x+rho)+' Y'+fx(y)+' I'+fx(la)+' J0. F'+F);
+              g.push(a2+' I'+fx(-rho));
+              g.push(a2+' X'+fx(x)+' Y'+fx(y)+' I'+fx(-la)+' J0.');
+            }else{
+              g.push('G01 X'+fx(x+rho)+' F'+F);g.push(Gc+' I'+fx(-rho));g.push('G01 X'+fx(x));
+            }
+          }else{
+            var a=Math.max(1,Math.min(3,rho/2));
+            // approach from outside with a quarter-arc S-lead (opposite sense to the main circle), tangent at (x+rho, y)
+            g.push('G00 X'+fx(x+rho+a)+' Y'+fx(y+(Gc==='G02'?a:-a)));
+            g.push('G01 Z'+fx(ztip)+' F'+pf);
+            var inOp=(Gc==='G02')?'G03':'G02';
+            g.push(inOp+' X'+fx(x+rho)+' Y'+fx(y)+' I0. J'+fx(Gc==='G02'?-a:a)+' F'+F);
+            g.push(Gc+' I'+fx(-rho));
+            g.push(inOp+' X'+fx(x+rho+a)+' Y'+fx(y+(Gc==='G02'?-a:a))+' I'+fx(a)+' J0.');
+          }
+          g.push('G00 Z'+fx(R));
+          holeEnd(g,P);
+        }
+        foot();
+      }
+    }
+    else return {err:'Unknown operation '+op};
+    return {prog:g.join('\n'),warns:warns};
+  }
+
+  /* ---- G-code parser for estimate + simulation (handles what gen() emits) ---- */
+  function parse(prog){
+    var moves=[],cur={x:0,y:0,z:0},g=0,abs=true,f=0,cyc=null,cycR=0,retInit=false,initZ=0,plane99=true;
+    prog.split('\n').forEach(function(raw){
+      var ln=raw.replace(/\(.*?\)/g,'').trim();
+      if(!ln||ln==='%'||/^O\d/.test(ln))return;
+      var w={},re=/([A-Z])\s*(-?\d*\.?\d+)/g,m;
+      while((m=re.exec(ln))!==null){if(w[m[1]]===undefined)w[m[1]]=parseFloat(m[2]);else if(m[1]==='G'){}}
+      // collect all G words on the line
+      var gs=[];re=/G\s*(\d+\.?\d*)/g;while((m=re.exec(ln))!==null)gs.push(parseFloat(m[1]));
+      gs.forEach(function(v){
+        if(v===90)abs=true;else if(v===91)abs=false;
+        else if(v===0||v===1||v===2||v===3||v===84||v===74||v===331||v===332){g=v;if(v===84||v===74||v===331)cyc=v;}
+        else if(v===80){cyc=null;}
+        else if(v===98)plane99=false;else if(v===99)plane99=true;
+      });
+      if(/^\s*G0?4\b/.test(ln)||gs.indexOf(4)>=0){var sec=(w.P!=null?(P_isMs(ln)?w.P/1000:w.P):(w.F!=null?w.F:(w.X!=null?w.X:0)));moves.push({k:'dwell',sec:sec,x:cur.x,y:cur.y,z:cur.z});return;}
+      if(w.F!=null&&gs.indexOf(331)<0&&gs.indexOf(332)<0)f=w.F;
+      var nx=cur.x,ny=cur.y,nz=cur.z;
+      if(w.X!=null)nx=abs?w.X:cur.x+w.X;if(w.Y!=null)ny=abs?w.Y:cur.y+w.Y;if(w.Z!=null)nz=abs?w.Z:cur.z+w.Z;
+      var hasMove=(w.X!=null||w.Y!=null||w.Z!=null);
+      if(cyc===84||cyc===74||cyc===331){
+        if(!hasMove&&w.I==null)return;
+        if(w.R!=null)cycR=w.R;
+        if(g===331||cyc===331){ if(w.Z!=null&&gs.indexOf(331)>=0){moves.push({k:'feed',x:cur.x,y:cur.y,z:w.Z,f:f});cur.z=w.Z;} return; }
+        moves.push({k:'rapid',x:nx,y:ny,z:cur.z}); moves.push({k:'rapid',x:nx,y:ny,z:cycR});
+        var zb2=w.Z!=null?w.Z:cur.z;
+        moves.push({k:'feed',x:nx,y:ny,z:zb2,f:f}); moves.push({k:'feed',x:nx,y:ny,z:cycR,f:f});
+        cur.x=nx;cur.y=ny;cur.z=cycR;return;
+      }
+      if(gs.indexOf(332)>=0){moves.push({k:'feed',x:cur.x,y:cur.y,z:w.Z!=null?w.Z:cur.z,f:f});cur.z=w.Z!=null?w.Z:cur.z;return;}
+      if(!hasMove&&w.I==null&&w.J==null)return;
+      if(g===0||g===1){
+        if(nx===cur.x&&ny===cur.y&&nz===cur.z)return;
+        moves.push({k:g===0?'rapid':'feed',x:nx,y:ny,z:nz,f:f});cur.x=nx;cur.y=ny;cur.z=nz;
+      }else if(g===2||g===3){
+        var ccw=(g===3),i0=w.I||0,j0=w.J||0,cx=cur.x+i0,cy=cur.y+j0,rad=Math.hypot(i0,j0);
+        var a0=Math.atan2(cur.y-cy,cur.x-cx),a1=Math.atan2(ny-cy,nx-cx),da=a1-a0;
+        var full=(Math.abs(nx-cur.x)<1e-6&&Math.abs(ny-cur.y)<1e-6);
+        if(full)da=ccw?2*Math.PI:-2*Math.PI;
+        else{if(ccw&&da<=1e-9)da+=2*Math.PI;if(!ccw&&da>=-1e-9)da-=2*Math.PI;}
+        var nseg=Math.max(6,Math.ceil(Math.abs(da)*rad/0.5)),z0=cur.z;
+        for(var s=1;s<=nseg;s++){var t=s/nseg,an=a0+da*t;moves.push({k:'feed',x:cx+rad*Math.cos(an),y:cy+rad*Math.sin(an),z:z0+(nz-z0)*t,f:f,arc:true});}
+        cur.x=nx;cur.y=ny;cur.z=nz;
+        if(full){cur.x=cx+rad*Math.cos(a0);cur.y=cy+rad*Math.sin(a0);}
+      }
+    });
+    return moves;
+  }
+  function P_isMs(ln){return /G0?4\s+P\d+(?!\.)/.test(ln)&&!/P\d*\./.test(ln);}
+  function estimate(moves){
+    var t=0,p=null;
+    moves.forEach(function(m){
+      if(m.k==='dwell'){t+=m.sec||0;return;}
+      if(p){var d=Math.sqrt(Math.pow(m.x-p.x,2)+Math.pow(m.y-p.y,2)+Math.pow(m.z-p.z,2));
+        if(m.k==='rapid')t+=d/10000*60;else t+=d/Math.max(1,m.f||100)*60;}
+      p={x:m.x,y:m.y,z:m.z};
+    });
+    return t+8;
+  }
+  return {gen:gen,parse:parse,estimate:estimate,positions:positions,chamferGeom:chamferGeom};
+})();
+
+/* ================= HOLE OPERATIONS — screen logic (Tapping / Reaming / Boring / Centering / Chamfering / Counter bore) ================= */
+var hoMode='new',holeRaw='',lastHoleProg='',_hoSeeded=false,_hoLastOp='';
+function hoOp(){var e=$('ho_op');return e?e.value:'Tapping';}
+function hoMeth(){var op=hoOp();if(op==='Boring')return $('ho_bmeth').value;if(op==='Counter bore')return $('ho_cbmeth').value;if(op==='Chamfering')return $('ho_cmeth').value;return '';}
+function hoToks(){var op=hoOp(),m=hoMeth();return m?[op,op+':'+m]:[op];}
+function hoFamily(){var op=hoOp(),m=hoMeth();if(op==='Tapping')return 'tap';if(m==='interp')return 'tooth';return 'rev';}
+function hoN(id){var e=$(id);var x=e?parseFloat(e.value):NaN;return isNaN(x)?0:x;}
+function hoSet(id,v,dec){var e=$(id);if(!e)return;if(typeof v==='number'){e.value=(v>0&&isFinite(v))?(''+(+v.toFixed(dec==null?3:dec))):'';}else e.value=(v==null?'':v);}
+function hoCoolVis(){var s=$('ho_cool'),w=$('ho_coolCustWrap');if(w)w.style.display=(s&&s.value==='Custom')?'':'none';}
+
+/* ---- which fields show for the chosen operation / method ---- */
+function hoVis(){
+  var t=hoToks(),op=hoOp(),m=hoMeth();
+  document.querySelectorAll('#hole_op [data-ops]').forEach(function(el){
+    var a=el.getAttribute('data-ops').split(','),show=false;
+    for(var i=0;i<a.length;i++){if(t.indexOf(a[i])>=0){show=true;break;}}
+    el.style.display=show?'':'none';});
+  var cd=$('ho_cdef')?$('ho_cdef').value:'dia';
+  if($('ho_w_spot'))$('ho_w_spot').style.display=(op==='Centering'&&cd==='dia')?'':'none';
+  if($('ho_w_cdepth'))$('ho_w_cdepth').style.display=(op==='Centering'&&cd==='depth')?'':'none';
+  var sb=$('ho_shiftbox');if(sb)sb.style.display=(op==='Boring'&&m==='head'&&$('ho_bret').value==='shift')?'':'none';
+  var fb=$('ho_finbox');if(fb)fb.style.display=($('ho_fin')&&$('ho_fin').value==='1')?'':'none';
+  hoCoolVis();
+}
+var HO_NOTES={
+ 'Tapping':'Rigid tapping with a canned cycle: Fanuc emits M29 + G84 (G74 for left-hand), Haas G84/G74, Siemens G331/G332. Feed is pitch × RPM. Needs rigid-tap on the machine and a tapping holder. Pre-drill the tap-drill size shown above.',
+ 'Reaming':'Feeds the reamer to depth, optional dwell, then feeds or rapids out. Ream at low speed and a steady feed; leave 0.1–0.3 mm for the reamer to remove.',
+ 'Boring:head':'Feeds a boring head / bar to depth, dwells, and retracts. The fine-boring option orients the spindle (M19) and shifts the insert off the wall before rapid retract, so the finished bore is not marked.',
+ 'Boring:interp':'Circular interpolation with an end mill: the cutter spirals down (helix), clears the floor in concentric rings, then optionally finishes the wall with a tangent lead-in. Cutter must be smaller than the bore.',
+ 'Counter bore:plunge':'Feeds a counterbore tool (with its pilot) straight to depth, dwells to clean the floor, and retracts.',
+ 'Counter bore:interp':'Circular interpolation: helix down, concentric rings to clear the floor, optional wall + floor finish. Use a cutter smaller than the counterbore; enter the pilot hole size so it only cuts the ring.',
+ 'Centering':'Spot / centre drill: feeds to the depth needed for the spot diameter (or a set depth), optional dwell, then retracts. Use before drilling for accurate hole position.',
+ 'Chamfering:interp':'V-tool circular interpolation. The tip runs a little below the chamfer bottom (tip clearance) so the chamfer breaks cleanly. Hole = internal edge; Boss = external edge of a pin.',
+ 'Chamfering:plunge':'A large V-cutter (chamfer / spot tool) centred over the hole: one plunge produces the chamfer. Tool Ø must be at least hole Ø + 2 × chamfer.'};
+function hoOpChange(){
+  var op=hoOp(),m=hoMeth(),edge=$('ho_edge')?$('ho_edge').value:'hole';
+  var pl=$('ho_cmeth');if(pl){pl.options[1].disabled=(edge==='boss');if(edge==='boss'&&pl.value==='plunge')pl.value='interp';}
+  m=hoMeth();
+  var h2=$('ho_h2');if(h2)h2.textContent=op;
+  var L={'Reaming':'Reamer / hole Ø (mm)','Boring':'Finished bore Ø (mm)','Counter bore':'Counterbore Ø (mm)','Chamfering':(edge==='boss'?'Boss Ø (mm)':'Hole Ø (mm)')};
+  if($('ho_d_lbl'))$('ho_d_lbl').innerHTML=(L[op]||'Hole Ø (mm)').replace('Ø','&Oslash;');
+  var LD={'Tapping':'Thread depth (mm)','Reaming':'Ream depth (mm)','Boring':'Bore depth (mm)','Counter bore':'Counterbore depth (mm)'};
+  if($('ho_depth_lbl'))$('ho_depth_lbl').textContent=LD[op]||'Depth (mm)';
+  var fam=hoFamily();
+  if($('ho_fpr_lbl'))$('ho_fpr_lbl').textContent=(fam==='tap')?'Feed / rev = pitch (mm)':(fam==='tooth'?'Fz (mm/tooth)':'Feed / rev (mm)');
+  var fp=$('ho_fpr');if(fp)fp.readOnly=(fam==='tap');
+  var nk=op+((m&&(op==='Boring'||op==='Counter bore'||op==='Chamfering'))?':'+m:'');
+  if($('ho_opnote'))$('ho_opnote').textContent=HO_NOTES[nk]||HO_NOTES[op]||'';
+  var pn=$('ho_parnote');if(pn)pn.textContent=(fam==='tap')?'Vc ↔ RPM through the thread size. Feed = pitch × RPM (synchronised with the spindle).':(fam==='tooth'?'Vc ↔ RPM through the tool Ø; Fz ↔ Feed through flutes × RPM. Feed = Fz × flutes × RPM.':'Vc ↔ RPM through the diameter; Feed/rev ↔ Feed through RPM. Feed = Feed/rev × RPM.');
+  hoVis();
+  if(op==='Tapping'){hoTapFillOnce();}
+  if(hoMode==='sample'&&_hoLastOp!==op){hoSampleDefaults();}
+  _hoLastOp=op;
+  hoCalc('init');hoDraw();hoPosChange();hoRefreshReq();
+}
+
+/* ---- tapping: thread list ---- */
+var _hoTapFilled=false;
+function hoTapFillOnce(){if(_hoTapFilled)return;var p=$('ho_tp_prof');if(!p||typeof PROFILES==='undefined')return;_hoTapFilled=true;p.innerHTML=Object.keys(PROFILES).map(function(k){return '<option>'+k+'</option>';}).join('');p.value='ISO Metric';hoTapProf();}
+function hoTapProf(){var p=$('ho_tp_prof')?$('ho_tp_prof').value:'',list=PROFILES[p]||[];var s=$('ho_tp_size');if(s)s.innerHTML=list.map(function(r){return '<option>'+r[0]+'</option>';}).join('');hoTapSize();}
+function hoTapEntry(){var p=$('ho_tp_prof')?$('ho_tp_prof').value:'',sz=$('ho_tp_size')?$('ho_tp_size').value:'',list=PROFILES[p]||[];for(var i=0;i<list.length;i++){if(list[i][0]===sz)return list[i];}return null;}
+function hoTapSize(){var e=hoTapEntry();if(e&&$('ho_tp_pitch'))$('ho_tp_pitch').value=e[1];hoTapHint();hoCalc('mat');hoDraw();hoRefreshReq();}
+function hoTapPitch(){hoTapHint();hoCalc('pitch');hoDraw();}
+function hoTapMajor(){var e=hoTapEntry();if(e&&e[2]>0)return e[2];return 0;}
+function hoTapHint(){var el=$('ho_tp_hint');if(!el)return;var M=hoTapMajor(),P=hoN('ho_tp_pitch');if(!(M>0&&P>0)){el.textContent='';return;}
+  var form=($('ho_taptype')&&$('ho_taptype').value==='form');var dr=form?(M-0.5*P):(M-P);
+  el.textContent='Tap drill Ø ≈ '+(Math.round(dr*100)/100)+' mm ('+(form?'forming':'cutting')+' tap) · check the tap maker’s chart.';}
+
+/* ---- material -> Vc / feed defaults, and the Vc / RPM / feed links ---- */
+function hoMat(){return matBy($('ho_mat')?$('ho_mat').value:'');}
+function hoDia(){var op=hoOp(),m=hoMeth();
+  if(op==='Tapping')return hoTapMajor();
+  if(op==='Centering'||op==='Chamfering'||m==='interp'&&(op==='Boring'||op==='Counter bore'))return hoN('ho_toolD');
+  return hoN('ho_d');}
+function hoClamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function hoVcDef(){var m=hoMat(),ref=m[1]||60,op=hoOp(),me=hoMeth(),v;
+  if(op==='Tapping')v=hoClamp(ref*0.13*(($('ho_taptype')&&$('ho_taptype').value==='form')?0.8:1),3,25);
+  else if(op==='Reaming')v=hoClamp(ref*0.5,4,60);
+  else if(op==='Boring')v=(me==='interp')?hoClamp(ref*0.9,10,300):hoClamp(ref*1.1,10,300);
+  else if(op==='Counter bore')v=(me==='interp')?hoClamp(ref*0.9,10,300):hoClamp(ref*0.45,8,100);
+  else if(op==='Centering')v=hoClamp(ref*0.5,5,100);
+  else v=hoClamp(ref*0.9,10,250);
+  return v;}
+function hoFprDef(D){var m=hoMat(),fzb=m[3]||0.08,op=hoOp(),me=hoMeth();
+  if(op==='Tapping')return hoN('ho_tp_pitch');
+  if(op==='Reaming')return hoClamp(fzb*D/10*1.5,0.05,0.5);
+  if(op==='Boring'&&me==='head')return hoClamp(fzb*0.9,0.03,0.25);
+  if(op==='Counter bore'&&me==='plunge')return hoClamp(fzb*D/10*0.6,0.03,0.3);
+  if(op==='Centering'||(op==='Chamfering'&&me==='plunge'))return hoClamp(fzb*D/10*0.7,0.02,0.2);
+  if(op==='Chamfering')return hoClamp(fzb*0.5*Math.min(D,20)/10,0.01,0.1);
+  return hoClamp(fzb*Math.min(D,20)/10*0.8,0.01,0.2);}
+function hoMr(){var m=hoMat(),el=$('ho_mr');if(el&&m&&m[4]!=null){var c=(typeof ISO_COL!=='undefined'&&ISO_COL[m[2]])||'#9E9E9E';el.innerHTML='<span class="isochip" style="background:'+c+'">ISO '+m[2]+'</span> Machinability '+m[4]+'%';}}
+function hoCalc(src){
+  try{hoMr();}catch(e){}
+  var fam=hoFamily(),D=hoDia(),z=(fam==='tooth')?Math.max(1,hoN('ho_teeth')):1,pitch=hoN('ho_tp_pitch');
+  function feedFrom(rpm,fpr){return Math.round(fpr*z*rpm);}
+  var rpm=hoN('ho_rpm'),vc=hoN('ho_vc'),fpr=hoN('ho_fpr'),fm=hoN('ho_fmin');
+  if(fam==='tap'&&pitch>0)fpr=pitch;
+  if(src==='mat'||src==='d'||src==='init'){
+    if(D>0){vc=hoVcDef();rpm=Math.max(20,Math.min(6000,Math.round(1000*vc/(Math.PI*D))));fpr=hoFprDef(D);
+      hoSet('ho_vc',Math.round(Math.PI*D*rpm/1000*10)/10,1);hoSet('ho_rpm',rpm,0);hoSet('ho_fpr',fpr,4);if(fpr>0)hoSet('ho_fmin',feedFrom(rpm,fpr),0);else hoSet('ho_fmin','');}
+    else{hoSet('ho_vc','');hoSet('ho_rpm','');hoSet('ho_fpr',fam==='tap'?pitch:'');hoSet('ho_fmin','');}
+  }else if(src==='vc'){
+    if(D>0&&vc>0){rpm=Math.round(1000*vc/(Math.PI*D));hoSet('ho_rpm',rpm,0);if(fpr>0)hoSet('ho_fmin',feedFrom(rpm,fpr),0);}
+  }else if(src==='rpm'){
+    if(D>0&&rpm>0)hoSet('ho_vc',Math.PI*D*rpm/1000,1);
+    if(fpr>0&&rpm>0)hoSet('ho_fmin',feedFrom(rpm,fpr),0);
+  }else if(src==='fpr'||src==='teeth'||src==='pitch'){
+    if(fam==='tap'){hoSet('ho_fpr',pitch,4);fpr=pitch;}
+    if(fpr>0&&rpm>0)hoSet('ho_fmin',feedFrom(rpm,fpr),0);
+  }else if(src==='feed'){
+    if(fam!=='tap'&&rpm>0&&fm>0)hoSet('ho_fpr',fm/(rpm*z),4);
+  }
+}
+
+/* ---- pattern ---- */
+function hoPosChange(){var pt=$('ho_pat')?$('ho_pat').value:'Point';
+  [['ho_line','Line'],['ho_grid','Rows (grid)'],['ho_pcd','PCD circle'],['ho_man','Manual coords']].forEach(function(x){var e=$(x[0]);if(e)e.style.display=(pt===x[1])?'block':'none';});
+  var c=$('ho_poscount');if(c){var k=hoPositions().length;c.textContent=k+' hole'+(k===1?'':'s');}
+  try{hoPatDraw();}catch(e){}}
+function hoPositions(){return HOLE.positions({pat:$('ho_pat').value,x0:hoN('ho_x0'),y0:hoN('ho_y0'),ln:hoN('ho_ln'),lp:hoN('ho_lp'),la:hoN('ho_la'),nx:hoN('ho_nx'),ny:hoN('ho_ny'),px:hoN('ho_px'),py:hoN('ho_py'),pd:hoN('ho_pd'),pn:hoN('ho_pn'),pa:hoN('ho_pa'),mc:$('ho_mc').value});}
+
+/* ---- Sample / New ---- */
+function hoFields(){var op=hoOp(),m=hoMeth(),a=[];
+  if(op==='Tapping')a.push(['ho_tp_pitch','Thread / pitch',['ho_tp_size']],['ho_depth','Depth']);
+  else if(op==='Reaming')a.push(['ho_d','Reamer Ø'],['ho_depth','Depth']);
+  else if(op==='Boring'){a.push(['ho_d','Bore Ø'],['ho_depth','Depth']);if(m==='interp')a.push(['ho_toolD','Tool Ø']);}
+  else if(op==='Counter bore'){a.push(['ho_d','Counterbore Ø'],['ho_depth','Depth']);if(m==='interp')a.push(['ho_toolD','Tool Ø']);}
+  else if(op==='Centering'){a.push(['ho_toolD','Tool Ø']);a.push(($('ho_cdef').value==='dia')?['ho_spot','Spot Ø']:['ho_cdepth','Centring depth']);}
+  else if(op==='Chamfering')a.push(['ho_d','Hole Ø'],['ho_cham','Chamfer size'],['ho_toolD','Tool Ø']);
+  return a;}
+function hoMissing(){var m=[];hoFields().forEach(function(f){var e=$(f[0]);if(!e)return;if(!(parseFloat(e.value)>0))m.push(f[1]);});return m;}
+function hoRefreshReq(){var host=$('hole_op');if(!host)return;host.querySelectorAll('.reqbad').forEach(function(e){e.classList.remove('reqbad');});
+  if(hoMode!=='new')return;
+  hoFields().forEach(function(f){var e=$(f[0]);if(e&&!(parseFloat(e.value)>0)){e.classList.add('reqbad');(f[2]||[]).forEach(function(id){var x=$(id);if(x)x.classList.add('reqbad');});}});}
+function hoOpenBad(){document.querySelectorAll('#hole_op .reqbad').forEach(function(el){_fmOpenSb(el.closest('.sb'));});}
+function hoOpenSim(){var sec=$('ho_simsec');if(sec)_fmOpenSb(sec.querySelector(':scope > .sb'));}
+function hoClearMandatory(){hoFields().forEach(function(f){var e=$(f[0]);if(e)e.value='';});
+  if(hoOp()==='Tapping'){soBlank('ho_tp_size');}
+  hoCalc('init');}
+function hoSampleDefaults(){var op=hoOp();
+  function sv(id,v){var e=$(id);if(e)e.value=v;}
+  if(op==='Tapping'){hoTapFillOnce();soUnblank('ho_tp_size');sv('ho_tp_prof','ISO Metric');hoTapProf();var s=$('ho_tp_size');if(s){for(var i=0;i<s.options.length;i++){if(s.options[i].value==='M10'){s.value='M10';break;}}}hoTapSize();sv('ho_depth',15);}
+  else if(op==='Reaming'){sv('ho_d',10);sv('ho_depth',15);}
+  else if(op==='Boring'){sv('ho_d',20);sv('ho_depth',20);sv('ho_toolD',12);}
+  else if(op==='Counter bore'){sv('ho_d',16);sv('ho_depth',8);sv('ho_pilot',9);sv('ho_toolD',10);}
+  else if(op==='Centering'){sv('ho_toolD',6);sv('ho_ang',90);sv('ho_spot',4);sv('ho_cdepth',2);}
+  else if(op==='Chamfering'){sv('ho_d',10);sv('ho_cham',1);sv('ho_toolD',12);sv('ho_ang',90);}
+  hoCalc('init');}
+function setHoMode(m){hoMode=m;var s=$('ho_pm_sample'),n=$('ho_pm_new');if(s)s.classList.toggle('on',m==='sample');if(n)n.classList.toggle('on',m==='new');
+  var h=$('ho_pm_hint');
+  if(m==='new'){hoClearMandatory();if(h)h.textContent='New program — fill the fields marked in red, then Generate and Save.';}
+  else{hoSampleDefaults();if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}
+  try{pbNote('ho','');}catch(e){}
+  hoCalc('init');hoDraw();hoRefreshReq();}
+function hoOpen(name){var o=$('ho_op');if(o)o.value=name;holeRaw='';lastHoleProg='';
+  if($('ho_block'))$('ho_block').innerHTML='';if($('ho_cyc'))$('ho_cyc').textContent='';if($('ho_out'))$('ho_out').textContent='Set values and press Generate.';
+  try{HOS.pts=[];HOS.playing=false;}catch(e){}
+  hoMachineSeed();_hoLastOp=name;hoOpChange();setHoMode(hoMode);show('hole_op');}
+function hoMachineSeed(){if(_hoSeeded)return;_hoSeeded=true;
+  function sv(id,val){var e=$(id);if(!e||!val)return;for(var i=0;i<e.options.length;i++){if(e.options[i].value===val||e.options[i].text===val){e.value=e.options[i].value;return;}}}
+  var dc=($('def_ctrl')&&$('def_ctrl').value)||'';
+  var map={'Fanuc':'Fanuc I & J','Siemens':'Siemens I & J','Heidenhain':'Heidenhain','Haas':'Haas'};
+  if(map[dc])sv('ho_ctrl',map[dc]);
+  var sp=(($('def_spindle')&&$('def_spindle').value)||'').match(/M0[34]/);if(sp)sv('ho_sp',sp[0]);
+  sv('ho_cool',($('def_cool')&&$('def_cool').value)||'');
+  var dm=$('def_mat');if(dm&&dm.value)sv('ho_mat',dm.value);
+  try{hoCoolVis();}catch(e){}}
+
+/* ---- assemble the engine input ---- */
+function hoParams(){
+  var op=hoOp(),m=hoMeth(),cool=$('ho_cool').value,coolOn,coolOff;
+  if(cool==='None'){coolOn='';coolOff='';}
+  else if(cool==='Custom'){coolOn=(($('ho_coolcustom').value||'').trim())||'M08';coolOff='M09';}
+  else{coolOn=cool;coolOff='M09';}
+  var interp=(m==='interp');
+  var P={op:op,ctrl:$('ho_ctrl').value,onum:Math.round(hoN('ho_onum'))||2020,t:Math.round(hoN('ho_t'))||1,h:Math.round(hoN('ho_h'))||1,
+    rpm:hoN('ho_rpm'),feed:hoN('ho_fmin'),spin:$('ho_sp').value,coolOn:coolOn,coolOff:coolOff,
+    topZ:hoN('ho_topz'),safeZ:hoN('ho_safez')||20,rClr:hoN('ho_r'),retract:$('ho_retbetween').value,positions:hoPositions(),
+    depth:hoN('ho_depth'),d:hoN('ho_d'),dwell:hoN('ho_dwell'),method:m};
+  var tD=hoN('ho_toolD');P.toolD=tD>0?tD:P.d;
+  if(op==='Tapping'){P.pitch=hoN('ho_tp_pitch');P.dia=hoTapMajor();var e=hoTapEntry();P.desig=(e?e[0]:'')||('P'+P.pitch);P.hand=$('ho_hand').value;P.feedMode=$('ho_feedmode').value;}
+  if(op==='Reaming'){P.bretract=$('ho_rret').value;}
+  if(op==='Boring'&&m==='head'){P.bretract=$('ho_bret').value;P.shift=hoN('ho_shift');P.shiftAxis=$('ho_shaxis').value;P.shiftSign=$('ho_shsign').value;}
+  if(interp||(op==='Chamfering')){P.dir=$('ho_dir').value;P.plungeFeed=hoN('ho_pf')||100;}
+  if(interp&&(op==='Boring'||op==='Counter bore')){P.pilot=hoN('ho_pilot');P.finish=($('ho_fin').value==='1');P.wallStock=hoN('ho_wall');P.floorStock=hoN('ho_floor');P.ap=hoN('ho_ap')||1;P.stepPct=hoN('ho_step')||60;P.rampPitch=hoN('ho_rpitch')||1;P.rampPct=hoN('ho_rpct')||50;}
+  if(op==='Centering'){P.cdef=$('ho_cdef').value;P.spot=hoN('ho_spot');P.toolAngle=hoN('ho_ang')||90;P.depth=hoN('ho_cdepth');}
+  if(op==='Chamfering'){P.edge=$('ho_edge').value;P.cmethod=m;P.chamfer=hoN('ho_cham');P.toolAngle=hoN('ho_ang')||90;P.tipD=hoN('ho_tipD');P.tipClr=hoN('ho_tipclr');if(!(P.tipClr>=0))P.tipClr=0.3;}
+  return P;}
+
+function genHole(){
+  var out=$('ho_out'),op=hoOp();
+  if(hoMode==='new'){var miss=hoMissing();if(miss.length){out.textContent='Required for a New program: '+miss.join(', ')+'. Fill the fields marked in red, then Generate.';try{hoRefreshReq();}catch(e){}try{hoOpenBad();}catch(e){}return;}}
+  var P=hoParams();
+  if(!(P.rpm>0)){out.textContent='Spindle speed is empty — pick a material or type an RPM.';try{_fmOpenSb($('ho_rpm').closest('.sb'));}catch(e){}return;}
+  if(op!=='Tapping'&&!(P.feed>0)){out.textContent='Feed is empty — set feed/rev (or Fz) or the feed in mm/min.';try{_fmOpenSb($('ho_fmin').closest('.sb'));}catch(e){}return;}
+  if(!P.positions.length){out.textContent='No hole positions — check the Pattern section.';return;}
+  var r;try{r=HOLE.gen(P);}catch(e){out.textContent='Cannot generate: '+e.message;return;}
+  if(r.err){out.textContent=r.err;return;}
+  holeRaw=r.prog;
+  var prog=holeRaw;try{prog=formatForControl(holeRaw,P.ctrl);}catch(e){}
+  try{prog=roundProg(prog);}catch(e){}
+  lastHoleProg=prog;lastAnyProg=prog;pbRender('ho');
+  out.textContent=(r.warns&&r.warns.length)?('⚠ '+r.warns.join(' ')):'';
+  var sec=Math.round(HOLE.estimate(HOLE.parse(holeRaw)));
+  $('ho_cyc').textContent='CYCLE ≈ '+Math.floor(sec/60)+'m '+(sec%60)+'s · '+P.positions.length+' hole'+(P.positions.length===1?'':'s');
+  try{hoOpenSim();}catch(e){}
+  hoSimBuild(holeRaw,P);
+}
+function hoSaveProg(){if(!lastHoleProg)return;var b=new Blob([lastHoleProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_'+hoOp().toUpperCase().replace(/\s+/g,'')+'.'+((typeof progExt==='function')?progExt():'nc');document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},600);}
+function hoJobLabel(){var op=hoOp(),n=hoPositions().length,d=hoN('ho_d')||hoDia();var t=(op==='Tapping'&&$('ho_tp_size')&&$('ho_tp_size').value)?$('ho_tp_size').value:(d>0?'Ø'+(Math.round(d*100)/100):'');return op+(t?' '+t:'')+' ×'+n;}
+pbReg('ho',{host:'ho_block',get:function(){return lastHoleProg||'';},set:function(v){lastHoleProg=v;lastAnyProg=v;},sim:function(){try{hoOpenSim();}catch(e){}hoSimPlay();},save:function(){hoSaveProg();},label:hoJobLabel,guard:function(){return (typeof hoMode!=='undefined'&&hoMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
+
+/* ---- cross-section graph ---- */
+function hoDraw(){
+  var svg=$('ho_stage');if(!svg)return;
+  var op=hoOp(),m=hoMeth(),edge=$('ho_edge').value,X0=280,TOP=72,o='';
+  var d=hoN('ho_d'),dep=hoN('ho_depth'),pilot=hoN('ho_pilot'),c=hoN('ho_cham'),ang=hoN('ho_ang')||90,T=Math.tan(ang/2*Math.PI/180);
+  var lab=function(x,y,t,a){return '<text x="'+x+'" y="'+y+'" fill="#9fb0cc" font-size="12" font-family="sans-serif" text-anchor="'+(a||'middle')+'">'+t+'</text>';};
+  var nf=function(v){return (Math.round(v*100)/100);};
+  var dimV=function(x,y1,y2,t){return '<line x1="'+x+'" y1="'+y1+'" x2="'+x+'" y2="'+y2+'" stroke="#ffd166" stroke-width="1.3" marker-start="url(#hoar)" marker-end="url(#hoar)"/>'+lab(x+8,(y1+y2)/2+4,t,'start');};
+  var dimH=function(x1,x2,y,t){return '<line x1="'+x1+'" y1="'+y+'" x2="'+x2+'" y2="'+y+'" stroke="#ffd166" stroke-width="1.3" marker-start="url(#hoar)" marker-end="url(#hoar)"/>'+lab((x1+x2)/2,y-6,t);};
+  var defs='<defs><marker id="hoar" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 z" fill="#ffd166"/></marker><pattern id="hohatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#2f4256" stroke-width="1"/></pattern></defs>';
+  var depthShow,wShow;
+  if(op==='Tapping'){var M=hoTapMajor()||10;d=M;depthShow=dep||15;wShow=M*1.2;}
+  else if(op==='Centering'){var cd=($('ho_cdef').value==='dia')?((hoN('ho_spot')/2)/T):hoN('ho_cdepth');dep=cd>0?cd:2;var hw=dep*T;depthShow=Math.max(dep*1.6,4);wShow=Math.max(2*hw*1.4,6);}
+  else if(op==='Chamfering'){d=d||10;c=c||1;depthShow=Math.max(d*0.9,c/T*4,4);wShow=d+2*c+(edge==='boss'?d*0.6:d*0.5);}
+  else{d=d||10;dep=dep||15;depthShow=dep*(op==='Counter bore'?1.8:1.25);wShow=d*1.5;}
+  var s=Math.min(190/depthShow,300/wShow,16);
+  var Wpx=function(v){return v*s;};
+  var bot=TOP+Math.max(60,Math.min(200,depthShow*s));
+  var body='<rect x="30" y="'+TOP+'" width="500" height="'+(bot-TOP)+'" fill="#1c2a38" stroke="#3a4f63"/><rect x="30" y="'+TOP+'" width="500" height="'+(bot-TOP)+'" fill="url(#hohatch)"/>';
+  var cut='',ann='';
+  if(op==='Tapping'){
+    var P=hoN('ho_tp_pitch')||1.5,mn=Math.max(M-P,0.2),yb=TOP+Wpx(dep||15);
+    cut+='<rect x="'+(X0-Wpx(mn)/2)+'" y="'+TOP+'" width="'+Wpx(mn)+'" height="'+(yb-TOP)+'" fill="#0a1015" stroke="#5a6068"/>';
+    cut+='<line x1="'+(X0-Wpx(M)/2)+'" y1="'+TOP+'" x2="'+(X0-Wpx(M)/2)+'" y2="'+yb+'" stroke="#ffd166" stroke-dasharray="5 3"/><line x1="'+(X0+Wpx(M)/2)+'" y1="'+TOP+'" x2="'+(X0+Wpx(M)/2)+'" y2="'+yb+'" stroke="#ffd166" stroke-dasharray="5 3"/>';
+    ann+=dimH(X0-Wpx(M)/2,X0+Wpx(M)/2,TOP-16,'thread Ø'+nf(M)+' · tap drill ≈ Ø'+nf(mn))+dimV(X0+Wpx(M)/2+26,TOP,yb,dep>0?nf(dep):'depth');
+  }else if(op==='Reaming'||op==='Boring'){
+    var yb2=TOP+Wpx(dep),pw=(m==='interp'&&pilot>0)?Wpx(pilot):0;
+    cut+='<rect x="'+(X0-Wpx(d)/2)+'" y="'+TOP+'" width="'+Wpx(d)+'" height="'+(yb2-TOP)+'" fill="#0a1015" stroke="#37d39a" stroke-width="1.6"/>';
+    if(pw>0)cut+='<rect x="'+(X0-pw/2)+'" y="'+(yb2-2)+'" width="'+pw+'" height="'+Math.min(30,bot-yb2)+'" fill="#0a1015" stroke="#5a6068"/>';
+    ann+=dimH(X0-Wpx(d)/2,X0+Wpx(d)/2,TOP-16,'Ø'+(hoN('ho_d')>0?nf(d):'?'))+dimV(X0+Wpx(d)/2+26,TOP,yb2,hoN('ho_depth')>0?nf(dep):'depth');
+  }else if(op==='Counter bore'){
+    var pd=pilot>0?pilot:d*0.55,yb3=TOP+Wpx(dep),yp=Math.min(bot-6,yb3+Wpx(Math.max(dep*0.6,3)));
+    cut+='<rect x="'+(X0-Wpx(pd)/2)+'" y="'+TOP+'" width="'+Wpx(pd)+'" height="'+(yp-TOP)+'" fill="#0a1015" stroke="#5a6068"/>';
+    cut+='<rect x="'+(X0-Wpx(d)/2)+'" y="'+TOP+'" width="'+Wpx(d)+'" height="'+(yb3-TOP)+'" fill="#0a1015" stroke="#37d39a" stroke-width="1.6"/>';
+    ann+=dimH(X0-Wpx(d)/2,X0+Wpx(d)/2,TOP-16,'Ø'+(hoN('ho_d')>0?nf(d):'?'))+dimV(X0+Wpx(d)/2+26,TOP,yb3,hoN('ho_depth')>0?nf(dep):'depth')+lab(X0,yp+16,'pilot Ø'+nf(pd));
+  }else if(op==='Centering'){
+    var hw2=Wpx(dep*T);
+    cut+='<path d="M'+(X0-hw2)+' '+TOP+' L'+X0+' '+(TOP+Wpx(dep))+' L'+(X0+hw2)+' '+TOP+' Z" fill="#0a1015" stroke="#37d39a" stroke-width="1.6"/>';
+    ann+=dimH(X0-hw2,X0+hw2,TOP-16,'spot Ø'+nf(2*dep*T))+dimV(X0+hw2+26,TOP,TOP+Wpx(dep),'depth '+nf(dep))+lab(X0,TOP+Wpx(dep)+18,ang+'° tool');
+  }else if(op==='Chamfering'){
+    var h=c/T,r=d/2;
+    if(edge==='hole'){
+      var yb4=TOP+Wpx(depthShow*0.85);
+      cut+='<path d="M'+(X0-Wpx(r+c))+' '+TOP+' L'+(X0-Wpx(r))+' '+(TOP+Wpx(h))+' L'+(X0-Wpx(r))+' '+yb4+' L'+(X0+Wpx(r))+' '+yb4+' L'+(X0+Wpx(r))+' '+(TOP+Wpx(h))+' L'+(X0+Wpx(r+c))+' '+TOP+' Z" fill="#0a1015" stroke="#37d39a" stroke-width="1.6"/>';
+      ann+=dimH(X0-Wpx(r+c),X0+Wpx(r+c),TOP-16,'Ø'+nf(d+2*c)+' at surface')+lab(X0,yb4-10,'hole Ø'+(hoN('ho_d')>0?nf(d):'?'))+dimV(X0+Wpx(r+c)+22,TOP,TOP+Wpx(h),'h '+nf(h))+lab(X0-Wpx(r+c)-6,TOP-4,'C'+(hoN('ho_cham')>0?nf(c):'?'),'end');
+    }else{
+      // boss: stock is a pin; draw pin + chamfered top corners over the plate
+      body='<rect x="30" y="'+(bot-24)+'" width="500" height="24" fill="#1c2a38" stroke="#3a4f63"/>';
+      cut+='<path d="M'+(X0-Wpx(r-c))+' '+TOP+' L'+(X0+Wpx(r-c))+' '+TOP+' L'+(X0+Wpx(r))+' '+(TOP+Wpx(h))+' L'+(X0+Wpx(r))+' '+(bot-24)+' L'+(X0-Wpx(r))+' '+(bot-24)+' L'+(X0-Wpx(r))+' '+(TOP+Wpx(h))+' Z" fill="#1c2a38" stroke="#37d39a" stroke-width="1.6"/>';
+      ann+=dimH(X0-Wpx(r),X0+Wpx(r),TOP-16,'boss Ø'+(hoN('ho_d')>0?nf(d):'?'))+dimV(X0+Wpx(r)+22,TOP,TOP+Wpx(h),'h '+nf(h))+lab(X0,TOP-34,'C'+(hoN('ho_cham')>0?nf(c):'?'));
+    }
+  }
+  var topline='<line x1="30" y1="'+TOP+'" x2="530" y2="'+TOP+'" stroke="#7fb0d8" stroke-width="1.4"/>'+lab(520,TOP-6,'Z0 (top)','end');
+  svg.innerHTML=defs+body+cut+topline+ann;
+}
+function hoPatDraw(){
+  var svg=$('ho_patstage');if(!svg)return;var pos=hoPositions();if(!pos.length){svg.innerHTML='';return;}
+  var d=hoDia(),op=hoOp();var rr=(op==='Tapping'||op==='Reaming'||op==='Boring'||op==='Counter bore'||op==='Chamfering')?(hoN('ho_d')||hoTapMajor()||6)/2:(hoN('ho_spot')||hoN('ho_toolD')||6)/2;
+  var mnx=1e9,mxx=-1e9,mny=1e9,mxy=-1e9;pos.forEach(function(p){mnx=Math.min(mnx,p[0]);mxx=Math.max(mxx,p[0]);mny=Math.min(mny,p[1]);mxy=Math.max(mxy,p[1]);});
+  mnx=Math.min(mnx,0);mny=Math.min(mny,0);mxx=Math.max(mxx,0);mxy=Math.max(mxy,0);
+  var pad=Math.max(rr*1.6,6),W=560,H=240,mg=26;var sx=(W-2*mg)/Math.max(1,(mxx-mnx)+2*pad),sy=(H-2*mg)/Math.max(1,(mxy-mny)+2*pad),s=Math.min(sx,sy);
+  var ox=mg+((W-2*mg)-((mxx-mnx)+2*pad)*s)/2+pad*s-mnx*s,oy=H-mg-((H-2*mg)-((mxy-mny)+2*pad)*s)/2-pad*s+mny*s;
+  var X=function(x){return ox+x*s;},Y=function(y){return oy-y*s;};
+  var o='<line x1="'+X(0)+'" y1="'+(Y(0)-10)+'" x2="'+X(0)+'" y2="'+(Y(0)+10)+'" stroke="#7fb0d8"/><line x1="'+(X(0)-10)+'" y1="'+Y(0)+'" x2="'+(X(0)+10)+'" y2="'+Y(0)+'" stroke="#7fb0d8"/><text x="'+(X(0)+6)+'" y="'+(Y(0)+16)+'" fill="#7fb0d8" font-size="11" font-family="sans-serif">part zero</text>';
+  pos.forEach(function(p,i){var r=Math.max(3,rr*s);o+='<circle cx="'+X(p[0])+'" cy="'+Y(p[1])+'" r="'+r+'" fill="#0a1015" stroke="#37d39a" stroke-width="1.4"/>';if(pos.length<=40)o+='<text x="'+X(p[0])+'" y="'+(Y(p[1])+4)+'" fill="#9fb0cc" font-size="'+Math.max(9,Math.min(12,r))+'" font-family="sans-serif" text-anchor="middle">'+(i+1)+'</text>';});
+  svg.innerHTML=o;
+}
+
+/* ---- toolpath simulation (plan view + Z trace), driven by the parsed program ---- */
+var HOS={pts:[],total:0,pos:0,playing:false,last:0,box:null,dia:6,holes:[],topZ:0,zmin:0,zmax:0,trail:null,drawn:0,raf:0};
+function hoSimBuild(raw,P){
+  var cv=$('ho_simcv');if(!cv)return;
+  var mv=HOLE.parse(raw),pts=[],s=0,p=null;
+  mv.forEach(function(m){var len=0;if(m.k==='dwell')len=5;else if(p){len=Math.hypot(m.x-p.x,m.y-p.y,m.z-p.z);if(m.k==='rapid')len=Math.min(len,40)*0.3+0.5;}
+    s+=len;pts.push({s:s,k:m.k,x0:p?p.x:m.x,y0:p?p.y:m.y,z0:p?p.z:m.z,x:m.x,y:m.y,z:m.z});p={x:m.x,y:m.y,z:m.z};});
+  HOS.pts=pts;HOS.total=s||1;HOS.pos=0;HOS.playing=false;HOS.drawn=0;HOS.topZ=P.topZ;
+  var op=P.op;HOS.dia=(op==='Tapping')?(P.dia||6):((op==='Reaming'||(op==='Boring'&&P.method!=='interp')||(op==='Counter bore'&&P.method!=='interp'))?P.d:P.toolD);
+  HOS.holes=P.positions.map(function(q){return {x:q[0],y:q[1]};});
+  HOS.holeD=(op==='Tapping')?(P.dia||6):(op==='Centering'?(P.cdef==='dia'?P.spot:P.toolD/2):((op==='Chamfering')?(P.d+2*(P.chamfer||0)):P.d));
+  var mnx=1e9,mxx=-1e9,mny=1e9,mxy=-1e9,zmin=1e9,zmax=-1e9;
+  pts.forEach(function(q){mnx=Math.min(mnx,q.x);mxx=Math.max(mxx,q.x);mny=Math.min(mny,q.y);mxy=Math.max(mxy,q.y);zmin=Math.min(zmin,q.z);zmax=Math.max(zmax,q.z);});
+  var r=Math.max(HOS.dia/2,HOS.holeD/2,3)*(HOS.holes.length>1?1.3:2.2)+4;HOS.box=[mnx-r,mxx+r,mny-r,mxy+r];HOS.zmin=zmin;HOS.zmax=Math.min(zmax,P.topZ+P.rClr+5);
+  cv.width=760;cv.height=470;HOS.trail=document.createElement('canvas');HOS.trail.width=760;HOS.trail.height=340;
+  hoSimDraw();
+}
+function hoSimLayout(){var b=HOS.box,W=760,Hp=340,mg=14;var w=Math.max(1,b[1]-b[0]),h=Math.max(1,b[3]-b[2]);var s=Math.min((W-2*mg)/w,(Hp-2*mg)/h);var ox=mg+((W-2*mg)-w*s)/2-b[0]*s,oy=Hp-mg-((Hp-2*mg)-h*s)/2+b[2]*s;return {s:s,X:function(x){return ox+x*s;},Y:function(y){return oy-y*s;}};}
+function hoSimAt(sPos){var pts=HOS.pts,i=0,lo=0,hi=pts.length-1;while(lo<hi){var mid=(lo+hi)>>1;if(pts[mid].s<sPos)lo=mid+1;else hi=mid;}i=lo;var q=pts[i],sPrev=i>0?pts[i-1].s:0,t=(q.s>sPrev)?Math.max(0,Math.min(1,(sPos-sPrev)/(q.s-sPrev))):1;return {i:i,x:q.x0+(q.x-q.x0)*t,y:q.y0+(q.y-q.y0)*t,z:q.z0+(q.z-q.z0)*t,k:q.k};}
+function hoSimDraw(){
+  var cv=$('ho_simcv');if(!cv||!HOS.box||!HOS.pts.length)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height,L=hoSimLayout(),pts=HOS.pts;
+  ctx.fillStyle='#0a1015';ctx.fillRect(0,0,W,H);
+  // trail (finished segments)
+  var tc=HOS.trail.getContext('2d'),cur=hoSimAt(HOS.pos);
+  while(HOS.drawn<cur.i){var q=pts[HOS.drawn];hoSimSeg(tc,L,q,1);HOS.drawn++;}
+  ctx.globalAlpha=1;ctx.drawImage(HOS.trail,0,0);
+  // hole outlines
+  ctx.strokeStyle='#4f6a82';ctx.setLineDash([5,4]);ctx.lineWidth=1;HOS.holes.forEach(function(h){ctx.beginPath();ctx.arc(L.X(h.x),L.Y(h.y),Math.max(2,HOS.holeD/2*L.s),0,Math.PI*2);ctx.stroke();});ctx.setLineDash([]);
+  // partial current segment
+  if(cur.i<pts.length){var q2=pts[cur.i];hoSimSeg(ctx,L,{k:q2.k,x0:q2.x0,y0:q2.y0,z0:q2.z0,x:cur.x,y:cur.y,z:cur.z},1);}
+  // tool
+  ctx.beginPath();ctx.arc(L.X(cur.x),L.Y(cur.y),Math.max(3,HOS.dia/2*L.s),0,Math.PI*2);ctx.fillStyle='rgba(169,139,255,.28)';ctx.fill();ctx.strokeStyle='#a98bff';ctx.lineWidth=1.6;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(L.X(cur.x)-5,L.Y(cur.y));ctx.lineTo(L.X(cur.x)+5,L.Y(cur.y));ctx.moveTo(L.X(cur.x),L.Y(cur.y)-5);ctx.lineTo(L.X(cur.x),L.Y(cur.y)+5);ctx.stroke();
+  // Z trace
+  var y0=352,y1=H-14,x0=14,x1=W-14,zr=Math.max(0.1,HOS.zmax-HOS.zmin);
+  ctx.fillStyle='#0d161e';ctx.fillRect(x0-6,y0-8,x1-x0+12,y1-y0+18);
+  var zy=function(z){return y1-(z-HOS.zmin)/zr*(y1-y0);},sx=function(sv){return x0+sv/HOS.total*(x1-x0);};
+  var ztop=zy(HOS.topZ);ctx.strokeStyle='#7fb0d8';ctx.lineWidth=1;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(x0,ztop);ctx.lineTo(x1,ztop);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#7fb0d8';ctx.font='11px sans-serif';ctx.fillText('Z top',x0+2,ztop-3);
+  ctx.beginPath();ctx.strokeStyle='#3b4f61';ctx.lineWidth=1.2;var prevS=0;pts.forEach(function(q,ix){var xa=sx(prevS),xb=sx(q.s);if(ix===0)ctx.moveTo(xa,zy(Math.min(q.z0,HOS.zmax)));ctx.lineTo(xa,zy(Math.min(q.z0,HOS.zmax)));ctx.lineTo(xb,zy(Math.min(q.z,HOS.zmax)));prevS=q.s;});ctx.stroke();
+  ctx.beginPath();ctx.strokeStyle='#37d39a';ctx.lineWidth=1.8;prevS=0;var stopped=false;pts.forEach(function(q,ix){if(stopped)return;var xa=sx(prevS),xb=sx(Math.min(q.s,HOS.pos));if(ix===0)ctx.moveTo(xa,zy(Math.min(q.z0,HOS.zmax)));ctx.lineTo(xa,zy(Math.min(q.z0,HOS.zmax)));ctx.lineTo(xb,zy(Math.min(ix===cur.i?cur.z:q.z,HOS.zmax)));prevS=q.s;if(q.s>=HOS.pos)stopped=true;});ctx.stroke();
+  ctx.fillStyle='#a98bff';ctx.beginPath();ctx.arc(sx(HOS.pos),zy(Math.min(cur.z,HOS.zmax)),4,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#cfe0ee';ctx.font='12px sans-serif';ctx.fillText('X '+cur.x.toFixed(2)+'   Y '+cur.y.toFixed(2)+'   Z '+cur.z.toFixed(2)+'   '+(cur.k==='rapid'?'RAPID':(cur.k==='dwell'?'DWELL':'FEED')),16,22);
+}
+function hoSimSeg(ctx,L,q,scale){
+  var below=(q.k==='feed')&&(Math.min(q.z0,q.z)<HOS.topZ-0.01);
+  ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+  if(q.k==='dwell'){ctx.restore();return;}
+  if(below){ctx.strokeStyle='rgba(55,211,154,.45)';ctx.lineWidth=Math.max(1.5,HOS.dia*L.s);}
+  else if(q.k==='rapid'){ctx.strokeStyle='rgba(107,124,140,.6)';ctx.lineWidth=1;ctx.setLineDash([3,4]);}
+  else{ctx.strokeStyle='rgba(200,215,230,.55)';ctx.lineWidth=1.2;}
+  ctx.beginPath();ctx.moveTo(L.X(q.x0),L.Y(q.y0));ctx.lineTo(L.X(q.x),L.Y(q.y));ctx.stroke();ctx.restore();
+}
+function hoSimReset(){HOS.playing=false;HOS.pos=0;HOS.drawn=0;if(HOS.trail)HOS.trail.getContext('2d').clearRect(0,0,HOS.trail.width,HOS.trail.height);var b=$('ho_sim_play');if(b)b.innerHTML='&#9654; Play';hoSimDraw();}
+function hoSimPlay(){
+  if(!HOS.pts.length){if(holeRaw){try{hoSimBuild(holeRaw,hoParams());}catch(e){}}if(!HOS.pts.length){var o=$('ho_out');if(o)o.textContent='Generate a program first, then Play.';return;}}
+  var b=$('ho_sim_play');
+  if(HOS.playing){HOS.playing=false;if(b)b.innerHTML='&#9654; Play';return;}
+  if(HOS.pos>=HOS.total-1e-6)hoSimReset();
+  HOS.playing=true;HOS.last=0;if(b)b.innerHTML='&#10074;&#10074; Pause';
+  function step(ts){if(!HOS.playing)return;if(!HOS.last)HOS.last=ts;var dt=Math.min(0.1,(ts-HOS.last)/1000);HOS.last=ts;
+    var spd=(parseFloat(($('ho_sim_spd')||{}).value)||220)/220*HOS.total/14;HOS.pos+=spd*dt;
+    if(HOS.pos>=HOS.total){HOS.pos=HOS.total;HOS.playing=false;if(b)b.innerHTML='&#9654; Play';}
+    hoSimDraw();if(HOS.playing)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+(function initHo(){try{
+  var mt=$('ho_mat');if(mt){opt(mt,MATS.map(function(x){return x[0];}),'Stainless 316 austenitic');}
+  var host=$('hole_op');if(host){host.addEventListener('input',function(){hoRefreshReq();});host.addEventListener('change',function(){hoRefreshReq();});}
+  hoTapFillOnce();hoVis();hoOpChange();setHoMode('new');hoPosChange();
+}catch(e){}})();
+
 (function initFm(){try{['fm_aW','fm_aL','fm_aD','fmc_D','fmc_teeth','fmc_facez'].forEach(function(id){var el=$(id);if(el){el.addEventListener('input',fmRefreshReq);el.addEventListener('change',fmRefreshReq);}});var sh=$('fm_aShape');if(sh)sh.addEventListener('click',function(){setTimeout(fmRefreshReq,0);});var h=$('fm_pm_hint');if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}catch(e){}try{fmCalc('init');fmFinVis();}catch(e){}})();
 (function initTnSections(){try{['side','D','minor','P'].forEach(function(id){var el=$(id);if(el){el.addEventListener('input',tnAfterGeom);el.addEventListener('change',tnAfterGeom);}});}catch(e){}try{if(typeof spInlineInit==='function')spInlineInit();}catch(e){}try{window.addEventListener('load',function(){try{spInlineInit();}catch(e){}});}catch(e){}})();
 function _stripControlLine(prog){if(!prog)return prog;return String(prog).split('\n').filter(function(l){return !/^\s*;?\s*\(\s*CONTROL\b[^)]*\)\s*$/i.test(l);}).join('\n');}
@@ -4381,7 +5350,7 @@ async function renderHist(){var c=$('histlist');if(!c)return;var TMPL=(typeof tm
 var JKEY='yantra_job';var lastAnyProg='';
 function getJob(){try{return JSON.parse(localStorage.getItem(JKEY+'_'+(window._mode||'turn'))||'[]');}catch(e){return [];}}
 function setJob(a){try{localStorage.setItem(JKEY+'_'+(window._mode||'turn'),JSON.stringify(a));}catch(e){}if(window.cloudTouch)cloudTouch();}
-function jobLabel(){var sd=$('side').value==='Internal'?'INT':'EXT';var m=(method==='Turn')?'Thread Turn':'Thread Mill';return 'M'+num('D',0)+'x'+num('P',0)+' '+sd+' '+m;}
+function jobLabel(){if(window._jobLbl){var _l=window._jobLbl;window._jobLbl=null;return _l;}var sd=$('side').value==='Internal'?'INT':'EXT';var m=(method==='Turn')?'Thread Turn':'Thread Mill';return 'M'+num('D',0)+'x'+num('P',0)+' '+sd+' '+m;}
 function addToJob(){var pr=(typeof lastAnyProg!=='undefined'&&lastAnyProg)?lastAnyProg:lastProg;if(!pr){alert('Generate a program first.');return;}var a=getJob();if(jobEditIdx!=null&&a[jobEditIdx]){a[jobEditIdx].p=pr;jobEditIdx=null;}else{a.push({l:jobLabel(),type:'prog',preset:{},p:pr});}setJob(a);var sb=$('savestepbtn');if(sb)sb.style.display='none';show('fulljob');renderJob();var jw=$('joboutwrap');if(jw)jw.style.display='none';}
 function delJobStep(i){var a=getJob();a.splice(i,1);setJob(a);renderJob();}
 function moveJobStep(i,d){var a=getJob();var j=i+d;if(j<0||j>=a.length)return;var t=a[i];a[i]=a[j];a[j]=t;setJob(a);renderJob();}
