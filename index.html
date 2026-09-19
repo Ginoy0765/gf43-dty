@@ -246,7 +246,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.36 &middot; 19 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.37 &middot; 19 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -546,6 +546,171 @@
     <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter</span>
   </div>
   <p class="note" style="text-align:left">Press <b>Generate</b> first, then <b>Play</b>. Top: plan view. Bottom: tool height (Z) along the program. The simulation follows the generated Fanuc-style program.</p>
+</div></div>
+</section>
+<section id="pocket_op" class="view">
+<style>
+#pocket_op #pk_stage{width:100%;display:block;background:#0a1015;border:1px solid var(--line);border-radius:12px;margin-top:10px;touch-action:none}
+#pocket_op .fmsub{font-size:11px;letter-spacing:.6px;color:#8aa2b4;margin:14px 2px 6px;font-weight:700;border-top:1px solid #1e2d3a;padding-top:12px}
+#pocket_op .fmbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 8px}
+#pocket_op .fmb{background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer}
+#pocket_op .fmb:hover{border-color:var(--acc2);color:var(--acc2)}
+#pocket_op .fmbar label{margin:0;display:flex;align-items:center;gap:8px;font-size:12px}
+#pocket_op .fmbar input[type=range]{width:120px;padding:0;border:none;background:none}
+#pocket_op #pk_simcv{width:100%;display:block;background:#0a1015;border:1px solid var(--line);border-radius:10px;touch-action:none}
+#pocket_op .fmleg{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--mut);margin:8px 2px 0}
+#pocket_op .fmleg span{display:inline-flex;align-items:center;gap:6px}
+#pocket_op .fmleg .sw{width:13px;height:13px;border-radius:3px;display:inline-block}
+</style>
+<div class="modeseg" style="margin:2px 0 8px"><button type="button" id="pk_pm_sample" onclick="setPkMode('sample')">&#128218; Sample</button><button type="button" id="pk_pm_new" class="on" onclick="setPkMode('new')">&#10133; New</button></div><span id="pk_pm_hint" class="note mhint" style="margin:0 0 10px"></span>
+<div class="zconv" style="background:rgba(67,209,122,.08);border:1px solid rgba(67,209,122,.28);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:12px;color:var(--txt)">
+  <b style="color:#43d17a">Z convention:</b> Part top = <b>Z=0</b> &middot; cutting down into the part is <b>&minus;Z</b> &middot; away from the part is <b>+Z</b>. Enter the floor depth as a negative value.
+</div>
+<div class="vhead"><button class="back" onclick="show('home')">&lsaquo;</button><h2 id="pk_h2">Pocket milling</h2></div>
+
+<!-- ============ 1. OPERATION ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">OPERATION <span>&#9662;</span></div><div class="sb">
+  <label>Finishing</label>
+  <select id="pk_fin" onchange="pkVis();pkDraw();pkRefreshReq()"><option value="off">Off &mdash; rough straight to size</option><option value="both">Wall + floor &mdash; leave stock, then finish</option><option value="wall">Wall only</option><option value="floor">Floor only</option></select>
+  <div class="fmsub">POCKET SHAPE</div>
+  <div class="row2">
+    <div><label>Pocket shape</label><select id="pk_shape" onchange="pkVis();pkDraw();pkRefreshReq()"><option value="rect">Rectangle</option><option value="circle">Circle</option></select></div>
+    <div data-pk="rect"><label>Pocket reference</label><select id="pk_ref" onchange="pkVis();pkDraw()"><option value="corner">Corner</option><option value="center">Center</option></select></div>
+  </div>
+  <label id="pk_lblXY">Corner X, Y</label>
+  <div class="row2"><input type="number" id="pk_x" value="0" step="1" inputmode="decimal" oninput="pkDraw()"><input type="number" id="pk_y" value="0" step="1" inputmode="decimal" oninput="pkDraw()"></div>
+  <div class="row2" data-pk="rect">
+    <div><label>Width X (mm)</label><input type="number" id="pk_w" step="1" inputmode="decimal" oninput="pkDraw()"></div>
+    <div><label>Length Y (mm)</label><input type="number" id="pk_l" step="1" inputmode="decimal" oninput="pkDraw()"></div>
+  </div>
+  <div class="row2" data-pk="rect">
+    <div><label>Corner radius (mm)</label><input type="number" id="pk_r" value="0" min="0" step="0.5" inputmode="decimal" oninput="pkDraw()"></div>
+    <div><label>Rotation &deg;</label><input type="number" id="pk_rot" value="0" step="1" inputmode="decimal" oninput="pkDraw()"></div>
+  </div>
+  <div data-pk="circle"><label>Pocket diameter (mm)</label><input type="number" id="pk_dia" step="1" inputmode="decimal" oninput="pkDraw()"></div>
+  <p class="note" style="text-align:left">Pocket milling &mdash; clears a closed pocket down to the floor: helix (or ramp / plunge) entry, roughing by contour-parallel rings or zigzag rows, then optional wall and floor finishing. One pocket, no islands.</p>
+</div></div>
+
+<!-- ============ 2. TOOL ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div class="row2">
+    <div><label>End mill &Oslash; (mm)</label><input id="pk_D" type="number" step="0.1" inputmode="decimal" oninput="pkCalc('D');pkDraw()"></div>
+    <div><label>No. of flutes</label><input id="pk_teeth" type="number" value="4" step="1" inputmode="numeric" oninput="pkCalc('teeth')"></div>
+  </div>
+  <div class="row2">
+    <div><label>Tool no. (T)</label><input id="pk_t" type="number" value="1" inputmode="numeric"></div>
+    <div><label>Length offset (H)</label><input id="pk_h" type="number" value="1" inputmode="numeric"></div>
+  </div>
+  <div class="row2">
+    <div><label>Spindle rotation</label><select id="pk_sp"><option value="M03">M03 (CW)</option><option value="M04">M04 (CCW)</option></select></div>
+    <div><label>Coolant type</label><select id="pk_cool" onchange="pkCoolVis()"><option value="M08">M08 flood</option><option value="M07">M07 mist</option><option value="Custom">Custom</option><option value="None">None</option></select></div>
+  </div>
+  <div id="pk_coolCustWrap" style="display:none"><label>Custom coolant code</label><input type="text" id="pk_coolcustom" placeholder="e.g. M51"></div>
+  <p class="note" style="text-align:left">The toolpath is generated at the tool centre (no G41/G42), so the cutter diameter only needs to be right here &mdash; not in an offset register.</p>
+</div></div>
+
+<!-- ============ 3. PROFILE (graph only) ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9662;</span></div><div class="sb">
+  <svg id="pk_stage" viewBox="0 0 560 300"></svg>
+  <p class="note" style="text-align:left;margin-top:8px">Left: plan view of the pocket with the cutter drawn to scale. Right: section showing the depth, the roughing levels and the stock left for finishing. It updates as you type.</p>
+</div></div>
+
+<!-- ============ 4. PARAMETERS ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">PARAMETERS <span>&#9656;</span></div><div class="sb" style="display:none">
+  <label>Material</label><select id="pk_mat" onchange="pkCalc('mat')"></select><div id="pk_mr" class="mrinfo"></div>
+  <div class="row2">
+    <div><label>Vc (m/min)</label><input id="pk_vc" type="number" step="1" inputmode="decimal" oninput="pkCalc('vc')"></div>
+    <div><label>Spindle speed (RPM)</label><input id="pk_rpm" type="number" step="1" inputmode="numeric" oninput="pkCalc('rpm')"></div>
+  </div>
+  <div class="row2">
+    <div><label>Fz (mm/tooth)</label><input id="pk_fz" type="number" step="0.001" inputmode="decimal" oninput="pkCalc('fz')"></div>
+    <div><label>Feed (mm/min)</label><input id="pk_fmin" type="number" step="1" inputmode="decimal" oninput="pkCalc('feed')"></div>
+  </div>
+  <p class="note" style="text-align:left">Vc &harr; RPM through the end mill &Oslash;; Fz &harr; Feed through flutes &times; RPM. Feed = Fz &times; flutes &times; RPM.</p>
+</div></div>
+
+<!-- ============ 5. CYCLES ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">CYCLES <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div class="fmsub" style="margin-top:2px;border-top:none;padding-top:0">ROUGHING</div>
+  <div class="row2">
+    <div><label>Rough pattern</label><select id="pk_pat" onchange="pkVis()"><option value="contour">Contour-parallel (rings)</option><option value="zigzag">Zigzag rows</option></select></div>
+    <div><label>Milling direction</label><select id="pk_dir"><option value="climb">Climb</option><option value="conventional">Conventional</option></select></div>
+  </div>
+  <div data-pk="p_zigzag"><label>Sweep direction</label><select id="pk_sweep"><option value="auto">Auto (along the longest side)</option><option value="0">Along X</option><option value="90">Along Y</option></select></div>
+  <div class="fmsub">ENTRY</div>
+  <label>Entry method</label>
+  <select id="pk_entry" onchange="pkVis()"><option value="helix">Helix (centre of the pocket)</option><option value="ramp">Ramp (zigzag along the long axis)</option><option value="plunge">Plunge</option></select>
+  <div class="row2" data-pk="e_helix,e_ramp">
+    <div><label>Ramp / helix angle &deg;</label><input id="pk_angle" type="number" value="3" step="0.5" inputmode="decimal"></div>
+    <div><label>Ramp / helix feed (% of feed)</label><input id="pk_rfeed" type="number" value="60" step="5" inputmode="decimal"></div>
+  </div>
+  <div data-pk="e_helix"><label>Helix &Oslash; (% of tool &Oslash;)</label><input id="pk_hpct" type="number" value="80" step="5" inputmode="decimal"></div>
+  <p class="note" id="pk_cycnote" style="text-align:left"></p>
+</div></div>
+
+<!-- ============ 6. POSITIONING ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">POSITIONING <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div class="row2">
+    <div><label>Top Z (mm)</label><input id="pk_topz" type="number" value="0" step="0.1" inputmode="decimal" oninput="pkDraw()"></div>
+    <div><label>Floor Z &mdash; final depth (mm)</label><input id="pk_floorz" type="number" step="0.1" inputmode="decimal" oninput="pkDraw()"></div>
+  </div>
+  <div class="row2">
+    <div><label>Safe Z (mm)</label><input id="pk_safez" type="number" value="20" step="1" inputmode="decimal"></div>
+    <div><label>Feed plane (mm)</label><input id="pk_fplane" type="number" value="2" step="0.5" inputmode="decimal"></div>
+  </div>
+  <p class="note" style="text-align:left">Top Z = the surface the pocket starts from. Floor Z = the finished pocket floor (negative when below the top). Feed plane = the height above the top where rapid stops and the cutter starts feeding in.</p>
+</div></div>
+
+<!-- ============ 7. CUT SETUP ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">CUT SETUP <span>&#9656;</span></div><div class="sb" style="display:none">
+  <div class="row2">
+    <div><label>Max ap &mdash; depth per pass (mm)</label><input id="pk_ap" type="number" value="4" step="0.1" inputmode="decimal" oninput="pkDraw()"></div>
+    <div><label>Stepover (%&Oslash;)</label><input id="pk_step" type="number" value="60" step="1" inputmode="decimal"></div>
+  </div>
+  <div data-pk="e_plunge"><label>Plunge entry feed (mm/min)</label><input id="pk_pf" type="number" value="200" step="10" inputmode="decimal"></div>
+  <div data-pk="fa">
+    <div class="fmsub">FINISHING</div>
+    <div class="row2">
+      <div data-pk="fw"><label>Wall finish stock (mm)</label><input id="pk_wall" type="number" value="0.2" step="0.05" inputmode="decimal" oninput="pkDraw()"></div>
+      <div data-pk="ff"><label>Floor finish stock (mm)</label><input id="pk_floor" type="number" value="0.2" step="0.05" inputmode="decimal" oninput="pkDraw()"></div>
+    </div>
+    <div class="row2" data-pk="ff">
+      <div><label>Floor finish stepover (%&Oslash;)</label><input id="pk_fstep" type="number" value="40" step="1" inputmode="decimal"></div>
+      <div><label>Floor finish pattern</label><select id="pk_fpat"><option value="contour">Contour-parallel</option><option value="zigzag">Zigzag</option></select></div>
+    </div>
+    <div><label>Finish feed (% of feed)</label><input id="pk_ffeed" type="number" value="80" step="5" inputmode="decimal"></div>
+    <p class="note" style="text-align:left">Roughing leaves this much stock on the wall and floor. Each level is then finished around the wall with a tangent lead-in / lead-out, and the floor is finished once at the final depth.</p>
+  </div>
+</div></div>
+
+<!-- ============ 8. MACHINE ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">MACHINE <span>&#9656;</span></div><div class="sb" style="display:none">
+  <p class="note" style="text-align:left">Seeded from <b>Defaults</b>. Edit here to override for this operation only.</p>
+  <div class="row2">
+    <div><label>Control</label><select id="pk_ctrl"><option>Fanuc I &amp; J</option><option>Fanuc R</option><option>Haas</option><option>Siemens I &amp; J</option><option>Siemens R</option><option>Heidenhain</option></select></div>
+    <div><label>Program no. (O)</label><input id="pk_onum" type="number" value="3020" inputmode="numeric"></div>
+  </div>
+</div></div>
+
+<!-- ============ GENERATE + PROGRAM ============ -->
+<button class="btn genbtn" id="pk_gen" onclick="genPocket()">&#9881;&#65039;  GENERATE G-CODE</button>
+<div id="pk_cyc" class="note" style="text-align:left;margin-top:8px;color:var(--acc);font-weight:700"></div>
+<div id="pk_out" class="note" style="text-align:left;margin-top:6px;white-space:pre-wrap">Set values and press Generate.</div>
+<div id="pk_block"></div>
+
+<div class="sec" id="pk_simsec"><div class="st" onclick="tog(this)">TOOLPATH SIMULATION <span>&#9662;</span></div><div class="sb">
+  <div class="fmbar">
+    <button type="button" class="fmb" id="pk_sim_play" onclick="pkSimPlay()">&#9654; Play</button>
+    <button type="button" class="fmb" onclick="pkSimReset()">&#8635; Reset</button>
+    <label>speed <input type="range" id="pk_sim_spd" min="20" max="900" value="220"></label>
+  </div>
+  <canvas id="pk_simcv"></canvas>
+  <div class="fmleg">
+    <span><i class="sw" style="background:rgba(55,211,154,.5)"></i> cut path (tool &Oslash;)</span>
+    <span><i class="sw" style="background:#6b7c8c"></i> rapid / air</span>
+    <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter</span>
+  </div>
+  <p class="note" style="text-align:left">Press <b>Generate</b> first, then <b>Play</b>. Top: plan view with the pocket outline. Bottom: tool height (Z) along the program.</p>
 </div></div>
 </section>
     <section id="fulljob" class="view">
@@ -2135,7 +2300,7 @@ function ttUpdate(){var r=tnResolve();var ce=tnGeom(r.pts).errs;for(var i=0;i<tn
 function ttAuto(i,k,val){var el=document.querySelector('#tt_body .ttf[data-i="'+i+'"][data-k="'+k+'"]');if(!el||el.tagName==='SELECT')return;var u=tnPts[i][k];if(u!==''&&u!=null&&(''+u).length>0){el.classList.remove('autof');return;}if(document.activeElement===el)return;el.value=(Math.round(val*1000)/1000).toString();el.classList.add('autof');}
 var helpMode=false;
 function toggleHelp(){helpMode=!helpMode;document.body.classList.toggle('helpon',helpMode);var b=document.getElementById('helpbtn');if(b)b.classList.toggle('on',helpMode);}
-function openMillOp(n){if(['Tapping','Reaming','Boring','Centering','Chamfering','Counter bore'].indexOf(n)>=0){hoOpen(n);return;}if(n==='Face mill'||n==='Face milling'){show('facemill');try{fmMachineSeed();}catch(e){}return;}var t=$('mill_op_title');if(t)t.textContent=n;var nm=$('mill_op_name');if(nm)nm.textContent=n;show('mill_op');}
+function openMillOp(n){if(n==='Pocketing'||n==='Pocket'||n==='Pocket milling'){pkOpen();return;}if(['Tapping','Reaming','Boring','Centering','Chamfering','Counter bore'].indexOf(n)>=0){hoOpen(n);return;}if(n==='Face mill'||n==='Face milling'){show('facemill');try{fmMachineSeed();}catch(e){}return;}var t=$('mill_op_title');if(t)t.textContent=n;var nm=$('mill_op_name');if(nm)nm.textContent=n;show('mill_op');}
 function millGrp(id){var el=document.getElementById(id);if(!el)return;var op=el.classList.contains('open');['mg_c','mg_p'].forEach(function(g){var e=document.getElementById(g);if(e)e.classList.remove('open');});if(!op)el.classList.add('open');}
 function tnQuick(k){show('turnops');try{tnMachRefresh();}catch(e){}try{function _qs(id,v){var e=document.getElementById(id);if(e){e.value=v;if(typeof e.onchange==='function')e.onchange();}}if(k==='OD'){_qs('tn_odid','OD (outside)');_qs('tn_pathsel','Turning');}else if(k==='ID'){_qs('tn_odid','ID (bore)');_qs('tn_pathsel','Turning');}else if(k==='FACE'){_qs('tn_odid','OD (outside)');_qs('tn_pathsel','Facing');}}catch(e){}}
 function setMode(m){var t=document.getElementById('mt-turn'),l=document.getElementById('mt-mill');if(!t||!l)return;window._mode=m;try{document.querySelectorAll('.tile[data-mode]').forEach(function(x){var dm=x.getAttribute('data-mode');x.style.display=(dm==='both'||dm===m)?'':'none';});document.querySelectorAll('.jobop-turn').forEach(function(x){x.style.display=(m==='turn')?'':'none';});document.querySelectorAll('.jobop-mill').forEach(function(x){x.style.display=(m==='mill')?'':'none';});document.querySelectorAll('.js-turn-only').forEach(function(x){x.style.display=(m==='mill')?'none':'';});document.querySelectorAll('.js-mill-only').forEach(function(x){x.style.display=(m==='mill')?'':'none';});}catch(e){}var jt=document.getElementById('js-turn'),jm=document.getElementById('js-mill');if(m==='mill'){l.style.background='#334559';l.style.color='#e8eef4';l.style.boxShadow='inset 3px 0 0 var(--acc)';t.style.background='transparent';t.style.color='var(--mut)';t.style.boxShadow='none';if(jt)jt.style.display='none';if(jm)jm.style.display='block';}else{t.style.background='#334559';t.style.color='#e8eef4';t.style.boxShadow='inset 3px 0 0 var(--acc)';l.style.background='transparent';l.style.color='var(--mut)';l.style.boxShadow='none';if(jt)jt.style.display='block';if(jm)jm.style.display='none';}try{window.scrollTo(0,0);}catch(e){}}
@@ -2150,7 +2315,7 @@ function jsMr(){var el=$('js_mr');if(!el||!$('js_mat'))return;var m=(typeof matB
 /* ===== DEFAULTS (global presets, each operation can still override locally) ===== */
 function _defSetSel(id,val){var el=document.getElementById(id);if(!el)return false;var ok=false;for(var i=0;i<el.options.length;i++){if(el.options[i].value===val||el.options[i].text===val){el.value=el.options[i].value;ok=true;break;}}if(ok){try{el.dispatchEvent(new Event('change'));}catch(e){}}return ok;}
 function defMatChip(){var el=document.getElementById('def_mat');if(!el)return;var m=(typeof matBy==='function')?matBy(el.value):null;var chip=document.getElementById('def_mr');if(!chip)return;if(m&&m[4]!=null){var c=(typeof ISO_COL!=='undefined'&&ISO_COL[m[2]])||'#9E9E9E';chip.innerHTML='<span class="isochip" style="background:'+c+'">ISO '+m[2]+'</span> Machinability '+m[4]+'%';}else{chip.textContent='';}}
-function applyDefMaterial(){var el=document.getElementById('def_mat');if(!el)return;var v=el.value;['js_mat','tn_mat','dr_mat','mat','gv_mat','ho_mat'].forEach(function(id){_defSetSel(id,v);});defMatChip();}
+function applyDefMaterial(){var el=document.getElementById('def_mat');if(!el)return;var v=el.value;['js_mat','tn_mat','dr_mat','mat','gv_mat','ho_mat','pk_mat'].forEach(function(id){_defSetSel(id,v);});defMatChip();}
 function applyDefTcp(){var lathe=document.getElementById('def_tcp');if(lathe){var m=document.getElementById('ms_tcp');if(m)m.value=lathe.value;}try{if(typeof gv_recalc==='function')gv_recalc();}catch(e){}}
 function defMachineReadouts(){var g=function(id){return document.getElementById(id);};var chuck=g('def_chuck'),turret=g('def_turret'),lf=g('def_lathefeed');if(lf&&chuck&&turret){var side=(chuck.value==='L')?'left':'right';var xdir=(turret.value==='rear')?'X+ points away from the operator (rear turret)':'X+ points toward the operator (front turret)';lf.innerHTML='Z0 at the face, <b>Z&minus; feeds toward the '+side+' chuck</b>. OD: tool sits outside and feeds <b>X&minus; inward</b> to the programmed diameter &middot; '+xdir+'.';}var mf=g('def_millfeed'),ta=g('def_toolaxis'),td=g('def_tooldir');if(mf&&ta&&td){var ax=ta.value,dir=td.value,planeTxt=(ax==='Z')?'XY plane':(ax==='X'?'YZ plane':'XZ plane');mf.innerHTML='Tool on the <b>'+ax+'</b> axis, cutting <b>'+dir+ax+'</b> into the work &middot; feed in the '+planeTxt+'.';}}
 function applyDefMachine(){var g=function(id){return document.getElementById(id);};var ctrl=g('def_ctrl'),sp=g('def_spindle'),chuck=g('def_chuck');if(ctrl)_defSetSel('ms_ctrl',ctrl.value);if(sp)_defSetSel('ms_sp',sp.value);if(chuck){var frVal=(chuck.value==='L')?'Left chuck · Rear turret · R hand':'Right chuck · Front turret · L hand';_defSetSel('ms_fr',frVal);}defMachineReadouts();try{if(typeof gv_recalc==='function')gv_recalc();}catch(e){}}
@@ -2160,6 +2325,23 @@ function showHelp(label){ensureHelpPov();var k=helpKey(label),h=HELP[k];if(!h){v
 function closeHelp(){var o=document.getElementById('hlpov');if(o)o.classList.remove('on');}
 document.addEventListener('click',function(e){if(!helpMode)return;var el=e.target;while(el&&el!==document.body){if(el.tagName==='LABEL'){e.preventDefault();e.stopPropagation();showHelp(el.textContent);return;}el=el.parentNode;}},true);
 var HELP={
+"finishing":{"svg": "", "text": "Off = roughing cuts straight to the finished wall and floor. On = roughing leaves a little stock (set in Cut setup), then the wall is finished around every level and the floor is finished once at the final depth. Choose wall only or floor only if you need just one."},
+"pocket shape":{"svg": "", "text": "Shape of the pocket: a Rectangle (optionally with corner radius and rotation) or a Circle."},
+"pocket reference":{"svg": "", "text": "Which point of the rectangle the X, Y position refers to: its Corner (lower-left before rotation) or its Center. Rotation pivots about this point."},
+"corner radius mm":{"svg": "", "text": "Radius of the four inside corners of the rectangular pocket. A radius smaller than the cutter radius cannot be cut; the corners then come out at the cutter radius."},
+"pocket diameter mm":{"svg": "", "text": "Diameter of the round pocket."},
+"end mill ø mm":{"svg": "", "text": "Diameter of the end mill. It sets the stepover (stepover % × Ø) and converts Vc to RPM. It must be smaller than the pocket."},
+"rough pattern":{"svg": "", "text": "How each level is cleared. Contour-parallel = concentric rings from the centre outwards (constant engagement, good in corners). Zigzag = straight rows back and forth (fewer moves in long pockets)."},
+"milling direction":{"svg": "", "text": "Climb = the cutter rotates with the feed along the wall (better finish, less rubbing). Conventional = against the feed. Climb is the default for rigid machines."},
+"entry method":{"svg": "", "text": "How the cutter gets down into solid material at every level. Helix = spiral at the pocket centre. Ramp = slide down along the long axis. Plunge = straight down (centre-cutting end mill only)."},
+"ramp helix angle":{"svg": "", "text": "Slope of the entry ramp or helix, in degrees from the horizontal. Small angles (2–5°) are gentle on the cutter; larger angles save time."},
+"ramp helix feed % of feed":{"svg": "", "text": "Feed during the helix or ramp entry, as a percent of the cutting feed."},
+"helix ø % of tool ø":{"svg": "", "text": "Diameter of the tool-centre path of the helix as a percent of the cutter Ø. Around 80% leaves no centre core. It shrinks automatically if the pocket is small."},
+"floor z — final depth mm":{"svg": "", "text": "Z of the finished pocket floor. Enter a negative value when the floor is below the top surface."},
+"plunge entry feed mm min":{"svg": "", "text": "Feed used for the straight plunge when Entry method is Plunge."},
+"floor finish stepover %ø":{"svg": "", "text": "Stepover of the floor finishing pass as a percent of the end mill Ø. Finer than roughing for a better surface (e.g. 40%)."},
+"floor finish pattern":{"svg": "", "text": "Contour-parallel rings or zigzag rows for the floor finishing pass."},
+"finish feed % of feed":{"svg": "", "text": "Feed of the wall and floor finishing passes as a percent of the roughing feed."},
 "operation":{"svg": "", "text": "Which hole operation this screen programs: Tapping, Reaming, Boring, Centering, Chamfering or Counter bore. The fields below change to match."},
 "boring method":{"svg": "", "text": "Boring head = the tool feeds to depth and retracts (fine-boring heads, bars). Circular interpolation = an end mill spirals down and cuts the bore, so one tool can make any size."},
 "counterbore method":{"svg": "", "text": "Counterbore tool = a piloted tool plunges to depth. Circular interpolation = an end mill helixes down and clears the counterbore, so no special tool is needed."},
@@ -2974,6 +3156,7 @@ if(v==='drill')return 'Drilling '+M;
 if(v==='groove')return 'Groove Turning';
 if(v==='facemill')return 'Face Milling';
 if(v==='mill_holes')return 'Holes Milling';
+if(v==='pocket_op')return 'Pockets Milling';
 if(v==='hole_op'){try{return hoOp();}catch(e){return 'Holes';}}
 if(v==='mill_op'){var t=((document.getElementById('mill_op_title')||{}).textContent||'').trim();if(/pocket/i.test(t))return 'Pockets Milling';var root=t.replace(/\s*mill(ing)?$/i,'').trim();return (root||t)+' Milling';}
 return null;}
@@ -5287,6 +5470,279 @@ function hoSimPlay(){
   var mt=$('ho_mat');if(mt){opt(mt,MATS.map(function(x){return x[0];}),'Stainless 316 austenitic');}
   var host=$('hole_op');if(host){host.addEventListener('input',function(){hoRefreshReq();});host.addEventListener('change',function(){hoRefreshReq();});}
   hoTapFillOnce();hoVis();hoOpChange();setHoMode('new');hoPosChange();
+}catch(e){}})();
+
+/* ================= POCKET MILLING — screen logic (engine runs on the YANTRA server: /pocket/program + /pocket/path) ================= */
+var pkMode='new',pocketRaw='',lastPocketProg='',_pkSeeded=false;
+function pkN(id){var e=$(id);var x=e?parseFloat(e.value):NaN;return isNaN(x)?0:x;}
+function pkHas(id){var e=$(id);return !!e&&e.value!==''&&!isNaN(parseFloat(e.value));}
+function pkSet(id,v,dec){var e=$(id);if(!e)return;if(typeof v==='number'){e.value=(v>0&&isFinite(v))?(''+(+v.toFixed(dec==null?3:dec))):'';}else e.value=(v==null?'':v);}
+function pkCoolVis(){var s=$('pk_cool'),w=$('pk_coolCustWrap');if(w)w.style.display=(s&&s.value==='Custom')?'':'none';}
+function pkShapeV(){var e=$('pk_shape');return e?e.value:'rect';}
+function pkFinV(){var e=$('pk_fin');return e?e.value:'off';}
+function pkWallOn(){var f=pkFinV();return f==='both'||f==='wall';}
+function pkFloorOn(){var f=pkFinV();return f==='both'||f==='floor';}
+function pkClamp(v,a,b){return Math.max(a,Math.min(b,v));}
+
+/* ---- which fields show for the chosen shape / entry / pattern / finishing ---- */
+function pkVis(){
+  var sh=pkShapeV(),en=$('pk_entry')?$('pk_entry').value:'helix',pt=$('pk_pat')?$('pk_pat').value:'contour';
+  var act=[sh,'e_'+en,'p_'+pt];if(en!=='plunge')act.push('e_helix_ramp');if(pkWallOn())act.push('fw');if(pkFloorOn())act.push('ff');if(pkFinV()!=='off')act.push('fa');
+  document.querySelectorAll('#pocket_op [data-pk]').forEach(function(el){var a=el.getAttribute('data-pk').split(','),show=false;
+    for(var i=0;i<a.length;i++){if(act.indexOf(a[i])>=0){show=true;break;}}el.style.display=show?'':'none';});
+  var ctr=(sh==='circle')||($('pk_ref')&&$('pk_ref').value==='center');
+  var l=$('pk_lblXY');if(l)l.textContent=ctr?'Center X, Y':'Corner X, Y';
+  var nt=$('pk_cycnote');if(nt){var m={helix:'Helix: the cutter spirals down at the pocket centre at the angle above, then the level is cleared outwards. Needs room for a helix of the set Ø (it shrinks automatically in a small pocket).',ramp:'Ramp: the cutter slides down along the long axis of the pocket at the angle above, back and forth, then clears the level.',plunge:'Plunge: the cutter drops straight down at the pocket centre at the plunge feed. Use only with a centre-cutting end mill.'};nt.textContent=m[en]||'';}
+  pkCoolVis();
+}
+
+/* ---- material -> Vc / Fz defaults, and the Vc / RPM / Fz / feed links ---- */
+function pkMat(){return matBy($('pk_mat')?$('pk_mat').value:'');}
+function pkMr(){var m=pkMat(),el=$('pk_mr');if(el&&m&&m[4]!=null){var c=(typeof ISO_COL!=='undefined'&&ISO_COL[m[2]])||'#9E9E9E';el.innerHTML='<span class="isochip" style="background:'+c+'">ISO '+m[2]+'</span> Machinability '+m[4]+'%';}}
+function pkVcDef(){var m=pkMat(),ref=m[1]||60;return pkClamp(ref*0.9,10,300);}
+function pkFzDef(D){var m=pkMat(),fzb=m[3]||0.08;return pkClamp(fzb*Math.min(D,20)/10*0.8,0.01,0.2);}
+function pkCalc(src){
+  try{pkMr();}catch(e){}
+  var D=pkN('pk_D'),z=Math.max(1,pkN('pk_teeth')),rpm=pkN('pk_rpm'),vc=pkN('pk_vc'),fz=pkN('pk_fz'),fm=pkN('pk_fmin');
+  function feedFrom(r,f){return Math.round(f*z*r);}
+  if(src==='mat'||src==='D'||src==='init'){
+    if(D>0){vc=pkVcDef();rpm=pkClamp(Math.round(1000*vc/(Math.PI*D)),20,24000);fz=pkFzDef(D);
+      pkSet('pk_vc',Math.round(Math.PI*D*rpm/1000*10)/10,1);pkSet('pk_rpm',rpm,0);pkSet('pk_fz',fz,4);pkSet('pk_fmin',feedFrom(rpm,fz),0);}
+    else{pkSet('pk_vc','');pkSet('pk_rpm','');pkSet('pk_fz','');pkSet('pk_fmin','');}
+  }else if(src==='vc'){
+    if(D>0&&vc>0){rpm=Math.round(1000*vc/(Math.PI*D));pkSet('pk_rpm',rpm,0);if(fz>0)pkSet('pk_fmin',feedFrom(rpm,fz),0);}
+  }else if(src==='rpm'){
+    if(D>0&&rpm>0)pkSet('pk_vc',Math.PI*D*rpm/1000,1);
+    if(fz>0&&rpm>0)pkSet('pk_fmin',feedFrom(rpm,fz),0);
+  }else if(src==='fz'||src==='teeth'){
+    if(fz>0&&rpm>0)pkSet('pk_fmin',feedFrom(rpm,fz),0);
+  }else if(src==='feed'){
+    if(rpm>0&&fm>0)pkSet('pk_fz',fm/(rpm*z),4);
+  }
+}
+
+/* ---- Sample / New ---- */
+function pkFields(){var a=[];
+  if(pkShapeV()==='circle')a.push(['pk_dia','Diameter']);else a.push(['pk_w','Width X'],['pk_l','Length Y']);
+  a.push(['pk_D','End mill Ø'],['pk_floorz','Floor Z']);return a;}
+function pkBad(f){var e=$(f[0]);if(!e)return false;if(f[0]==='pk_floorz')return !(pkHas('pk_floorz')&&pkN('pk_floorz')<pkN('pk_topz'));return !(parseFloat(e.value)>0);}
+function pkMissing(){var m=[];pkFields().forEach(function(f){if(pkBad(f))m.push(f[1]);});return m;}
+function pkRefreshReq(){var host=$('pocket_op');if(!host)return;host.querySelectorAll('.reqbad').forEach(function(e){e.classList.remove('reqbad');});
+  if(pkMode!=='new')return;pkFields().forEach(function(f){var e=$(f[0]);if(e&&pkBad(f))e.classList.add('reqbad');});}
+function pkOpenBad(){document.querySelectorAll('#pocket_op .reqbad').forEach(function(el){_fmOpenSb(el.closest('.sb'));});}
+function pkOpenSim(){var sec=$('pk_simsec');if(sec)_fmOpenSb(sec.querySelector(':scope > .sb'));}
+function pkClearMandatory(){['pk_w','pk_l','pk_dia','pk_D','pk_floorz'].forEach(function(id){var e=$(id);if(e)e.value='';});pkCalc('init');}
+function pkSampleDefaults(){function sv(id,v){var e=$(id);if(e)e.value=v;}
+  sv('pk_w',60);sv('pk_l',40);sv('pk_r',5);sv('pk_dia',40);sv('pk_D',10);sv('pk_floorz',-10);sv('pk_topz',0);pkCalc('init');}
+function setPkMode(m){pkMode=m;var s=$('pk_pm_sample'),n=$('pk_pm_new');if(s)s.classList.toggle('on',m==='sample');if(n)n.classList.toggle('on',m==='new');
+  var h=$('pk_pm_hint');
+  if(m==='new'){pkClearMandatory();if(h)h.textContent='New program — fill the fields marked in red, then Generate and Save.';}
+  else{pkSampleDefaults();if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}
+  try{pbNote('pk','');}catch(e){}
+  pkVis();pkDraw();pkRefreshReq();}
+function pkOpen(){pocketRaw='';lastPocketProg='';
+  if($('pk_block'))$('pk_block').innerHTML='';if($('pk_cyc'))$('pk_cyc').textContent='';if($('pk_out'))$('pk_out').textContent='Set values and press Generate.';
+  try{PKS.pts=[];PKS.playing=false;}catch(e){}
+  pkMachineSeed();pkVis();setPkMode(pkMode);show('pocket_op');}
+function pkMachineSeed(){if(_pkSeeded)return;_pkSeeded=true;
+  function sv(id,val){var e=$(id);if(!e||!val)return;for(var i=0;i<e.options.length;i++){if(e.options[i].value===val||e.options[i].text===val){e.value=e.options[i].value;return;}}}
+  var dc=($('def_ctrl')&&$('def_ctrl').value)||'';
+  var map={'Fanuc':'Fanuc I & J','Siemens':'Siemens I & J','Heidenhain':'Heidenhain','Haas':'Haas'};
+  if(map[dc])sv('pk_ctrl',map[dc]);
+  var sp=(($('def_spindle')&&$('def_spindle').value)||'').match(/M0[34]/);if(sp)sv('pk_sp',sp[0]);
+  sv('pk_cool',($('def_cool')&&$('def_cool').value)||'');
+  var dm=$('def_mat');if(dm&&dm.value){sv('pk_mat',dm.value);pkCalc('mat');}
+  try{pkCoolVis();}catch(e){}}
+
+/* ---- assemble the engine input ---- */
+function pkParams(){
+  var sh=pkShapeV(),cool=$('pk_cool').value,coolOn;
+  if(cool==='None')coolOn='None';else if(cool==='Custom')coolOn=(($('pk_coolcustom').value||'').trim())||'M08';else coolOn=cool;
+  var area={shape:sh,x:pkN('pk_x'),y:pkN('pk_y')};
+  if(sh==='circle'){area.dia=pkN('pk_dia');}
+  else{area.ref=$('pk_ref').value;area.w=pkN('pk_w');area.l=pkN('pk_l');area.r=pkN('pk_r');area.rot=pkN('pk_rot');}
+  var sw=$('pk_sweep').value;
+  return {
+    area:area,D:pkN('pk_D'),rpm:pkN('pk_rpm'),feed:pkN('pk_fmin'),spindle:$('pk_sp').value,coolant:coolOn,
+    control:'Fanuc I & J',tnum:Math.round(pkN('pk_t'))||1,hnum:Math.round(pkN('pk_h'))||1,toolaxis:'Z-',safez:pkN('pk_safez')||20,
+    depth:{topZ:pkN('pk_topz'),floorZ:pkN('pk_floorz'),maxAp:pkN('pk_ap')||1},
+    entry:{type:$('pk_entry').value,angle:pkN('pk_angle')||3,helixPct:pkN('pk_hpct')||80,feedPlane:pkN('pk_fplane'),plungeFeed:pkN('pk_pf')||200,rampFeedPct:pkN('pk_rfeed')||60},
+    rough:{pattern:$('pk_pat').value,stepPct:pkN('pk_step')||60,direction:$('pk_dir').value,sweepAngle:(sw==='auto'?'auto':parseFloat(sw))},
+    finish:{wall:{enabled:pkWallOn(),stock:pkHas('pk_wall')?pkN('pk_wall'):0.2},
+            floor:{enabled:pkFloorOn(),stock:pkHas('pk_floor')?pkN('pk_floor'):0.2,stepPct:pkN('pk_fstep')||40,pattern:$('pk_fpat').value},
+            feedPct:pkN('pk_ffeed')||80}
+  };}
+function pkErr(e){var m=(e&&e.message)?e.message:String(e);var i=m.indexOf('{');if(m.indexOf('API ')===0&&i>0){try{var j=JSON.parse(m.slice(i));if(j&&j.detail)return String(j.detail).replace(/^ValueError:\s*/,'');}catch(x){}}return m;}
+
+async function genPocket(){
+  var out=$('pk_out');
+  if(pkMode==='new'){var miss=pkMissing();if(miss.length){out.textContent='Required for a New program: '+miss.join(', ')+'. Fill the fields marked in red, then Generate.';try{pkRefreshReq();}catch(e){}try{pkOpenBad();}catch(e){}return;}}
+  var P=pkParams();
+  if(!pkFieldsOk(P,out))return;
+  out.textContent='Generating…';
+  try{
+    var res=await Promise.all([apiPost('/pocket/program',P),apiPost('/pocket/path',P)]);
+    var raw=String(res[0].program||'');
+    var on=String(Math.max(0,Math.round(pkN('pk_onum'))||3020));while(on.length<4)on='0'+on;
+    raw=raw.replace(/^O0001\b/m,'O'+on);
+    pocketRaw=raw;
+    var prog=raw;try{prog=formatForControl(raw,$('pk_ctrl').value);}catch(e){}
+    try{prog=roundProg(prog);}catch(e){}
+    lastPocketProg=prog;lastAnyProg=prog;pbRender('pk');
+    var notes=[];(raw.match(/^\(NOTE: [^\n]*\)$/mg)||[]).forEach(function(n){notes.push(n.slice(7,-1).trim());});
+    out.textContent=notes.length?('⚠ '+notes.join(' · ')):'';
+    var sec=Math.round(res[0].seconds||0);
+    $('pk_cyc').textContent='CYCLE ≈ '+Math.floor(sec/60)+'m '+(sec%60)+'s';
+    try{pkOpenSim();}catch(e){}
+    pkSimBuild(res[1].path,P);
+  }catch(e){out.textContent='Cannot generate:\n'+pkErr(e);try{$('pk_cyc').textContent='';}catch(x){}}
+}
+function pkFieldsOk(P,out){
+  function bad(msg,id){out.textContent=msg;try{_fmOpenSb($(id).closest('.sb'));}catch(e){}return false;}
+  if(P.area.shape==='rect'&&!(P.area.w>0&&P.area.l>0)){out.textContent='Enter the pocket width and length.';return false;}
+  if(P.area.shape==='circle'&&!(P.area.dia>0)){out.textContent='Enter the pocket diameter.';return false;}
+  if(!(P.D>0))return bad('Enter the end mill Ø.','pk_D');
+  if(!(P.depth.floorZ<P.depth.topZ))return bad('Floor Z must be below Top Z (enter it as a negative value).','pk_floorz');
+  if(!(P.rpm>0))return bad('Spindle speed is empty — pick a material or type an RPM.','pk_rpm');
+  if(!(P.feed>0))return bad('Feed is empty — set Fz or the feed in mm/min.','pk_fmin');
+  return true;}
+function pkSaveProg(){if(!lastPocketProg)return;var b=new Blob([lastPocketProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_POCKET.'+((typeof progExt==='function')?progExt():'nc');document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},600);}
+function pkJobLabel(){var t=(pkShapeV()==='circle')?('Ø'+(Math.round(pkN('pk_dia')*100)/100)):((Math.round(pkN('pk_w')*100)/100)+'×'+(Math.round(pkN('pk_l')*100)/100));return 'Pocket '+t+' ↓'+Math.abs(Math.round((pkN('pk_topz')-pkN('pk_floorz'))*100)/100);}
+pbReg('pk',{host:'pk_block',get:function(){return lastPocketProg||'';},set:function(v){lastPocketProg=v;lastAnyProg=v;},sim:function(){try{pkOpenSim();}catch(e){}pkSimPlay();},save:function(){pkSaveProg();},label:pkJobLabel,guard:function(){return (typeof pkMode!=='undefined'&&pkMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
+
+/* ---- profile graph: plan view (left) + section (right) ---- */
+function pkOutlinePts(a,b,q,rot,cx,cy){ /* rounded rectangle, half sizes a,b, corner radius q, rotated about its centre */
+  var pts=[],c=Math.cos(rot*Math.PI/180),s=Math.sin(rot*Math.PI/180);
+  function W(x,y){return [cx+c*x-s*y,cy+s*x+c*y];}
+  if(q<=1e-9){[[-a,-b],[a,-b],[a,b],[-a,b]].forEach(function(p){pts.push(W(p[0],p[1]));});return pts;}
+  var corners=[[a-q,b-q,0],[-(a-q),b-q,90],[-(a-q),-(b-q),180],[a-q,-(b-q),270]];
+  corners.forEach(function(k){for(var i=0;i<=8;i++){var t=(k[2]+90*i/8)*Math.PI/180;pts.push(W(k[0]+q*Math.cos(t),k[1]+q*Math.sin(t)));}});
+  return pts;}
+function pkDraw(){
+  var svg=$('pk_stage');if(!svg)return;
+  var sh=pkShapeV(),nf=function(v){return Math.round(v*100)/100;};
+  var lab=function(x,y,t,a,col){return '<text x="'+x+'" y="'+y+'" fill="'+(col||'#9fb0cc')+'" font-size="11.5" font-family="sans-serif" text-anchor="'+(a||'middle')+'">'+t+'</text>';};
+  var D=pkN('pk_D'),topz=pkN('pk_topz'),flz=pkHas('pk_floorz')?pkN('pk_floorz'):topz-10,depth=Math.max(0.1,topz-flz);
+  var w,l,q=0,rot=0,dia=0;
+  if(sh==='circle'){dia=pkN('pk_dia')||40;w=l=dia;}else{w=pkN('pk_w')||60;l=pkN('pk_l')||40;q=Math.max(0,Math.min(pkN('pk_r'),w/2,l/2));rot=pkN('pk_rot');}
+  var o='<defs><marker id="pkar" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 z" fill="#ffd166"/></marker><pattern id="pkhatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#2f4256" stroke-width="1"/></pattern></defs>';
+  /* ---------- plan view ---------- */
+  var PX=16,PY=26,PW=330,PH=236,cxw=0,cyw=0,pts;
+  if(sh==='circle'){pts=null;}else{pts=pkOutlinePts(w/2,l/2,q,rot,0,0);}
+  var mnx,mxx,mny,mxy;
+  if(sh==='circle'){mnx=mny=-dia/2;mxx=mxy=dia/2;}else{mnx=mny=1e9;mxx=mxy=-1e9;pts.forEach(function(p){mnx=Math.min(mnx,p[0]);mxx=Math.max(mxx,p[0]);mny=Math.min(mny,p[1]);mxy=Math.max(mxy,p[1]);});}
+  var bw=Math.max(1,mxx-mnx),bh=Math.max(1,mxy-mny),s=Math.min((PW-30)/bw,(PH-30)/bh);
+  var ox=PX+PW/2,oy=PY+PH/2,X=function(x){return ox+x*s;},Y=function(y){return oy-y*s;};
+  o+='<rect x="'+PX+'" y="'+PY+'" width="'+PW+'" height="'+PH+'" fill="#0d161e" stroke="#1e2d3a" rx="8"/>';
+  if(sh==='circle')o+='<circle cx="'+X(0)+'" cy="'+Y(0)+'" r="'+(dia/2*s)+'" fill="#0a1015" stroke="#37d39a" stroke-width="1.8"/>';
+  else o+='<polygon points="'+pts.map(function(p){return X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1);}).join(' ')+'" fill="#0a1015" stroke="#37d39a" stroke-width="1.8" stroke-linejoin="round"/>';
+  /* wall stock band (finishing) */
+  var ws=pkWallOn()?(pkHas('pk_wall')?pkN('pk_wall'):0.2):0;
+  if(ws>0){if(sh==='circle')o+='<circle cx="'+X(0)+'" cy="'+Y(0)+'" r="'+Math.max(1,(dia/2-ws)*s)+'" fill="none" stroke="#ffb300" stroke-width="1" stroke-dasharray="4 3"/>';
+    else{var p2=pkOutlinePts(Math.max(0.01,w/2-ws),Math.max(0.01,l/2-ws),Math.max(0,q-ws),rot,0,0);o+='<polygon points="'+p2.map(function(p){return X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1);}).join(' ')+'" fill="none" stroke="#ffb300" stroke-width="1" stroke-dasharray="4 3"/>';}}
+  /* cutter at a corner / near the wall, to scale */
+  if(D>0){var tx,ty;
+    if(sh==='circle'){tx=-(dia/2-D/2)*Math.cos(Math.PI/4);ty=-(dia/2-D/2)*Math.sin(Math.PI/4);if(dia/2-D/2<0){tx=ty=0;}}
+    else{var lx=-(w/2-D/2),ly=-(l/2-D/2);if(w/2-D/2<0)lx=0;if(l/2-D/2<0)ly=0;var cr=Math.cos(rot*Math.PI/180),sr=Math.sin(rot*Math.PI/180);tx=cr*lx-sr*ly;ty=sr*lx+cr*ly;}
+    o+='<circle cx="'+X(tx)+'" cy="'+Y(ty)+'" r="'+(D/2*s)+'" fill="rgba(169,139,255,.22)" stroke="#a98bff" stroke-width="1.4"/><circle cx="'+X(tx)+'" cy="'+Y(ty)+'" r="2" fill="#a98bff"/>'+lab(X(tx)+D/2*s+6,Y(ty)+4,'Ø'+nf(D)+' cutter','start','#a98bff');}
+  /* dimensions */
+  if(sh==='circle'){o+=lab(ox,PY+PH-10,'Ø'+nf(dia),'middle','#ffd166');}
+  else if(Math.abs(rot)<1e-6){
+    o+='<line x1="'+X(-w/2)+'" y1="'+(PY+PH-8)+'" x2="'+X(w/2)+'" y2="'+(PY+PH-8)+'" stroke="#ffd166" stroke-width="1.2" marker-start="url(#pkar)" marker-end="url(#pkar)"/>'+lab(ox,PY+PH-14,nf(w)+' (X)','middle','#ffd166');
+    o+='<line x1="'+(PX+PW-8)+'" y1="'+Y(l/2)+'" x2="'+(PX+PW-8)+'" y2="'+Y(-l/2)+'" stroke="#ffd166" stroke-width="1.2" marker-start="url(#pkar)" marker-end="url(#pkar)"/>'+lab(PX+PW-14,oy,nf(l)+' (Y)','end','#ffd166');
+  }else{o+=lab(ox,PY+PH-10,nf(w)+' × '+nf(l)+' · rotated '+nf(rot)+'°','middle','#ffd166');}
+  if(q>0)o+=lab(PX+8,PY+16,'corner R'+nf(q),'start','#9fb0cc');
+  o+=lab(ox,PY+16,(sh==='circle'?'centre':((($('pk_ref')||{}).value==='center')?'centre':'corner'))+' at X'+nf(pkN('pk_x'))+' Y'+nf(pkN('pk_y')),'middle','#7fb0d8');
+  /* ---------- section ---------- */
+  var SX=366,SY=26,SW=178,SH=236;
+  o+='<rect x="'+SX+'" y="'+SY+'" width="'+SW+'" height="'+SH+'" fill="#0d161e" stroke="#1e2d3a" rx="8"/>';
+  var ww=(sh==='circle')?dia:w,fs=pkFloorOn()?(pkHas('pk_floor')?pkN('pk_floor'):0.2):0,ap=pkN('pk_ap')||1;
+  var s2=Math.min((SW-60)/ww,(SH-90)/depth),cw=ww*s2,ch=depth*s2,bx=SX+SW/2-cw/2-6,by=SY+34,blk=ch+34;
+  o+='<rect x="'+(SX+8)+'" y="'+by+'" width="'+(SW-16)+'" height="'+blk+'" fill="#1c2a38" stroke="#3a4f63"/><rect x="'+(SX+8)+'" y="'+by+'" width="'+(SW-16)+'" height="'+blk+'" fill="url(#pkhatch)"/>';
+  o+='<rect x="'+bx+'" y="'+by+'" width="'+cw+'" height="'+ch+'" fill="#0a1015" stroke="#37d39a" stroke-width="1.6"/>';
+  if(ws>0){var wp=Math.max(1.5,ws*s2);o+='<rect x="'+bx+'" y="'+by+'" width="'+wp+'" height="'+ch+'" fill="rgba(255,179,0,.35)"/><rect x="'+(bx+cw-wp)+'" y="'+by+'" width="'+wp+'" height="'+ch+'" fill="rgba(255,179,0,.35)"/>';}
+  if(fs>0){var fp=Math.max(1.5,fs*s2);o+='<rect x="'+bx+'" y="'+(by+ch-fp)+'" width="'+cw+'" height="'+fp+'" fill="rgba(255,179,0,.35)"/>';}
+  var rough=Math.max(0.05,depth-fs),n=Math.max(1,Math.ceil(rough/ap-1e-6)),apx=rough/n;
+  for(var i=1;i<n;i++){var yy=by+i*apx*s2;o+='<line x1="'+bx+'" y1="'+yy+'" x2="'+(bx+cw)+'" y2="'+yy+'" stroke="#5f7a90" stroke-dasharray="3 3" stroke-width="1"/>';}
+  o+='<line x1="'+(SX+8)+'" y1="'+by+'" x2="'+(SX+SW-8)+'" y2="'+by+'" stroke="#7fb0d8" stroke-width="1.4"/>'+lab(SX+12,by-5,'Z'+nf(topz)+' (top)','start','#7fb0d8');
+  o+='<line x1="'+(bx+cw+14)+'" y1="'+by+'" x2="'+(bx+cw+14)+'" y2="'+(by+ch)+'" stroke="#ffd166" stroke-width="1.2" marker-start="url(#pkar)" marker-end="url(#pkar)"/>';
+  o+=lab(bx+cw+20,by+ch/2+4,nf(depth),'start','#ffd166');
+  o+=lab(SX+SW/2,by+ch+16,'floor Z'+nf(flz),'middle','#37d39a');
+  o+=lab(SX+SW/2,SY+SH-24,n+' level'+(n>1?'s':'')+' × '+nf(apx)+' mm','middle','#9fb0cc');
+  if(ws>0||fs>0)o+=lab(SX+SW/2,SY+SH-9,'amber = finishing stock','middle','#ffb300');
+  svg.innerHTML=o;
+}
+
+/* ---- toolpath simulation (plan view + Z trace), driven by the server's sampled path ---- */
+var PKS={pts:[],total:0,pos:0,playing:false,last:0,box:null,dia:10,topZ:0,zmin:0,zmax:0,trail:null,drawn:0,area:null};
+function pkSimBuild(path,P){
+  var cv=$('pk_simcv');if(!cv||!path)return;
+  var mv=path.moves||[],pts=[],s=0,p=null;
+  mv.forEach(function(m){var x=m[1],y=m[2],z=m[3],len=0;if(p){len=Math.hypot(x-p.x,y-p.y,z-p.z);if(m[0]==='rapid')len=Math.min(len,40)*0.3+0.5;}
+    s+=len;pts.push({s:s,k:m[0],x0:p?p.x:x,y0:p?p.y:y,z0:p?p.z:z,x:x,y:y,z:z});p={x:x,y:y,z:z};});
+  PKS.pts=pts;PKS.total=s||1;PKS.pos=0;PKS.playing=false;PKS.drawn=0;PKS.topZ=path.topZ;PKS.dia=path.dia;PKS.area=path.area;
+  var mnx=1e9,mxx=-1e9,mny=1e9,mxy=-1e9,zmin=1e9,zmax=-1e9,a=path.area;
+  pts.forEach(function(q){mnx=Math.min(mnx,q.x);mxx=Math.max(mxx,q.x);mny=Math.min(mny,q.y);mxy=Math.max(mxy,q.y);zmin=Math.min(zmin,q.z);zmax=Math.max(zmax,q.z);});
+  if(a.shape==='circle'){mnx=Math.min(mnx,a.cx-a.a);mxx=Math.max(mxx,a.cx+a.a);mny=Math.min(mny,a.cy-a.a);mxy=Math.max(mxy,a.cy+a.a);}
+  else{pkOutlinePts(a.a,a.b,a.q,a.rot,a.cx,a.cy).forEach(function(q){mnx=Math.min(mnx,q[0]);mxx=Math.max(mxx,q[0]);mny=Math.min(mny,q[1]);mxy=Math.max(mxy,q[1]);});}
+  var r=PKS.dia/2+4;PKS.box=[mnx-r,mxx+r,mny-r,mxy+r];PKS.zmin=zmin;PKS.zmax=Math.min(zmax,path.topZ+Math.max(P.entry.feedPlane,2)+6);
+  cv.width=760;cv.height=470;PKS.trail=document.createElement('canvas');PKS.trail.width=760;PKS.trail.height=340;
+  pkSimDraw();
+}
+function pkSimLayout(){var b=PKS.box,W=760,Hp=340,mg=14;var w=Math.max(1,b[1]-b[0]),h=Math.max(1,b[3]-b[2]);var s=Math.min((W-2*mg)/w,(Hp-2*mg)/h);var ox=mg+((W-2*mg)-w*s)/2-b[0]*s,oy=Hp-mg-((Hp-2*mg)-h*s)/2+b[2]*s;return {s:s,X:function(x){return ox+x*s;},Y:function(y){return oy-y*s;}};}
+function pkSimAt(sPos){var pts=PKS.pts,lo=0,hi=pts.length-1;while(lo<hi){var mid=(lo+hi)>>1;if(pts[mid].s<sPos)lo=mid+1;else hi=mid;}var i=lo,q=pts[i],sPrev=i>0?pts[i-1].s:0,t=(q.s>sPrev)?Math.max(0,Math.min(1,(sPos-sPrev)/(q.s-sPrev))):1;return {i:i,x:q.x0+(q.x-q.x0)*t,y:q.y0+(q.y-q.y0)*t,z:q.z0+(q.z-q.z0)*t,k:q.k};}
+function pkSimSeg(ctx,L,q){
+  var below=(q.k==='feed')&&(Math.min(q.z0,q.z)<PKS.topZ-0.01);
+  ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+  if(below){ctx.strokeStyle='rgba(55,211,154,.28)';ctx.lineWidth=Math.max(1.5,PKS.dia*L.s);}
+  else if(q.k==='rapid'){ctx.strokeStyle='rgba(107,124,140,.6)';ctx.lineWidth=1;ctx.setLineDash([3,4]);}
+  else{ctx.strokeStyle='rgba(200,215,230,.55)';ctx.lineWidth=1.2;}
+  ctx.beginPath();ctx.moveTo(L.X(q.x0),L.Y(q.y0));ctx.lineTo(L.X(q.x),L.Y(q.y));ctx.stroke();ctx.restore();
+}
+function pkSimOutline(ctx,L){var a=PKS.area;if(!a)return;ctx.save();ctx.strokeStyle='#4f8cff';ctx.lineWidth=1.5;ctx.setLineDash([6,4]);ctx.beginPath();
+  if(a.shape==='circle'){ctx.arc(L.X(a.cx),L.Y(a.cy),a.a*L.s,0,Math.PI*2);}
+  else{var pts=pkOutlinePts(a.a,a.b,a.q,a.rot,a.cx,a.cy);pts.forEach(function(p,i){i?ctx.lineTo(L.X(p[0]),L.Y(p[1])):ctx.moveTo(L.X(p[0]),L.Y(p[1]));});ctx.closePath();}
+  ctx.stroke();ctx.restore();}
+function pkSimDraw(){
+  var cv=$('pk_simcv');if(!cv||!PKS.box||!PKS.pts.length)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height,L=pkSimLayout(),pts=PKS.pts;
+  ctx.fillStyle='#0a1015';ctx.fillRect(0,0,W,H);
+  var tc=PKS.trail.getContext('2d'),cur=pkSimAt(PKS.pos);
+  while(PKS.drawn<cur.i){pkSimSeg(tc,L,pts[PKS.drawn]);PKS.drawn++;}
+  ctx.drawImage(PKS.trail,0,0);
+  pkSimOutline(ctx,L);
+  if(cur.i<pts.length){var q2=pts[cur.i];pkSimSeg(ctx,L,{k:q2.k,x0:q2.x0,y0:q2.y0,z0:q2.z0,x:cur.x,y:cur.y,z:cur.z});}
+  ctx.beginPath();ctx.arc(L.X(cur.x),L.Y(cur.y),Math.max(3,PKS.dia/2*L.s),0,Math.PI*2);ctx.fillStyle='rgba(169,139,255,.28)';ctx.fill();ctx.strokeStyle='#a98bff';ctx.lineWidth=1.6;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(L.X(cur.x)-5,L.Y(cur.y));ctx.lineTo(L.X(cur.x)+5,L.Y(cur.y));ctx.moveTo(L.X(cur.x),L.Y(cur.y)-5);ctx.lineTo(L.X(cur.x),L.Y(cur.y)+5);ctx.stroke();
+  var y0=352,y1=H-14,x0=14,x1=W-14,zr=Math.max(0.1,PKS.zmax-PKS.zmin);
+  ctx.fillStyle='#0d161e';ctx.fillRect(x0-6,y0-8,x1-x0+12,y1-y0+18);
+  var zy=function(z){return y1-(Math.min(z,PKS.zmax)-PKS.zmin)/zr*(y1-y0);},sx=function(sv){return x0+sv/PKS.total*(x1-x0);};
+  var ztop=zy(PKS.topZ);ctx.strokeStyle='#7fb0d8';ctx.lineWidth=1;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(x0,ztop);ctx.lineTo(x1,ztop);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#7fb0d8';ctx.font='11px sans-serif';ctx.fillText('Z top',x0+2,ztop-3);
+  ctx.beginPath();ctx.strokeStyle='#3b4f61';ctx.lineWidth=1.2;var prevS=0;
+  pts.forEach(function(q,ix){var xa=sx(prevS),xb=sx(q.s);if(ix===0)ctx.moveTo(xa,zy(q.z0));ctx.lineTo(xa,zy(q.z0));ctx.lineTo(xb,zy(q.z));prevS=q.s;});ctx.stroke();
+  ctx.beginPath();ctx.strokeStyle='#37d39a';ctx.lineWidth=1.8;prevS=0;
+  for(var ix=0;ix<pts.length;ix++){var q=pts[ix],xa=sx(prevS),xb=sx(Math.min(q.s,PKS.pos));if(ix===0)ctx.moveTo(xa,zy(q.z0));ctx.lineTo(xa,zy(q.z0));ctx.lineTo(xb,zy(ix===cur.i?cur.z:q.z));prevS=q.s;if(q.s>=PKS.pos)break;}
+  ctx.stroke();
+  ctx.fillStyle='#a98bff';ctx.beginPath();ctx.arc(sx(PKS.pos),zy(cur.z),4,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#cfe0ee';ctx.font='12px sans-serif';ctx.fillText('X '+cur.x.toFixed(2)+'   Y '+cur.y.toFixed(2)+'   Z '+cur.z.toFixed(2)+'   '+(cur.k==='rapid'?'RAPID':'FEED'),16,22);
+}
+function pkSimReset(){PKS.playing=false;PKS.pos=0;PKS.drawn=0;if(PKS.trail)PKS.trail.getContext('2d').clearRect(0,0,PKS.trail.width,PKS.trail.height);var b=$('pk_sim_play');if(b)b.innerHTML='&#9654; Play';pkSimDraw();}
+function pkSimPlay(){
+  if(!PKS.pts.length){var o=$('pk_out');if(o)o.textContent='Generate a program first, then Play.';return;}
+  var b=$('pk_sim_play');
+  if(PKS.playing){PKS.playing=false;if(b)b.innerHTML='&#9654; Play';return;}
+  if(PKS.pos>=PKS.total-1e-6)pkSimReset();
+  PKS.playing=true;PKS.last=0;if(b)b.innerHTML='&#10074;&#10074; Pause';
+  function step(ts){if(!PKS.playing)return;if(!PKS.last)PKS.last=ts;var dt=Math.min(0.1,(ts-PKS.last)/1000);PKS.last=ts;
+    var spd=(parseFloat(($('pk_sim_spd')||{}).value)||220)/220*PKS.total/14;PKS.pos+=spd*dt;
+    if(PKS.pos>=PKS.total){PKS.pos=PKS.total;PKS.playing=false;if(b)b.innerHTML='&#9654; Play';}
+    pkSimDraw();if(PKS.playing)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+(function initPk(){try{
+  var mt=$('pk_mat');if(mt){opt(mt,MATS.map(function(x){return x[0];}),'Stainless 316 austenitic');}
+  var host=$('pocket_op');if(host){host.addEventListener('input',function(){pkRefreshReq();});host.addEventListener('change',function(){pkRefreshReq();});}
+  pkVis();setPkMode('new');
 }catch(e){}})();
 
 (function initFm(){try{['fm_aW','fm_aL','fm_aD','fmc_D','fmc_teeth','fmc_facez'].forEach(function(id){var el=$(id);if(el){el.addEventListener('input',fmRefreshReq);el.addEventListener('change',fmRefreshReq);}});var sh=$('fm_aShape');if(sh)sh.addEventListener('click',function(){setTimeout(fmRefreshReq,0);});var h=$('fm_pm_hint');if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}catch(e){}try{fmCalc('init');fmFinVis();}catch(e){}})();
