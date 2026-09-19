@@ -246,7 +246,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.40 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.42 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1789,6 +1789,7 @@
         <button class="btn btn2" id="simspeed" style="width:auto;padding:8px 12px" onclick="simSpeed()">Speed 5&#215;</button>
         <button class="btn btn2" id="simzoombox" style="width:auto;padding:8px 12px" onclick="simMarquee()" title="Zoom to a region — tap this, then drag a box over the area">&#128269; Area</button>
         <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="simReset()">Reset (clear)</button>
+        <button class="btn btn2" id="simviewbtn" style="width:auto;padding:8px 12px" onclick="simViewCycle()" title="Change the viewing direction: ISO, Top, Right, Front">&#128065; View: ISO</button>
         <div id="simblklbl" class="note" style="width:100%;text-align:center;margin-top:2px"></div>
         <div id="simpos" style="width:100%;text-align:center;font-family:monospace;font-size:13px;color:#ffb300;margin-top:2px"></div>
       </div>
@@ -4544,7 +4545,7 @@ function runSim(){if(!lastProg)return;var cv=$('simcv');if(!cv)return;cv.style.d
   else{SIM.pts=d.pts;SIM.blk=d.blk;SIM.blocks=d.blocks;var fit=d.pts.filter(function(pp){return pp[2]<=5;});all=(fit.length?fit:d.pts);if(!all.length)all=[[0,0,0]];}
   var bb=_bounds(all);SIM.c=bb.c;var ext=Math.max(bb.mx[0]-bb.mn[0],bb.mx[1]-bb.mn[1],bb.mx[2]-bb.mn[2])||1;
   SIM.base=Math.min(SIM.W,SIM.H)/(ext*1.7);SIM.zoom=1;SIM.panX=0;SIM.panY=0;SIM.pd=0;SIM.marquee=false;SIM._sel=false;if(typeof simSetZoomBtn==='function')simSetZoomBtn(false);
-  SIM.azim=d.turning?0:0.6;SIM.tilt=d.turning?0:0.95;
+  SIM.azim=d.turning?0:0.6;SIM.tilt=d.turning?0:0.95;SIM.view='iso';{var _vb=$('simviewbtn');if(_vb){_vb.style.display=d.turning?'none':'';_vb.innerHTML='&#128065; View: ISO';}}
   SIM.curBlk=d.turning?d.passes.length:d.blocks;SIM.playing=false;SIM.speed=5;SIM.cycleSec=lastCycleSec||10;
   bindSim(cv);updatePlayBtn();var _sb=$('simspeed');if(_sb)_sb.innerHTML='Speed 5×';renderSim();
 }
@@ -4552,7 +4553,7 @@ function _proj(p){var x=p[0]-SIM.c[0],y=p[1]-SIM.c[1],z=p[2]-SIM.c[2];var s=SIM.
   if(SIM.turning){return [SIM.W/2+SIM.panX+x*s, SIM.H/2+SIM.panY-y*s];}
   var ca=Math.cos(SIM.azim),sa=Math.sin(SIM.azim);var xa=x*ca+y*sa,ya=-x*sa+y*ca;
   var st=Math.sin(SIM.tilt),ct=Math.cos(SIM.tilt);
-  return [SIM.W/2+SIM.panX+xa*s, SIM.H/2+SIM.panY+(ya*st - z*ct)*s];}
+  return [SIM.W/2+SIM.panX+xa*s, SIM.H/2+SIM.panY-(ya*st + z*ct)*s];}
 function renderSim(){var ctx=SIM.ctx,W=SIM.W,H=SIM.H;if(!ctx)return;ctx.clearRect(0,0,W,H);
   var lbl=$('simblklbl');
   if(SIM.turning){var cb=Math.max(0,Math.round(SIM.curBlk));
@@ -4575,7 +4576,8 @@ function renderSim(){var ctx=SIM.ctx,W=SIM.W,H=SIM.H;if(!ctx)return;ctx.clearRec
     var tip=null;for(var mi=0;mi<SIM.pts.length;mi++){if(SIM.blk[mi]>SIM.curBlk)break;tip=SIM.pts[mi];}
     if(tip){var tp=_proj(tip);ctx.fillStyle='#ff5252';ctx.beginPath();ctx.arc(tp[0],tp[1],5,0,2*Math.PI);ctx.fill();}
     var pos=$('simpos');if(pos)pos.textContent=tip?('X '+tip[0].toFixed(3)+'    Y '+tip[1].toFixed(3)+'    Z '+tip[2].toFixed(3)):'';
-    if(lbl)lbl.textContent='Block '+Math.round(SIM.curBlk)+' / '+SIM.blocks+'  ·  drag = pan · Top/Front/Left/3D';
+    try{simTriad(ctx);}catch(_e){}
+    if(lbl)lbl.textContent='Block '+Math.round(SIM.curBlk)+' / '+SIM.blocks+'  ·  drag = pan · pinch / wheel = zoom · View = ISO / Top / Right / Front';
   }
 }
 function simStop(){if(SIM.anim)cancelAnimationFrame(SIM.anim);SIM.playing=false;updatePlayBtn();}
@@ -4594,10 +4596,22 @@ function simPlay(){var mx=SIM.turning?SIM.passes.length:SIM.blocks;
     if(SIM.curBlk>=m){SIM.curBlk=m;SIM.playing=false;updatePlayBtn();renderSim();return;}
     SIM.anim=requestAnimationFrame(frame);}
   SIM.anim=requestAnimationFrame(frame);}
-function simView(v){if(!SIM.turning){if(v==='top'){SIM.azim=0;SIM.tilt=1.5708;}else if(v==='front'){SIM.azim=0;SIM.tilt=0.0;}else if(v==='left'){SIM.azim=1.5708;SIM.tilt=0.0;}else{SIM.azim=0.6;SIM.tilt=0.95;}}renderSim();}
+var SIM_VIEWS={iso:{n:'ISO',a:0.6,t:0.95},top:{n:'Top',a:0,t:1.5708},right:{n:'Right',a:1.5708,t:0},front:{n:'Front',a:0,t:0}};
+var SIM_VORDER=['iso','top','right','front'];
+function simView(v,keep){if(SIM.turning)return;var d=SIM_VIEWS[v]||SIM_VIEWS.iso;SIM.view=SIM_VIEWS[v]?v:'iso';SIM.azim=d.a;SIM.tilt=d.t;
+  if(!keep){SIM.zoom=1;SIM.panX=0;SIM.panY=0;SIM.pd=0;}
+  var b=$('simviewbtn');if(b)b.innerHTML='&#128065; View: '+d.n;renderSim();}
+function simViewCycle(){if(SIM.turning)return;var i=SIM_VORDER.indexOf(SIM.view||'iso');simView(SIM_VORDER[(i+1)%SIM_VORDER.length]);}
+function simTriad(ctx){var ca=Math.cos(SIM.azim),sa=Math.sin(SIM.azim),st=Math.sin(SIM.tilt),ct=Math.cos(SIM.tilt),ox=46,oy=SIM.H-46,L=30;
+  [['X',[1,0,0],'#ff6b6b'],['Y',[0,1,0],'#5fd97a'],['Z',[0,0,1],'#5b9bff']].forEach(function(a){var v=a[1],xa=v[0]*ca+v[1]*sa,ya=-v[0]*sa+v[1]*ca;
+    var dx=xa*L,dy=-(ya*st+v[2]*ct)*L,len=Math.hypot(dx,dy);ctx.strokeStyle=a[2];ctx.fillStyle=a[2];ctx.lineWidth=2;
+    if(len>3){ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+dx,oy+dy);ctx.stroke();}
+    else{ctx.beginPath();ctx.arc(ox,oy,3,0,2*Math.PI);ctx.fill();}
+    ctx.font='bold 12px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    var k=len>3?1.28:0;ctx.fillText(a[0],ox+dx*k+(len>3?0:11),oy+dy*k+(len>3?0:-9));});}
 function simBlock(d){simStop();var mx=SIM.turning?SIM.passes.length:SIM.blocks;SIM.curBlk=Math.max(1,Math.min(mx,Math.round(SIM.curBlk)+d));renderSim();}
 function simAll(){simStop();SIM.curBlk=SIM.turning?SIM.passes.length:SIM.blocks;renderSim();}
-function simReset(){simStop();SIM.curBlk=0;SIM.zoom=1;SIM.panX=0;SIM.panY=0;SIM.pd=0;SIM.marquee=false;simSetZoomBtn(false);if(SIM.cv)SIM.cv.style.cursor='';var _ov=$('simsel');if(_ov)_ov.style.display='none';SIM.azim=SIM.turning?0:0.6;SIM.tilt=SIM.turning?0:0.95;renderSim();}
+function simReset(){simStop();SIM.curBlk=0;SIM.zoom=1;SIM.panX=0;SIM.panY=0;SIM.pd=0;SIM.marquee=false;simSetZoomBtn(false);if(SIM.cv)SIM.cv.style.cursor='';var _ov=$('simsel');if(_ov)_ov.style.display='none';SIM.azim=SIM.turning?0:0.6;SIM.tilt=SIM.turning?0:0.95;SIM.view='iso';{var _vb=$('simviewbtn');if(_vb)_vb.innerHTML='&#128065; View: ISO';}renderSim();}
 function simZoom(f){if(!SIM.ctx)return;SIM.zoom=Math.max(0.05,Math.min(200,(SIM.zoom||1)*f));renderSim();}
 function simSetZoomBtn(a){var b=$('simzoombox');if(!b)return;b.style.background=a?'#3a1622':'';b.style.borderColor=a?'#ff4d4d':'';b.style.color=a?'#ff8a8a':'';}
 function simMarquee(){SIM.marquee=!SIM.marquee;simSetZoomBtn(SIM.marquee);if(SIM.cv)SIM.cv.style.cursor=SIM.marquee?'crosshair':'';var ov=$('simsel');if(ov&&!SIM.marquee)ov.style.display='none';}
@@ -6060,7 +6074,7 @@ function pkParams(){
             floor:{enabled:pkFloorOn(),stock:pkHas('pk_floor')?pkN('pk_floor'):0.2,stepPct:pkN('pk_fstep')||40,pattern:$('pk_fpat').value},
             feedPct:pkN('pk_ffeed')||80}
   };}
-function pkErr(e){var m=(e&&e.message)?e.message:String(e);var i=m.indexOf('{');if(m.indexOf('API ')===0&&i>0){try{var j=JSON.parse(m.slice(i));if(j&&j.detail)return String(j.detail).replace(/^ValueError:\s*/,'');}catch(x){}}return m;}
+function pkErr(e){var m=(e&&e.message)?e.message:String(e);var i=m.indexOf('{');if(m.indexOf('API ')===0&&i>0){try{var j=JSON.parse(m.slice(i));if(j&&j.detail){var dd=String(j.detail).replace(/^ValueError:\s*/,'');if(dd==='Not Found')return 'The YANTRA server does not have this operation yet - the server needs the latest update. (Programs for the other operations still work.)';return dd;}}catch(x){}}return m;}
 
 async function genPocket(){
   var out=$('pk_out');
