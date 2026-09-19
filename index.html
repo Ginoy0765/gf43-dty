@@ -253,7 +253,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.50 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.52 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1536,9 +1536,10 @@
 
       <div id="calcTapDrill" class="calcpanel" style="display:none">
         <p class="note hlpinfo" style="text-align:left;margin:2px 0 8px">Tap drill size for ~75% thread engagement (the standard shop default) &mdash; adjust engagement % for a looser or tighter tap.</p>
-        <div class="row2"><div><label>Thread system</label><select id="td_sys" onchange="tdSysFill();tdCalc()"><option value="ISO Metric">Metric (ISO)</option><option value="UN">Inch (UN/UNC/UNF)</option></select></div><div><label>Size</label><select id="td_size" onchange="tdSizeChange()"></select></div></div>
-        <div class="row2"><div><label id="td_dlabel">Major dia D (mm)</label><input id="td_d" type="number" inputmode="decimal" oninput="tdCalc()"></div><div><label id="td_plabel">Pitch (mm)</label><input id="td_p" type="number" inputmode="decimal" oninput="tdCalc()"></div></div>
-        <div class="row2"><div><label>Thread engagement %</label><input id="td_eng" type="number" value="75" inputmode="numeric" oninput="tdCalc()"></div><div></div></div>
+        <div class="row2"><div><label>Thread system</label><select id="td_sys" onchange="tdSysFill();tdCalc()"><option value="ISO Metric">Metric (ISO)</option><option value="UN">Inch (UN/UNC/UNF)</option><option value="HC-M">Metric Heli-Coil (STI)</option><option value="HC-UN">Inch Heli-Coil (UNC/UNF)</option></select></div><div><label>Size</label><select id="td_size" onchange="tdSizeChange()"></select></div></div>
+        <div class="row2" id="td_row_dp"><div><label id="td_dlabel">Major dia D (mm)</label><input id="td_d" type="number" inputmode="decimal" oninput="tdCalc()"></div><div><label id="td_plabel">Pitch (mm)</label><input id="td_p" type="number" inputmode="decimal" oninput="tdCalc()"></div></div>
+        <div class="row2" id="td_row_eng"><div><label>Thread engagement %</label><input id="td_eng" type="number" value="75" inputmode="numeric" oninput="tdCalc()"></div><div></div></div>
+        <div class="row2" id="td_row_hc" style="display:none"><div><label>Insert length</label><select id="td_hclen" onchange="tdCalc()"><option value="1">1 D</option><option value="1.5" selected>1.5 D</option><option value="2">2 D</option><option value="2.5">2.5 D</option><option value="3">3 D</option></select></div><div><label>Workpiece material</label><select id="td_hcmat" onchange="tdCalc()"><option value="st">Steel / cast iron / plastic</option><option value="al">Aluminium / magnesium</option></select></div></div>
         <div id="td_res"></div>
       </div>
 
@@ -1675,8 +1676,9 @@
         <button class="btn btn2" type="button" onclick="var _e=$('sp_feat');if(_e)_e.value='Thread';if(typeof spSave==='function')spSave();" style="margin-top:8px">&#10003; Apply specials</button>
       </div></div>
       <div class="sec mill-only"><div class="st" onclick="tog(this)"><span class="reqttl">PARAMETERS <button type="button" class="autobtn" id="autoBtn" onclick="event.stopPropagation();openAuto()">AUTO</button></span><span>&#9656;</span></div><div class="sb" style="display:none">
-        <div class="row2"><div><label>Stability %</label><input id="stab" type="number" value="50" inputmode="numeric" oninput="matChange()"></div><div><label>Vc (m/min)</label><input id="vc" type="number" value="60" inputmode="decimal" oninput="vcEdited=true;recalc()"></div></div>
-        <div class="row2"><div><label>RPM (auto)</label><input id="rpm" readonly></div><div><label>fz (mm/tooth)</label><input id="fz" inputmode="decimal" oninput="fzEdited=true;recalc()" placeholder="auto"></div></div>
+        <div class="row2"><div><label>Stability %</label><input id="stab" type="number" value="50" inputmode="numeric" oninput="matChange()"></div><div><label>Vc (m/min)</label><input id="vc" type="number" value="60" inputmode="decimal" oninput="vcEdited=true;rpmEdited=false;recalc()"></div></div>
+        <div class="row2"><div><label>Spindle RPM (S)</label><input id="rpm" type="number" inputmode="numeric" placeholder="auto" oninput="tmRpmEdit()" onchange="tmRpmDone()"></div><div><label>fz (mm/tooth)</label><input id="fz" inputmode="decimal" oninput="fzEdited=true;recalc()" placeholder="auto"></div></div>
+        <div class="row2"><div><label>Feed F (mm/min)</label><input id="tmfeed" type="number" inputmode="numeric" placeholder="auto" oninput="tmFeedEdit()"></div><div></div></div>
         <div class="row2"><div><label>Passes</label><input id="passes" type="number" value="1" inputmode="numeric" oninput="renderPassPcts()"></div><div><label>Spring pass</label><select id="spring"><option>No</option><option>Yes</option></select></div></div>
         <div id="passpcts"></div>
         <div class="row2"><div><label>Equal-volume passes</label><select id="eqvol" onchange="renderPassPcts()"><option>No</option><option>Yes</option></select></div><div id="rctfWrap"><label>RCTF comp (%)</label><input id="rctf" type="number" value="0" inputmode="numeric"></div></div>
@@ -2437,7 +2439,7 @@ const ISO_COL={P:"#2196F3",M:"#FBC02D",K:"#E53935",N:"#43A047",S:"#FB8C00",H:"#4
 const SERIES={Coarse:COARSE,Fine:FINE,All:ALL};
 const MAXRPM=5000;
 let method='Mill';
-let minorEdited=false;let vcEdited=false,fzEdited=false;
+let minorEdited=false;let vcEdited=false,fzEdited=false,rpmEdited=false;
 let pyReady=false, py=null, pendingGen=false;
 const MILLPY="import webpost\nwebpost.post_mill(dict(JS))";
 const MILLTIME="import webpost\nwebpost.mill_time(dict(JS))";
@@ -2636,6 +2638,10 @@ function showHelp(label){ensureHelpPov();var k=helpKey(label),h=HELP[k];if(!h){v
 function closeHelp(){var o=document.getElementById('hlpov');if(o)o.classList.remove('on');}
 document.addEventListener('click',function(e){if(!helpMode)return;var el=e.target;while(el&&el!==document.body){if(el.tagName==='LABEL'){e.preventDefault();e.stopPropagation();showHelp(el.textContent);return;}el=el.parentNode;}},true);
 var HELP={
+"spindle rpm s":{"svg": "", "text": "Spindle speed the program will use (the S word). Type it directly and Vc follows (Vc = π × d × RPM / 1000); or change Vc and RPM follows. It is capped by Max RPM. Changing the material, stability, tool diameter or tooth count puts RPM back to automatic."},
+"feed f mm min":{"svg": "", "text": "Programmed feed (the F word) for the full-depth thread pass, on the tool-centre path: F = fz × flutes × RPM × (D − d) / D for an internal thread (external and Tool OD use the engine's own ratio). Type it directly and fz follows; change fz, Vc or RPM and F follows. Earlier passes are proportionally lower, and entry / RCTF reductions apply on top, so other F values in the program are normal."},
+"insert length":{"svg": "", "text": "Length of the Heli-Coil insert as a multiple of the nominal diameter: 1D, 1.5D, 2D, 2.5D or 3D. 1.5D is the usual general-purpose choice; use longer inserts in soft materials such as aluminium."},
+"workpiece material":{"svg": "", "text": "Heli-Coil drilled holes are slightly smaller in aluminium and magnesium and slightly larger in steel, cast iron and plastic. Pick the group your part belongs to."},
 "pcd ø mm":{"svg": "", "text": "Pitch circle diameter: the diameter of the circle that passes through the centres of all the holes."},
 "start angle from +x":{"svg": "", "text": "Angle of hole no. 1 measured from the +X axis, counter-clockwise positive. 0° puts hole 1 on the right, 90° at the top."},
 "no. of holes":{"svg": "", "text": "Number of equally spaced holes on the circle."},
@@ -3562,7 +3568,7 @@ function matFill(sel,def,grouped){if(!sel)return;
 function opt(sel,arr,val){sel.innerHTML=arr.map(a=>'<option>'+a+'</option>').join('');if(val!=null)sel.value=val;}
 document.addEventListener('keydown',function(e){if(e.key!=='ArrowUp'&&e.key!=='ArrowDown')return;var t=e.target;if(!t)return;var tg=t.tagName;if(tg!=='INPUT'&&tg!=='SELECT')return;if(e.key==='ArrowDown'&&t.classList&&t.classList.contains('ttf')&&typeof tnPts!=='undefined'){var _di=parseInt(t.getAttribute('data-i'));if(_di===tnPts.length-1&&typeof tnAddPt==='function'){e.preventDefault();tnAddPt();setTimeout(function(){var _r=document.querySelectorAll('.ttf[data-i="'+(tnPts.length-1)+'"]');if(_r.length)_r[0].focus();},0);return;}}var _gn=(typeof yaGuidedNeighbor==='function')?yaGuidedNeighbor(t,e.key==='ArrowDown'?'after':'before'):null;if(_gn==='END'){e.preventDefault();try{t.blur();}catch(x){}return;}if(_gn){e.preventDefault();if(typeof yaFocusOpen==='function')yaFocusOpen(_gn);else{_gn.focus();if(typeof _gn.select==='function'){try{_gn.select();}catch(x){}}}return;}e.preventDefault();var f=[].slice.call(document.querySelectorAll('input,select')).filter(function(el){return el.offsetParent!==null&&!el.disabled&&el.type!=='hidden'&&el.type!=='button';});var i=f.indexOf(t);if(i<0)return;var n=(e.key==='ArrowDown')?i+1:i-1;if(n>=0&&n<f.length){var el=f[n];el.focus();if(typeof el.select==='function'){try{el.select();}catch(x){}}}},true);document.addEventListener('wheel',function(e){var t=e.target;if(t&&t.tagName==='INPUT'&&t.type==='number'&&document.activeElement===t){e.preventDefault();}},{passive:false});
 function matBy(name){return MATS.find(x=>x[0]===name)||MATS.find(x=>x[0]==='Stainless 316 austenitic')||MATS[0];}
-function clearD(){var e=$('d');if(e)e.value=((typeof progMode!=='undefined'&&progMode==='sample')?'10':'');if($('rpm'))$('rpm').value='';if($('fz'))$('fz').value='';fzEdited=false;}
+function clearD(){var e=$('d');if(e)e.value=((typeof progMode!=='undefined'&&progMode==='sample')?'10':'');if($('rpm'))$('rpm').value='';if($('fz'))$('fz').value='';if($('tmfeed'))$('tmfeed').value='';fzEdited=false;rpmEdited=false;}
 function taperOffset(internal,L){var pre=(method==='Turn')?'t_':'';var tm=$(pre+'thtaper');if(tm){var mode=tm.value;var dd=parseFloat($(pre+'diadiff').value);var deg=parseFloat($(pre+'taperdeg').value);if(mode==='Manual'){if(!isNaN(dd)&&dd!==0)return dd;if(!isNaN(deg)&&deg!==0)return 2*L*Math.tan(deg*Math.PI/180);return 0;}if(mode==='NPT'||mode==='BSPT')return internal?-L/16:L/16;}var pv=$('profile').value;if(pv==='NPT (Taper)'||pv==='BSPT (Taper)')return internal?-L/16:L/16;return 0;}
 function setMethod(m){method=m;
   var mm=$('mMill'),mt=$('mTurn');if(mm)mm.classList.toggle('on',m==='Mill');if(mt)mt.classList.toggle('on',m==='Turn');
@@ -3606,14 +3612,43 @@ function _parseInchFrac(s){s=(s||'').trim().replace(/[\u2033"]/g,'');if(!s)retur
 function tpiChange(){const t=parseFloat($('tpi').value);if(t>0)$('P').value=r(25.4/t,4);recalc();}
 function syncTpi(){var p=parseFloat($('P').value);if(p>0)tpiSet(r(25.4/p,3));}
 function updateMR(){var m=matBy($('mat').value);var el=$('mrinfo');if(!el)return;if(!m||m[4]==null){el.innerHTML='<span class=\'isochip\' style=\'background:#9E9E9E\'>MANUAL</span> manual entry';return;}var c=ISO_COL[m[2]]||'#9E9E9E';el.innerHTML='<span class=\'isochip\' style=\'background:'+c+'\'>ISO '+m[2]+'</span> Machinability '+m[4]+'%';}
-function matChange(){updateMR();vcEdited=false;fzEdited=false;var m=matBy($('mat').value);if(!m||m[1]==null)return;var vc=m[1],fzb=m[3];var sm=Math.max(10,Math.min(100,num('stab',50)));var vfm=Math.max(0.33,sm/50);var fsm=sm>=50?(0.5+sm/100):Math.max(0.5,sm/50);if($('vc'))$('vc').value=Math.round(vc*vfm);var stt=Math.max(10,Math.min(100,num('t_stab',50)));var vft=Math.max(0.33,stt/50);if($('t_vc'))$('t_vc').value=Math.round(Math.round(vc*1.4)*vft);var d=num('d',0),nt=Math.max(1,Math.round(num('teeth',1)));var nf=Math.max(0.1,1-0.08*Math.min(9,nt-1)-0.02*Math.max(0,nt-10));if($('fz')){if(d>0){var vg=fzb*Math.min(d,40)/10;$('fz').value=(vg*nf*fsm).toFixed(3);}else $('fz').value='';}recalc();tnFirstAuto=true;recalcT();}
+/* ---- Thread milling: editable RPM (<-> Vc) and editable programmed feed F (<-> fz) ---- */
+function tmMax(){return LOCK_ADV?5000:getMax();}
+function tmFeedK(){ /* F = fz * k * rpm  -- k = flutes x (centre-path / edge feed ratio), exactly as the engine derives the full-depth pass feed */
+  var d=num('d',0),D0=num('D',16),P=num('P',2);if(!(d>0)||!(D0>0))return 0;
+  var internal=!$('side')||$('side').value==='Internal';
+  var turnMill=(typeof method!=='undefined'&&method!=='Turn')&&$('ctrl')&&$('ctrl').value.indexOf('Turn-mill')>=0&&internal;
+  if(turnMill)return Math.max(1,Math.round(num('teeth',1)))*Math.max(0,(D0-d)/D0);
+  var D=D0+(LOCK_ADV?0:num('majadj',0));
+  var mf=$('minor'),minor=(mf&&parseFloat(mf.value)>0)?parseFloat(mf.value):stdMinor(D0,P,internal);
+  var od=(!LOCK_ADV)&&$('toolpath')&&$('toolpath').value.indexOf('OD')>=0;
+  var dEnd=internal?D:minor;
+  var ratio=od?dEnd/D:(internal?(dEnd-d):(dEnd+d))/D;
+  return Math.max(1,num('Z',1))*Math.max(0,ratio);}
+function tmRpmEff(){var r=parseFloat($('rpm')?$('rpm').value:'');return r>0?Math.min(r,tmMax()):0;}
+function tmFeedUpd(){var e=$('tmfeed');if(!e)return;var fz=parseFloat($('fz')?$('fz').value:''),r=tmRpmEff(),k=tmFeedK();
+  e.value=(fz>0&&r>0&&k>0)?Math.round(fz*k*r):'';}
+function tmFeedEdit(){var F=parseFloat($('tmfeed').value),r=tmRpmEff(),k=tmFeedK();if(!(F>0)||!(r>0)||!(k>0))return;
+  $('fz').value=(F/(k*r)).toFixed(5);fzEdited=true;}
+function tmRpmEdit(){var d=num('d',0),r=parseFloat($('rpm').value);if(!(r>0)||!(d>0))return;
+  r=Math.min(r,tmMax());rpmEdited=true;vcEdited=true;
+  if($('vc'))$('vc').value=Math.round(Math.PI*d*r/1000*100)/100;
+  tmFeedUpd();}
+function tmRpmDone(){var e=$('rpm'),r=parseFloat(e.value);
+  if(!(r>0)){rpmEdited=false;recalc();return;}
+  r=Math.min(Math.round(r),tmMax());e.value=r;tmRpmEdit();}
+function tmVcFromRpm(Vc,d){if(rpmEdited&&d>0){var r=tmRpmEff();if(r>0)return Math.PI*d*r/1000;}return Vc;}
+document.addEventListener('input',function(ev){var t=ev.target;if(t&&/^(Z|D|P|d|minor|majadj|teeth)$/.test(t.id||''))setTimeout(function(){try{tmFeedUpd();}catch(e){}},0);});
+document.addEventListener('change',function(ev){var t=ev.target;if(t&&/^(Z|D|P|d|minor|majadj|teeth|side|toolpath|ctrl|profile)$/.test(t.id||''))setTimeout(function(){try{tmFeedUpd();}catch(e){}},0);});
+function matChange(){updateMR();vcEdited=false;fzEdited=false;rpmEdited=false;var m=matBy($('mat').value);if(!m||m[1]==null)return;var vc=m[1],fzb=m[3];var sm=Math.max(10,Math.min(100,num('stab',50)));var vfm=Math.max(0.33,sm/50);var fsm=sm>=50?(0.5+sm/100):Math.max(0.5,sm/50);if($('vc'))$('vc').value=Math.round(vc*vfm);var stt=Math.max(10,Math.min(100,num('t_stab',50)));var vft=Math.max(0.33,stt/50);if($('t_vc'))$('t_vc').value=Math.round(Math.round(vc*1.4)*vft);var d=num('d',0),nt=Math.max(1,Math.round(num('teeth',1)));var nf=Math.max(0.1,1-0.08*Math.min(9,nt-1)-0.02*Math.max(0,nt-10));if($('fz')){if(d>0){var vg=fzb*Math.min(d,40)/10;$('fz').value=(vg*nf*fsm).toFixed(3);}else $('fz').value='';}recalc();tnFirstAuto=true;recalcT();}
 function isPipe(){return $('profile')&&$('profile').value==='NPT (Taper)';}
 function is55(){var p=($('profile')&&$('profile').value)||'';return /whitworth|bsp|bsw|bsf/i.test(p);}
 function stdMinor(D,P,internal){
   if(is55())return D-1.280654*P;           /* 55deg Whitworth form: thread depth 0.640327*P (BSP/BSPT/BSW/BSF) */
   return isPipe()?(D-1.6*P):(internal?(D-P):(D-1.226*P));  /* NPT 60deg (0.8P) : ISO/UN 60deg */
 }
-function recalc(){var dv=($('d')?$('d').value.trim():'');var Vc=num('vc',60);if($('rpm'))$('rpm').value=dv?rpmFor(Vc,parseFloat(dv)):'';if($('minor')&&!minorEdited){var internal=$('side').value==='Internal';var D0=num('D',16),P0=num('P',2);$('minor').value=r(stdMinor(D0,P0,internal),3);var _tm=$('t_minor');if(_tm)_tm.value=$('minor').value;}}
+function recalc(){recalc0();try{tmFeedUpd();}catch(e){}}
+function recalc0(){var dv=($('d')?$('d').value.trim():'');var Vc=num('vc',60);if($('rpm')&&!rpmEdited)$('rpm').value=dv?rpmFor(Vc,parseFloat(dv)):'';if($('minor')&&!minorEdited){var internal=$('side').value==='Internal';var D0=num('D',16),P0=num('P',2);$('minor').value=r(stdMinor(D0,P0,internal),3);var _tm=$('t_minor');if(_tm)_tm.value=$('minor').value;}}
 var tnFirstAuto=true;
 var tnFloorAuto=true;
 var tnAutoOn=true;
@@ -4016,9 +4051,43 @@ function calcShowMenu(){
   var back=$('calcBackRow');if(back)back.style.display='none';var vh=$('calcVhead');if(vh)vh.style.display='';
   Object.keys(CALC_PANELS).forEach(function(k){var el=$(CALC_PANELS[k]);if(el)el.style.display='none';});
 }
+var HC_M=[{"k":"M2x0.4","l":"M2 × 0.4","s":"C","P":0.4,"D":2.0,"al":2.1,"st":2.1,"mn":2.087,"mx":2.17},{"k":"M2.2x0.45","l":"M2.2 × 0.45","s":"C","P":0.45,"D":2.2,"al":2.3,"st":2.35,"mn":2.297,"mx":2.397},{"k":"M2.5x0.45","l":"M2.5 × 0.45","s":"C","P":0.45,"D":2.5,"al":2.55,"st":2.65,"mn":2.597,"mx":2.697},{"k":"M3x0.5","l":"M3 × 0.5","s":"C","P":0.5,"D":3.0,"al":3.15,"st":3.2,"mn":3.108,"mx":3.22},{"k":"M3.5x0.6","l":"M3.5 × 0.6","s":"C","P":0.6,"D":3.5,"al":3.7,"st":3.7,"mn":3.63,"mx":3.755},{"k":"M4x0.7","l":"M4 × 0.7","s":"C","P":0.7,"D":4.0,"al":4.2,"st":4.25,"mn":4.152,"mx":4.292},{"k":"M5x0.8","l":"M5 × 0.8","s":"C","P":0.8,"D":5.0,"al":5.2,"st":5.3,"mn":5.174,"mx":5.334},{"k":"M6x1","l":"M6 × 1","s":"C","P":1.0,"D":6.0,"al":6.25,"st":6.3,"mn":6.217,"mx":6.407},{"k":"M7x1","l":"M7 × 1","s":"C","P":1.0,"D":7.0,"al":7.25,"st":7.3,"mn":7.217,"mx":7.407},{"k":"M8x1.25","l":"M8 × 1.25","s":"C","P":1.25,"D":8.0,"al":8.3,"st":8.4,"mn":8.271,"mx":8.483},{"k":"M10x1.5","l":"M10 × 1.5","s":"C","P":1.5,"D":10.0,"al":10.5,"st":10.5,"mn":10.324,"mx":10.56},{"k":"M12x1.75","l":"M12 × 1.75","s":"C","P":1.75,"D":12.0,"al":12.5,"st":12.5,"mn":12.379,"mx":12.644},{"k":"M14x2","l":"M14 × 2","s":"C","P":2.0,"D":14.0,"al":14.5,"st":14.5,"mn":14.433,"mx":14.733},{"k":"M16x2","l":"M16 × 2","s":"C","P":2.0,"D":16.0,"al":16.5,"st":16.5,"mn":16.433,"mx":16.733},{"k":"M18x2.5","l":"M18 × 2.5","s":"C","P":2.5,"D":18.0,"al":18.75,"st":18.75,"mn":18.541,"mx":18.896},{"k":"M20x2.5","l":"M20 × 2.5","s":"C","P":2.5,"D":20.0,"al":20.75,"st":20.75,"mn":20.541,"mx":20.896},{"k":"M22x2.5","l":"M22 × 2.5","s":"C","P":2.5,"D":22.0,"al":22.75,"st":22.75,"mn":22.541,"mx":22.896},{"k":"M24x3","l":"M24 × 3","s":"C","P":3.0,"D":24.0,"al":24.75,"st":24.75,"mn":24.649,"mx":25.049},{"k":"M27x3","l":"M27 × 3","s":"C","P":3.0,"D":27.0,"al":27.75,"st":27.75,"mn":27.649,"mx":28.049},{"k":"M30x3.5","l":"M30 × 3.5","s":"C","P":3.5,"D":30.0,"al":31,"st":31,"mn":30.757,"mx":31.207},{"k":"M33x3.5","l":"M33 × 3.5","s":"C","P":3.5,"D":33.0,"al":34,"st":34,"mn":33.757,"mx":34.207},{"k":"M36x4","l":"M36 × 4","s":"C","P":4.0,"D":36.0,"al":37,"st":37,"mn":36.866,"mx":37.341},{"k":"M39x4","l":"M39 × 4","s":"C","P":4.0,"D":39.0,"al":40,"st":40,"mn":39.866,"mx":40.341},{"k":"M8x1","l":"M8 × 1","s":"F","P":1.0,"D":8.0,"al":8.25,"st":8.3,"mn":8.217,"mx":8.407},{"k":"M10x1","l":"M10 × 1","s":"F","P":1.0,"D":10.0,"al":10.25,"st":10.25,"mn":10.217,"mx":10.407},{"k":"M10x1.25","l":"M10 × 1.25","s":"F","P":1.25,"D":10.0,"al":10.25,"st":10.25,"mn":10.271,"mx":10.483},{"k":"M12x1.25","l":"M12 × 1.25","s":"F","P":1.25,"D":12.0,"al":12.25,"st":12.25,"mn":12.271,"mx":12.483},{"k":"M12x1.5","l":"M12 × 1.5","s":"F","P":1.5,"D":12.0,"al":12.25,"st":12.5,"mn":12.324,"mx":12.56},{"k":"M14x1.5","l":"M14 × 1.5","s":"F","P":1.5,"D":14.0,"al":14.25,"st":14.5,"mn":14.324,"mx":14.56},{"k":"M16x1.5","l":"M16 × 1.5","s":"F","P":1.5,"D":16.0,"al":16.25,"st":16.5,"mn":16.324,"mx":16.56},{"k":"M18x1.5","l":"M18 × 1.5","s":"F","P":1.5,"D":18.0,"al":18.25,"st":18.5,"mn":18.324,"mx":18.56},{"k":"M20x1.5","l":"M20 × 1.5","s":"F","P":1.5,"D":20.0,"al":20.25,"st":20.5,"mn":20.324,"mx":20.56},{"k":"M22x1.5","l":"M22 × 1.5","s":"F","P":1.5,"D":22.0,"al":22.25,"st":22.5,"mn":22.324,"mx":22.56},{"k":"M18x2","l":"M18 × 2","s":"F","P":2.0,"D":18.0,"al":18.5,"st":18.5,"mn":18.433,"mx":18.733},{"k":"M20x2","l":"M20 × 2","s":"F","P":2.0,"D":20.0,"al":20.5,"st":20.5,"mn":20.433,"mx":20.733},{"k":"M22x2","l":"M22 × 2","s":"F","P":2.0,"D":22.0,"al":22.5,"st":22.5,"mn":22.433,"mx":22.733},{"k":"M24x2","l":"M24 × 2","s":"F","P":2.0,"D":24.0,"al":24.5,"st":24.5,"mn":24.433,"mx":24.733},{"k":"M27x2","l":"M27 × 2","s":"F","P":2.0,"D":27.0,"al":27.5,"st":27.5,"mn":27.433,"mx":27.733},{"k":"M30x2","l":"M30 × 2","s":"F","P":2.0,"D":30.0,"al":30.5,"st":30.5,"mn":30.433,"mx":30.733},{"k":"M33x2","l":"M33 × 2","s":"F","P":2.0,"D":33.0,"al":33.5,"st":33.5,"mn":33.433,"mx":33.733},{"k":"M36x2","l":"M36 × 2","s":"F","P":2.0,"D":36.0,"al":36.5,"st":36.5,"mn":36.433,"mx":36.733},{"k":"M39x2","l":"M39 × 2","s":"F","P":2.0,"D":39.0,"al":39.5,"st":39.5,"mn":39.433,"mx":39.733},{"k":"M36x3","l":"M36 × 3","s":"F","P":3.0,"D":36.0,"al":37,"st":37,"mn":36.649,"mx":37.049},{"k":"M39x3","l":"M39 × 3","s":"F","P":3.0,"D":39.0,"al":40,"st":40,"mn":39.649,"mx":40.049}];
+var HC_UN=[{"k":"1-64","l":"#1-64","s":"C","P":0.01562,"D":0.073,"tpi":64,"al":"#47","ald":0.0785,"st":"#46","std":0.081},{"k":"2-56","l":"#2-56","s":"C","P":0.01786,"D":0.086,"tpi":56,"al":"3/32","ald":0.0938,"st":"#41","std":0.096},{"k":"3-48","l":"#3-48","s":"C","P":0.02083,"D":0.099,"tpi":48,"al":"#36","ald":0.1065,"st":"7/64","std":0.1094},{"k":"4-40","l":"#4-40","s":"C","P":0.025,"D":0.112,"tpi":40,"al":"#31","ald":0.12,"st":"#31","std":0.12},{"k":"5-40","l":"#5-40","s":"C","P":0.025,"D":0.125,"tpi":40,"al":"3.4 mm","ald":0.1339,"st":"#29","std":0.136},{"k":"6-32","l":"#6-32","s":"C","P":0.03125,"D":0.138,"tpi":32,"al":"#26","ald":0.147,"st":"#25","std":0.1495},{"k":"8-32","l":"#8-32","s":"C","P":0.03125,"D":0.164,"tpi":32,"al":"#17","ald":0.173,"st":"#16","std":0.177},{"k":"10-24","l":"#10-24","s":"C","P":0.04167,"D":0.19,"tpi":24,"al":"13/64","ald":0.2031,"st":"#5","std":0.2055},{"k":"12-24","l":"#12-24","s":"C","P":0.04167,"D":0.216,"tpi":24,"al":"#1","ald":0.228,"st":"#1","std":0.228},{"k":"1/4-20","l":"1/4-20","s":"C","P":0.05,"D":0.25,"tpi":20,"al":"H","ald":0.266,"st":"H","std":0.266},{"k":"5/16-18","l":"5/16-18","s":"C","P":0.05556,"D":0.3125,"tpi":18,"al":"Q","ald":0.332,"st":"Q","std":0.332},{"k":"3/8-16","l":"3/8-16","s":"C","P":0.0625,"D":0.375,"tpi":16,"al":"X","ald":0.397,"st":"X","std":0.397},{"k":"7/16-14","l":"7/16-14","s":"C","P":0.07143,"D":0.4375,"tpi":14,"al":"29/64","ald":0.4531,"st":"29/64","std":0.4531},{"k":"1/2-13","l":"1/2-13","s":"C","P":0.07692,"D":0.5,"tpi":13,"al":"33/64","ald":0.5156,"st":"17/32","std":0.5312},{"k":"9/16-12","l":"9/16-12","s":"C","P":0.08333,"D":0.5625,"tpi":12,"al":"37/64","ald":0.5781,"st":"19/32","std":0.5938},{"k":"5/8-11","l":"5/8-11","s":"C","P":0.09091,"D":0.625,"tpi":11,"al":"21/32","ald":0.6562,"st":"21/32","std":0.6562},{"k":"3/4-10","l":"3/4-10","s":"C","P":0.1,"D":0.75,"tpi":10,"al":"25/32","ald":0.7812,"st":"25/32","std":0.7812},{"k":"7/8-9","l":"7/8-9","s":"C","P":0.11111,"D":0.875,"tpi":9,"al":"29/32","ald":0.9062,"st":"29/32","std":0.9062},{"k":"1-8","l":"#1-8","s":"C","P":0.125,"D":0.073,"tpi":8,"al":"1-1/32","ald":1.0312,"st":"1-1/32","std":1.0312},{"k":"1-1/8-7","l":"1-1/8-7","s":"C","P":0.14286,"D":1.125,"tpi":7,"al":"1-11/64","ald":1.1719,"st":"1-11/64","std":1.1719},{"k":"1-1/4-7","l":"1-1/4-7","s":"C","P":0.14286,"D":1.25,"tpi":7,"al":"1-19/64","ald":1.2969,"st":"1-19/64","std":1.2969},{"k":"1-3/8-6","l":"1-3/8-6","s":"C","P":0.16667,"D":1.375,"tpi":6,"al":"1-27/64","ald":1.4219,"st":"1-27/64","std":1.4219},{"k":"1-1/2-6","l":"1-1/2-6","s":"C","P":0.16667,"D":1.5,"tpi":6,"al":"1-35/64","ald":1.5469,"st":"1-35/64","std":1.5469},{"k":"2-64","l":"#2-64","s":"F","P":0.01562,"D":0.086,"tpi":64,"al":"2.35 mm","ald":0.0925,"st":"2.35 mm","std":0.0925},{"k":"3-56","l":"#3-56","s":"F","P":0.01786,"D":0.099,"tpi":56,"al":"#37","ald":0.104,"st":"#36","std":0.1065},{"k":"4-48","l":"#4-48","s":"F","P":0.02083,"D":0.112,"tpi":48,"al":"3 mm","ald":0.1181,"st":"#31","std":0.12},{"k":"6-40","l":"#6-40","s":"F","P":0.025,"D":0.138,"tpi":40,"al":"#26","ald":0.147,"st":"#25","std":0.1495},{"k":"8-36","l":"#8-36","s":"F","P":0.02778,"D":0.164,"tpi":36,"al":"#17","ald":0.173,"st":"#16","std":0.177},{"k":"10-32","l":"#10-32","s":"F","P":0.03125,"D":0.19,"tpi":32,"al":"#7","ald":0.201,"st":"13/64","std":0.2031},{"k":"1/4-28","l":"1/4-28","s":"F","P":0.03571,"D":0.25,"tpi":28,"al":"G","ald":0.261,"st":"6.7 mm","std":0.2638},{"k":"5/16-24","l":"5/16-24","s":"F","P":0.04167,"D":0.3125,"tpi":24,"al":"21/64","ald":0.3281,"st":"21/64","std":0.3281},{"k":"3/8-24","l":"3/8-24","s":"F","P":0.04167,"D":0.375,"tpi":24,"al":"25/64","ald":0.3906,"st":"25/64","std":0.3906},{"k":"7/16-20","l":"7/16-20","s":"F","P":0.05,"D":0.4375,"tpi":20,"al":"29/64","ald":0.4531,"st":"29/64","std":0.4531},{"k":"1/2-20","l":"1/2-20","s":"F","P":0.05,"D":0.5,"tpi":20,"al":"33/64","ald":0.5156,"st":"33/64","std":0.5156},{"k":"9/16-18","l":"9/16-18","s":"F","P":0.05556,"D":0.5625,"tpi":18,"al":"37/64","ald":0.5781,"st":"37/64","std":0.5781},{"k":"5/8-18","l":"5/8-18","s":"F","P":0.05556,"D":0.625,"tpi":18,"al":"41/64","ald":0.6406,"st":"41/64","std":0.6406},{"k":"3/4-16","l":"3/4-16","s":"F","P":0.0625,"D":0.75,"tpi":16,"al":"49/64","ald":0.7656,"st":"49/64","std":0.7656},{"k":"7/8-14","l":"7/8-14","s":"F","P":0.07143,"D":0.875,"tpi":14,"al":"57/64","ald":0.8906,"st":"57/64","std":0.8906},{"k":"1-14","l":"#1-14 UNS","s":"F","P":0.07143,"D":0.073,"tpi":14,"al":"1-1/64","ald":1.0156,"st":"1-1/32","std":1.0312},{"k":"1-12","l":"#1-12","s":"F","P":0.08333,"D":0.073,"tpi":12,"al":"1-1/64","ald":1.0156,"st":"1-1/32","std":1.0312},{"k":"1-1/8-12","l":"1-1/8-12","s":"F","P":0.08333,"D":1.125,"tpi":12,"al":"1-9/64","ald":1.1406,"st":"1-5/32","std":1.1562},{"k":"1-1/4-12","l":"1-1/4-12","s":"F","P":0.08333,"D":1.25,"tpi":12,"al":"1-17/64","ald":1.2656,"st":"1-9/32","std":1.2812},{"k":"1-3/8-12","l":"1-3/8-12","s":"F","P":0.08333,"D":1.375,"tpi":12,"al":"1-25/64","ald":1.3906,"st":"1-13/32","std":1.4062},{"k":"1-1/2-12","l":"1-1/2-12","s":"F","P":0.08333,"D":1.5,"tpi":12,"al":"1-33/64","ald":1.5156,"st":"1-17/32","std":1.5312}];
+function tdHcIs(){var v=$('td_sys')?$('td_sys').value:'';return v==='HC-M'||v==='HC-UN';}
+function tdHcVis(hc){var a=$('td_row_dp'),b=$('td_row_eng'),c=$('td_row_hc');if(a)a.style.display=hc?'none':'';if(b)b.style.display=hc?'none':'';if(c)c.style.display=hc?'':'none';}
+function tdHcFill(sys){var sel=$('td_size');if(!sel)return;var arr=(sys==='HC-M')?HC_M:HC_UN,cur=sel.value;
+  var opt=function(r){return '<option value="'+r.k+'">'+r.l+'</option>';};
+  var co=arr.filter(function(r){return r.s==='C';}).map(opt).join(''),fi=arr.filter(function(r){return r.s==='F';}).map(opt).join('');
+  sel.innerHTML='<optgroup label="Coarse'+(sys==='HC-M'?' (ISO)':' (UNC)')+'">'+co+'</optgroup><optgroup label="Fine'+(sys==='HC-M'?' (ISO)':' (UNF)')+'">'+fi+'</optgroup>';
+  sel.setAttribute('data-sys',sys);
+  var def=(sys==='HC-M')?'M6x1':'1/4-20';if(cur&&arr.some(function(r){return r.k===cur;}))def=cur;sel.value=def;
+  tdHcVis(true);}
+function tdHcCalc(){var res=$('td_res');if(!res)return;
+  var sys=$('td_sys').value,arr=(sys==='HC-M')?HC_M:HC_UN,r=arr.find(function(x){return x.k===$('td_size').value;});
+  if(!r){res.innerHTML='';return;}
+  var metric=(sys==='HC-M'),mult=parseFloat(($('td_hclen')||{}).value)||1.5,mat=($('td_hcmat')||{}).value||'st';
+  var u=metric?' mm':'&Prime;',nd=metric?2:4,f=function(v){return v.toFixed(metric?2:3);};
+  var D=r.D,P=r.P,L=mult*D,small=metric?(D<=8):(D<=0.3125+1e-9);
+  var Fp=L+(small?0.5*D:0)+6*P,Fb=L+4*P,H=L+P;
+  var drl=function(kind){ if(metric){var d=(kind==='al')?r.al:r.st;return '<b>'+d.toFixed(2)+'</b> mm <span style="color:var(--mut)">('+(d/25.4).toFixed(4)+'&Prime;)</span>';}
+    var des=(kind==='al')?r.al:r.st,dd=(kind==='al')?r.ald:r.std;return '<b>'+des+'</b> <span style="color:var(--mut)">('+dd.toFixed(4)+'&Prime; / '+(dd*25.4).toFixed(2)+' mm)</span>';};
+  var h='<div class="res"><div class="rh">'+r.l+(metric?'':' ('+r.tpi+' TPI)')+' &middot; '+(r.s==='C'?'coarse':'fine')+' &middot; Heli-Coil</div>';
+  h+='<div class="kv"><span class="k">Tap</span><span class="v">'+r.l+' STI (Heli-Coil oversize tap)</span></div>';
+  h+='<div class="kv"><span class="k">Drill'+(mat==='st'?' &mdash; steel, cast iron, plastic':' &mdash; aluminium, magnesium')+'</span><span class="v">'+drl(mat)+'</span></div>';
+  h+='<div class="kv"><span class="k" style="color:var(--mut)">Drill &mdash; '+(mat==='st'?'aluminium, magnesium':'steel, cast iron, plastic')+'</span><span class="v">'+drl(mat==='st'?'al':'st')+'</span></div>';
+  if(metric)h+='<div class="kv"><span class="k">Tapped hole minor &Oslash;</span><span class="v">'+r.mn.toFixed(3)+' &ndash; '+r.mx.toFixed(3)+' mm</span></div>';
+  h+='<div class="kv"><span class="k">Insert length ('+mult+'D)</span><span class="v"><b>'+f(L)+'</b>'+u+'</span></div>';
+  h+='<div class="kv"><span class="k">Min. drill depth &mdash; plug tap</span><span class="v">'+f(Fp)+u+'</span></div>';
+  h+='<div class="kv"><span class="k">Min. drill depth &mdash; bottoming tap</span><span class="v">'+f(Fb)+u+'</span></div>';
+  h+='<div class="kv"><span class="k">Min. tapped depth</span><span class="v">'+f(H)+u+'</span></div>';
+  h+='<div class="kv"><span class="k">Pitch</span><span class="v">'+(metric?P+' mm':r.tpi+' TPI ('+P.toFixed(4)+'&Prime;)')+'</span></div>';
+  h+='<p class="note hlpinfo" style="text-align:left;margin:8px 12px 10px">Heli-Coil (wire thread insert) tapped holes: drill the size shown, then tap with the oversize <b>STI</b> tap &mdash; an ordinary tap of the same size will not give the right thread. Drill values follow the published Heli-Coil drilling data (steel, cast iron and plastic take a slightly larger hole than aluminium and magnesium). Insert lengths are multiples of the nominal diameter: 1D, 1.5D, 2D, 2.5D, 3D. Depths are minimums: plug tap = length + 6&times;pitch (+ &frac12;D for M8 / 5/16&Prime; and smaller); bottoming tap = length + 4&times;pitch; tapped depth = length + 1&times;pitch.</p>';
+  h+='</div>';res.innerHTML=h;}
 function tdSysFill(){
   var sysSel=$('td_sys'),sizeSel=$('td_size');if(!sysSel||!sizeSel)return;
   var sys=sysSel.value||'ISO Metric';
+  if(sys==='HC-M'||sys==='HC-UN'){if(sizeSel.getAttribute('data-sys')!==sys)tdHcFill(sys);else tdHcVis(true);tdCalc();return;}
+  tdHcVis(false);
   if(sizeSel.options.length&&sizeSel.getAttribute('data-sys')===sys){tdSizeChange();return;}
   var list=(typeof PROFILES!=='undefined'&&PROFILES[sys])?PROFILES[sys]:[];
   sizeSel.innerHTML=list.map(function(r){var v=(''+r[0]).replace(/"/g,'&quot;');return '<option value="'+v+'">'+v+'</option>';}).join('');
@@ -4028,6 +4097,7 @@ function tdSysFill(){
 }
 function tdSizeChange(){
   var sysSel=$('td_sys'),sizeSel=$('td_size');if(!sysSel||!sizeSel)return;
+  if(tdHcIs()){tdCalc();return;}
   var list=(typeof PROFILES!=='undefined'&&PROFILES[sysSel.value])?PROFILES[sysSel.value]:[];
   var row=list.find(function(r){return r[0]===sizeSel.value;});
   if(row){var dEl=$('td_d'),pEl=$('td_p');if(dEl)dEl.value=row[2];if(pEl)pEl.value=row[1];}
@@ -4035,6 +4105,7 @@ function tdSizeChange(){
 }
 function tdCalc(){
   var res=$('td_res');if(!res)return;
+  if(tdHcIs()){tdHcCalc();return;}
   var D=num('td_d',0),P=num('td_p',0),eng=Math.max(10,Math.min(100,num('td_eng',75)));
   if(!(D>0&&P>0)){res.innerHTML='';return;}
   var drill=Math.round((D-P*(eng/75))/0.05)*0.05; // same D-P (75%) convention the app's own Thread Data panel uses, scaled for other engagement %
@@ -4762,7 +4833,7 @@ function genTurnMill(){
   var teeth=Math.max(1,Math.round(num('teeth',1)));
   var mfld=$('minor'),minor=(mfld&&parseFloat(mfld.value)>0)?parseFloat(mfld.value):stdMinor(D,P,true);
   var stab=num('stab',50),_vf=computeVcFz(stab),Vc=_vf.vc,fz=_vf.fz;
-  if(vcEdited&&num('vc',0)>0)Vc=num('vc',60);if(fzEdited&&num('fz',0)>0)fz=num('fz',0);if($('vc')&&!vcEdited)$('vc').value=Vc;if($('fz')&&!fzEdited&&fz>0)$('fz').value=fz.toFixed(3);
+  if(vcEdited&&num('vc',0)>0)Vc=num('vc',60);if(fzEdited&&num('fz',0)>0)fz=num('fz',0);if($('vc')&&!vcEdited)$('vc').value=Vc;if($('fz')&&!fzEdited&&fz>0)$('fz').value=fz.toFixed(3);Vc=tmVcFromRpm(Vc,d);
   var maxrpm=num('maxrpm',5000),rpm=Math.round(Vc*1000/(Math.PI*d));
   if(maxrpm>0&&rpm>maxrpm)rpm=maxrpm;if(rpm<1)rpm=1;if($('rpm'))$('rpm').value=rpm;
   var F1=fz*teeth*rpm,feed=Math.max(1,Math.round(F1*(D-d)/D));
@@ -4825,7 +4896,7 @@ function genTurnMill(){
   g.push('%');
   output(g.join('\n'),'');
   if($('simbtn'))$('simbtn').style.display='none';
-  if($('cyc'))$('cyc').innerHTML='<div class="cyc">TURN-MILL polar G12.1 · '+pcts.length+' pass'+(pcts.length>1?'es':'')+' · '+turns+' turns/pass · F'+feed+'</div>';
+  if($('cyc'))$('cyc').innerHTML='<div class="cyc">TURN-MILL polar G12.1 · '+pcts.length+' pass'+(pcts.length>1?'es':'')+' · '+turns+' turns/pass · F'+feed+'</div>';try{tmFeedUpd();}catch(_e){}
 }
 function faceParams(){
   if(!window.faceModel)return null;
@@ -4880,9 +4951,9 @@ function fmSim(a){if(!FM_SIMPROG){fmSimRun();return;}
 async function genMill(){
   if(!pyReady){notReady();return;}
   if(!$('d').value.trim()){$('p_res').innerHTML='<p class="warn">Enter Tool dia d (required).</p>';$('cyc').innerHTML='';if($('simbtn'))$('simbtn').style.display='none';if($('editbtn'))$('editbtn').style.display='none';if($('savebtn'))$('savebtn').style.display='none';return;}
-  var _ve=vcEdited,_fe=fzEdited,_vv=$('vc')?$('vc').value:'',_fv=$('fz')?$('fz').value:'';
+  var _ve=vcEdited,_fe=fzEdited,_re=rpmEdited,_vv=$('vc')?$('vc').value:'',_fv=$('fz')?$('fz').value:'',_rv=$('rpm')?$('rpm').value:'';
   matChange();
-  vcEdited=_ve;fzEdited=_fe;if(_ve&&$('vc'))$('vc').value=_vv;if(_fe&&$('fz'))$('fz').value=_fv;
+  vcEdited=_ve;fzEdited=_fe;rpmEdited=_re;if(_ve&&$('vc'))$('vc').value=_vv;if(_fe&&$('fz'))$('fz').value=_fv;if(_re&&$('rpm'))$('rpm').value=_rv;recalc();
   var internal=$('side').value==='Internal';
   var D0=num('D',16),P=num('P',2),L=num('L',20),d=num('d',10);
   var D=D0+(LOCK_ADV?0:num('majadj',0));
@@ -4892,7 +4963,7 @@ async function genMill(){
   var stabEff=(req==='Productivity')?100:((req==='Weak setup')?0:num('stab',50));
   var _vf=computeVcFz(stabEff);var Vc=_vf.vc,fz=_vf.fz;
   if(req==='Tool life')Vc=Math.round(Vc*0.8);
-  if(vcEdited&&num('vc',0)>0)Vc=num('vc',60);if(fzEdited&&num('fz',0)>0)fz=num('fz',0);if($('vc')&&!vcEdited)$('vc').value=Vc;if($('fz')&&!fzEdited&&fz>0)$('fz').value=fz.toFixed(3);
+  if(vcEdited&&num('vc',0)>0)Vc=num('vc',60);if(fzEdited&&num('fz',0)>0)fz=num('fz',0);if($('vc')&&!vcEdited)$('vc').value=Vc;if($('fz')&&!fzEdited&&fz>0)$('fz').value=fz.toFixed(3);Vc=tmVcFromRpm(Vc,d);
   var sxyz=$('startxyz').value==='Yes';var sX=sxyz?num('start_x',0):0,sY=sxyz?num('start_y',0):0,sZ=sxyz?num('start_z',0):0;
   var tax=LOCK_ADV?'Z-':($('toolaxis')?$('toolaxis').value:'Z-');tax=tax.indexOf('Z-')===0?'Z-':tax;
   var toff=LOCK_ADV?0:taperOffset(internal,L);
@@ -4913,7 +4984,7 @@ async function genMill(){
     prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));prog=_applyThreadHdr(prog,true);if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
     var _np=(typeof pcts!=='undefined'&&pcts)?pcts.length:0;var _mp=['CT '+mm+'m '+ss+'s','Vc '+Vc,'Fz '+(+fz).toFixed(3),_np+' pass'+(_np==1?'':'es')];if(brepass){_mp.push('Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p');var _ro=num('repoff',0);if(_ro>0)_mp.push('+'+_ro+' mm dia');}$('cyc').innerHTML='<div class="cyc">'+_mp.join(' &middot; ')+'</div>';
-    output(prog,'');
+    output(prog,'');try{tmFeedUpd();}catch(_e){}
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
 function _tpfmt(v){return (Math.round(v*1000)/1000).toFixed(3);}
