@@ -246,7 +246,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.37 &middot; 19 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.38 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -409,7 +409,7 @@
 </div></div>
 
 <!-- ============ 2. TOOL ============ -->
-<div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9656;</span></div><div class="sb" style="display:none">
+<div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9662;</span></div><div class="sb">
   <div class="row2">
     <div data-ops="Centering,Chamfering,Boring:interp,Counter bore:interp"><label>Tool &Oslash; (mm)</label><input id="ho_toolD" type="number" step="0.1" inputmode="decimal" oninput="hoCalc('d')"></div>
     <div data-ops="Boring:interp,Counter bore:interp,Chamfering:interp"><label>No. of flutes</label><input id="ho_teeth" type="number" value="4" step="1" inputmode="numeric" oninput="hoCalc('teeth')"></div>
@@ -433,7 +433,7 @@
 </div></div>
 
 <!-- ============ 3. PROFILE (graph only) ============ -->
-<div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9662;</span></div><div class="sb">
+<div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9656;</span></div><div class="sb" style="display:none">
   <svg id="ho_stage" viewBox="0 0 560 300"></svg>
   <p class="note" style="text-align:left;margin-top:8px">Section through the hole (not to scale for very deep holes). It updates as you type.</p>
 </div></div>
@@ -588,11 +588,12 @@
     <div><label>Rotation &deg;</label><input type="number" id="pk_rot" value="0" step="1" inputmode="decimal" oninput="pkDraw()"></div>
   </div>
   <div data-pk="circle"><label>Pocket diameter (mm)</label><input type="number" id="pk_dia" step="1" inputmode="decimal" oninput="pkDraw()"></div>
+  <div><label>Floor Z &mdash; final depth (mm)</label><input id="pk_floorz" type="number" step="0.1" inputmode="decimal" oninput="pkDraw()"></div>
   <p class="note" style="text-align:left">Pocket milling &mdash; clears a closed pocket down to the floor: helix (or ramp / plunge) entry, roughing by contour-parallel rings or zigzag rows, then optional wall and floor finishing. One pocket, no islands.</p>
 </div></div>
 
 <!-- ============ 2. TOOL ============ -->
-<div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9656;</span></div><div class="sb" style="display:none">
+<div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9662;</span></div><div class="sb">
   <div class="row2">
     <div><label>End mill &Oslash; (mm)</label><input id="pk_D" type="number" step="0.1" inputmode="decimal" oninput="pkCalc('D');pkDraw()"></div>
     <div><label>No. of flutes</label><input id="pk_teeth" type="number" value="4" step="1" inputmode="numeric" oninput="pkCalc('teeth')"></div>
@@ -610,7 +611,7 @@
 </div></div>
 
 <!-- ============ 3. PROFILE (graph only) ============ -->
-<div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9662;</span></div><div class="sb">
+<div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9656;</span></div><div class="sb" style="display:none">
   <svg id="pk_stage" viewBox="0 0 560 300"></svg>
   <p class="note" style="text-align:left;margin-top:8px">Left: plan view of the pocket with the cutter drawn to scale. Right: section showing the depth, the roughing levels and the stock left for finishing. It updates as you type.</p>
 </div></div>
@@ -652,13 +653,13 @@
 <div class="sec"><div class="st" onclick="tog(this)">POSITIONING <span>&#9656;</span></div><div class="sb" style="display:none">
   <div class="row2">
     <div><label>Top Z (mm)</label><input id="pk_topz" type="number" value="0" step="0.1" inputmode="decimal" oninput="pkDraw()"></div>
-    <div><label>Floor Z &mdash; final depth (mm)</label><input id="pk_floorz" type="number" step="0.1" inputmode="decimal" oninput="pkDraw()"></div>
+    <div><label>Safe Z (mm)</label><input id="pk_safez" type="number" value="20" step="1" inputmode="decimal"></div>
   </div>
   <div class="row2">
-    <div><label>Safe Z (mm)</label><input id="pk_safez" type="number" value="20" step="1" inputmode="decimal"></div>
     <div><label>Feed plane (mm)</label><input id="pk_fplane" type="number" value="2" step="0.5" inputmode="decimal"></div>
+    <div></div>
   </div>
-  <p class="note" style="text-align:left">Top Z = the surface the pocket starts from. Floor Z = the finished pocket floor (negative when below the top). Feed plane = the height above the top where rapid stops and the cutter starts feeding in.</p>
+  <p class="note" style="text-align:left">Top Z = the surface the pocket starts from. The final depth (Floor Z) is set in OPERATION. Feed plane = the height above the top where rapid stops and the cutter starts feeding in.</p>
 </div></div>
 
 <!-- ============ 7. CUT SETUP ============ -->
@@ -796,7 +797,7 @@
 </div></div>
 
 <!-- ============ 2. TOOL ============ -->
-<div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9656;</span></div><div class="sb" style="display:none">
+<div class="sec"><div class="st" onclick="tog(this)">TOOL <span>&#9662;</span></div><div class="sb">
   <div class="row2">
     <div><label>Cutter &Oslash; (mm)</label><input id="fmc_D" type="number" value="50" step="0.1" inputmode="decimal" oninput="fmCalc('D')"></div>
     <div><label>No. of inserts</label><input id="fmc_teeth" type="number" value="5" step="1" inputmode="numeric" oninput="fmCalc('teeth')"></div>
@@ -814,7 +815,7 @@
 </div></div>
 
 <!-- ============ 3. PROFILE (graph only) ============ -->
-<div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9662;</span></div><div class="sb">
+<div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9656;</span></div><div class="sb" style="display:none">
   <svg id="fm_stage" viewBox="0 0 560 460"></svg>
   <div class="fmleg">
     <span><i class="sw" style="background:rgba(79,140,255,.35);border:1px solid #4f8cff"></i> machining area</span>
@@ -1836,7 +1837,7 @@
   </div></div>
   <!-- ============ 3. TOOL ============ -->
   <div class="modeseg" style="margin:2px 0 8px"><button type="button" id="gv_pm_sample" onclick="setGvMode('sample')">&#128218; Sample</button><button type="button" id="gv_pm_new" class="on" onclick="setGvMode('new')">&#10133; New</button></div><span id="gv_pm_hint" class="note mhint" style="margin:0 0 10px">New program — generate, simulate, save &amp; download.</span>
-  <div class="sec"><div class="st" onclick="gv_toggle(this)">TOOL <span class="caret">&#9656;</span></div><div class="sb">
+  <div class="sec open"><div class="st" onclick="gv_toggle(this)">TOOL <span class="caret">&#9656;</span></div><div class="sb">
     <div class="row2">
       <div><label>Insert width Wi (mm)</label><input id="tl_wi" type="number" value="3" step="0.01" oninput="gvWiFeed()"></div>
       <div><label>Corner radius r (mm)</label><input id="tl_rc" type="number" value="0.2" step="0.01" oninput="gvNoseAllow()"></div>
@@ -3180,7 +3181,18 @@ cb.style.display=nm?'flex':'none';
 }catch(e){}}
 function crumbGo(){try{if(window.history.length>1){history.back();return;}}catch(e){}try{show('home');}catch(e){}}
 (function(){var hd=document.querySelector('header');if(hd&&!hd._backwired){hd._backwired=1;hd.addEventListener('click',function(e){if(e.target.closest('button,input,select,textarea,a'))return;if(e.target.closest('#mtoggle'))return;var h=document.getElementById('home');if(h&&h.classList.contains('on'))return;crumbGo();});}})();
-function show(v){document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));$(v).classList.add('on');if(v==='prog'&&typeof moveThreadCoreToProg==='function')moveThreadCoreToProg();try{crumbSync(v);}catch(e){}if(v==='turnops'){try{if(!window._tnProfInit){window._tnProfInit=1;openProfileTable();}else{ppDraw();}}catch(e){}}if(window.fabSync)fabSync(v);window.scrollTo(0,0);try{if(!window._inPop&&v!=='home')history.pushState({v:v},'');}catch(e){}try{var _mt=document.getElementById('mt-turn'),_ml=document.getElementById('mt-mill');if(_mt&&_ml){if(v==='home'){_mt.style.display='';_ml.style.display='';}else{var _cm=window._mode||'turn';_mt.style.display=(_cm==='turn')?'':'none';_ml.style.display=(_cm==='mill')?'':'none';}}}catch(e){}var sb=document.getElementById('savestepbtn');if(sb)sb.style.display=(typeof jobEditIdx!=='undefined'&&jobEditIdx!=null&&v!=='fulljob'&&v!=='home')?'block':'none';}
+/* Entry layout: when an operation screen is entered, the sections that hold mandatory fields are open and the rest of the
+   fixed defaults apply.  Only the sections named here are touched; everything else keeps whatever state it has. */
+var ENTRY_SECS={facemill:{open:['TOOL'],close:['PROFILE']},pocket_op:{open:['TOOL'],close:['PROFILE']},hole_op:{open:['TOOL'],close:['PROFILE']},groove:{open:['TOOL'],close:[]}};
+function secEntry(v){var cfg=ENTRY_SECS[v],root=document.getElementById(v);if(!cfg||!root)return;
+  var set=function(title,on){root.querySelectorAll('.sec > .st').forEach(function(st){
+    var t='';for(var n=st.firstChild;n;n=n.nextSibling){if(n.nodeType===3)t+=n.nodeValue;else break;}
+    if(t.trim()!==title)return;
+    var sec=st.parentElement,sb=st.nextElementSibling;if(!sb)return;
+    if(v==='groove'){sec.classList.toggle('open',on);return;}
+    sb.style.display=on?'block':'none';var sp=st.querySelector(':scope > span:last-child');if(sp)sp.textContent=on?'▾':'▸';});};
+  cfg.open.forEach(function(t){set(t,true);});cfg.close.forEach(function(t){set(t,false);});}
+function show(v){document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));$(v).classList.add('on');if(v==='prog'&&typeof moveThreadCoreToProg==='function')moveThreadCoreToProg();try{crumbSync(v);}catch(e){}try{secEntry(v);}catch(e){}if(v==='turnops'){try{if(!window._tnProfInit){window._tnProfInit=1;openProfileTable();}else{ppDraw();}}catch(e){}}if(window.fabSync)fabSync(v);window.scrollTo(0,0);try{if(!window._inPop&&v!=='home')history.pushState({v:v},'');}catch(e){}try{var _mt=document.getElementById('mt-turn'),_ml=document.getElementById('mt-mill');if(_mt&&_ml){if(v==='home'){_mt.style.display='';_ml.style.display='';}else{var _cm=window._mode||'turn';_mt.style.display=(_cm==='turn')?'':'none';_ml.style.display=(_cm==='mill')?'':'none';}}}catch(e){}var sb=document.getElementById('savestepbtn');if(sb)sb.style.display=(typeof jobEditIdx!=='undefined'&&jobEditIdx!=null&&v!=='fulljob'&&v!=='home')?'block':'none';}
 function tog(h){const b=h.nextElementSibling;b.style.display=b.style.display==='none'?'block':'none';var sp=h.querySelector(':scope > span:last-child');if(sp)sp.textContent=b.style.display==='none'?'▸':'▾';}
 function r(n,p){return Number(n).toFixed(p);}
 function num(id,def){const v=parseFloat($(id).value);return isNaN(v)?def:v;}
