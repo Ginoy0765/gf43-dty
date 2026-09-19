@@ -79,6 +79,7 @@
   input.ttf.autof{color:#5f7d94}
   body.helpon label{cursor:pointer;text-decoration:underline dotted var(--acc2);text-underline-offset:3px}
   #helpbtn.on{background:var(--acc);color:#1a1200;border-color:var(--acc)}
+  #data .hlpinfo{display:none}body.helpon #data .hlpinfo{display:block}
   #defaults .note,#defaults .mrinfo{display:none}body.helpon #defaults .note,body.helpon #defaults .mrinfo{display:block}
   .hlpov{position:fixed;inset:0;background:rgba(4,10,16,.72);z-index:60;display:none;align-items:center;justify-content:center;padding:18px}
   .hlpov.on{display:flex}
@@ -246,7 +247,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.43 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.44 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1511,7 +1512,7 @@
     <!-- THREAD DATA -->
     <section id="data" class="view">
       <div class="hubtabs"><button type="button" class="hubtab" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" class="hubtab on" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div>
-      <div class="vhead"><button class="back" onclick="show('prog')">&lsaquo;</button><h2>Calculator</h2></div>
+      <div class="vhead" id="calcVhead"><button class="back" onclick="show('prog')">&lsaquo;</button><h2>Calculator</h2></div>
       <div id="calcMenu" class="grid" style="margin-bottom:12px">
         <div class="tile" data-cst="thread" onclick="calcSubTab('thread')"><div class="ic">&#128269;</div><div><div class="t">Thread Data</div><div class="s">Tap-drill, minor, pitch dia</div></div></div>
         <div class="tile" data-cst="speedfeed" onclick="calcSubTab('speedfeed')"><div class="ic">&#9889;</div><div><div class="t">Speed &amp; Feed</div><div class="s">Vc, RPM, feed rate</div></div></div>
@@ -1523,10 +1524,10 @@
         <div class="tile" data-cst="fits" onclick="calcSubTab('fits')"><div class="ic">&#127919;</div><div><div class="t">Fits &amp; Tolerances</div><div class="s">ISO 286 hole/shaft limits</div></div></div>
         <div class="tile" data-cst="gmcode" onclick="calcSubTab('gmcode')"><div class="ic">&#128187;</div><div><div class="t">G/M-Code Ref</div><div class="s">Code meanings &amp; cycles</div></div></div>
       </div>
-      <button type="button" id="calcBackBtn" class="back" style="display:none;width:auto;padding:0 14px;font-size:13px;font-weight:700;margin-bottom:10px" onclick="calcShowMenu()">&lsaquo; Calculator</button>
+      <button type="button" id="calcBackBtn" class="back" style="display:none;width:auto;padding:0 14px;font-size:13px;font-weight:700;margin-bottom:10px" onclick="calcShowMenu()">&lsaquo; Back</button>
 
       <div id="calcSpeedFeed" class="calcpanel" style="display:none">
-        <p class="note" style="text-align:left;margin:2px 0 8px">Quick lookup &mdash; pick a material and size, get a starting Vc/RPM (and feed rate for milling/drilling). For the fine-tuned version used when generating a program, see that operation's own Parameters.</p>
+        <p class="note hlpinfo" style="text-align:left;margin:2px 0 8px">Quick lookup &mdash; pick a material and size, get a starting Vc/RPM (and feed rate for milling/drilling). For the fine-tuned version used when generating a program, see that operation's own Parameters.</p>
         <div class="row2"><div><label>Operation</label><select id="sf_op" onchange="sfVis();sfCalc()"><option>Turning</option><option>Milling</option><option>Drilling</option></select></div><div><label>Material</label><select id="sf_mat" onchange="sfCalc()"></select></div></div>
         <div class="row2"><div><label id="sf_dlabel">Workpiece dia D (mm)</label><input id="sf_d" type="number" value="25" inputmode="decimal" oninput="sfCalc()"></div><div><label>Stability %</label><input id="sf_stab" type="number" value="50" inputmode="numeric" oninput="sfCalc()"></div></div>
         <div class="row2" id="sf_teethRow" style="display:none"><div><label>Flutes / teeth</label><input id="sf_teeth" type="number" value="2" inputmode="numeric" oninput="sfCalc()"></div><div></div></div>
@@ -1535,7 +1536,7 @@
       </div>
 
       <div id="calcThreadData" class="calcpanel" style="display:none">
-      <p class="note" style="text-align:left;margin:2px 0 8px">Pick a thread profile, pitch and standard size &mdash; both internal and external dimensions are shown below, so there's no side to choose here.</p>
+      <p class="note hlpinfo" style="text-align:left;margin:2px 0 8px">Pick a thread profile, pitch and standard size &mdash; both internal and external dimensions are shown below, so there's no side to choose here.</p>
       <div id="threadCoreSlotCalc"></div>
       <div class="row2" style="margin-top:2px"><div><label>External class</label><select id="d_extc" onchange="calcData()"><option>4g</option><option>6e</option><option>6f</option><option selected>6g</option><option>6h</option><option>8g</option></select></div><div><label>Internal class</label><select id="d_intc" onchange="calcData()"><option>4H</option><option>5H</option><option>6G</option><option selected>6H</option><option>7G</option><option>7H</option></select></div></div>
       <button class="btn btn2" type="button" onclick="saveThreadPdf()" style="margin:2px 0 6px">&#128196; Save to PDF</button> <span id="td_pdfmsg" class="note" style="text-align:left"></span>
@@ -1544,7 +1545,7 @@
       </div>
 
       <div id="calcTapDrill" class="calcpanel" style="display:none">
-        <p class="note" style="text-align:left;margin:2px 0 8px">Tap drill size for ~75% thread engagement (the standard shop default) &mdash; adjust engagement % for a looser or tighter tap.</p>
+        <p class="note hlpinfo" style="text-align:left;margin:2px 0 8px">Tap drill size for ~75% thread engagement (the standard shop default) &mdash; adjust engagement % for a looser or tighter tap.</p>
         <div class="row2"><div><label>Thread system</label><select id="td_sys" onchange="tdSysFill();tdCalc()"><option value="ISO Metric">Metric (ISO)</option><option value="UN">Inch (UN/UNC/UNF)</option></select></div><div><label>Size</label><select id="td_size" onchange="tdSizeChange()"></select></div></div>
         <div class="row2"><div><label id="td_dlabel">Major dia D (mm)</label><input id="td_d" type="number" inputmode="decimal" oninput="tdCalc()"></div><div><label id="td_plabel">Pitch (mm)</label><input id="td_p" type="number" inputmode="decimal" oninput="tdCalc()"></div></div>
         <div class="row2"><div><label>Thread engagement %</label><input id="td_eng" type="number" value="75" inputmode="numeric" oninput="tdCalc()"></div><div></div></div>
@@ -1559,12 +1560,12 @@
         <h3>Hardness (approximate, steel &mdash; per ASTM E140)</h3>
         <div class="row2"><div><label>HRC</label><input id="cv_hrc" type="number" inputmode="decimal" oninput="cvHard('hrc')"></div><div><label>Brinell HB</label><input id="cv_hb" type="number" inputmode="decimal" oninput="cvHard('hb')"></div></div>
         <div class="row2"><div><label>Vickers HV</label><input id="cv_hv" type="number" inputmode="decimal" oninput="cvHard('hv')"></div><div></div></div>
-        <p class="note" style="text-align:left;margin-top:6px">Hardness conversion is approximate and standardized for steels only &mdash; not accurate for other alloys.</p>
+        <p class="note hlpinfo" style="text-align:left;margin-top:6px">Hardness conversion is approximate and standardized for steels only &mdash; not accurate for other alloys.</p>
       </div>
 
       <div id="calcTaper" class="calcpanel" style="display:none">
         <h3>Taper solver</h3>
-        <p class="note" style="text-align:left;margin:2px 0 8px">Fill any 3 of the 4 fields below, leave the one you want solved blank.</p>
+        <p class="note hlpinfo" style="text-align:left;margin:2px 0 8px">Fill any 3 of the 4 fields below, leave the one you want solved blank.</p>
         <div class="row2"><div><label>Large end dia (mm)</label><input id="tp_dl" type="number" inputmode="decimal" oninput="taperCalc('dl')"></div><div><label>Small end dia (mm)</label><input id="tp_ds" type="number" inputmode="decimal" oninput="taperCalc('ds')"></div></div>
         <div class="row2"><div><label>Length (mm)</label><input id="tp_len" type="number" inputmode="decimal" oninput="taperCalc('len')"></div><div><label>Included angle (&deg;)</label><input id="tp_ang" type="number" inputmode="decimal" oninput="taperCalc('ang')"></div></div>
         <div id="tp_res"></div>
@@ -1608,7 +1609,7 @@
       </div>
 
       <div id="calcFits" class="calcpanel" style="display:none">
-        <p class="note" style="text-align:left;margin:2px 0 8px">ISO 286 hole-basis limits &amp; fits &mdash; computed from the standard's own tolerance-unit/deviation formulas for the exact diameter you enter (not a fixed lookup table), rounded to the nearest micron. Covers clearance &amp; transition fits (H with c/d/e/f/g/h/js/k/n). Interference press fits (p/r/s/t/u) aren't included yet &mdash; ask your fastener/bearing supplier's fit chart for those in the meantime.</p>
+        <p class="note hlpinfo" style="text-align:left;margin:2px 0 8px">ISO 286 hole-basis limits &amp; fits &mdash; computed from the standard's own tolerance-unit/deviation formulas for the exact diameter you enter (not a fixed lookup table), rounded to the nearest micron. Covers clearance &amp; transition fits (H with c/d/e/f/g/h/js/k/n). Interference press fits (p/r/s/t/u) aren't included yet &mdash; ask your fastener/bearing supplier's fit chart for those in the meantime.</p>
         <div class="row2"><div><label>Nominal diameter (mm)</label><input id="ft_d" type="number" value="25" inputmode="decimal" oninput="ftCalc()"></div><div><label>Fit</label><select id="ft_fit" onchange="ftFitChange()">
           <option value="H7/g6">H7/g6 &mdash; sliding clearance</option>
           <option value="H7/h6">H7/h6 &mdash; close location, no play</option>
@@ -1625,7 +1626,7 @@
       </div>
 
       <div id="calcGMCode" class="calcpanel" style="display:none">
-        <p class="note" style="text-align:left;margin:2px 0 8px">Fanuc-style G-code &amp; M-code reference &mdash; same dialect YANTRA's own program output uses (G54&ndash;G59 work offsets, G81/G82/G83/G84 canned cycles, G90/G91, G96/G97, etc.). Some builders' codes vary slightly &mdash; always confirm against your machine's control manual before running a new program.</p>
+        <p class="note hlpinfo" style="text-align:left;margin:2px 0 8px">Fanuc-style G-code &amp; M-code reference &mdash; same dialect YANTRA's own program output uses (G54&ndash;G59 work offsets, G81/G82/G83/G84 canned cycles, G90/G91, G96/G97, etc.). Some builders' codes vary slightly &mdash; always confirm against your machine's control manual before running a new program.</p>
         <div class="row2"><div><input id="gm_search" type="text" placeholder="Search code or keyword&hellip;" oninput="gmRender()"></div><div><select id="gm_cat" onchange="gmRender()"><option value="">All categories</option><option value="Motion">Motion (G)</option><option value="Plane/Units">Plane &amp; units (G)</option><option value="Offsets">Offsets &amp; coord systems (G)</option><option value="Comp">Cutter/tool comp (G)</option><option value="Canned">Canned cycles (G)</option><option value="Spindle/Feed">Spindle &amp; feed mode (G)</option><option value="M">M-codes</option></select></div></div>
         <div id="gm_list" style="margin-top:10px"></div>
       </div>
@@ -3535,11 +3536,18 @@ function fzGreen(fzb,d){d=Math.max(1,Math.min(100,d));return fzb*Math.min(d,40)/
 function getMax(){var e=$('maxrpm');var v=e?parseFloat(e.value):NaN;return isNaN(v)||v<=0?MAXRPM:v;}
 function rpmFor(Vc,d){let n=Math.round(Vc*1000/(Math.PI*d));var mx=getMax();return n>mx?mx:n;}
 function find(des){return ALL.find(x=>x[0]===des);}
-function matFill(sel,def){if(!sel)return;var g={};MATS.forEach(function(m){(g[m[2]]=g[m[2]]||[]).push(m[0]);});
-  var nmx={P:'P - Steel',M:'M - Stainless',K:'K - Cast iron',N:'N - Non-ferrous',S:'S - Titanium and superalloys',H:'H - Hardened','-':'Plastics and composites'};
+function matFill(sel,def,grouped){if(!sel)return;
   var esc=function(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');},h='';
-  ['P','M','K','N','S','H','-'].forEach(function(k){var a=g[k];if(!a)return;a.sort(function(x,y){return x.localeCompare(y,undefined,{numeric:true});});
-    h+='<optgroup label="'+nmx[k]+'">'+a.map(function(n){return '<option>'+esc(n)+'</option>';}).join('')+'</optgroup>';});
+  if(!grouped){ /* programming screens: one flat list, best machinability first (MR high -> low; ties keep table order) */
+    var arr=MATS.map(function(m,i){return {n:m[0],mr:(+m[4]||0),i:i};});
+    arr.sort(function(x,y){return (y.mr-x.mr)||(x.i-y.i);});
+    h=arr.map(function(o){return '<option>'+esc(o.n)+'</option>';}).join('');
+  }else{ /* calculator dropdowns: grouped by ISO colour class, A-Z inside each group (unchanged) */
+    var g={};MATS.forEach(function(m){(g[m[2]]=g[m[2]]||[]).push(m[0]);});
+    var nmx={P:'P - Steel',M:'M - Stainless',K:'K - Cast iron',N:'N - Non-ferrous',S:'S - Titanium and superalloys',H:'H - Hardened','-':'Plastics and composites'};
+    ['P','M','K','N','S','H','-'].forEach(function(k){var a=g[k];if(!a)return;a.sort(function(x,y){return x.localeCompare(y,undefined,{numeric:true});});
+      h+='<optgroup label="'+nmx[k]+'">'+a.map(function(n){return '<option>'+esc(n)+'</option>';}).join('')+'</optgroup>';});
+  }
   sel.innerHTML=h;if(def!=null)sel.value=def;}
 function opt(sel,arr,val){sel.innerHTML=arr.map(a=>'<option>'+a+'</option>').join('');if(val!=null)sel.value=val;}
 document.addEventListener('keydown',function(e){if(e.key!=='ArrowUp'&&e.key!=='ArrowDown')return;var t=e.target;if(!t)return;var tg=t.tagName;if(tg!=='INPUT'&&tg!=='SELECT')return;if(e.key==='ArrowDown'&&t.classList&&t.classList.contains('ttf')&&typeof tnPts!=='undefined'){var _di=parseInt(t.getAttribute('data-i'));if(_di===tnPts.length-1&&typeof tnAddPt==='function'){e.preventDefault();tnAddPt();setTimeout(function(){var _r=document.querySelectorAll('.ttf[data-i="'+(tnPts.length-1)+'"]');if(_r.length)_r[0].focus();},0);return;}}var _gn=(typeof yaGuidedNeighbor==='function')?yaGuidedNeighbor(t,e.key==='ArrowDown'?'after':'before'):null;if(_gn==='END'){e.preventDefault();try{t.blur();}catch(x){}return;}if(_gn){e.preventDefault();if(typeof yaFocusOpen==='function')yaFocusOpen(_gn);else{_gn.focus();if(typeof _gn.select==='function'){try{_gn.select();}catch(x){}}}return;}e.preventDefault();var f=[].slice.call(document.querySelectorAll('input,select')).filter(function(el){return el.offsetParent!==null&&!el.disabled&&el.type!=='hidden'&&el.type!=='button';});var i=f.indexOf(t);if(i<0)return;var n=(e.key==='ArrowDown')?i+1:i-1;if(n>=0&&n<f.length){var el=f[n];el.focus();if(typeof el.select==='function'){try{el.select();}catch(x){}}}},true);document.addEventListener('wheel',function(e){var t=e.target;if(t&&t.tagName==='INPUT'&&t.type==='number'&&document.activeElement===t){e.preventDefault();}},{passive:false});
@@ -3886,7 +3894,7 @@ function hubTab(which){
   else if(which==='calc'){show('data');calcShowMenu();}
 }
 /* ===== Speed & Feed quick calculator (a Calculator sub-tab, not tied to a job setup) ===== */
-function sfMatFill(){var s=$('sf_mat');if(!s||s.options.length)return;matFill(s,'Stainless 316 austenitic');}
+function sfMatFill(){var s=$('sf_mat');if(!s||s.options.length)return;matFill(s,'Stainless 316 austenitic',true);}
 function sfVis(){var op=$('sf_op')?$('sf_op').value:'Turning';var isMill=(op==='Milling'),isDrill=(op==='Drilling');
   var lbl=$('sf_dlabel');if(lbl)lbl.textContent=isMill?'Tool dia D (mm)':(isDrill?'Drill dia D (mm)':'Workpiece dia D (mm)');
   var tr=$('sf_teethRow');if(tr)tr.style.display=isMill?'':'none';
@@ -3978,7 +3986,7 @@ function threadCoreLive(){
 }
 function calcSubTab(which){
   var menu=$('calcMenu');if(menu)menu.style.display='none';
-  var back=$('calcBackBtn');if(back)back.style.display='';
+  var back=$('calcBackBtn');if(back)back.style.display='';var vh=$('calcVhead');if(vh)vh.style.display='none';
   Object.keys(CALC_PANELS).forEach(function(k){var el=$(CALC_PANELS[k]);if(el)el.style.display=(k===which)?'':'none';});
   if(which==='thread'){moveThreadCoreToCalc();calcData();}
   else if(which==='speedfeed'){sfMatFill();sfVis();sfCalc();}
@@ -3992,7 +4000,7 @@ function calcSubTab(which){
 /* Return from any open calculator panel to the full-screen tool menu (tile grid). */
 function calcShowMenu(){
   var menu=$('calcMenu');if(menu)menu.style.display='';
-  var back=$('calcBackBtn');if(back)back.style.display='none';
+  var back=$('calcBackBtn');if(back)back.style.display='none';var vh=$('calcVhead');if(vh)vh.style.display='';
   Object.keys(CALC_PANELS).forEach(function(k){var el=$(CALC_PANELS[k]);if(el)el.style.display='none';});
 }
 function tdSysFill(){
@@ -4092,7 +4100,7 @@ function sineCalc(){
 }
 var WT_DENSITY={"Magnesium alloys":1.74,"Aluminium soft (1050/1100)":2.71,"Aluminium 6061-T6":2.70,"Al 2011 / free-cut brass":2.83,"Zinc die-cast":6.60,"Aluminium 7075-T6":2.81,"Free-machining steel 12L14":7.87,"Al >12%Si (high silicon)":2.71,"AISI 1215 free-cut":7.87,"Copper":8.96,"Cast iron (gray)":7.20,"Low carbon steel <0.55%C":7.85,"Stainless 303 (free-cut)":8.00,"Bronze":8.80,"Nickel Aluminium Bronze (NAB)":7.53,"Carbon fibre (CFRP)":1.60,"High carbon steel >=0.55%C":7.85,"AISI 4140 annealed":7.85,"Cast steel":7.85,"Alloy steel (treated)":7.85,"Stainless 304 austenitic":8.00,"Stainless 316 austenitic":8.00,"Titanium Ti-6Al-4V":4.43,"Tool steel D2":7.70,"Hardened steel 40 HRC":7.85,"Super Duplex 2507":7.80,"Inconel 600":8.47,"Hardened steel 45 HRC":7.85,"Hardened steel 50 HRC":7.85,"Inconel 718":8.19,"Hastelloy":8.89,"Hardened steel 55 HRC":7.85,"Hardened steel 60 HRC":7.85,"Hardened steel 65 HRC":7.85,"Hardened steel 70 HRC":7.85};
 Object.assign(WT_DENSITY,{"AISI 1212 free-cut (reference = 100)": 7.86, "AISI 1018 mild steel": 7.87, "AISI 1020 mild steel": 7.87, "AISI 1045 medium carbon": 7.85, "AISI 1117 free-cut case-hardening": 7.87, "EN8 (080M40) medium carbon steel": 7.85, "EN9 (070M55) medium-high carbon": 7.85, "EN1A (220M07) free-cut": 7.85, "EN1A Leaded (230M07)": 7.87, "EN19 / 42CrMo4 (QT)": 7.85, "EN24 (817M40) QT": 7.85, "EN31 (52100) bearing steel annealed": 7.81, "EN36 / 20MnCr5 case-hardening steel": 7.85, "AISI 8620": 7.85, "AISI 4130 annealed": 7.85, "AISI 4340 annealed": 7.85, "AISI 1095 high carbon annealed": 7.85, "Spring steel 5160 / 60Si2Mn annealed": 7.85, "EN41B nitriding steel": 7.8, "Mould steel P20 (~30 HRC pre-hardened)": 7.85, "Mould steel 1.2738 (~38 HRC pre-hardened)": 7.85, "Tool steel O1 annealed": 7.81, "Tool steel A2 annealed": 7.86, "Tool steel H13 annealed": 7.8, "HSS M2 annealed": 8.16, "IS 2062 E250 / ASTM A36 structural steel": 7.85, "S355 / E350 structural steel": 7.85, "ASTM A516 Gr.70 pressure-vessel plate": 7.85, "Stainless 304L": 8.0, "Stainless 316L": 8.0, "Stainless 321": 8.03, "Stainless 347": 8.0, "Stainless 310S": 7.9, "Stainless 410 martensitic annealed": 7.74, "Stainless 416 free-machining": 7.75, "Stainless 420 annealed": 7.74, "Stainless 430 ferritic": 7.75, "Stainless 440C annealed": 7.65, "Stainless 17-4 PH (solution annealed)": 7.78, "Duplex 2205": 7.8, "Stainless 904L": 8.0, "Cast stainless CF8M (316 cast)": 8.0, "Gray iron FG200 (Class 30)": 7.1, "Gray iron FG260 (Class 40)": 7.2, "SG iron 400/12 ferritic (60-40-18)": 7.1, "SG iron 600/3 pearlitic (80-55-06)": 7.15, "SG iron 700/2 (100-70-03)": 7.2, "ADI austempered ductile iron (~40 HRC)": 7.1, "Malleable iron (ferritic)": 7.2, "Compacted graphite iron (CGI)": 7.1, "Aluminium 6063-T6": 2.7, "Aluminium 6082-T6": 2.7, "Aluminium 5052-H32": 2.68, "Aluminium 5083-H116": 2.66, "Aluminium 2024-T351": 2.78, "Aluminium cast A356 / LM25 (7% Si)": 2.68, "Aluminium die-cast ADC12 / A380": 2.74, "Brass 70/30 cartridge (C26000)": 8.53, "Brass 60/40 Muntz (C28000)": 8.39, "Naval brass (C46400)": 8.41, "Phosphor bronze C51000": 8.86, "Leaded gunmetal LG2 (C83600)": 8.8, "Aluminium bronze C614 (~7% Al)": 7.8, "Beryllium copper C17200 (aged)": 8.25, "Chromium copper C18200 (aged)": 8.89, "Tellurium copper C14500 (free-cut)": 8.94, "Copper-nickel 90/10 (C70600)": 8.94, "Copper-nickel 70/30 (C71500)": 8.94, "Acetal POM-C (Delrin type)": 1.41, "Nylon PA6 / PA66": 1.14, "PTFE (Teflon type)": 2.2, "PEEK": 1.32, "Acrylic PMMA": 1.18, "Polycarbonate PC": 1.2, "ABS": 1.05, "G10 / FR4 glass-epoxy laminate": 1.85, "Titanium CP Grade 2": 4.51, "Titanium Grade 9 (Ti-3Al-2.5V)": 4.48, "Inconel 625": 8.44, "Inconel X-750 (aged)": 8.28, "Waspaloy (aged)": 8.19, "Incoloy 800H": 7.94, "Incoloy 825": 8.14, "Monel 400": 8.8, "Monel K500 (aged)": 8.44, "Stellite 6 (cobalt alloy)": 8.38, "Hastelloy X": 8.22, "Cobalt-chrome CoCr (ASTM F75)": 8.3, "H13 hardened (~48 HRC)": 7.8, "D2 hardened (~60 HRC)": 7.7, "M2 HSS hardened (~64 HRC)": 8.16, "O1 hardened (~60 HRC)": 7.81, "52100 bearing steel hardened (~60 HRC)": 7.81, "Case-hardened steel (~60 HRC case)": 7.85, "Maraging 300 aged (~52 HRC)": 8.1, "Hardox 450 wear plate (~45 HRC)": 7.85, "Hardox 500 wear plate (~50 HRC)": 7.85, "Ni-Hard white cast iron": 7.7});
-function wtMatFill(){var s=$('wt_mat');if(!s||s.options.length)return;matFill(s,'Low carbon steel <0.55%C');}
+function wtMatFill(){var s=$('wt_mat');if(!s||s.options.length)return;matFill(s,'Low carbon steel <0.55%C',true);}
 function wtVis(){
   var shape=$('wt_shape')?$('wt_shape').value:'Round bar';
   var l1=$('wt_d1label'),wrap2=$('wt_d2wrap');
