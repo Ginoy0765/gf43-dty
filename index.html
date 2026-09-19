@@ -247,7 +247,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.44 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.45 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -534,20 +534,6 @@
 <div id="ho_out" class="note" style="text-align:left;margin-top:6px">Set values and press Generate.</div>
 <div id="ho_block"></div>
 
-<div class="sec" id="ho_simsec"><div class="st" onclick="tog(this)">TOOLPATH SIMULATION <span>&#9662;</span></div><div class="sb">
-  <div class="fmbar">
-    <button type="button" class="fmb" id="ho_sim_play" onclick="hoSimPlay()">&#9654; Play</button>
-    <button type="button" class="fmb" onclick="hoSimReset()">&#8635; Reset</button>
-    <label>speed <input type="range" id="ho_sim_spd" min="20" max="900" value="220"></label>
-  </div>
-  <canvas id="ho_simcv"></canvas>
-  <div class="fmleg">
-    <span><i class="sw" style="background:rgba(55,211,154,.5)"></i> cut path (tool &Oslash;)</span>
-    <span><i class="sw" style="background:#6b7c8c"></i> rapid / air</span>
-    <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter</span>
-  </div>
-  <p class="note" style="text-align:left">Press <b>Generate</b> first, then <b>Play</b>. Top: plan view. Bottom: tool height (Z) along the program. The simulation follows the generated Fanuc-style program.</p>
-</div></div>
 </section>
 <section id="pocket_op" class="view">
 <style>
@@ -884,20 +870,18 @@
 <div id="gm_block"></div>
 
 <div class="sec" id="gm_simsec"><div class="st" onclick="tog(this)">TOOLPATH SIMULATION <span>&#9662;</span></div><div class="sb">
-  <div class="fmbar">
-    <button type="button" class="fmb" id="gm_sim_play" onclick="gmSimPlay()">&#9654; Play</button>
-    <button type="button" class="fmb" onclick="gmSimReset()">&#8635; Reset</button>
-    <label>speed <input type="range" id="gm_sim_spd" min="20" max="900" value="220"></label>
+  <div id="gm_simwrap" style="position:relative"><canvas id="gm_simcv" width="640" height="520" style="width:100%;display:block;background:#0a1118;border:1px solid #293a4d;border-radius:12px"></canvas><div id="gm_simsel" style="position:absolute;display:none;left:0;top:0;border:1.5px dashed #ff4d4d;background:rgba(255,77,77,0.08);pointer-events:none;border-radius:4px"></div></div>
+  <div id="gm_simctrls" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:8px">
+    <button class="btn btn2" id="gm_simplay" style="width:auto;padding:8px 12px" onclick="gmSim('toggle')">&#9654; Play</button>
+    <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="gmSim('prev')">&#9664; Block</button>
+    <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="gmSim('next')">Block &#9654;</button>
+    <button class="btn btn2" id="gm_simspeed" style="width:auto;padding:8px 12px" onclick="gmSim('speed')">Speed 5&#215;</button>
+    <button class="btn btn2" id="gm_simzoombox" style="width:auto;padding:8px 12px" onclick="gmSim('area')" title="Zoom to a region &mdash; tap this, then drag a box over the area">&#128269; Area</button>
+    <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="gmSim('reset')">Reset (clear)</button>
+    <button class="btn btn2" id="gm_simviewbtn" style="width:auto;padding:8px 12px" onclick="gmSim('view')" title="Change the viewing direction: ISO, Top, Right, Front">&#128065; View: ISO</button>
+    <div id="gm_simblklbl" class="note" style="width:100%;text-align:center;margin-top:2px">Press Generate first, then simulate.</div>
+    <div id="gm_simpos" style="width:100%;text-align:center;font-family:monospace;font-size:13px;color:#ffb300;margin-top:2px"></div>
   </div>
-  <canvas id="gm_simcv"></canvas>
-  <div class="fmleg">
-    <span><i class="sw" style="background:rgba(55,211,154,.5)"></i> cut path (cutter &Oslash;)</span>
-    <span><i class="sw" style="background:#6b7c8c"></i> rapid / air</span>
-    <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter</span>
-    <span><i class="sw" style="background:#4f8cff"></i> wall</span>
-    <span><i class="sw" style="background:#ffb300"></i> groove root</span>
-  </div>
-  <p class="note" style="text-align:left">Press <b>Generate</b> first, then <b>Play</b>. Top: plan view with the wall and the groove root. Bottom: cutter height (Z) along the program.</p>
 </div></div>
 </section>
     <section id="fulljob" class="view">
@@ -1081,17 +1065,18 @@
 <div id="fm_block"></div>
 
 <div class="sec" id="fm_simsec"><div class="st" onclick="tog(this)">TOOLPATH SIMULATION <span>&#9662;</span></div><div class="sb">
-  <div class="fmbar">
-    <button type="button" class="fmb" id="fmsim_play" onclick="fmSimPlay()">&#9654; Play</button>
-    <button type="button" class="fmb" id="fmsim_reset" onclick="fmSimReset()">&#8635; Reset</button>
-    <label>speed <input type="range" id="fmsim_spd" min="40" max="1500" value="400"></label>
+  <div id="fm_simwrap" style="position:relative"><canvas id="fm_simcv" width="640" height="520" style="width:100%;display:block;background:#0a1118;border:1px solid #293a4d;border-radius:12px"></canvas><div id="fm_simsel" style="position:absolute;display:none;left:0;top:0;border:1.5px dashed #ff4d4d;background:rgba(255,77,77,0.08);pointer-events:none;border-radius:4px"></div></div>
+  <div id="fm_simctrls" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:8px">
+    <button class="btn btn2" id="fm_simplay" style="width:auto;padding:8px 12px" onclick="fmSim('toggle')">&#9654; Play</button>
+    <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="fmSim('prev')">&#9664; Block</button>
+    <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="fmSim('next')">Block &#9654;</button>
+    <button class="btn btn2" id="fm_simspeed" style="width:auto;padding:8px 12px" onclick="fmSim('speed')">Speed 5&#215;</button>
+    <button class="btn btn2" id="fm_simzoombox" style="width:auto;padding:8px 12px" onclick="fmSim('area')" title="Zoom to a region &mdash; tap this, then drag a box over the area">&#128269; Area</button>
+    <button class="btn btn2" style="width:auto;padding:8px 12px" onclick="fmSim('reset')">Reset (clear)</button>
+    <button class="btn btn2" id="fm_simviewbtn" style="width:auto;padding:8px 12px" onclick="fmSim('view')" title="Change the viewing direction: ISO, Top, Right, Front">&#128065; View: ISO</button>
+    <div id="fm_simblklbl" class="note" style="width:100%;text-align:center;margin-top:2px">Press Generate first, then simulate.</div>
+    <div id="fm_simpos" style="width:100%;text-align:center;font-family:monospace;font-size:13px;color:#ffb300;margin-top:2px"></div>
   </div>
-  <canvas id="fmsim"></canvas>
-  <div class="fmleg">
-    <span><i class="sw" style="background:rgba(55,211,154,.45)"></i> cut (material removed)</span>
-    <span><i class="sw" style="background:rgba(169,139,255,.5);border-radius:50%"></i> cutter (&Oslash;)</span>
-  </div>
-  <p class="note" style="text-align:left">Press <b>Generate</b> first, then <b>Play</b>.</p>
 </div></div>
 
 <!-- PARKED (hidden): avoid zones, do-not-cross lines, data model, avoid clearance.
@@ -3107,7 +3092,7 @@ function tnCalc(){var m=matBy(tnMatVal());if(m){var vc=m[1]||60;if($('tn_vc'))$(
 var tnRdocEdit=0,tnAxEdit=0,tnAzEdit=0;
 function tnModeChange(){var mv=$('tn_mode')?$('tn_mode').value:'';var doR=mv.indexOf('Rough')>=0,both=(doR&&mv.indexOf('Finish')>=0);var st=$('tn_strat');if(st){st.disabled=!doR;st.style.opacity=doR?'1':'0.5';}var r2=$('tn_t2row');if(r2)r2.style.display=both?'':'none';var sf=$('tn_spdfrow');if(sf)sf.style.display=both?'':'none';if(typeof tnFaceStockDefault==='function')tnFaceStockDefault();if(typeof tnPosDefaults==='function')tnPosDefaults();}
 function tnZatX(P,xl){for(var i=0;i<P.length-1;i++){var a=P[i],b=P[i+1];if((a.x-xl)*(b.x-xl)<=0&&a.x!==b.x){var t=(xl-a.x)/(b.x-a.x);return a.z+t*(b.z-a.z);}}return Math.min.apply(null,P.map(function(p){return p.z;}));}
-function drSim(){if(!lastProg)return;var cv=$('dr_simcv');if(!cv)return;var _un=$('dr_unrollcv');S2.hv3d=false;var _ov=$('dr_simfull');if(_ov)_ov.style.display='flex';if($('dr_simctrls'))$('dr_simctrls').style.display='flex';cv.style.display='block';if(_un)_un.style.display='block';var turning=(window._mode==='turn');var dd=parseFloat($('dr_d').value)||6;var ptLen=(dd/2)/Math.tan(70*Math.PI/180);var L=lastProg.split('\n');var x=0,y=0,z=20,g=0;var segs=[];for(var k=0;k<L.length;k++){var u=L[k].trim();if(!u||u[0]==='('||u[0]==='%')continue;if(/\bG0?0\b/.test(u))g=0;else if(/\bG0?1\b/.test(u))g=1;else if(/\bG0?2\b/.test(u))g=2;else if(/\bG0?3\b/.test(u))g=3;if(/\bG0?4\b/.test(u)){if(turning){segs.push([z,Math.abs(x)/2,z,Math.abs(x)/2,1,[x,y,z],[x,y,z],'dwell']);}else{segs.push([x,z,x,z,1,[x,y,z],[x,y,z],'dwell']);}continue;}var X=_sv('X',u),Y=_sv('Y',u),Z=_sv('Z',u);if(X==null&&Y==null&&Z==null)continue;var nx=(X!=null?X:x),ny=(Y!=null?Y:y),nz=(Z!=null?Z:z);if(turning){segs.push([z,Math.abs(x)/2,nz,Math.abs(nx)/2,g,[x,y,z],[nx,ny,nz]]);}else{segs.push([x,z,nx,nz,g,[x,y,z],[nx,ny,nz]]);}x=nx;y=ny;z=nz;}var _dopt={base:true,dash:false,pad:dd/2+1,drill:{dia:dd,ptLen:ptLen,turning:turning},unroll:1,unrollCv:$('dr_unrollcv'),fmt:function(r){return 'X'+r[0].toFixed(2)+' Y'+r[1].toFixed(2)+' Z'+r[2].toFixed(2);}};function _drStart(){[cv,_un].forEach(function(c){if(c){var rc=c.getBoundingClientRect();c.width=Math.max(50,Math.round(rc.width)||600);c.height=Math.max(50,Math.round(rc.height)||420);}});s2Start(cv,segs,_dopt,'dr');var _vb=$('dr_viewbtns');if(_vb)_vb.style.display=turning?'none':'inline-flex';if(typeof drView==='function')drView('2d');}if(window.requestAnimationFrame){requestAnimationFrame(function(){requestAnimationFrame(_drStart);});}else{_drStart();}}
+function drSim(o){o=(o&&o.segs)?o:null;if(!o&&!lastProg)return;var cv=$('dr_simcv');if(!cv)return;var _un=$('dr_unrollcv');S2.hv3d=false;var _ov=$('dr_simfull');if(_ov)_ov.style.display='flex';if($('dr_simctrls'))$('dr_simctrls').style.display='flex';cv.style.display='block';if(_un)_un.style.display='block';var turning=o?false:(window._mode==='turn');var dd=o?o.dia:(parseFloat($('dr_d').value)||6);var ptLen=(o&&o.ptLen!=null)?o.ptLen:(dd/2)/Math.tan(70*Math.PI/180);var L=o?[]:lastProg.split('\n');var x=0,y=0,z=20,g=0;var segs=o?o.segs.slice():[];for(var k=0;k<L.length;k++){var u=L[k].trim();if(!u||u[0]==='('||u[0]==='%')continue;if(/\bG0?0\b/.test(u))g=0;else if(/\bG0?1\b/.test(u))g=1;else if(/\bG0?2\b/.test(u))g=2;else if(/\bG0?3\b/.test(u))g=3;if(/\bG0?4\b/.test(u)){if(turning){segs.push([z,Math.abs(x)/2,z,Math.abs(x)/2,1,[x,y,z],[x,y,z],'dwell']);}else{segs.push([x,z,x,z,1,[x,y,z],[x,y,z],'dwell']);}continue;}var X=_sv('X',u),Y=_sv('Y',u),Z=_sv('Z',u);if(X==null&&Y==null&&Z==null)continue;var nx=(X!=null?X:x),ny=(Y!=null?Y:y),nz=(Z!=null?Z:z);if(turning){segs.push([z,Math.abs(x)/2,nz,Math.abs(nx)/2,g,[x,y,z],[nx,ny,nz]]);}else{segs.push([x,z,nx,nz,g,[x,y,z],[nx,ny,nz]]);}x=nx;y=ny;z=nz;}var _dopt={base:true,dash:false,pad:dd/2+1,drill:{dia:dd,ptLen:ptLen,turning:turning},unroll:1,unrollCv:$('dr_unrollcv'),fmt:function(r){return 'X'+r[0].toFixed(2)+' Y'+r[1].toFixed(2)+' Z'+r[2].toFixed(2);}};function _drStart(){[cv,_un].forEach(function(c){if(c){var rc=c.getBoundingClientRect();c.width=Math.max(50,Math.round(rc.width)||600);c.height=Math.max(50,Math.round(rc.height)||420);}});s2Start(cv,segs,_dopt,'dr');var _vb=$('dr_viewbtns');if(_vb)_vb.style.display=turning?'none':'inline-flex';if(typeof drView==='function')drView('2d');}if(window.requestAnimationFrame){requestAnimationFrame(function(){requestAnimationFrame(_drStart);});}else{_drStart();}}
 var lastTurnProg='';
 function tnArcIK(z1,r1,z2,r2,I,K,ccw){var cz=z1+K,cr=r1+I,RR=Math.hypot(I,K);if(RR<1e-6)return [[z2,r2]];var a0=Math.atan2(r1-cr,z1-cz),a1=Math.atan2(r2-cr,z2-cz),sw=a1-a0;if(ccw&&sw<0)sw+=2*Math.PI;if(!ccw&&sw>0)sw-=2*Math.PI;if(Math.abs(sw)<1e-9)sw=(ccw?1:-1)*2*Math.PI;var n=Math.max(6,Math.round(Math.abs(sw)/(Math.PI/24))),out=[];for(var i=1;i<=n;i++){var a=a0+sw*i/n;out.push([cz+RR*Math.cos(a),cr+RR*Math.sin(a)]);}return out;}
 function tnArc(z1,r1,z2,r2,R,ccw){var dz=z2-z1,dr=r2-r1,d=Math.hypot(dz,dr);if(d<1e-6||R<=0)return [[z2,r2]];var RR=Math.max(R,d/2);var h=Math.sqrt(Math.max(0,RR*RR-d*d/4));var mz=(z1+z2)/2,mr=(r1+r2)/2;var ux=-dr/d,ur=dz/d;var sgn=ccw?1:-1;var cz=mz+sgn*h*ux,cr=mr+sgn*h*ur;var a0=Math.atan2(r1-cr,z1-cz),a1=Math.atan2(r2-cr,z2-cz);var sw=a1-a0;if(ccw&&sw<0)sw+=2*Math.PI;if(!ccw&&sw>0)sw-=2*Math.PI;var n=Math.max(6,Math.round(Math.abs(sw)/(Math.PI/24)));var out=[];for(var i=1;i<=n;i++){var a=a0+sw*i/n;out.push([cz+RR*Math.cos(a),cr+RR*Math.sin(a)]);}return out;}
@@ -4805,97 +4790,22 @@ async function genFace(){
     document.getElementById('fmc_cyc').textContent='CYCLE ≈ '+mm+'m '+ss+'s';
     var _fp=await apiPost('/face/path',P);
     try{fmOpenSim();}catch(e){}
-    fmSimBuild(_fp.path, P);
+    FM_SIMPROG=fmSimProg(_fp.path);FM_SEC=t;FM_TOPZ=(P.depth&&P.depth.topZ)||0;fmSimRun();
   }catch(e){out.textContent='Cannot generate:\n'+((e&&e.message)?e.message:e);}
 }
-/* ---------- face-mill toolpath simulator ---------- */
-var FMS={moves:[],dia:50,topZ:0,pts:[],total:0,pos:0,drawn:0,playing:false,last:0,view:null,mat:null};
-function fmSimBuild(data,P){
-  var cv=document.getElementById('fmsim'); if(!cv)return;
-  FMS.moves=data.moves||[]; FMS.dia=data.dia||50; FMS.topZ=data.topZ||0; FMS.model=(P||faceParams());
-  var W=760,H=460; cv.width=W; cv.height=H;
-  // cumulative points
-  var pts=[],tot=0,prev=null;
-  for(var i=0;i<FMS.moves.length;i++){var m=FMS.moves[i];var x=m[1],y=m[2],z=m[3],k=m[0];
-    if(prev){var d=Math.hypot(x-prev[0],y-prev[1]);tot+=d;}
-    pts.push({x:x,y:y,z:z,k:k,acc:tot}); prev=[x,y];}
-  FMS.pts=pts; FMS.total=tot; FMS.pos=0; FMS.drawn=0; FMS.playing=false;
-  // world bbox
-  var minx=1e9,miny=1e9,maxx=-1e9,maxy=-1e9;
-  function ext(x,y){minx=Math.min(minx,x);miny=Math.min(miny,y);maxx=Math.max(maxx,x);maxy=Math.max(maxy,y);}
-  pts.forEach(function(p){ext(p.x,p.y);});
-  var fm=FMS.model; if(fm){var a=fm.area; if(a.shape==='rect'){ext(a.x,a.y);ext(a.x+a.w,a.y+a.l);} else {ext(a.x-a.dia/2,a.y-a.dia/2);ext(a.x+a.dia/2,a.y+a.dia/2);}}
-  if(minx>maxx){minx=0;maxx=120;miny=0;maxy=80;}
-  var pad=40, bw=Math.max(1,maxx-minx), bh=Math.max(1,maxy-miny);
-  var sc=Math.min((W-2*pad)/bw,(H-2*pad)/bh);
-  FMS.view={sc:sc,minx:minx,maxy:maxy,offx:(W-bw*sc)/2,offy:(H-bh*sc)/2,W:W,H:H,minY:miny};
-  // material layer
-  var mat=document.createElement('canvas'); mat.width=W; mat.height=H; FMS.mat=mat;
-  document.getElementById('fmsim_play').textContent='▶ Play';
-  fmSimDraw();
-}
-function fmSX(x){var v=FMS.view;return v.offx+(x-v.minx)*v.sc;}
-function fmSY(y){var v=FMS.view;return v.offy+(v.maxy-y)*v.sc;}
-function fmSimPaint(fromD,toD){ // paint cut swaths on material layer between distances
-  var mc=FMS.mat.getContext('2d'),pts=FMS.pts,r=FMS.dia/2*FMS.view.sc;
-  mc.strokeStyle='rgba(55,211,154,.5)';mc.lineWidth=2*r;mc.lineCap='round';mc.lineJoin='round';
-  for(var i=1;i<pts.length;i++){var a=pts[i-1],b=pts[i];
-    var s0=a.acc,s1=b.acc; if(s1<=fromD||s0>=toD)continue;
-    if(b.k!=='feed'||b.z>=FMS.topZ-1e-4)continue; // only cutting feed moves
-    mc.beginPath();mc.moveTo(fmSX(a.x),fmSY(a.y));mc.lineTo(fmSX(b.x),fmSY(b.y));mc.stroke();}
-}
-function fmPointAt(dist){var pts=FMS.pts;if(!pts.length)return{x:0,y:0};
-  for(var i=1;i<pts.length;i++){if(dist<=pts[i].acc){var a=pts[i-1],b=pts[i];var seg=b.acc-a.acc;var f=seg>0?(dist-a.acc)/seg:0;return{x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f};}}
-  var l=pts[pts.length-1];return{x:l.x,y:l.y};}
-function fmSimDraw(){
-  var cv=document.getElementById('fmsim');if(!cv||!FMS.view)return;var c=cv.getContext('2d'),v=FMS.view;
-  c.clearRect(0,0,v.W,v.H);
-  // material (cleared)
-  c.drawImage(FMS.mat,0,0);
-  var fm=FMS.model;
-  // area outline
-  c.strokeStyle='#4f8cff';c.lineWidth=1.5;c.setLineDash([6,4]);
-  if(fm){var a=fm.area;
-    if(a.shape==='rect'){var cs=fmRect(a);c.beginPath();cs.forEach(function(p,i){var X=fmSX(p[0]),Y=fmSY(p[1]);i?c.lineTo(X,Y):c.moveTo(X,Y);});c.closePath();c.stroke();}
-    else{c.beginPath();c.arc(fmSX(a.x),fmSY(a.y),a.dia/2*v.sc,0,7);c.stroke();}
-    c.setLineDash([]);
-    // avoids
-    (fm.avoid||[]).forEach(function(z){c.fillStyle='rgba(255,107,107,.35)';c.strokeStyle='#ff6b6b';c.lineWidth=1.5;
-      if(z.shape==='circle'){c.beginPath();c.arc(fmSX(z.x),fmSY(z.y),z.dia/2*v.sc,0,7);c.fill();c.stroke();}
-      else{var cs=fmRect(z);c.beginPath();cs.forEach(function(p,i){var X=fmSX(p[0]),Y=fmSY(p[1]);i?c.lineTo(X,Y):c.moveTo(X,Y);});c.closePath();c.fill();c.stroke();}});
-    // barriers
-    c.strokeStyle='#ff9f43';c.lineWidth=2.4;c.setLineDash([8,5]);
-    (fm.noCross||[]).forEach(function(ln){c.beginPath();ln.pts.forEach(function(p,i){var X=fmSX(p[0]),Y=fmSY(p[1]);i?c.lineTo(X,Y):c.moveTo(X,Y);});c.stroke();});
-    c.setLineDash([]);
-  }
-  // cutter
-  var p=fmPointAt(FMS.pos),r=FMS.dia/2*v.sc;
-  c.fillStyle='rgba(169,139,255,.28)';c.strokeStyle='#a98bff';c.lineWidth=1.6;
-  c.beginPath();c.arc(fmSX(p.x),fmSY(p.y),r,0,7);c.fill();c.stroke();
-  c.fillStyle='#a98bff';c.beginPath();c.arc(fmSX(p.x),fmSY(p.y),2.6,0,7);c.fill();
-}
-function fmRect(a){var x=a.x,y=a.y,w=a.w,l=a.l,rot=a.rot||0;var x0,y0;
-  if(a.ref==='center'){x0=x-w/2;y0=y-l/2;}else{x0=x;y0=y;}
-  var pts=[[x0,y0],[x0+w,y0],[x0+w,y0+l],[x0,y0+l]];
-  return pts.map(function(pp){var dx=pp[0]-x,dy=pp[1]-y,ar=rot*Math.PI/180;return [x+dx*Math.cos(ar)-dy*Math.sin(ar), y+dx*Math.sin(ar)+dy*Math.cos(ar)];});}
-function fmSimStep(t){
-  if(!FMS.playing)return;
-  if(!FMS.last)FMS.last=t;var dt=(t-FMS.last)/1000;FMS.last=t;
-  var spd=parseFloat(document.getElementById('fmsim_spd').value)||400;
-  var nxt=Math.min(FMS.total,FMS.pos+spd*dt);
-  fmSimPaint(FMS.drawn,nxt);FMS.drawn=nxt;FMS.pos=nxt;
-  fmSimDraw();
-  if(FMS.pos>=FMS.total){FMS.playing=false;document.getElementById('fmsim_play').textContent='▶ Replay';return;}
-  if(typeof requestAnimationFrame!=='undefined')requestAnimationFrame(fmSimStep);
-}
-function fmSimPlay(){
-  try{fmOpenSim();}catch(e){}
-  if(!FMS.pts.length){document.getElementById('fmc_out').textContent='Press Generate first, then Play.';return;}
-  if(FMS.pos>=FMS.total){FMS.pos=0;FMS.drawn=0;var m=FMS.mat.getContext('2d');m.clearRect(0,0,FMS.view.W,FMS.view.H);}
-  FMS.playing=!FMS.playing;document.getElementById('fmsim_play').textContent=FMS.playing?'❚❚ Pause':'▶ Play';FMS.last=0;
-  if(FMS.playing&&typeof requestAnimationFrame!=='undefined')requestAnimationFrame(fmSimStep);
-}
-function fmSimReset(){FMS.playing=false;FMS.pos=0;FMS.drawn=0;if(FMS.mat){var m=FMS.mat.getContext('2d');m.clearRect(0,0,FMS.view.W,FMS.view.H);}document.getElementById('fmsim_play').textContent='▶ Play';fmSimDraw();}
+/* ---------- face-mill toolpath simulation: the same 3-D path player as the thread-milling screen (SIM engine) ---------- */
+function simClearPanel(pfx){try{if(SIM.pfx===pfx)simStop();SIM.src=null;var c=$(pfx+'simcv');if(c)c.getContext('2d').clearRect(0,0,c.width,c.height);var l=$(pfx+'simblklbl');if(l)l.textContent='Press Generate first, then simulate.';var q=$(pfx+'simpos');if(q)q.textContent='';}catch(e){}}
+var FM_SIMPROG='',FM_TOPZ=0;
+function fmSimProg(path){ /* the server's sampled path -> plain absolute G00/G01 text, so the player works whatever control is selected */
+  var L=['%','O0001 (FACE SIM)','G90'];((path&&path.moves)||[]).forEach(function(m){L.push((m[0]==='rapid'?'G00':'G01')+' X'+(+m[1]).toFixed(3)+' Y'+(+m[2]).toFixed(3)+' Z'+(+m[3]).toFixed(3));});L.push('M30','%');return L.join('\n');}
+var FM_SEC=0;
+function fmSimRun(){var l=$('fm_simblklbl');
+  if(!FM_SIMPROG){if(l)l.textContent='Press Generate first, then simulate.';return false;}
+  runSim({pfx:'fm_',prog:FM_SIMPROG,cycleSec:FM_SEC||10,fitZ:FM_TOPZ+5});return true;}
+function fmSim(a){if(!FM_SIMPROG){fmSimRun();return;}
+  if(SIM.pfx!=='fm_'||SIM.src!==FM_SIMPROG)fmSimRun();
+  var f={toggle:simToggle,prev:function(){simBlock(-1);},next:function(){simBlock(1);},speed:simSpeed,area:simMarquee,reset:simReset,view:simViewCycle}[a];if(f)f();}
+
 async function genMill(){
   if(!pyReady){notReady();return;}
   if(!$('d').value.trim()){$('p_res').innerHTML='<p class="warn">Enter Tool dia d (required).</p>';$('cyc').innerHTML='';if($('simbtn'))$('simbtn').style.display='none';if($('editbtn'))$('editbtn').style.display='none';if($('savebtn'))$('savebtn').style.display='none';return;}
@@ -5117,7 +5027,7 @@ function pbRender(ns){var c=PB_CFG[ns];if(!c)return;var host=$(c.host);if(!host)
 }
 function fmSaveProg(){if(!lastFaceProg)return;var b=new Blob([lastFaceProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_FACEMILL.'+((typeof progExt==='function')?progExt():'nc');document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},600);}
 pbReg('dr2',{host:'dr_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof drSim==='function')drSim();},save:function(){if(typeof saveDrill==='function')saveDrill();},guard:function(){return (typeof drMode!=='undefined'&&drMode==='sample')?SAMPLE_MSG:null;}});
-pbReg('fm',{host:'fm_block',label:function(){return 'Face milling';},get:function(){return lastFaceProg||'';},set:function(v){lastFaceProg=v;lastAnyProg=v;},sim:function(){if(typeof fmSimPlay==='function')fmSimPlay();},save:function(){fmSaveProg();},guard:function(){return (typeof fmMode!=='undefined'&&fmMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
+pbReg('fm',{host:'fm_block',label:function(){return 'Face milling';},get:function(){return lastFaceProg||'';},set:function(v){lastFaceProg=v;lastAnyProg=v;},sim:function(){try{fmOpenSim();}catch(e){}fmSimRun();},save:function(){fmSaveProg();},guard:function(){return (typeof fmMode!=='undefined'&&fmMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
 pbReg('p',{host:'p_res',get:function(){return lastProg;},set:function(v){lastProg=v;lastAnyProg=v;},sim:function(){if(typeof runSim==='function')runSim();},save:function(){if(typeof saveProg==='function')saveProg();},guard:function(){return progMode==='sample'?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
 pbReg('gv',{host:'gv_block',get:function(){return lastGrooveProg;},set:function(v){lastGrooveProg=v;lastAnyProg=v;var g=$('gcode');if(g)g.textContent=v;},sim:function(){if(typeof gvSim==='function')gvSim();},save:function(){if(typeof gv_saveProg==='function')gv_saveProg();},guard:function(){return (typeof gvMode!=='undefined'&&gvMode==='sample')?SAMPLE_MSG:null;}});
 function toggleEdit(){pbEdit('p');}
@@ -5769,7 +5679,6 @@ function hoRefreshReq(){var host=$('hole_op');if(!host)return;host.querySelector
   if(hoMode!=='new')return;
   hoFields().forEach(function(f){var e=$(f[0]);if(e&&!(parseFloat(e.value)>0)){e.classList.add('reqbad');(f[2]||[]).forEach(function(id){var x=$(id);if(x)x.classList.add('reqbad');});}});}
 function hoOpenBad(){document.querySelectorAll('#hole_op .reqbad').forEach(function(el){_fmOpenSb(el.closest('.sb'));});}
-function hoOpenSim(){var sec=$('ho_simsec');if(sec)_fmOpenSb(sec.querySelector(':scope > .sb'));}
 function hoClearMandatory(){hoFields().forEach(function(f){var e=$(f[0]);if(e)e.value='';});
   if(hoOp()==='Tapping'){soBlank('ho_tp_size');}
   hoCalc('init');}
@@ -5790,7 +5699,7 @@ function setHoMode(m){hoMode=m;var s=$('ho_pm_sample'),n=$('ho_pm_new');if(s)s.c
   hoCalc('init');hoDraw();hoRefreshReq();}
 function hoOpen(name){var o=$('ho_op');if(o)o.value=name;holeRaw='';lastHoleProg='';
   if($('ho_block'))$('ho_block').innerHTML='';if($('ho_cyc'))$('ho_cyc').textContent='';if($('ho_out'))$('ho_out').textContent='Set values and press Generate.';
-  try{HOS.pts=[];HOS.playing=false;}catch(e){}
+  HO_SIMP=null;
   hoMachineSeed();_hoLastOp=name;hoOpChange();setHoMode(hoMode);show('hole_op');}
 function hoMachineSeed(){if(_hoSeeded)return;_hoSeeded=true;
   function sv(id,val){var e=$(id);if(!e||!val)return;for(var i=0;i<e.options.length;i++){if(e.options[i].value===val||e.options[i].text===val){e.value=e.options[i].value;return;}}}
@@ -5839,12 +5748,11 @@ function genHole(){
   out.textContent=(r.warns&&r.warns.length)?('⚠ '+r.warns.join(' ')):'';
   var sec=Math.round(HOLE.estimate(HOLE.parse(holeRaw)));
   $('ho_cyc').textContent='CYCLE ≈ '+Math.floor(sec/60)+'m '+(sec%60)+'s · '+P.positions.length+' hole'+(P.positions.length===1?'':'s');
-  try{hoOpenSim();}catch(e){}
-  hoSimBuild(holeRaw,P);
+  HO_SIMP=hoSimGeom(P);
 }
 function hoSaveProg(){if(!lastHoleProg)return;var b=new Blob([lastHoleProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_'+hoOp().toUpperCase().replace(/\s+/g,'')+'.'+((typeof progExt==='function')?progExt():'nc');document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},600);}
 function hoJobLabel(){var op=hoOp(),n=hoPositions().length,d=hoN('ho_d')||hoDia();var t=(op==='Tapping'&&$('ho_tp_size')&&$('ho_tp_size').value)?$('ho_tp_size').value:(d>0?'Ø'+(Math.round(d*100)/100):'');return op+(t?' '+t:'')+' ×'+n;}
-pbReg('ho',{host:'ho_block',get:function(){return lastHoleProg||'';},set:function(v){lastHoleProg=v;lastAnyProg=v;},sim:function(){try{hoOpenSim();}catch(e){}hoSimPlay();},save:function(){hoSaveProg();},label:hoJobLabel,guard:function(){return (typeof hoMode!=='undefined'&&hoMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
+pbReg('ho',{host:'ho_block',get:function(){return lastHoleProg||'';},set:function(v){lastHoleProg=v;lastAnyProg=v;},sim:function(){hoSimRun();},save:function(){hoSaveProg();},label:hoJobLabel,guard:function(){return (typeof hoMode!=='undefined'&&hoMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
 
 /* ---- cross-section graph ---- */
 function hoDraw(){
@@ -5914,72 +5822,27 @@ function hoPatDraw(){
   svg.innerHTML=o;
 }
 
-/* ---- toolpath simulation (plan view + Z trace), driven by the parsed program ---- */
-var HOS={pts:[],total:0,pos:0,playing:false,last:0,box:null,dia:6,holes:[],topZ:0,zmin:0,zmax:0,trail:null,drawn:0,raf:0};
-function hoSimBuild(raw,P){
-  var cv=$('ho_simcv');if(!cv)return;
-  var mv=HOLE.parse(raw),pts=[],s=0,p=null;
-  mv.forEach(function(m){var len=0;if(m.k==='dwell')len=5;else if(p){len=Math.hypot(m.x-p.x,m.y-p.y,m.z-p.z);if(m.k==='rapid')len=Math.min(len,40)*0.3+0.5;}
-    s+=len;pts.push({s:s,k:m.k,x0:p?p.x:m.x,y0:p?p.y:m.y,z0:p?p.z:m.z,x:m.x,y:m.y,z:m.z});p={x:m.x,y:m.y,z:m.z};});
-  HOS.pts=pts;HOS.total=s||1;HOS.pos=0;HOS.playing=false;HOS.drawn=0;HOS.topZ=P.topZ;
-  var op=P.op;HOS.dia=(op==='Tapping')?(P.dia||6):((op==='Reaming'||(op==='Boring'&&P.method!=='interp')||(op==='Counter bore'&&P.method!=='interp'))?P.d:P.toolD);
-  HOS.holes=P.positions.map(function(q){return {x:q[0],y:q[1]};});
-  HOS.holeD=(op==='Tapping')?(P.dia||6):(op==='Centering'?(P.cdef==='dia'?P.spot:P.toolD/2):((op==='Chamfering')?(P.d+2*(P.chamfer||0)):P.d));
-  var mnx=1e9,mxx=-1e9,mny=1e9,mxy=-1e9,zmin=1e9,zmax=-1e9;
-  pts.forEach(function(q){mnx=Math.min(mnx,q.x);mxx=Math.max(mxx,q.x);mny=Math.min(mny,q.y);mxy=Math.max(mxy,q.y);zmin=Math.min(zmin,q.z);zmax=Math.max(zmax,q.z);});
-  var r=Math.max(HOS.dia/2,HOS.holeD/2,3)*(HOS.holes.length>1?1.3:2.2)+4;HOS.box=[mnx-r,mxx+r,mny-r,mxy+r];HOS.zmin=zmin;HOS.zmax=Math.min(zmax,P.topZ+P.rClr+5);
-  cv.width=760;cv.height=470;HOS.trail=document.createElement('canvas');HOS.trail.width=760;HOS.trail.height=340;
-  hoSimDraw();
-}
-function hoSimLayout(){var b=HOS.box,W=760,Hp=340,mg=14;var w=Math.max(1,b[1]-b[0]),h=Math.max(1,b[3]-b[2]);var s=Math.min((W-2*mg)/w,(Hp-2*mg)/h);var ox=mg+((W-2*mg)-w*s)/2-b[0]*s,oy=Hp-mg-((Hp-2*mg)-h*s)/2+b[2]*s;return {s:s,X:function(x){return ox+x*s;},Y:function(y){return oy-y*s;}};}
-function hoSimAt(sPos){var pts=HOS.pts,i=0,lo=0,hi=pts.length-1;while(lo<hi){var mid=(lo+hi)>>1;if(pts[mid].s<sPos)lo=mid+1;else hi=mid;}i=lo;var q=pts[i],sPrev=i>0?pts[i-1].s:0,t=(q.s>sPrev)?Math.max(0,Math.min(1,(sPos-sPrev)/(q.s-sPrev))):1;return {i:i,x:q.x0+(q.x-q.x0)*t,y:q.y0+(q.y-q.y0)*t,z:q.z0+(q.z-q.z0)*t,k:q.k};}
-function hoSimDraw(){
-  var cv=$('ho_simcv');if(!cv||!HOS.box||!HOS.pts.length)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height,L=hoSimLayout(),pts=HOS.pts;
-  ctx.fillStyle='#0a1015';ctx.fillRect(0,0,W,H);
-  // trail (finished segments)
-  var tc=HOS.trail.getContext('2d'),cur=hoSimAt(HOS.pos);
-  while(HOS.drawn<cur.i){var q=pts[HOS.drawn];hoSimSeg(tc,L,q,1);HOS.drawn++;}
-  ctx.globalAlpha=1;ctx.drawImage(HOS.trail,0,0);
-  // hole outlines
-  ctx.strokeStyle='#4f6a82';ctx.setLineDash([5,4]);ctx.lineWidth=1;HOS.holes.forEach(function(h){ctx.beginPath();ctx.arc(L.X(h.x),L.Y(h.y),Math.max(2,HOS.holeD/2*L.s),0,Math.PI*2);ctx.stroke();});ctx.setLineDash([]);
-  // partial current segment
-  if(cur.i<pts.length){var q2=pts[cur.i];hoSimSeg(ctx,L,{k:q2.k,x0:q2.x0,y0:q2.y0,z0:q2.z0,x:cur.x,y:cur.y,z:cur.z},1);}
-  // tool
-  ctx.beginPath();ctx.arc(L.X(cur.x),L.Y(cur.y),Math.max(3,HOS.dia/2*L.s),0,Math.PI*2);ctx.fillStyle='rgba(169,139,255,.28)';ctx.fill();ctx.strokeStyle='#a98bff';ctx.lineWidth=1.6;ctx.stroke();
-  ctx.beginPath();ctx.moveTo(L.X(cur.x)-5,L.Y(cur.y));ctx.lineTo(L.X(cur.x)+5,L.Y(cur.y));ctx.moveTo(L.X(cur.x),L.Y(cur.y)-5);ctx.lineTo(L.X(cur.x),L.Y(cur.y)+5);ctx.stroke();
-  // Z trace
-  var y0=352,y1=H-14,x0=14,x1=W-14,zr=Math.max(0.1,HOS.zmax-HOS.zmin);
-  ctx.fillStyle='#0d161e';ctx.fillRect(x0-6,y0-8,x1-x0+12,y1-y0+18);
-  var zy=function(z){return y1-(z-HOS.zmin)/zr*(y1-y0);},sx=function(sv){return x0+sv/HOS.total*(x1-x0);};
-  var ztop=zy(HOS.topZ);ctx.strokeStyle='#7fb0d8';ctx.lineWidth=1;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(x0,ztop);ctx.lineTo(x1,ztop);ctx.stroke();ctx.setLineDash([]);
-  ctx.fillStyle='#7fb0d8';ctx.font='11px sans-serif';ctx.fillText('Z top',x0+2,ztop-3);
-  ctx.beginPath();ctx.strokeStyle='#3b4f61';ctx.lineWidth=1.2;var prevS=0;pts.forEach(function(q,ix){var xa=sx(prevS),xb=sx(q.s);if(ix===0)ctx.moveTo(xa,zy(Math.min(q.z0,HOS.zmax)));ctx.lineTo(xa,zy(Math.min(q.z0,HOS.zmax)));ctx.lineTo(xb,zy(Math.min(q.z,HOS.zmax)));prevS=q.s;});ctx.stroke();
-  ctx.beginPath();ctx.strokeStyle='#37d39a';ctx.lineWidth=1.8;prevS=0;var stopped=false;pts.forEach(function(q,ix){if(stopped)return;var xa=sx(prevS),xb=sx(Math.min(q.s,HOS.pos));if(ix===0)ctx.moveTo(xa,zy(Math.min(q.z0,HOS.zmax)));ctx.lineTo(xa,zy(Math.min(q.z0,HOS.zmax)));ctx.lineTo(xb,zy(Math.min(ix===cur.i?cur.z:q.z,HOS.zmax)));prevS=q.s;if(q.s>=HOS.pos)stopped=true;});ctx.stroke();
-  ctx.fillStyle='#a98bff';ctx.beginPath();ctx.arc(sx(HOS.pos),zy(Math.min(cur.z,HOS.zmax)),4,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#cfe0ee';ctx.font='12px sans-serif';ctx.fillText('X '+cur.x.toFixed(2)+'   Y '+cur.y.toFixed(2)+'   Z '+cur.z.toFixed(2)+'   '+(cur.k==='rapid'?'RAPID':(cur.k==='dwell'?'DWELL':'FEED')),16,22);
-}
-function hoSimSeg(ctx,L,q,scale){
-  var below=(q.k==='feed')&&(Math.min(q.z0,q.z)<HOS.topZ-0.01);
-  ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
-  if(q.k==='dwell'){ctx.restore();return;}
-  if(below){ctx.strokeStyle='rgba(55,211,154,.45)';ctx.lineWidth=Math.max(1.5,HOS.dia*L.s);}
-  else if(q.k==='rapid'){ctx.strokeStyle='rgba(107,124,140,.6)';ctx.lineWidth=1;ctx.setLineDash([3,4]);}
-  else{ctx.strokeStyle='rgba(200,215,230,.55)';ctx.lineWidth=1.2;}
-  ctx.beginPath();ctx.moveTo(L.X(q.x0),L.Y(q.y0));ctx.lineTo(L.X(q.x),L.Y(q.y));ctx.stroke();ctx.restore();
-}
-function hoSimReset(){HOS.playing=false;HOS.pos=0;HOS.drawn=0;if(HOS.trail)HOS.trail.getContext('2d').clearRect(0,0,HOS.trail.width,HOS.trail.height);var b=$('ho_sim_play');if(b)b.innerHTML='&#9654; Play';hoSimDraw();}
-function hoSimPlay(){
-  if(!HOS.pts.length){if(holeRaw){try{hoSimBuild(holeRaw,hoParams());}catch(e){}}if(!HOS.pts.length){var o=$('ho_out');if(o)o.textContent='Generate a program first, then Play.';return;}}
-  var b=$('ho_sim_play');
-  if(HOS.playing){HOS.playing=false;if(b)b.innerHTML='&#9654; Play';return;}
-  if(HOS.pos>=HOS.total-1e-6)hoSimReset();
-  HOS.playing=true;HOS.last=0;if(b)b.innerHTML='&#10074;&#10074; Pause';
-  function step(ts){if(!HOS.playing)return;if(!HOS.last)HOS.last=ts;var dt=Math.min(0.1,(ts-HOS.last)/1000);HOS.last=ts;
-    var spd=(parseFloat(($('ho_sim_spd')||{}).value)||220)/220*HOS.total/14;HOS.pos+=spd*dt;
-    if(HOS.pos>=HOS.total){HOS.pos=HOS.total;HOS.playing=false;if(b)b.innerHTML='&#9654; Play';}
-    hoSimDraw();if(HOS.playing)requestAnimationFrame(step);}
-  requestAnimationFrame(step);
-}
+/* ---- Holes simulation: the Drilling screen's full-screen player (hole view + peck-depth trace + 2D/3D/Top/Front/Left), fed with the generated program ---- */
+var HO_SIMP=null;
+function hoSimGeom(P){var op=P.op,dia=(op==='Tapping')?(P.dia||6):((op==='Reaming'||(op==='Boring'&&P.method!=='interp')||(op==='Counter bore'&&P.method!=='interp'))?P.d:P.toolD);
+  if(!(dia>0))dia=P.d>0?P.d:6;var pl=0;
+  if(op==='Centering'||op==='Chamfering'){var a=((P.toolAngle>0?P.toolAngle:90)/2)*Math.PI/180,tip=(op==='Chamfering'&&P.tipD>0)?P.tipD:0;pl=Math.max(0,(dia-tip)/2/Math.tan(a));}
+  return {dia:dia,ptLen:pl};}
+function hoSimRun(){var o=$('ho_out');
+  if(!holeRaw){if(o)o.textContent='Generate a program first, then Simulate.';return false;}
+  var mv=[];try{mv=HOLE.parse(holeRaw);}catch(e){}
+  if(!mv.length){if(o)o.textContent='Nothing to simulate in this program.';return false;}
+  var g=HO_SIMP||hoSimGeom(hoParams()),segs=[],p=null;
+  mv.forEach(function(m){
+    if(m.k==='dwell'){segs.push([m.x,m.z,m.x,m.z,1,[m.x,m.y,m.z],[m.x,m.y,m.z],'dwell']);return;}
+    if(!p){p={x:m.x,y:m.y,z:m.z};return;}
+    segs.push([p.x,p.z,m.x,m.z,(m.k==='rapid'?0:1),[p.x,p.y,p.z],[m.x,m.y,m.z]]);p={x:m.x,y:m.y,z:m.z};});
+  if(!segs.length){if(o)o.textContent='Nothing to simulate in this program.';return false;}
+  if(segs.length>1500){ /* interpolated bores/counter-bores are cut into many tiny arc steps - group runs of feed steps so Block stepping stays usable */
+    var nfeed=segs.filter(function(q){return q[4]===1&&q[7]!=='dwell';}).length,N=Math.max(1,Math.ceil(nfeed/1200)),out=[],run=[];
+    var flush=function(){if(!run.length)return;var a=run[0],z=run[run.length-1];out.push([a[0],a[1],z[2],z[3],1,a[5],z[6]]);run=[];};
+    segs.forEach(function(q){if(q[4]===1&&q[7]!=='dwell'){run.push(q);if(run.length>=N)flush();}else{flush();out.push(q);}});flush();segs=out;}
+  drSim({segs:segs,dia:g.dia,ptLen:g.ptLen});return true;}
 (function initHo(){try{
   var mt=$('ho_mat');if(mt){matFill(mt,'Stainless 316 austenitic');}
   var host=$('hole_op');if(host){host.addEventListener('input',function(){hoRefreshReq();});host.addEventListener('change',function(){hoRefreshReq();});}
@@ -6309,7 +6172,7 @@ function setGmMode(m){gmMode=m;var s=$('gm_pm_sample'),n=$('gm_pm_new');if(s)s.c
   gmVis();gmDraw();gmRefreshReq();}
 function gmOpen(){grooveRaw='';lastGrooveProg='';
   if($('gm_block'))$('gm_block').innerHTML='';if($('gm_cyc'))$('gm_cyc').textContent='';if($('gm_out'))$('gm_out').textContent='Set values and press Generate.';
-  try{GMS.pts=[];GMS.playing=false;}catch(e){}
+  simClearPanel('gm_');
   gmMachineSeed();gmVis();setGmMode(gmMode);show('groove_op');}
 function gmMachineSeed(){if(_gmSeeded)return;_gmSeeded=true;
   function sv(id,val){var e=$(id);if(!e||!val)return;for(var i=0;i<e.options.length;i++){if(e.options[i].value===val||e.options[i].text===val){e.value=e.options[i].value;return;}}}
@@ -6344,7 +6207,7 @@ async function genGroove(){
   if(!(P.feed>0)){out.textContent='Feed is empty — set Fz or the feed in mm/min.';try{_fmOpenSb($('gm_fmin').closest('.sb'));}catch(e){}return;}
   out.textContent='Generating…';
   try{
-    var res=await Promise.all([apiPost('/groove/program',P),apiPost('/groove/path',P)]);
+    var res=[await apiPost('/groove/program',P)];
     var raw=String(res[0].program||'');
     var on=String(Math.max(0,Math.round(pkN('gm_onum'))||3030));while(on.length<4)on='0'+on;
     raw=raw.replace(/^O0001\b/m,'O'+on);
@@ -6357,14 +6220,14 @@ async function genGroove(){
     var sec=Math.round(res[0].seconds||0);
     $('gm_cyc').textContent='CYCLE ≈ '+Math.floor(sec/60)+'m '+(sec%60)+'s';
     try{gmOpenSim();}catch(e){}
-    gmSimBuild(res[1].path,P);
+    GM_SEC=sec;gmSimRun();
   }catch(e){out.textContent='Cannot generate:\n'+pkErr(e);try{$('gm_cyc').textContent='';}catch(x){}try{gmOpenBad();}catch(x){}}
 }
 function gmSaveProg(){if(!lastGrooveProg)return;var b=new Blob([lastGrooveProg],{type:'text/plain'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='YANTRA_GROOVE.'+((typeof progExt==='function')?progExt():'nc');document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();},600);}
 function gmJobLabel(){var k=gmKindV(),nf=function(v){return Math.round(v*100)/100;},t;
   if(k==='round')t='ring Ø'+nf(pkN('gm_gdia'));else if(k==='straight')t='axial '+nf(pkN('gm_ws'))+'×'+nf(pkN('gm_depth'));else t='profile d'+nf(pkN('gm_depth'));
   return 'Groove '+(gmSideV()==='internal'?'int ':'ext ')+t;}
-pbReg('gm',{host:'gm_block',get:function(){return lastGrooveProg||'';},set:function(v){lastGrooveProg=v;lastAnyProg=v;},sim:function(){try{gmOpenSim();}catch(e){}gmSimPlay();},save:function(){gmSaveProg();},label:gmJobLabel,guard:function(){return (typeof gmMode!=='undefined'&&gmMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
+pbReg('gm',{host:'gm_block',get:function(){return lastGrooveProg||'';},set:function(v){lastGrooveProg=v;lastAnyProg=v;},sim:function(){try{gmOpenSim();}catch(e){}gmSimRun();},save:function(){gmSaveProg();},label:gmJobLabel,guard:function(){return (typeof gmMode!=='undefined'&&gmMode==='sample')?'This is a Sample for study — tap “New” at the top to start your own program, then you can save.':null;}});
 
 /* ---- profile graph: plan view (left) + section (right) ---- */
 function gmFilletPts(P){ /* closed polygon with corner radii -> sampled outline (for the preview only) */
@@ -6469,70 +6332,14 @@ function gmDraw(){
   svg.innerHTML=o;
 }
 
-/* ---- toolpath simulation (plan view + Z trace), driven by the server's sampled path ---- */
-var GMS={pts:[],total:0,pos:0,playing:false,last:0,box:null,dia:10,topZ:0,zmin:0,zmax:0,trail:null,drawn:0,area:null};
-function gmSimBuild(path,P){
-  var cv=$('gm_simcv');if(!cv||!path)return;
-  var mv=path.moves||[],pts=[],s=0,p=null;
-  mv.forEach(function(m){var x=m[1],y=m[2],z=m[3],len=0;if(p){len=Math.hypot(x-p.x,y-p.y,z-p.z);if(m[0]==='rapid')len=Math.min(len,40)*0.3+0.5;}
-    s+=len;pts.push({s:s,k:m[0],x0:p?p.x:x,y0:p?p.y:y,z0:p?p.z:z,x:x,y:y,z:z});p={x:x,y:y,z:z};});
-  GMS.pts=pts;GMS.total=s||1;GMS.pos=0;GMS.playing=false;GMS.drawn=0;GMS.topZ=path.topZ;GMS.dia=path.dia;GMS.area=path.area;
-  var mnx=1e9,mxx=-1e9,mny=1e9,mxy=-1e9,zmin=1e9,zmax=-1e9,a=path.area||{};
-  pts.forEach(function(q){mnx=Math.min(mnx,q.x);mxx=Math.max(mxx,q.x);mny=Math.min(mny,q.y);mxy=Math.max(mxy,q.y);zmin=Math.min(zmin,q.z);zmax=Math.max(zmax,q.z);});
-  (a.wall||[]).concat(a.root||[]).forEach(function(q){mnx=Math.min(mnx,q[0]);mxx=Math.max(mxx,q[0]);mny=Math.min(mny,q[1]);mxy=Math.max(mxy,q[1]);});
-  var r=GMS.dia/2+4;GMS.box=[mnx-r,mxx+r,mny-r,mxy+r];GMS.zmin=zmin;GMS.zmax=Math.min(zmax,path.topZ+Math.max(P.safez||20,2)*0.5+6);
-  cv.width=760;cv.height=470;GMS.trail=document.createElement('canvas');GMS.trail.width=760;GMS.trail.height=340;
-  gmSimDraw();
-}
-function gmSimLayout(){var b=GMS.box,W=760,Hp=340,mg=14;var w=Math.max(1,b[1]-b[0]),h=Math.max(1,b[3]-b[2]);var s=Math.min((W-2*mg)/w,(Hp-2*mg)/h);var ox=mg+((W-2*mg)-w*s)/2-b[0]*s,oy=Hp-mg-((Hp-2*mg)-h*s)/2+b[2]*s;return {s:s,X:function(x){return ox+x*s;},Y:function(y){return oy-y*s;}};}
-function gmSimAt(sPos){var pts=GMS.pts,lo=0,hi=pts.length-1;while(lo<hi){var mid=(lo+hi)>>1;if(pts[mid].s<sPos)lo=mid+1;else hi=mid;}var i=lo,q=pts[i],sPrev=i>0?pts[i-1].s:0,t=(q.s>sPrev)?Math.max(0,Math.min(1,(sPos-sPrev)/(q.s-sPrev))):1;return {i:i,x:q.x0+(q.x-q.x0)*t,y:q.y0+(q.y-q.y0)*t,z:q.z0+(q.z-q.z0)*t,k:q.k};}
-function gmSimSeg(ctx,L,q){
-  var below=(q.k==='feed')&&(Math.min(q.z0,q.z)<GMS.topZ-0.01);
-  ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
-  if(below){ctx.strokeStyle='rgba(55,211,154,.22)';ctx.lineWidth=Math.max(1.5,GMS.dia*L.s);}
-  else if(q.k==='rapid'){ctx.strokeStyle='rgba(107,124,140,.6)';ctx.lineWidth=1;ctx.setLineDash([3,4]);}
-  else{ctx.strokeStyle='rgba(200,215,230,.55)';ctx.lineWidth=1.2;}
-  ctx.beginPath();ctx.moveTo(L.X(q.x0),L.Y(q.y0));ctx.lineTo(L.X(q.x),L.Y(q.y));ctx.stroke();ctx.restore();
-}
-function gmSimOutline(ctx,L){var a=GMS.area;if(!a)return;
-  function poly(pts,col,dash){if(!pts||!pts.length)return;ctx.save();ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.setLineDash(dash);ctx.beginPath();pts.forEach(function(p,i){i?ctx.lineTo(L.X(p[0]),L.Y(p[1])):ctx.moveTo(L.X(p[0]),L.Y(p[1]));});ctx.closePath();ctx.stroke();ctx.restore();}
-  poly(a.wall,'#4f8cff',[6,4]);poly(a.root,'#ffb300',[3,3]);}
-function gmSimDraw(){
-  var cv=$('gm_simcv');if(!cv||!GMS.box||!GMS.pts.length)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height,L=gmSimLayout(),pts=GMS.pts;
-  ctx.fillStyle='#0a1015';ctx.fillRect(0,0,W,H);
-  var tc=GMS.trail.getContext('2d'),cur=gmSimAt(GMS.pos);
-  while(GMS.drawn<cur.i){gmSimSeg(tc,L,pts[GMS.drawn]);GMS.drawn++;}
-  ctx.drawImage(GMS.trail,0,0);
-  gmSimOutline(ctx,L);
-  if(cur.i<pts.length){var q2=pts[cur.i];gmSimSeg(ctx,L,{k:q2.k,x0:q2.x0,y0:q2.y0,z0:q2.z0,x:cur.x,y:cur.y,z:cur.z});}
-  ctx.beginPath();ctx.arc(L.X(cur.x),L.Y(cur.y),Math.max(3,GMS.dia/2*L.s),0,Math.PI*2);ctx.fillStyle='rgba(169,139,255,.28)';ctx.fill();ctx.strokeStyle='#a98bff';ctx.lineWidth=1.6;ctx.stroke();
-  ctx.beginPath();ctx.moveTo(L.X(cur.x)-5,L.Y(cur.y));ctx.lineTo(L.X(cur.x)+5,L.Y(cur.y));ctx.moveTo(L.X(cur.x),L.Y(cur.y)-5);ctx.lineTo(L.X(cur.x),L.Y(cur.y)+5);ctx.stroke();
-  var y0=352,y1=H-14,x0=14,x1=W-14,zr=Math.max(0.1,GMS.zmax-GMS.zmin);
-  ctx.fillStyle='#0d161e';ctx.fillRect(x0-6,y0-8,x1-x0+12,y1-y0+18);
-  var zy=function(z){return y1-(Math.min(z,GMS.zmax)-GMS.zmin)/zr*(y1-y0);},sx=function(sv){return x0+sv/GMS.total*(x1-x0);};
-  var ztop=zy(GMS.topZ);ctx.strokeStyle='#7fb0d8';ctx.lineWidth=1;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(x0,ztop);ctx.lineTo(x1,ztop);ctx.stroke();ctx.setLineDash([]);
-  ctx.fillStyle='#7fb0d8';ctx.font='11px sans-serif';ctx.fillText('Z top',x0+2,ztop-3);
-  ctx.beginPath();ctx.strokeStyle='#3b4f61';ctx.lineWidth=1.2;var prevS=0;
-  pts.forEach(function(q,ix){var xa=sx(prevS),xb=sx(q.s);if(ix===0)ctx.moveTo(xa,zy(q.z0));ctx.lineTo(xa,zy(q.z0));ctx.lineTo(xb,zy(q.z));prevS=q.s;});ctx.stroke();
-  ctx.beginPath();ctx.strokeStyle='#37d39a';ctx.lineWidth=1.8;prevS=0;
-  for(var ix=0;ix<pts.length;ix++){var q=pts[ix],xa=sx(prevS),xb=sx(Math.min(q.s,GMS.pos));if(ix===0)ctx.moveTo(xa,zy(q.z0));ctx.lineTo(xa,zy(q.z0));ctx.lineTo(xb,zy(ix===cur.i?cur.z:q.z));prevS=q.s;if(q.s>=GMS.pos)break;}
-  ctx.stroke();
-  ctx.fillStyle='#a98bff';ctx.beginPath();ctx.arc(sx(GMS.pos),zy(cur.z),4,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#cfe0ee';ctx.font='12px sans-serif';ctx.fillText('X '+cur.x.toFixed(2)+'   Y '+cur.y.toFixed(2)+'   Z '+cur.z.toFixed(2)+'   '+(cur.k==='rapid'?'RAPID':'FEED'),16,22);
-}
-function gmSimReset(){GMS.playing=false;GMS.pos=0;GMS.drawn=0;if(GMS.trail)GMS.trail.getContext('2d').clearRect(0,0,GMS.trail.width,GMS.trail.height);var b=$('gm_sim_play');if(b)b.innerHTML='&#9654; Play';gmSimDraw();}
-function gmSimPlay(){
-  if(!GMS.pts.length){var o=$('gm_out');if(o)o.textContent='Generate a program first, then Play.';return;}
-  var b=$('gm_sim_play');
-  if(GMS.playing){GMS.playing=false;if(b)b.innerHTML='&#9654; Play';return;}
-  if(GMS.pos>=GMS.total-1e-6)gmSimReset();
-  GMS.playing=true;GMS.last=0;if(b)b.innerHTML='&#10074;&#10074; Pause';
-  function step(ts){if(!GMS.playing)return;if(!GMS.last)GMS.last=ts;var dt=Math.min(0.1,(ts-GMS.last)/1000);GMS.last=ts;
-    var spd=(parseFloat(($('gm_sim_spd')||{}).value)||220)/220*GMS.total/14;GMS.pos+=spd*dt;
-    if(GMS.pos>=GMS.total){GMS.pos=GMS.total;GMS.playing=false;if(b)b.innerHTML='&#9654; Play';}
-    gmSimDraw();if(GMS.playing)requestAnimationFrame(step);}
-  requestAnimationFrame(step);
-}
+/* ---- toolpath simulation: the same 3-D path player as the thread-milling screen (SIM engine), fed with the generated program ---- */
+var GM_SEC=0;
+function gmSimRun(){var l=$('gm_simblklbl');
+  if(!grooveRaw){if(l)l.textContent='Press Generate first, then simulate.';return false;}
+  runSim({pfx:'gm_',prog:grooveRaw,cycleSec:GM_SEC||10,fitZ:pkN('gm_topz')+5});return true;}
+function gmSim(a){if(!grooveRaw){gmSimRun();return;}
+  if(SIM.pfx!=='gm_'||SIM.src!==grooveRaw)gmSimRun();
+  var f={toggle:simToggle,prev:function(){simBlock(-1);},next:function(){simBlock(1);},speed:simSpeed,area:simMarquee,reset:simReset,view:simViewCycle}[a];if(f)f();}
 (function initGm(){try{
   var mt=$('gm_mat');if(mt){matFill(mt,'Stainless 316 austenitic');}
   var host=$('groove_op');if(host){host.addEventListener('input',function(){gmRefreshReq();});host.addEventListener('change',function(){gmRefreshReq();});}
