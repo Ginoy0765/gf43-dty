@@ -246,7 +246,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.34 &middot; 19 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.35 &middot; 19 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="mtoggle" style="flex:none;display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;gap:3px"><button type="button" id="mt-turn" onclick="setMode('turn')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:#334559;color:#e8eef4;box-shadow:inset 3px 0 0 var(--acc)">Turning</button><button type="button" id="mt-mill" onclick="setMode('mill')" style="border:none;border-radius:16px;padding:10px 26px;font-size:16px;font-weight:700;letter-spacing:.4px;cursor:pointer;background:transparent;color:var(--mut)">Milling</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -404,6 +404,22 @@
   <label>Finish skim</label>
   <select id="fm_rf" onchange="fmRf()"><option value="rough">Off &mdash; rough straight to depth</option><option value="both">On &mdash; leave stock, then skim</option></select>
   <input type="checkbox" id="fmc_fin" style="display:none" onchange="fmFinVis()">
+  <div class="fmsub">MACHINING AREA</div>
+  <label>Area shape</label>
+  <div class="segbtns" id="fm_aShape"><button type="button" data-v="rect" class="on">Rectangle</button><button type="button" data-v="circle">Circle</button></div>
+  <div id="fm_aRef"><label>Area reference</label>
+    <div class="segbtns" id="fm_aRefSeg"><button type="button" data-v="corner" class="on">Corner</button><button type="button" data-v="center">Center</button></div>
+  </div>
+  <label id="fm_lblXY">Corner X, Y</label>
+  <div class="row2"><input type="number" id="fm_aX" value="0" step="1" inputmode="decimal"><input type="number" id="fm_aY" value="0" step="1" inputmode="decimal"></div>
+  <div class="row2">
+    <div id="fm_rWL"><label>Width X (mm)</label><input type="number" id="fm_aW" value="120" step="1" inputmode="decimal"></div>
+    <div id="fm_rL"><label>Length Y (mm)</label><input type="number" id="fm_aL" value="80" step="1" inputmode="decimal"></div>
+  </div>
+  <div class="row2">
+    <div id="fm_rDia" style="display:none"><label>Diameter (mm)</label><input type="number" id="fm_aD" value="100" step="1" inputmode="decimal"></div>
+    <div id="fm_rRot"><label>Rotation &deg;</label><input type="number" id="fm_aR" value="0" step="1" inputmode="decimal"></div>
+  </div>
   <p class="note" style="text-align:left">Face milling &mdash; clear a flat area down to a set depth by sweeping the cutter across the face. <b>Finish skim</b> leaves a little stock on the floor and removes it in a final light one-way climb pass.</p>
 </div></div>
 
@@ -425,23 +441,8 @@
   <div id="fmc_coolCustWrap" style="display:none"><label>Custom coolant code</label><input type="text" id="fmc_coolcustom" placeholder="e.g. M51"></div>
 </div></div>
 
-<!-- ============ 3. PROFILE — MACHINING AREA ============ -->
-<div class="sec"><div class="st" onclick="tog(this)">PROFILE &mdash; MACHINING AREA <span>&#9662;</span></div><div class="sb">
-  <label>Area shape</label>
-  <div class="segbtns" id="fm_aShape"><button type="button" data-v="rect" class="on">Rectangle</button><button type="button" data-v="circle">Circle</button></div>
-  <div id="fm_aRef"><label>Area reference</label>
-    <div class="segbtns" id="fm_aRefSeg"><button type="button" data-v="corner" class="on">Corner</button><button type="button" data-v="center">Center</button></div>
-  </div>
-  <label id="fm_lblXY">Corner X, Y</label>
-  <div class="row2"><input type="number" id="fm_aX" value="0" step="1" inputmode="decimal"><input type="number" id="fm_aY" value="0" step="1" inputmode="decimal"></div>
-  <div class="row2">
-    <div id="fm_rWL"><label>Width X (mm)</label><input type="number" id="fm_aW" value="120" step="1" inputmode="decimal"></div>
-    <div id="fm_rL"><label>Length Y (mm)</label><input type="number" id="fm_aL" value="80" step="1" inputmode="decimal"></div>
-  </div>
-  <div class="row2">
-    <div id="fm_rDia" style="display:none"><label>Diameter (mm)</label><input type="number" id="fm_aD" value="100" step="1" inputmode="decimal"></div>
-    <div id="fm_rRot"><label>Rotation &deg;</label><input type="number" id="fm_aR" value="0" step="1" inputmode="decimal"></div>
-  </div>
+<!-- ============ 3. PROFILE (graph only) ============ -->
+<div class="sec"><div class="st" onclick="tog(this)">PROFILE <span>&#9662;</span></div><div class="sb">
   <svg id="fm_stage" viewBox="0 0 560 460"></svg>
   <div class="fmleg">
     <span><i class="sw" style="background:rgba(79,140,255,.35);border:1px solid #4f8cff"></i> machining area</span>
