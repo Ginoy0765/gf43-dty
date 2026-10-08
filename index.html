@@ -253,7 +253,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.52 &middot; 20 Sep 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.53 &middot; 07 Oct 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1741,6 +1741,7 @@
         <div class="row2"><div><label>Stability %</label><input id="t_stab" type="number" value="50" inputmode="numeric" oninput="matChange()"></div><div><label>Vc (m/min)</label><input id="t_vc" type="number" value="120" inputmode="decimal" oninput="recalcT()"></div></div>
         <div class="row2"><div><label>RPM (auto)</label><input id="t_rpm" readonly></div><div><label>Max RPM</label><input id="t_maxrpm" type="number" value="5000" inputmode="numeric" oninput="recalcT()"></div></div>
         <div class="row2"><div><label>First DOC / 0% (mm)</label><input id="t_first" type="number" value="0.25" inputmode="decimal" oninput="tnFirstAuto=false;recalcT()"></div><div><label>Last DOC / floor (mm)</label><input id="t_e100" type="number" value="0.05" inputmode="decimal" oninput="tnFloorAuto=false;recalcT()"></div></div>
+        <p class="note" style="text-align:left;margin:2px 0 6px">First cut is always taken as 2 equal cuts (AUTO on or off).</p>
         <div id="t_zoneRows"></div>
         <div class="row2"><div><label>Idle (spring) passes</label><input id="t_idle" type="number" value="2" inputmode="numeric"></div><div><label>Total passes (auto)</label><input id="t_total" readonly onclick="showPassTable()" style="cursor:pointer" title="Click for per-pass table"></div></div>
         <button type="button" class="btn btn2" onclick="showPassTable()" style="margin-top:4px">&#9636; Pass details (per-pass table)</button>
@@ -2782,7 +2783,7 @@ var HELP={
 "vc m min":{"svg": "", "text": "Cutting speed in metres per minute — how fast the surface passes the insert. With the diameter it sets spindle RPM (RPM = Vc×1000 / πD). Higher Vc = faster but hotter."},
 "rpm auto":{"svg": "", "text": "Spindle speed the program will use, computed from Vc and the diameter and capped by Max RPM. Read-only — change Vc or the diameter to alter it."},
 "max rpm":{"svg": "", "text": "Upper spindle-speed limit. Protects the chuck/part on small diameters where Vc alone would demand an unsafe RPM. The emitted G97 S value never exceeds this."},
-"first doc 0% mm":{"svg": "", "text": "The depth of cut for the very first threading pass (at 0% of thread depth). The heaviest bite; later passes get lighter per the Transition mode."},
+"first doc 0% mm":{"svg": "", "text": "The depth of cut for the very first threading pass (at 0% of thread depth). The heaviest bite; later passes get lighter per the Transition mode. This first cut is always taken as 2 equal cuts (half this depth each) — with AUTO on or off, in every Transition mode."},
 "last doc floor mm":{"svg": "", "text": "The smallest cut the degression is allowed to reach — once the shrinking bite hits this value it holds constant to full depth, so it sets the floor DOC and therefore the pass count. You can change it even while AUTO is on: AUTO keeps managing the First DOC and the curve, but honours your floor here (a light auto adjustment/spring cut may still follow). Bigger floor = fewer, heavier passes; smaller floor = more, lighter passes."},
 "idle spring passes":{"svg": "", "text": "Extra passes at full depth that remove nothing new (zero infeed). They let the tool spring back and clean the flanks, improving finish and size on springy setups."},
 "total passes auto":{"svg": "", "text": "The number of cutting passes the current DOC + Transition + zones settings produce. Read-only — changes as you adjust First/Last DOC, the zone pattern, or the Transition."},
@@ -3657,13 +3658,52 @@ var CARMEX_K={N:0.261,K:0.247,P:0.239,M:0.180,H:0.180,S:0.166};
 function tnCarmexFirst(){var m=(typeof matBy==='function'&&$('mat'))?matBy($('mat').value):null;var g=(m&&m[2]&&CARMEX_K[m[2]])?m[2]:'P';var P=num('P',2);if(P<=0)return 0;var internal=$('side')&&$('side').value==='Internal';return CARMEX_K[g]*Math.pow(P,0.80)*(internal?0.78:1.0);}
 function tnFreePasses(){return (tnAutoMode==='Difficult')?2:1;}
 function tnAutoDOC(){if(!tnAutoOn)return;var cf=tnCarmexFirst();if(tnAutoMode==='Difficult')cf*=0.75;if(cf>0){if(tnFirstAuto){if($('t_first'))$('t_first').value=cf.toFixed(3);if($('t_trans'))$('t_trans').value=(tnAutoMode==='Productivity'?'Pctreduce':'Degressive');if($('t_idle'))$('t_idle').value=String(tnFreePasses());if($('t_infeed'))$('t_infeed').value='Alternate flank';}if(tnFloorAuto){if($('t_e100'))$('t_e100').value=(0.01).toFixed(3);}}}
-function _tnFmt(v){return (Math.round(v*10000)/10000).toString();}
+function _tnFmt(v){var s=(Math.round(v*10000)/10000).toString();if(s.indexOf('.')<0&&s.indexOf('e')<0)s+='.0';return s;}
 function _autoParams(d1){var s=(tnAutoMode==='Productivity')?(0.75*d1):(0.5*d1);return {K:2,s:s};}
 function _autoEntry(d1){return (tnAutoMode==='Productivity')?[d1,0.75*d1]:[0.5*d1,0.5*d1];}
-function _autoBuildCums(d1,TD){var res=[];var cum=0;var fl=Math.max(0.001,num('t_e100',0.01));if(tnAutoMode==='Productivity'){var R=Math.max(1,Math.min(90,num('t_pctred',20)))/100;var doc=d1;var g=0;while(cum<TD-1e-4&&g<10000){var dc=Math.max(fl,doc);if(cum+dc>TD)dc=TD-cum;cum+=dc;res.push(cum);doc=doc*(1-R);g++;}}else{var entry=_autoEntry(d1);for(var e=0;e<entry.length;e++){cum+=entry[e];if(cum<TD-1e-4){res.push(cum);}else{cum=TD;break;}}var i=1;while(cum<TD-1e-4&&i<10000){var inc=d1*(Math.sqrt(i+1)-Math.sqrt(i));if(inc<fl)inc=fl;cum+=inc;if(cum>TD-1e-4)cum=TD;res.push(cum);i++;}}if(!res.length||res[res.length-1]<TD-1e-4)res.push(TD);return res;}
+function _autoBuildCums(d1,TD){var res=[];var cum=0;var fl=Math.max(0.001,num('t_e100',0.01));if(tnAutoMode==='Productivity'){var R=Math.max(1,Math.min(90,num('t_pctred',20)))/100;var doc=d1;var g=0;while(cum<TD-1e-4&&g<10000){var dc=Math.max(fl,doc);if(cum+dc>TD)dc=TD-cum;cum+=dc;res.push(cum);doc=doc*(1-R);g++;}res=_tnSplitFirst(res);}else{var entry=_autoEntry(d1);for(var e=0;e<entry.length;e++){cum+=entry[e];if(cum<TD-1e-4){res.push(cum);}else{cum=TD;break;}}var i=1;while(cum<TD-1e-4&&i<10000){var inc=d1*(Math.sqrt(i+1)-Math.sqrt(i));if(inc<fl)inc=fl;cum+=inc;if(cum>TD-1e-4)cum=TD;res.push(cum);i++;}}if(!res.length||res[res.length-1]<TD-1e-4)res.push(TD);return res;}
 function _autoCycleCums(cums,d1){if(!cums.length)return cums;var TD=cums[cums.length-1];var res=_autoBuildCums(d1,TD);var nf=tnFreePasses();for(var z=0;z<nf;z++)res.push(TD);return res;}
+/* U-SPLIT-FIRST (v28.53): the first thread-turning cut is ALWAYS taken as 2 equal cuts —
+   every AUTO requirement (Standard / Difficult / Productivity) and, with AUTO off, every
+   Transition (Equal depth / Equal reduction MM / Equal load / Equal reduction %).
+   _tnSplitFirst  -> pass list (Total passes, Pass details table)
+   _tnSplitCycle  -> the G92 program when AUTO is off (AUTO on is rebuilt by _autoCycle)
+   Set tnSplitFirst=false to get the old single first cut back. */
+var tnSplitFirst=true;
+function _tnSplitFirst(cums){if(!tnSplitFirst||!cums||!cums.length)return cums;var c1=cums[0];if(!(c1>=0.004))return cums;return [+(c1/2).toFixed(4)].concat(cums);}
+function _tnSplitCycle(prog){try{
+  if(!tnSplitFirst)return prog;
+  var raw=buildTurnPasses(true);var c1=raw.length?raw[0]:0;if(!(c1>=0.004))return prog;
+  var internal=$('side')&&$('side').value==='Internal';
+  var lines=prog.split('\n'),n=lines.length,out=[],i=0,Zs=null;
+  var reZ=/^G00 Z(-?[\d.]+)\s*$/,reG=/^G92\s/;
+  function nxt(k){while(k<n&&lines[k].trim()==='')k++;return k;}
+  function gx(l){var m=l.match(/X(-?[\d.]+)/);return m?parseFloat(m[1]):NaN;}
+  /* half-depth pass placed just before the pass at lines[gi] (appr = its own "G00 Z" line or null) */
+  function half(appr,gi){var x0=gx(lines[gi]);if(isNaN(x0))return;
+    if(appr){var zp=parseFloat(appr.match(reZ)[1]);out.push('G00 Z'+_tnFmt((Zs!=null)?(Zs-(Zs-zp)*0.5):zp));}
+    out.push(lines[gi].replace(/X-?[\d.]+/,'X'+_tnFmt(internal?(x0-c1):(x0+c1))));}
+  while(i<n){
+    var mA=lines[i].match(/^G00 X-?[\d.]+ Z(-?[\d.]+)\s*$/);if(mA){Zs=parseFloat(mA[1]);out.push(lines[i]);i++;continue;}
+    var appr=null,gi=-1;
+    if(reZ.test(lines[i])){var k=nxt(i+1);if(k<n&&reG.test(lines[k])){appr=lines[i];gi=k;}}else if(reG.test(lines[i])){gi=i;}
+    if(gi<0){out.push(lines[i]);i++;continue;}
+    half(appr,gi);var prevX=gx(lines[gi]);for(var q=i;q<=gi;q++)out.push(lines[q]);var j=gi+1;
+    while(j<n){
+      if(lines[j].trim()===''){out.push(lines[j]);j++;continue;}
+      var a2=null,g2=-1;
+      if(reZ.test(lines[j])){var k2=nxt(j+1);if(k2<n&&reG.test(lines[k2])){a2=lines[j];g2=k2;}}else if(reG.test(lines[j])){g2=j;}
+      if(g2<0)break;
+      var xx=gx(lines[g2]);
+      /* depth jumps back = the next start of a multi-start thread: its first cut is split as well */
+      if(!isNaN(xx)&&!isNaN(prevX)&&(internal?(xx<prevX-1e-6):(xx>prevX+1e-6)))half(a2,g2);
+      for(var q2=j;q2<=g2;q2++)out.push(lines[q2]);prevX=xx;j=g2+1;}
+    i=j;}
+  return out.join('\n');
+}catch(e){return prog;}}
+function _tnG92Count(prog){var m=String(prog||'').match(/^G92\s/gm);return m?m.length:0;}
 function tnAutoUI(){var btn=$('tnAutoBtn');if(!btn)return;if(tnAutoOn){btn.style.background='#2e9c60';btn.style.borderColor='#2e9c60';btn.style.color='#04220f';btn.textContent='AUTO ✓';}else{btn.style.background='';btn.style.borderColor='';btn.style.color='';btn.textContent='AUTO';}}
-function tnAutoDescUpdate(){var d=$('tnAutoDesc');if(!d)return;var t={Standard:'Standard — first cut split into 2 equal cuts, then the Carmex equal-volume curve. Balanced default.',Difficult:'Difficult — 2 lighter entry cuts at 75% depth for hard or unstable jobs, then the Carmex curve.',Productivity:'Productivity — 3 full-size entry cuts (deeper start, fewer total passes) for faster cycles.'};d.textContent=t[tnAutoMode]||'';}
+function tnAutoDescUpdate(){var d=$('tnAutoDesc');if(!d)return;var t={Standard:'Standard — first cut split into 2 equal cuts, then the Carmex equal-volume curve. Balanced default.',Difficult:'Difficult — 2 lighter entry cuts at 75% depth for hard or unstable jobs, then the Carmex curve.',Productivity:'Productivity — first cut split into 2 equal cuts, then each cut reduced by a fixed % (fewer total passes) for faster cycles.'};d.textContent=t[tnAutoMode]||'';}
 function tnAutoOpen(){var m=$('tnAutoModal');if(!m)return;var sel=$('tnAutoReq');if(sel)sel.value=tnAutoMode;tnAutoDescUpdate();m.style.display='flex';}
 function tnAutoClose(){var m=$('tnAutoModal');if(m)m.style.display='none';}
 function tnAutoPick(){var sel=$('tnAutoReq');if(sel)tnAutoMode=sel.value;tnAutoOn=true;tnFirstAuto=true;tnFloorAuto=true;tnAutoUI();tnAutoDescUpdate();recalcT();}
@@ -3751,7 +3791,7 @@ function gvAutoApply(){var o=$('gvAutoOp'),r=$('gvAutoReq');if(o)gvAutoOp=o.valu
 function gvAutoOffBtn(){gvAutoOn=false;gvOpFaUI();gvAutoUI();gvAutoClose();}
 (function(){function build(){if(document.getElementById('gvAutoModal'))return;var m=document.createElement('div');m.id='gvAutoModal';m.className='automodal';m.style.display='none';m.innerHTML='<div class="autocard"><div class="autohd">AUTO &mdash; default cycle<button type="button" class="autox" onclick="gvAutoClose()">&times;</button></div><label>Operation</label><select id="gvAutoOp" onchange="gvAutoPick()"><option>Parting</option><option selected>Rough + Finish</option><option>Widening</option></select><label style="margin-top:12px">Requirement</label><select id="gvAutoReq" onchange="gvAutoPick()"><option>Standard</option><option>Difficult</option><option>Productivity</option></select><div id="gvAutoDesc" style="font-size:12px;color:#9fc4e6;margin-top:12px;line-height:1.5"></div><div style="display:flex;gap:8px;margin-top:14px"><button type="button" class="btn" style="flex:1" onclick="gvAutoApply()">Apply</button><button type="button" class="btn btn2" style="flex:1" onclick="gvAutoOffBtn()">Turn off</button></div></div>';document.body.appendChild(m);try{if(typeof gv_recalc==='function')gv_recalc();}catch(_){}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);else build();})();
-function buildTurnPasses(){
+function buildTurnPasses(rawOnly){
   var internal=$('side').value==='Internal';var D=num('D',16),P=num('P',2);
   var mf=$('t_minor');var minor=(mf&&parseFloat(mf.value)>0)?parseFloat(mf.value):stdMinor(D,P,internal);var td=(D-minor)/2;if(td<=0)return [];
   var first=Math.max(0.01,num('t_first',0.2));var trans=$('t_trans')?$('t_trans').value:'Linear';
@@ -3765,7 +3805,9 @@ function buildTurnPasses(){
     else{var avg=(prevDoc+doc)/2;var n3=Math.max(1,Math.round(depth/avg));if(n3===1)raw=[depth];else{for(var k3=0;k3<n3;k3++)raw.push(prevDoc-k3*(prevDoc-doc)/(n3-1));var sum=raw.reduce(function(a,b){return a+b;},0);raw=raw.map(function(x){return x*depth/sum;});}}
     var cum=cs;for(var j=0;j<raw.length;j++){cum+=raw[j];out.push(+cum.toFixed(4));}out[out.length-1]=+ce.toFixed(4);
     prevPct=pct;prevDoc=doc;}
+  if(rawOnly)return out;
   if(tnAutoOn&&out.length){out=_autoCycleCums(out,out[0]);}
+  else{out=_tnSplitFirst(out);}
   return out;
 }
 function tnPassRows(){var internal=$('side').value==='Internal';var D=num('D',16),P=num('P',2);var mf=$('t_minor');var minor=(mf&&parseFloat(mf.value)>0)?parseFloat(mf.value):stdMinor(D,P,internal);var td=(D-minor)/2;var cums=buildTurnPasses();var rows=[],prev=0;for(var i=0;i<cums.length;i++){var cd=cums[i];var doc=cd-prev;prev=cd;var dia=internal?(minor+2*cd):(D-2*cd);rows.push({n:i+1,dia:dia,pct:td>0?100*cd/td:0,cum:cd,doc:doc});}return {rows:rows,D:D,P:P,minor:minor,td:td,internal:internal};}
@@ -5049,8 +5091,9 @@ async function genTurn(){
     
     var _tr=await apiPost('/turn/program',P0); var res=_tr.result;lastCycleSec=res[1];
     var _tt=($('t_toff')&&$('t_toff').value==='Yes'&&$('t_tool'))?$('t_tool').value.trim():'0101';var prog=res[0].replace('T0101','T'+_tt);prog=tnPostTurn(prog);var _tpb=(typeof buildTaperPreturn==='function')?buildTaperPreturn():null;if(_tpb)prog=prog.replace('N1 G40 G99',_tpb+'\nG40 G99');prog=applyHeader(prog,($('t_msg')?$('t_msg').value.trim():''),($('t_username')?$('t_username').value.trim():''));prog=_applyThreadHdr(prog);if($('t_subprog')&&$('t_subprog').value==='Yes')prog=applySubprogram(prog);
-    var sec=Math.round(res[1]),mm=Math.floor(sec/60),ss=sec%60;
-    $('cyc').innerHTML='<div class="cyc">CT '+mm+'m '+ss+'s &middot; Vc '+num('t_vc',120)+' &middot; '+res[3]+' pass'+(res[3]==1?'':'es')+'</div>';
+    var _pk=(window._tnG92&&window._tnG92[0]>0&&window._tnG92[1]>0)?(window._tnG92[1]/window._tnG92[0]):1;var _np=Math.round(res[3]*_pk);lastCycleSec=res[1]*_pk;
+    var sec=Math.round(res[1]*_pk),mm=Math.floor(sec/60),ss=sec%60;
+    $('cyc').innerHTML='<div class="cyc">CT '+mm+'m '+ss+'s &middot; Vc '+num('t_vc',120)+' &middot; '+_np+' pass'+(_np==1?'':'es')+'</div>';
     output(prog,'');
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
@@ -5224,8 +5267,11 @@ function _q0ZShift(prog,P){var lines=prog.split('\n'),sh=0;for(var i=0;i<lines.l
 function tnPostTurn(prog){try{
   var mc=($('t_mcode')&&$('t_mcode').value)||'M03';
   prog=prog.replace(/(G97 S\d+) \(M03\/M04\)/,'$1 '+mc);
+  window._tnG92=null;var _g92b=_tnG92Count(prog);
+  if(!tnAutoOn)prog=_tnSplitCycle(prog);
   var _q0el=($('t_q0')||$('def_q0'));var _q0on=(_q0el&&_q0el.value==='On');if(_q0on){prog=prog.split('\n').map(function(l){return (/\bG92\b/.test(l)&&!/\sQ-?\d/.test(l))?(l+' Q0'):l;}).join('\n');}else{var _ns=Math.max(1,Math.round(num('starts',1))),_P=num('P',0);if(_ns>1&&_P>0)prog=_q0ZShift(prog,_P);prog=prog.replace(/ Q-?\d+\b/g,'');}
   if(tnAutoOn)prog=_autoCycle(prog);
+  window._tnG92=[_g92b,_tnG92Count(prog)];
   var cv=($('t_cool')&&$('t_cool').value)||'M08';
   var coolOn=(cv==='Custom')?((($('t_coolcustom')&&$('t_coolcustom').value)||'').trim()||'M08'):cv;
   prog=prog.replace(/(\n\s*G00 T\S+ )M08\b/,'$1'+coolOn);
