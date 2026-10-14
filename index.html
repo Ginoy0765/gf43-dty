@@ -253,7 +253,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.54 &middot; 08 Oct 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.57 &middot; 14 Oct 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1686,8 +1686,8 @@
       </div></div>
       <div class="sec mill-only"><div class="st" onclick="tog(this)">CYCLES <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Path mode</label><select id="path" onchange="updateSubs()"><option>Helical</option><option>Stepped</option></select></div><div><label>Direction</label><select id="dir" onchange="_entryStyleDefault()"><option>Top to Bottom</option><option>Bottom to Top</option></select></div></div>
-        <div class="row2"><div id="mStepWrap"><label>Stepped style</label><select id="sstyle"><option>Top load Modified</option><option>Carmex bottom-first</option></select></div><div id="mEntryWrap"><label>Entry style (deg)</label><select id="entry"><option>Old</option><option>90</option><option>45</option><option>180</option></select></div></div>
-        <label>Engagement feed reduction (%)</label><input id="engred" type="number" value="0" inputmode="numeric">
+        <div class="row2"><div id="mStepWrap"><label>Stepped style</label><select id="sstyle"><option>Top load Modified</option><option>Carmex bottom-first</option></select></div><div id="mEntryWrap"><label>Entry style (deg)</label><select id="entry"><option>Old</option><option>90</option><option>45</option><option>180</option><option value="Arc">Arc (tangent)</option></select></div></div>
+        <div class="row2"><div><label>Engagement feed reduction (%)</label><input id="engred" type="number" value="0" inputmode="numeric"></div><div id="mStartAngWrap"><label>Thread start angle (deg)</label><select id="m_startang"><option value="0" selected>0 (as generated)</option><option value="90">90</option><option value="180">180</option><option value="270">270</option></select></div></div>
         <div class="row2"><div><label>Thread taper</label><select id="thtaper" onchange="updateSubs()"><option>None</option><option>NPT</option><option>BSPT</option><option id="thtaperManual">Manual</option></select></div><div><label>Taper arcs / turn</label><select id="taparcs"><option>4</option><option>8</option><option>16</option></select></div></div>
         <div id="mTaper" style="display:none"><label>Taper degree</label><input id="taperdeg" type="number" value="0" inputmode="decimal"><label>Dia diff at end of thread (mm)</label><input id="diadiff" type="number" value="0" inputmode="decimal"></div>
         <div id="brepassRow"><label>Bottom repass</label><select id="brepass" onchange="updateSubs()"><option>No</option><option>Yes</option></select></div>
@@ -2806,7 +2806,7 @@ var HELP={
 "dia diff at end of thread mm":{"svg": "", "text": "For a manual taper, the total diameter change from the start face to the end of the thread (positive = grows deeper in). The authoritative taper amount, applied over the full Z travel."},
 "pre-size bore turn first":{"svg": "", "text": "Add a quick pass to bring the stock to the correct major (external) or minor (internal) size before threading, so the first thread pass sees a clean, on-size surface."},
 "requirement":{"svg": "", "text": "A preset bias for the whole operation: Standard, Finishing (lighter/cleaner), Productivity (fewer/heavier passes), Weak setup (gentler), or Tool life. Nudges the default speeds and pass scheme."},
-"thread start angle deg":{"svg": "", "text": "The spindle angle where the thread begins (Q phase). 0 = start at the index pulse. Shift it to align a multi-start or to clock the thread relative to a feature."},
+"thread start angle deg":{"svg": "", "text": "Where the thread begins, in degrees. Turning: the spindle angle (Q phase); 0 = start at the index pulse. Milling (external threads only): 0, 90, 180 or 270 — the whole thread toolpath, including the entry, is turned about the thread centre by that angle (counter-clockwise, seen from above) by swapping / changing the signs of X and Y; 0 = as generated. Use it when the part or clamping blocks the normal entry position. Use it to clock the thread start to a feature or to line up a mating part."},
 "find replace":{"svg": "", "text": "After generating, swap any text in the output G-code (find → replace) — handy for renumbering tools, tweaking an M-code, or adapting to a specific control."},
 "series":{"svg": "", "text": "The tool/insert series or family for this operation — selects the geometry set the app uses for reach and clearance checks."},
 "size":{"svg": "", "text": "The nominal size selection for the current standard — fills in the matching diameters/pitch."},
@@ -2817,7 +2817,7 @@ var HELP={
 "repass threads pitches":{"svg": "", "text": "Re-run the last few pitches of the thread as a cleanup, expressed in number of pitches. Clears burrs or a lead-out mark at the thread end."},
 "repass offset dia mm":{"svg": "", "text": "A tiny diameter offset used on the repass so it skims rather than re-cuts to full depth — a spring/cleanup cut."},
 "bottom repass":{"svg": "", "text": "Add an extra pass at the bottom of the thread to clean the run-out. Useful where the thread ends against a shoulder."},
-"entry style deg":{"svg": "", "text": "How the tool leads into the cut (ramp/arc angle in degrees). A gentler entry reduces the mark where the tool first touches."},
+"entry style deg":{"svg": "", "text": "How the tool leads into the cut (ramp/arc angle in degrees). A gentler entry reduces the mark where the tool first touches. External threads: Arc (tangent, default) starts just outside the thread OD, switches comp on with a short straight move, then rolls in on a large arc that touches the thread tangentially, with Z already on the helix; the exit rolls out the same way. 45 / 180 keep the older straight entries."},
 "passes":{"svg": "", "text": "Number of passes for this (milling) operation. More passes = lighter cuts and better finish at the cost of time."},
 "spring pass":{"svg": "", "text": "Add one no-infeed pass at final size to remove tool deflection and improve size and finish."},
 "equal-volume passes":{"svg": "", "text": "Space the pass depths so each removes the same amount of material (constant chip load) instead of equal depth — easier on the tool as it goes deeper."},
@@ -3834,7 +3834,7 @@ var TM_STYLES={'2':{mcode:'M03',teeth:3,dir:'Bottom to Top',path:'Helical',engre
    set (manually, via AUTO, or via a tmStyle preset) so the field starts
    correct — but it stays a plain editable dropdown afterward, same as
    every other soft-defaulted field this session. */
-function _entryStyleDefault(){var pm=$('path'),d=$('dir'),e=$('entry');if(!pm||!d||!e)return;if(pm.value==='Stepped'){e.value='45';return;}e.value=(d.value==='Top to Bottom')?'Old':'45';}function applyTmStyle(){var sel=$('tmStyle');if(!sel)return;var st=TM_STYLES[sel.value];var hint=$('tmStyleHint');if(!st){if(hint)hint.textContent='Manual \u2014 set each cell yourself.';return;}_tmSetV('mcode',st.mcode);_tmSetV('dir',st.dir);_tmSetV('path',st.path);if('teeth' in st)_tmSetV('teeth',st.teeth);try{_entryStyleDefault();}catch(e){}if('entry' in st)_tmSetV('entry',st.entry);if('engred' in st)_tmSetV('engred',st.engred);_tmSetV('brepass',st.brepass);if(st.brepass==='Yes'){if('repp' in st)_tmSetV('repp',st.repp);if('repoff' in st)_tmSetV('repoff',st.repoff);}try{updateSubs();}catch(e){}try{if(typeof matChange==='function')matChange();}catch(e){}try{if(typeof updateTeeth==='function')updateTeeth();}catch(e){}try{if(typeof recalc==='function')recalc();}catch(e){}try{if(typeof renderPassPcts==='function')renderPassPcts();}catch(e){}try{if(typeof fdUpd==='function')fdUpd();}catch(e){}if(hint){var msg='Applied: '+sel.options[sel.selectedIndex].text;msg+='  \u2014 taper: set by Dia diff at end of thread.';if(st.brepass==='Yes')msg+='  Repass +'+st.repoff+' mm dia (edit 0.02\u20130.05).';if(st.path==='Stepped')msg+='  Teeth from insert length \u00f7 pitch.';hint.textContent=msg;}}
+function _entryStyleDefault(){var pm=$('path'),d=$('dir'),e=$('entry');if(!pm||!d||!e)return;if($('side')&&$('side').value==='External'&&pm.value!=='Stepped'){e.value='Arc';return;}if(pm.value==='Stepped'){e.value='45';return;}e.value=(d.value==='Top to Bottom')?'Old':'45';}function applyTmStyle(){var sel=$('tmStyle');if(!sel)return;var st=TM_STYLES[sel.value];var hint=$('tmStyleHint');if(!st){if(hint)hint.textContent='Manual \u2014 set each cell yourself.';return;}_tmSetV('mcode',st.mcode);_tmSetV('dir',st.dir);_tmSetV('path',st.path);if('teeth' in st)_tmSetV('teeth',st.teeth);try{_entryStyleDefault();}catch(e){}if('entry' in st)_tmSetV('entry',st.entry);if('engred' in st)_tmSetV('engred',st.engred);_tmSetV('brepass',st.brepass);if(st.brepass==='Yes'){if('repp' in st)_tmSetV('repp',st.repp);if('repoff' in st)_tmSetV('repoff',st.repoff);}try{updateSubs();}catch(e){}try{if(typeof matChange==='function')matChange();}catch(e){}try{if(typeof updateTeeth==='function')updateTeeth();}catch(e){}try{if(typeof recalc==='function')recalc();}catch(e){}try{if(typeof renderPassPcts==='function')renderPassPcts();}catch(e){}try{if(typeof fdUpd==='function')fdUpd();}catch(e){}if(hint){var msg='Applied: '+sel.options[sel.selectedIndex].text;msg+='  \u2014 taper: set by Dia diff at end of thread.';if(st.brepass==='Yes')msg+='  Repass +'+st.repoff+' mm dia (edit 0.02\u20130.05).';if(st.path==='Stepped')msg+='  Teeth from insert length \u00f7 pitch.';hint.textContent=msg;}}
 /* ===== AUTO cycle: page (requirement + tool type) overriding tool, cycle & parameters ===== */
 var autoActive=false;var SS316_MACH=36; /* below SS316 machinability = difficult material */
 function _autoReqName(){var v=(($('autoReq')||{}).value)||'std';return (v==='prod')?'Productivity':(v==='diff')?'Difficult':'Standard';}
@@ -4869,7 +4869,8 @@ function applySubprogram(prog){var L=prog.split('\n'),o=[];for(var i=0;i<L.lengt
   if(/^G00\s+X\S+\s+Y\S+\s*$/.test(t)){continue;}
   if(t==='M30'){o.push(ln.replace('M30','M99'));continue;}
   o.push(ln);}return o.join('\n');}
-function entryVis(){var sel=$('entry');if(!sel)return;var ext=$('side')&&$('side').value==='External';for(var i=0;i<sel.options.length;i++){var v=sel.options[i].value||sel.options[i].text;if(v==='Old'||v==='90'){sel.options[i].disabled=ext;sel.options[i].hidden=ext;}}if(ext&&(sel.value==='Old'||sel.value==='90'))sel.value='45';}
+function mStartAngVis(){var w=$('mStartAngWrap');if(w)w.style.visibility=($('side')&&$('side').value==='External')?'':'hidden';}
+function entryVis(){try{mStartAngVis();}catch(e){}var sel=$('entry');if(!sel)return;var ext=$('side')&&$('side').value==='External';for(var i=0;i<sel.options.length;i++){var v=sel.options[i].value||sel.options[i].text;if(v==='Old'||v==='90'){sel.options[i].disabled=ext;sel.options[i].hidden=ext;}if(v==='Arc'){sel.options[i].disabled=!ext;sel.options[i].hidden=!ext;}}if(ext&&(sel.value==='Old'||sel.value==='90'))sel.value='Arc';if(!ext&&sel.value==='Arc')_entryStyleDefault();}
 function tmVis(){var c=$('ctrl');if(!c)return;var idx=-1;for(var i=0;i<c.options.length;i++){if(c.options[i].text.indexOf('Turn-mill')>=0)idx=i;}var internal=(method!=='Turn')&&$('side')&&$('side').value==='Internal';if(internal&&idx<0){var o=document.createElement('option');o.text='Turn-mill (polar)';c.add(o);}else if(!internal&&idx>=0){if(c.selectedIndex===idx)c.selectedIndex=0;c.remove(idx);}}
 function genTurnMill(){
   var dEl=$('d');
@@ -5019,7 +5020,7 @@ async function genMill(){
   var pcts=buildPcts();
   var P0={D:D,L:L,P:P,d:d,Z:num('Z',1),Vc:Vc,fz:fz,hand:$('hand').value,direction:$('dir').value,mode:$('path').value,
     num_passes:pcts.length,pcts:pcts,repass_pitches:(brepass?Math.max(1,Math.round(num('repp',1))):0),repass_offset:num('repoff',0),num_teeth:teeth,
-    bottom_offset:toff,spindle:(LOCK_ADV?'M03':$('mcode').value),dia_end_offset:toff,minor:minor,entry_style:(internal?(LOCK_ADV?'Old':$('entry').value):((!LOCK_ADV&&$('entry').value==='180')?'180':'45')),
+    bottom_offset:toff,spindle:(LOCK_ADV?'M03':$('mcode').value),dia_end_offset:toff,minor:minor,entry_style:(internal?(LOCK_ADV?'Old':$('entry').value):(LOCK_ADV?'Arc':(['180','45','Arc'].indexOf($('entry').value)>=0?$('entry').value:'Arc'))),
     num_starts:Math.max(1,Math.round(num('starts',1))),entry_feed_reduction:(LOCK_ADV?0:num('engred',0)),max_rpm:(LOCK_ADV?5000:num('maxrpm',5000)),
     stepped_style:(LOCK_ADV?'Modified':($('sstyle').value.indexOf('Carmex')>=0?'Carmex':'Modified')),is_external:!internal,
     strategy:'Standard',finishing:(req==='Finishing'),entry_angle:(LOCK_ADV?0:num('entryang',0)),tool_offset_mode:(toolOD?'od':'centre'),
@@ -5027,13 +5028,66 @@ async function genMill(){
   try{
     
     var _m=await apiPost('/mill/program',P0); var prog=_m.program, t=_m.seconds;lastCycleSec=t;
-    prog=tnPostMill(prog);prog=tnMillPattern(prog);
+    var _arcOld=false;if(P0.entry_style==='Arc'&&P0.mode==='Helical'&&!/TANGENT ARC/.test(prog)){_arcOld=true;P0.entry_style='45';_m=await apiPost('/mill/program',P0);prog=_m.program;t=_m.seconds;lastCycleSec=t;}
+    prog=tnMillStartAngle(prog);prog=tnPostMill(prog);prog=tnMillPattern(prog);
     prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));prog=_applyThreadHdr(prog,true);if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
-    var _np=(typeof pcts!=='undefined'&&pcts)?pcts.length:0;var _mp=['CT '+mm+'m '+ss+'s','Vc '+Vc,'Fz '+(+fz).toFixed(3),_np+' pass'+(_np==1?'':'es')];if(brepass){_mp.push('Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p');var _ro=num('repoff',0);if(_ro>0)_mp.push('+'+_ro+' mm dia');}$('cyc').innerHTML='<div class="cyc">'+_mp.join(' &middot; ')+'</div>';
+    var _np=(typeof pcts!=='undefined'&&pcts)?pcts.length:0;var _mp=['CT '+mm+'m '+ss+'s','Vc '+Vc,'Fz '+(+fz).toFixed(3),_np+' pass'+(_np==1?'':'es')];if(_arcOld)_mp.push('<span style="color:#ff7043">Arc entry needs the updated engine &mdash; 45 entry used</span>');var _sa=window._mStartAng;if(_sa&&_sa.deg>0){_mp.push(_sa.ok?('Start '+ppff(_sa.show)+'&deg;'):('<span style="color:#ff7043">Start angle NOT applied &mdash; '+pEsc(_sa.why)+'</span>'));}if(brepass){_mp.push('Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p');var _ro=num('repoff',0);if(_ro>0)_mp.push('+'+_ro+' mm dia');}$('cyc').innerHTML='<div class="cyc">'+_mp.join(' &middot; ')+'</div>';
     output(prog,'');try{tmFeedUpd();}catch(_e){}
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
+/* U-MILL-STARTANG (v28.56): EXTERNAL thread-milling start angle, 4 positions 0/90/180/270 (0 = as generated).
+   Turns the whole thread toolpath about the thread centre (program X0 Y0), CCW + seen from +Z, by swapping /
+   changing the signs of X,Y and I,J (exact, no trig). Explicit coordinates are
+   written (no G68 / ROT option needed). Points, G91 increments and arc I/J vectors (Heidenhain:
+   X/Y, IX/IY, CC) are rotated; R / CR= arcs and helix Z are unchanged. The Start-XYZ home point and
+   G28/G30/G53/G52/G92/G10 lines are left alone. Tilted-plane lines (G68.2, CYCLE800, PLANE...) are left alone,
+   so on a 3+2 tilted plane the turn happens about the tilted thread axis. X/Y moves mixed with A/B/C
+   rotary words, or any line it cannot read safely -> nothing is rotated. */
+function tnMillStartAngle(prog){var st={deg:0,ok:true,why:''};window._mStartAng=st;try{
+  if(!($('side')&&$('side').value==='External'))return prog;
+  var deg=Math.round(num('m_startang',0)/90)*90;st.show=deg;deg=((deg%360)+360)%360;st.deg=deg;if(!deg)return prog;
+  var tax=LOCK_ADV?'Z-':(($('toolaxis')&&$('toolaxis').value)||'Z-');if(tax.charAt(0)!=='Z'){st.ok=false;st.why='tool axis '+tax.split(' ')[0]+' (Z only)';return prog;}
+  var qd=deg/90,ca=[1,0,-1,0][qd],sa=[0,1,0,-1][qd];
+  /* 90: X=-Y Y=X | 180: X=-X Y=-Y | 270: X=Y Y=-X  (a true turn: G02/G03 and thread hand stay the same) */
+  function rot(x,y){return [x*ca-y*sa+0,x*sa+y*ca+0];}
+  var hh=/BEGIN PGM/.test(prog);
+  var home=($('startxyz')&&$('startxyz').value==='Yes')?[num('start_x',0),num('start_y',0)]:null;
+  var L=prog.split('\n'),out=[],abs=true,cx=null,cy=null,ccx=null,ccy=null;
+  for(var i=0;i<L.length;i++){var ln=L[i];
+    var cut=ln.length;var p1=ln.indexOf('(');if(p1>=0)cut=Math.min(cut,p1);var p2=ln.indexOf(';');if(p2>=0)cut=Math.min(cut,p2);
+    var code=ln.slice(0,cut),rest=ln.slice(cut);var up=code.toUpperCase();
+    if(/\bG91\b/.test(up))abs=false;if(/\bG90\b/.test(up))abs=true;
+    if(hh&&/^\s*CP\b/.test(up)){var mi=up.match(/\bIPA(-?[\d.]+)/);if(mi&&cx!=null&&ccx!=null){var b=parseFloat(mi[1])*Math.PI/180,vx=cx-ccx,vy=cy-ccy;cx=ccx+vx*Math.cos(b)-vy*Math.sin(b);cy=ccy+vx*Math.sin(b)+vy*Math.cos(b);}else{cx=cy=null;}}
+    var need=(up.match(/(^|[^A-Z])I?[XYIJ]-?[\d.]/g)||[]).length;if(!need){out.push(ln);continue;}
+    if(/\bG(28|30|53|52|92|10)\b/.test(up)){cx=cy=null;out.push(ln);continue;}
+    /* tilted work plane / 5-axis frame lines (G68, G68.2, G69, G43.4, G54.4, CYCLE800, TRAORI, PLANE, CYCL DEF 19) define the plane: leave them as they are */
+    if(/\bG(68(\.\d)?|69|43\.4|43\.5|54\.4)\b/.test(up)||/\b(CYCLE800|TRAORI|TRAFOOF|PLANE|CYCL\s+DEF\s+19)\b/.test(up)){out.push(ln);continue;}
+    /* X/Y move together with a rotary axis (A/B/C) = simultaneous multi-axis move: do not touch the program */
+    if(/(^|\s)[ABC][+-]?\d/.test(up))throw new Error('rotary axis (A/B/C) move: '+ln.trim());
+    var tk=code.split(/(\s+)/),W={},first=-1,got=0;
+    for(var k=0;k<tk.length;k++){var m=tk[k].match(/^(IX|IY|X|Y|I|J)(-?\d*\.?\d+)$/i);if(!m)continue;var w=m[1].toUpperCase();
+      if(hh&&(w==='I'||w==='J'))continue;if(!hh&&(w==='IX'||w==='IY'))continue;
+      W[w]=parseFloat(m[2]);if(first<0)first=k;tk[k]='';got++;}
+    if(got!==need){throw new Error('unreadable line: '+ln.trim());}
+    var put=[];var isCC=hh&&/^\s*CC\b/.test(up);
+    var ax=(hh?(W.X!=null||W.Y!=null):(abs&&(W.X!=null||W.Y!=null)));
+    var ix=hh?(W.IX!=null||W.IY!=null):(!abs&&(W.X!=null||W.Y!=null));
+    if(ax){var nx=(W.X!=null)?W.X:cx,ny=(W.Y!=null)?W.Y:cy;if(nx==null||ny==null)throw new Error('X/Y position unknown before: '+ln.trim());
+      if(!isCC&&home&&Math.abs(nx-home[0])<1e-6&&Math.abs(ny-home[1])<1e-6){put.push('X'+ppf(nx),'Y'+ppf(ny));}
+      else{var r=rot(nx,ny);put.push('X'+ppf(r[0]),'Y'+ppf(r[1]));}
+      if(!isCC){cx=nx;cy=ny;}else{ccx=nx;ccy=ny;}}
+    if(ix){var dx=hh?(W.IX||0):(W.X||0),dy=hh?(W.IY||0):(W.Y||0);var r2=rot(dx,dy);
+      if(hh)put.push('IX'+ppf(r2[0]),'IY'+ppf(r2[1]));else put.push('X'+ppf(r2[0]),'Y'+ppf(r2[1]));
+      if(!isCC){if(cx!=null&&cy!=null){cx+=dx;cy+=dy;}}else{if(cx!=null&&cy!=null){ccx=cx+dx;ccy=cy+dy;}else{ccx=ccy=null;}}}
+    if(!hh&&(W.I!=null||W.J!=null)){var r3=rot(W.I||0,W.J||0);put.push('I'+ppf(r3[0]),'J'+ppf(r3[1]));}
+    tk[first]=put.join(' ');
+    var nl=tk.join('').replace(/[ \t]{2,}/g,' ').replace(/\s+$/,'');out.push(nl+(rest?(' '+rest.replace(/^\s+/,'')):''));}
+  var cmt=(hh||/CONTROL = Siemens/.test(prog))?';(THREAD START ANGLE '+ppff(deg)+' DEG)':'(THREAD START ANGLE '+ppff(deg)+' DEG)';
+  var at=-1;for(var q=0;q<out.length;q++){if(/\(CONTROL =/.test(out[q])){at=q;break;}}if(at<0){for(var q2=0;q2<out.length;q2++){if(/^\s*(O\d|%\d|BEGIN PGM)/.test(out[q2])){at=q2;break;}}}
+  out.splice(at+1,0,cmt);
+  return out.join('\n');
+}catch(e){st.ok=false;st.why=(e&&e.message)?e.message:String(e);return prog;}}
 function _tpfmt(v){return (Math.round(v*1000)/1000).toFixed(3);}
 function buildTaperPreturn(){
   if(typeof isPipe!=='function'||!isPipe())return null;
@@ -5229,7 +5283,7 @@ function _hasList(){var prof=($('profile')&&$('profile').value)||'';return !!(ty
 function threadFields(){var a=[['side','Int/Ext','sel'],['profile','Thread profile','sel'],['size','Thread standard','std'],['P','Pitch','pit'],['L','Thread length','num']];if(method!=='Turn')a=a.concat([['d','Tool dia','num'],['Z','Flutes','num']]);return a;}
 function fieldMissing(f){var el=$(f[0]);if(!el)return false;var v=((el.value||'')+'').trim();if(f[2]==='sel')return v==='';if(f[2]==='num')return !(parseFloat(v)>0);if(f[2]==='std')return _hasList()?(v===''):false;if(f[2]==='pit')return _hasList()?false:!(parseFloat(($('P')&&$('P').value)||'')>0);return false;}
 function threadMandatoryMissing(){var miss=[];threadFields().forEach(function(f){if(fieldMissing(f))miss.push(f[1]);});return miss;}
-function refreshReq(){var on=(progMode==='new');['side','profile','P','size','L','d','Z'].forEach(function(id){var el=$(id);if(el)el.classList.remove('reqbad');});if(on){threadFields().forEach(function(f){if(fieldMissing(f)){var el=$(f[0]);if(el)el.classList.add('reqbad');}});}}
+function refreshReq(){try{mStartAngVis();}catch(e){}var on=(progMode==='new');['side','profile','P','size','L','d','Z'].forEach(function(id){var el=$(id);if(el)el.classList.remove('reqbad');});if(on){threadFields().forEach(function(f){if(fieldMissing(f)){var el=$(f[0]);if(el)el.classList.add('reqbad');}});}}
 function applyNewBlanks(){soBlank('side');soBlank('profile');try{if(typeof profChange==='function')profChange();}catch(e){}try{if(typeof fdUpd==='function')fdUpd();}catch(e){}['P','d','Z'].forEach(function(id){var el=$(id);if(el&&el.tagName==='INPUT')el.value='';});var _LN=$('L');if(_LN)_LN.value='20';
   /* U-TEETH-DEFAULT: No. of teeth defaults back to 1 on New (and on page
      refresh, via the input's HTML default value="1") — any other trigger
@@ -5255,7 +5309,7 @@ function yaWireOne(id,srcId){var e=document.getElementById(id);if(!e||e._yaFlow)
 function yaFlowWire(order){YA_ORDER=order;order.forEach(function(id){yaWireOne(id,id);});['psel','tpi','pother','tpiother'].forEach(function(pid){yaWireOne(pid,'P');});['D','Dinch'].forEach(function(did){var de=document.getElementById(did);if(!de||de._yaFlowD)return;de._yaFlowD=1;de.addEventListener('keydown',function(ev){var isEnter=(ev.key==='Enter'||ev.keyCode===13);var isTab=(ev.key==='Tab'||ev.keyCode===9)&&!ev.shiftKey;if(!(isEnter||isTab))return;if(typeof progMode==='undefined'||progMode!=='new')return;if(!de.value||String(de.value).trim()==='')return;var L=document.getElementById('L');if(L){ev.preventDefault();yaFocusOpen(L);}});});}
 function yaThreadFocus(){try{var o=yaThreadOrder();yaFlowWire(o);if(window._tmSuppressFocus){window._tmSuppressFocus=false;return;}var pv=document.getElementById('prog');var vis=pv&&pv.offsetParent!==null;if(!vis)return;var f0=yaResolve(o[0]);if(f0)setTimeout(function(){yaFocusOpen(f0);},120);}catch(e){}}
 var TURN_JOB_IDS=['t_infeed','t_trans','t_first','t_e100','t_idle','t_pctred','t_pctanchor','t_flank','t_modflank','t_zone','t_req','t_startang','t_presize','tp_len','t_thtaper','t_taperdeg','t_diadiff','t_safex','t_safez','t_pos1','t_pos2x','t_pos2z','t_subprog','t_toff','t_tool','t_cool','t_coolcustom','t_mcode','t_shank','t_stab','t_vc','t_majadj'];
-var MILL_JOB_IDS=['passes','spring','eqvol','rctf','path','dir','sstyle','entry','engred','thtaper','taparcs','taperdeg','diadiff','brepass','repp','repoff','subprog','startxyz','safez','start_x','start_y','start_z','toolpath','entryang','insl','mcode','toff','tool_t','tool_h','tool_d','stab','vc','majadj'];
+var MILL_JOB_IDS=['m_startang','passes','spring','eqvol','rctf','path','dir','sstyle','entry','engred','thtaper','taparcs','taperdeg','diadiff','brepass','repp','repoff','subprog','startxyz','safez','start_x','start_y','start_z','toolpath','entryang','insl','mcode','toff','tool_t','tool_h','tool_d','stab','vc','majadj'];
 function _resetDef(id){var el=$(id);if(!el)return;if(el.tagName==='SELECT'){var set=false;for(var i=0;i<el.options.length;i++){if(el.options[i].defaultSelected){el.selectedIndex=i;set=true;break;}}if(!set&&el.options.length)el.selectedIndex=0;}else if('defaultValue' in el){el.value=el.defaultValue;}}
 function refreshJobDefaults(){try{TURN_JOB_IDS.forEach(_resetDef);}catch(e){}try{tnFlankSync();}catch(e){}try{MILL_JOB_IDS.forEach(_resetDef);}catch(e){}try{tnAutoOn=true;tnAutoMode='Standard';tnFirstAuto=true;if($('tnAutoReq'))$('tnAutoReq').value='Standard';}catch(e){}try{tnAutoUI();}catch(e){}try{updateSubs();}catch(e){}try{if($('mat'))$('mat').value='Stainless 316 austenitic';}catch(e){}try{matChange();}catch(e){}try{setDefaultPasses();}catch(e){}try{renderPassPcts();}catch(e){}try{recalcT();}catch(e){}try{recalc();}catch(e){}}
 function setProgMode(m){progMode=m;var s=$('pm_sample'),n=$('pm_new');if(s)s.classList.toggle('on',m==='sample');if(n)n.classList.toggle('on',m==='new');var h=$('pm_hint');if(m==='new'){applyNewBlanks();try{yaThreadFocus();}catch(_e){}if(h)h.textContent='New program — choose the fields marked in red, then Generate and Save.';}else{restoreSampleDefaults();if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}try{pbNote('p','');}catch(e){}try{refreshJobDefaults();}catch(e){}refreshReq();}
