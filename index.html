@@ -119,6 +119,13 @@
   .seg button{flex:1;background:var(--bg2);border:1px solid var(--line);color:var(--mut);border-radius:11px;padding:11px;font-weight:700;cursor:pointer}
   .seg button.on{background:var(--acc2);color:#06121c;border-color:var(--acc2)}
   .cyc{margin-top:12px;background:linear-gradient(135deg,#0d2030,#13283a);border:1px solid var(--line);border-radius:12px;padding:13px;text-align:center;font-weight:800;letter-spacing:1px;color:var(--acc)}
+  .cycfull{margin-top:12px;background:linear-gradient(135deg,#0d2030,#13283a);border:1px solid var(--line);border-radius:12px;padding:13px 15px;color:var(--txt)}
+  .cycfull .cfhd{font-weight:800;letter-spacing:1px;color:var(--acc);font-size:12px;margin-bottom:9px;text-align:center}
+  .cycfull .cfgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+  .cycfull .cfrow{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;border-bottom:1px dashed rgba(255,255,255,.08);padding-bottom:3px}
+  .cycfull .cfrow b{color:var(--mut);font-weight:600}
+  .cycfull .cfrow span{color:var(--txt);font-weight:700;text-align:right}
+  @media(max-width:480px){.cycfull .cfgrid{grid-template-columns:1fr}}
   .warn{color:var(--pro);font-size:12px;margin-top:8px;line-height:1.4}
   .note{color:var(--mut);font-size:11.5px;text-align:center;margin-top:16px;line-height:1.5}
   .prolock{background:linear-gradient(160deg,#22150f,#1b2837);border:1px solid #3a2a20;border-radius:var(--radius);padding:20px;text-align:center;margin-top:12px}
@@ -253,7 +260,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.61 &middot; 16 Oct 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.62 &middot; 16 Oct 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -5003,14 +5010,13 @@ async function genMill(){
     var _m=await apiPost('/mill/program',P0); var prog=_m.program, t=_m.seconds;lastCycleSec=t;
     prog=tnPostMill(prog);prog=tnMillPattern(prog);
     prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));prog=_applyThreadHdr(prog,true);if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
-    var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
-    var _np=(typeof pcts!=='undefined'&&pcts)?pcts.length:0;var _rn=Math.max(1,Math.round(num('passes',1)));var _ex=Math.max(0,_np-_rn);var _passTxt=(_ex>0?(_rn+'+'+_ex):_np)+' pass'+(_np==1?'':'es');var _mp=['CT '+mm+'m '+ss+'s','Vc '+Vc,'Fz '+(+fz).toFixed(3),_passTxt];if(brepass){_mp.push('Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p');var _ro=num('repoff',0);if(_ro>0)_mp.push('+'+_ro+' mm dia');}
+    var _tmExtra=[];if(brepass){var _rpTxt='Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p';var _ro=num('repoff',0);if(_ro>0)_rpTxt+=' +'+_ro+' mm dia';_tmExtra.push(['Bottom repass',_rpTxt]);}
     /* U-CYC-INSIDE-CARD: #cyc now lives INSIDE the PROGRAM card's own markup
        (pbRender() rebuilds it fresh on every output()/renderProg() call), so
        it must be filled in AFTER output() runs, not before -- otherwise the
        very next renderProg() wipes it with a blank placeholder. */
     output(prog,'');try{tmFeedUpd();}catch(_e){}
-    if($('cyc'))$('cyc').innerHTML='<div class="cyc">'+_mp.join(' &middot; ')+'</div>';
+    _tmShowSummary(_tmExtra);
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
 function _tpfmt(v){return (Math.round(v*1000)/1000).toFixed(3);}
@@ -5075,9 +5081,8 @@ async function genTurn(){
     
     var _tr=await apiPost('/turn/program',P0); var res=_tr.result;lastCycleSec=res[1];
     var _tt=($('t_toff')&&$('t_toff').value==='Yes'&&$('t_tool'))?$('t_tool').value.trim():'0101';var prog=res[0].replace('T0101','T'+_tt);prog=tnPostTurn(prog);var _tpb=(typeof buildTaperPreturn==='function')?buildTaperPreturn():null;if(_tpb)prog=prog.replace('N1 G40 G99',_tpb+'\nG40 G99');prog=applyHeader(prog,($('t_msg')?$('t_msg').value.trim():''),($('t_username')?$('t_username').value.trim():''));prog=_applyThreadHdr(prog);if($('t_subprog')&&$('t_subprog').value==='Yes')prog=applySubprogram(prog);
-    var sec=Math.round(res[1]),mm=Math.floor(sec/60),ss=sec%60;
     output(prog,'');
-    if($('cyc'))$('cyc').innerHTML='<div class="cyc">CT '+mm+'m '+ss+'s &middot; Vc '+num('t_vc',120)+' &middot; '+res[3]+' pass'+(res[3]==1?'':'es')+'</div>';
+    _tmShowSummary();
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
 let lastProg='';var lastCycleSec=0;var editOn=false;var lastExtra='';
@@ -6590,23 +6595,28 @@ function _tmRestoreSummary(content){
   try{
     var get=function(label){var re=new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\s*:\\s*([^\\n\\)\\;]+)');var m=re.exec(content||'');return m?m[1].trim():'';};
     var cyc=get('Cycle Time');if(!cyc||cyc==='-')return;
-    var vc=get('Vc').replace(/\s*m\/min$/,'');
-    var fz=get('Fz').replace(/\s*mm\/tooth$/,'');
-    var parts=['CT '+cyc];
-    if(vc&&vc!=='-')parts.push('Vc '+vc);
-    if(fz&&fz!=='-')parts.push('Fz '+fz);
     var passTxt='';
     if(typeof method!=='undefined'&&method==='Mill'&&$('passes')){
       var rn=Math.max(1,Math.round(num('passes',1)));
       var tot=(typeof buildPcts==='function')?buildPcts().length:rn;
       var ex=Math.max(0,tot-rn);
-      passTxt=(ex>0?(rn+'+'+ex):tot)+' pass'+(tot===1?'':'es');
+      passTxt=(ex>0?(rn+'+'+ex):tot)+'';
     }else{
-      var p=get('Passes');
-      if(p&&p!=='-')passTxt=p+' pass'+(p==='1'?'':'es');
+      passTxt=get('Passes');
     }
-    if(passTxt)parts.push(passTxt);
-    if($('cyc'))$('cyc').innerHTML='<div class="cyc">'+parts.join(' &middot; ')+'</div>';
+    var rows=[
+      ['Major Dia',get('Major Dia')],
+      ['Minor Dia',get('Minor Dia')],
+      ['Tool Dia',get('Tool Dia')],
+      ['Thread Length',get('Thread Length')],
+      ['Material',get('Material')],
+      ['Vc',get('Vc')],
+      ['Fz',get('Fz')],
+      ['Passes',passTxt],
+      ['Cycle Time',cyc],
+      ['Date',get('Date')]
+    ];
+    if(typeof _tmSummaryHTML==='function'&&$('cyc'))$('cyc').innerHTML=_tmSummaryHTML(rows);
   }catch(e){}
 }
 async function yaServerSave(name,content,op,fields){try{await fetch(YANTRA_API+'/programs',{method:'POST',headers:{'Content-Type':'application/json','X-API-Key':YANTRA_KEY,'X-Device-Id':yaDeviceId()},body:JSON.stringify({name:name,content:content,op:op||'',fields:fields||{}})});}catch(e){}}
@@ -6802,6 +6812,54 @@ function _injectHeader(prog,comment){
   var hd=/Heidenhain/i.test(_threadCtrl());var j=0;while(j<lines.length&&lines[j].trim()==='')j++;
   lines.splice(j+1,0,hd?('; '+comment):('( '+comment+' )'));return lines.join('\n');
 }
+/* U-FULL-SUMMARY: the user asked that a freshly-generated (not-yet-saved)
+   program show the SAME full summary block that's visible when reopening a
+   saved one (Major/Minor/Tool Dia, Thread Length, Material, Vc, Fz, Passes,
+   Cycle Time, Date) -- previously that full block only ever appeared because
+   it's baked as G-code comments into the SAVED file's text (threadFooter(),
+   only run inside saveProg()). This renders the same facts as a small HTML
+   card into #cyc instead, for both the fresh-generate path (genMill() / the
+   Thread Turning generator, built live from current field values) and the
+   restore path (_tmRestoreSummary(), parsed back out of the saved footer
+   text) -- without ever touching lastProg/the actual saved G-code, so there
+   is no risk of double-injecting the footer when the user then hits Save. */
+function _tmSummaryRows(extra){
+  var mill=(typeof method!=='undefined'&&method==='Mill');
+  function selText(id){var e=$(id);if(!e)return '';try{if(e.selectedOptions&&e.selectedOptions[0])return e.selectedOptions[0].text;}catch(_){}return e.value||'';}
+  function v(id){var e=$(id);return e?(''+(e.value||'')):'';}
+  var told=mill?(num('d',0)>0?_tn(num('d',0))+' mm':'-'):'-';
+  var vc=(mill?v('vc'):v('t_vc'))||'-';
+  var fz=mill?(v('fz')||'-'):'-';
+  var passes=(mill?v('passes'):v('t_total'))||'-';
+  if(mill&&$('passes')){
+    var rn=Math.max(1,Math.round(num('passes',1)));
+    var tot=(typeof buildPcts==='function')?buildPcts().length:rn;
+    var ex=Math.max(0,tot-rn);
+    passes=(ex>0?(rn+'+'+ex):tot)+'';
+  }
+  var cyc='-';try{if(typeof lastCycleSec!=='undefined'&&lastCycleSec>0)cyc=Math.floor(lastCycleSec/60)+'m '+Math.round(lastCycleSec%60)+'s';}catch(_){}
+  var _dt=new Date();var dstr=('0'+_dt.getDate()).slice(-2)+'/'+('0'+(_dt.getMonth()+1)).slice(-2)+'/'+_dt.getFullYear();
+  var rows=[
+    ['Major Dia',_tn(num('D',0))+' mm'],
+    ['Minor Dia',_tn(num('minor',0))+' mm'],
+    ['Tool Dia',told],
+    ['Thread Length',_tn(num('L',0))+' mm'],
+    ['Material',selText('mat')||'-'],
+    ['Vc',vc+(vc==='-'?'':' m/min')],
+    ['Fz',fz+(fz==='-'?'':' mm/tooth')],
+    ['Passes',passes],
+    ['Cycle Time',cyc],
+    ['Date',dstr]
+  ];
+  if(extra&&extra.length)rows=rows.concat(extra);
+  return rows;
+}
+function _tmSummaryHTML(rows){
+  var cells=(rows||[]).filter(function(r){return r&&r[1]!=null&&r[1]!=='';}).map(function(r){return '<div class="cfrow"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>';}).join('');
+  if(!cells)return '';
+  return '<div class="cycfull"><div class="cfhd">PROGRAM SUMMARY</div><div class="cfgrid">'+cells+'</div></div>';
+}
+function _tmShowSummary(extra){try{if($('cyc'))$('cyc').innerHTML=_tmSummaryHTML(_tmSummaryRows(extra));}catch(e){}}
 function threadFooter(){
   var mill=(typeof method!=='undefined'&&method==='Mill');
   function selText(id){var e=$(id);if(!e)return '';try{if(e.selectedOptions&&e.selectedOptions[0])return e.selectedOptions[0].text;}catch(_){}return e.value||'';}
@@ -8765,5 +8823,3 @@ window.addEventListener('load',function(){try{window.scrollTo(0,0);}catch(e){}tr
 });</script>
 </body>
 </html>
-
-  
