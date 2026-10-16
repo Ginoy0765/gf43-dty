@@ -253,7 +253,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.59 &middot; 16 Oct 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.60 &middot; 16 Oct 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1783,7 +1783,6 @@
       <div id="engineStatus" class="note" style="text-align:center;margin-top:8px">Loading engine... (first time needs internet)</div>
       <button class="btn genbtn" onclick="genProg()">&#9881;&#65039;  GENERATE G-CODE</button>
       <div id="p_res"></div>
-      <div id="cyc"></div>
       <button class="btn btn2" id="savebtn" style="display:none" onclick="saveProg()">&#128190;  Save .txt to Downloads</button>
       <button class="btn btn2" id="simbtn" style="display:none" onclick="runSim()">&#9654;  Simulate toolpath</button>
       <button class="btn btn2" id="editbtn" style="display:none" onclick="toggleEdit()">&#9998;  Edit: OFF</button>
@@ -2493,7 +2492,7 @@ async function initPy(){
     if(pendingGen){pendingGen=false;genProg();}if(typeof calcTolData==='function')calcTolData();
   }catch(e){clearTimeout(wd);S('Engine load failed: '+(e&&e.message?e.message:e),'var(--pro)');}
 }
-function notReady(){$('p_res').innerHTML='<p class="warn">Engine still loading \u2014 wait a few seconds and tap Generate again.</p>';$('cyc').innerHTML='';}
+function notReady(){$('p_res').innerHTML='<p class="warn">Engine still loading \u2014 wait a few seconds and tap Generate again.</p>';if($('cyc'))$('cyc').innerHTML='';}
 const $=id=>document.getElementById(id);
 /* v24.1: pretty-print engine errors, hide Python traceback */
 function cleanErr(e){
@@ -3595,7 +3594,7 @@ function setMethod(m){method=m;
   if(m==='Turn'){try{if(!window._tnSeeded){tnMachineSeed();window._tnSeeded=1;}tnAfterGeom();tCoolVis();}catch(e){}}
   if(m==='Mill'){try{if(!window._mnSeeded){mnMachineSeed();window._mnSeeded=1;}mCoolVis();}catch(e){}}
   try{if(typeof spInlineInit==='function')spInlineInit();}catch(e){}
-  $('p_res').innerHTML='';$('cyc').innerHTML='';if($('copybtn'))$('copybtn').style.display='none';if($('savebtn'))$('savebtn').style.display='none';if($('simbtn'))$('simbtn').style.display='none';if($('editbtn'))$('editbtn').style.display='none';
+  $('p_res').innerHTML='';if($('cyc'))$('cyc').innerHTML='';if($('copybtn'))$('copybtn').style.display='none';if($('savebtn'))$('savebtn').style.display='none';if($('simbtn'))$('simbtn').style.display='none';if($('editbtn'))$('editbtn').style.display='none';
 }
 function _threadOpen(mode){var _h=$('prog_h2');if(_h)_h.textContent=(mode==='Turn'?'Thread Turning':'Thread Milling');show('prog');var o=$('opsel');if(o){o.value=(mode==='Turn'?'Turning':'Milling');if(o.parentNode)o.parentNode.style.display='none';}if(typeof setMethod==='function')setMethod(mode);try{if(typeof dInchVis==='function')dInchVis();}catch(e){}try{if(typeof progMode!=='undefined'&&progMode==='new'){if(typeof applyNewBlanks==='function')applyNewBlanks();if(typeof refreshReq==='function')refreshReq();if(typeof yaThreadFocus==='function')setTimeout(yaThreadFocus,140);}}catch(e){}try{if(mode==='Mill'&&typeof autoActive!=='undefined'&&autoActive&&typeof applyAuto==='function')setTimeout(applyAuto,200);else if(typeof _autoLock==='function')_autoLock([]);}catch(e){}}function openThreadTurn(){_threadOpen('Turn');}function openThreadMill(){_threadOpen('Mill');}
 function setMethodSel(){setMethod($('opsel').value==='Turning'?'Turn':'Mill');}
@@ -4655,7 +4654,7 @@ function resetAll(){editOn=false;try{if(PB_ST&&PB_ST.p)PB_ST.p.edit=false;}catch
   if($('mcode'))$('mcode').value='M03';if($('maxrpm'))$('maxrpm').value='5000';minorEdited=false;if($('minor'))$('minor').value='';if($('majadj'))$('majadj').value='0';if($('engred'))$('engred').value='0';
   if($('thtaper'))$('thtaper').value='None';if($('taperdeg'))$('taperdeg').value='0';if($('diadiff'))$('diadiff').value='0';if($('brepass'))$('brepass').value='No';if($('startxyz'))$('startxyz').value='No';if($('toff'))$('toff').value='No';if($('subprog'))$('subprog').value='No';if($('req'))$('req').value='Standard';if($('ctrl'))$('ctrl').value='Fanuc I & J';
   $('profile').value='ISO Metric';profChange();$('size').value='M16';sizeChange();clearD();
-  $('p_res').innerHTML='';$('cyc').innerHTML='';
+  $('p_res').innerHTML='';if($('cyc'))$('cyc').innerHTML='';
   if($('simcv'))$('simcv').style.display='none';if($('simctrls'))$('simctrls').style.display='none';if($('savebtn'))$('savebtn').style.display='none';if($('simbtn'))$('simbtn').style.display='none';if($('editbtn'))$('editbtn').style.display='none';
   setMethod('Mill');updateSubs();updateTeeth();matChange();window.scrollTo(0,0);
 }
@@ -4972,7 +4971,7 @@ function fmSim(a){if(!FM_SIMPROG){fmSimRun();return;}
 
 async function genMill(){
   if(!pyReady){notReady();return;}
-  if(!$('d').value.trim()){$('p_res').innerHTML='<p class="warn">Enter Tool dia d (required).</p>';$('cyc').innerHTML='';if($('simbtn'))$('simbtn').style.display='none';if($('editbtn'))$('editbtn').style.display='none';if($('savebtn'))$('savebtn').style.display='none';return;}
+  if(!$('d').value.trim()){$('p_res').innerHTML='<p class="warn">Enter Tool dia d (required).</p>';if($('cyc'))$('cyc').innerHTML='';if($('simbtn'))$('simbtn').style.display='none';if($('editbtn'))$('editbtn').style.display='none';if($('savebtn'))$('savebtn').style.display='none';return;}
   var _ve=vcEdited,_fe=fzEdited,_re=rpmEdited,_vv=$('vc')?$('vc').value:'',_fv=$('fz')?$('fz').value:'',_rv=$('rpm')?$('rpm').value:'';
   matChange();
   vcEdited=_ve;fzEdited=_fe;rpmEdited=_re;if(_ve&&$('vc'))$('vc').value=_vv;if(_fe&&$('fz'))$('fz').value=_fv;if(_re&&$('rpm'))$('rpm').value=_rv;recalc();
@@ -5005,8 +5004,13 @@ async function genMill(){
     prog=tnPostMill(prog);prog=tnMillPattern(prog);
     prog=applyHeader(prog,($('msg')?$('msg').value.trim():''),($('username')?$('username').value.trim():''));prog=_applyThreadHdr(prog,true);if($('subprog')&&$('subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(t),mm=Math.floor(sec/60),ss=sec%60;
-    var _np=(typeof pcts!=='undefined'&&pcts)?pcts.length:0;var _rn=Math.max(1,Math.round(num('passes',1)));var _ex=Math.max(0,_np-_rn);var _passTxt=(_ex>0?(_rn+'+'+_ex):_np)+' pass'+(_np==1?'':'es');var _mp=['CT '+mm+'m '+ss+'s','Vc '+Vc,'Fz '+(+fz).toFixed(3),_passTxt];if(brepass){_mp.push('Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p');var _ro=num('repoff',0);if(_ro>0)_mp.push('+'+_ro+' mm dia');}$('cyc').innerHTML='<div class="cyc">'+_mp.join(' &middot; ')+'</div>';
+    var _np=(typeof pcts!=='undefined'&&pcts)?pcts.length:0;var _rn=Math.max(1,Math.round(num('passes',1)));var _ex=Math.max(0,_np-_rn);var _passTxt=(_ex>0?(_rn+'+'+_ex):_np)+' pass'+(_np==1?'':'es');var _mp=['CT '+mm+'m '+ss+'s','Vc '+Vc,'Fz '+(+fz).toFixed(3),_passTxt];if(brepass){_mp.push('Bottom repass '+Math.max(1,Math.round(num('repp',1)))+'p');var _ro=num('repoff',0);if(_ro>0)_mp.push('+'+_ro+' mm dia');}
+    /* U-CYC-INSIDE-CARD: #cyc now lives INSIDE the PROGRAM card's own markup
+       (pbRender() rebuilds it fresh on every output()/renderProg() call), so
+       it must be filled in AFTER output() runs, not before -- otherwise the
+       very next renderProg() wipes it with a blank placeholder. */
     output(prog,'');try{tmFeedUpd();}catch(_e){}
+    if($('cyc'))$('cyc').innerHTML='<div class="cyc">'+_mp.join(' &middot; ')+'</div>';
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
 function _tpfmt(v){return (Math.round(v*1000)/1000).toFixed(3);}
@@ -5072,8 +5076,8 @@ async function genTurn(){
     var _tr=await apiPost('/turn/program',P0); var res=_tr.result;lastCycleSec=res[1];
     var _tt=($('t_toff')&&$('t_toff').value==='Yes'&&$('t_tool'))?$('t_tool').value.trim():'0101';var prog=res[0].replace('T0101','T'+_tt);prog=tnPostTurn(prog);var _tpb=(typeof buildTaperPreturn==='function')?buildTaperPreturn():null;if(_tpb)prog=prog.replace('N1 G40 G99',_tpb+'\nG40 G99');prog=applyHeader(prog,($('t_msg')?$('t_msg').value.trim():''),($('t_username')?$('t_username').value.trim():''));prog=_applyThreadHdr(prog);if($('t_subprog')&&$('t_subprog').value==='Yes')prog=applySubprogram(prog);
     var sec=Math.round(res[1]),mm=Math.floor(sec/60),ss=sec%60;
-    $('cyc').innerHTML='<div class="cyc">CT '+mm+'m '+ss+'s &middot; Vc '+num('t_vc',120)+' &middot; '+res[3]+' pass'+(res[3]==1?'':'es')+'</div>';
     output(prog,'');
+    if($('cyc'))$('cyc').innerHTML='<div class="cyc">CT '+mm+'m '+ss+'s &middot; Vc '+num('t_vc',120)+' &middot; '+res[3]+' pass'+(res[3]==1?'':'es')+'</div>';
   }catch(e){$('p_res').innerHTML='<p class="warn"><b>Cannot generate:</b><br>'+cleanErr(e)+'</p>';}
 }
 let lastProg='';var lastCycleSec=0;var editOn=false;var lastExtra='';
@@ -5169,7 +5173,7 @@ function pbRender(ns){var c=PB_CFG[ns];if(!c)return;var host=$(c.host);if(!host)
     '<div class="ptop"><b>PROGRAM</b><div class="pseg">'+
       '<button type="button" class="'+(th==='paper'?'on':'')+'" onclick="pbTheme(\''+ns+'\',\'paper\')">☀️ Light</button>'+
       '<button type="button" class="'+(th==='dark'?'on':'')+'" onclick="pbTheme(\''+ns+'\',\'dark\')">🌙 Dark</button>'+
-    '</div></div>'+code+
+    '</div></div>'+code+(ns==='p'?'<div id="cyc"></div>':'')+
     '<div class="prow">'+
       '<button class="pgbtn" type="button" onclick="pbSim(\''+ns+'\')">▶ Simulate</button>'+
       '<button class="pgbtn" type="button" onclick="pbSave(\''+ns+'\')">💾 Save</button>'+
@@ -8761,3 +8765,5 @@ window.addEventListener('load',function(){try{window.scrollTo(0,0);}catch(e){}tr
 });</script>
 </body>
 </html>
+
+  
