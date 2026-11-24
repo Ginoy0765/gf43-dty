@@ -253,7 +253,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.76 &middot; 18 Nov 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="display:none;flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.77 &middot; 24 Nov 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="display:none;flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1687,7 +1687,7 @@
       <div class="sec mill-only"><div class="st" onclick="tog(this)">CYCLES <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Path mode</label><select id="path" onchange="updateSubs()"><option>Helical</option><option>Stepped</option></select></div><div><label>Direction</label><select id="dir" onchange="_entryStyleDefault()"><option>Top to Bottom</option><option>Bottom to Top</option></select></div></div>
         <div class="row2"><div id="mStepWrap"><label>Stepped style</label><select id="sstyle"><option>Top load Modified</option><option>Carmex bottom-first</option></select></div><div id="mEntryWrap"><label>Entry style (deg)</label><select id="entry" onchange="entryEdited=true"><option>Old</option><option>90</option><option>45</option><option>180</option><option>Arc</option></select></div></div>
-        <label>Engagement feed reduction (%)</label><input id="engred" type="number" value="0" inputmode="numeric">
+        <label>Engagement feed (%)</label><input id="engpct" type="number" value="" min="5" max="100" placeholder="auto" inputmode="numeric"><input id="engpct_ed" type="hidden" value="0"><div id="engpctHint" style="font-size:11px;color:#8aa;margin-top:2px"></div>
         <div class="row2"><div><label>Thread taper</label><select id="thtaper" onchange="updateSubs()"><option>None</option><option>NPT</option><option>BSPT</option><option id="thtaperManual">Manual</option></select></div><div><label>Taper arcs / turn</label><select id="taparcs"><option>4</option><option>8</option><option>16</option></select></div></div>
         <div id="mTaper" style="display:none"><label>Taper degree</label><input id="taperdeg" type="number" value="0" inputmode="decimal"><label>Dia diff at end of thread (mm)</label><input id="diadiff" type="number" value="0" inputmode="decimal"></div>
         <div id="brepassRow"><label>Bottom repass</label><select id="brepass" onchange="updateSubs()"><option>No</option><option>Yes</option></select></div>
@@ -2822,7 +2822,7 @@ var HELP={"opti threading":{"svg": "", "text": "Chip-breaking thread turning. Ea
 "safe z mm":{"svg": "", "text": "Axial clearance plane in Z the tool retracts to and approaches from. Keep it clear of the chuck and any step in the part."},
 "path mode":{"svg": "", "text": "How the milling/threading path is built — e.g. Helical (continuous helix) vs Stepped (level-by-level). Affects surface finish and cycle time."},
 "stepped style":{"svg": "", "text": "For a Stepped path, how each level steps to the next (straight plunge vs ramped). Controls entry marks and tool load between levels."},
-"engagement feed reduction %":{"svg": "", "text": "Cuts the feed by this percentage while the tool is fully engaged (e.g. in a corner or full-width) to protect the edge, then restores it. 0 = no reduction."},
+"engagement feed %":{"svg": "", "text": "Feed on the entry (lead-in arc) as a percentage of the orbit feed F. 75 = entry runs at 75% of F. Shown automatically from the rule: Helical Bottom-to-Top 50, Helical Top-to-Bottom 100, Stepped 75, Stepped single axial band 33. Type your own value (5–100) to override; clear the field to go back to auto. Repass entries always run at full F."},
 "repass threads pitches":{"svg": "", "text": "Re-run the last few pitches of the thread as a cleanup, expressed in number of pitches. Clears burrs or a lead-out mark at the thread end."},
 "repass offset dia mm":{"svg": "", "text": "A tiny diameter offset used on the repass so it skims rather than re-cuts to full depth — a spring/cleanup cut."},
 "bottom repass":{"svg": "", "text": "Add an extra pass at the bottom of the thread to clean the run-out. Useful where the thread ends against a shoulder."},
@@ -3831,14 +3831,14 @@ function tnZoneList(){var bps=tnZones();var first=Math.max(0.01,num('t_first',0.
 function syncZoneRows(){var host=$('t_zoneRows');if(!host)return;var bps=tnZones();var first=Math.max(0.01,num('t_first',0.25));var last=Math.max(0.01,num('t_e100',0.05));var prev={};Array.prototype.forEach.call(host.querySelectorAll('input[data-pct]'),function(inp){prev[inp.getAttribute('data-pct')]=inp.value;});var html='';for(var i=0;i<bps.length;i++){var p=bps[i];var key=tnPctLbl(p);var val=(prev[key]!==undefined&&prev[key]!=='')?prev[key]:(first+(last-first)*(p/100)).toFixed(3);html+='<div class="row2"><div><label>End DOC at '+key+'% (mm)</label><input class="t_ez" data-pct="'+key+'" type="number" value="'+val+'" inputmode="decimal" oninput="recalcT()"></div><div></div></div>';}host.innerHTML=html;recalcT();}
 function transVis(){var v=($('t_trans')?$('t_trans').value:'');var e=$('tPctRed');if(e)e.style.display=(v==='Pctreduce')?'':'none';}
 function recalcT(){tnAutoUI();tnAutoDOC();var Vc=num('t_vc',120),D=num('D',16),mx=num('t_maxrpm',5000);var rpm=Math.round(Vc*1000/(Math.PI*D));if(mx>0&&rpm>mx)rpm=mx;$('t_rpm').value=rpm;if($('t_total'))$('t_total').value=buildTurnPasses().length;transVis();}
-var TM_STYLES={'2':{mcode:'M03',teeth:3,dir:'Bottom to Top',path:'Helical',engred:50,brepass:'Yes',repp:1,repoff:0.03},'4':{mcode:'M03',teeth:1,dir:'Bottom to Top',path:'Helical',engred:50,brepass:'No'},'6':{mcode:'M04',teeth:3,dir:'Top to Bottom',path:'Helical',engred:0,brepass:'No'},'8':{mcode:'M03',dir:'Bottom to Top',path:'Stepped',entry:'45',engred:50,brepass:'No'}};function _tmSetV(id,v){var e=$(id);if(!e||v==null)return;e.value=String(v);}
+var TM_STYLES={'2':{mcode:'M03',teeth:3,dir:'Bottom to Top',path:'Helical',brepass:'Yes',repp:1,repoff:0.03},'4':{mcode:'M03',teeth:1,dir:'Bottom to Top',path:'Helical',brepass:'No'},'6':{mcode:'M04',teeth:3,dir:'Top to Bottom',path:'Helical',brepass:'No'},'8':{mcode:'M03',dir:'Bottom to Top',path:'Stepped',entry:'45',brepass:'No'}};function _tmSetV(id,v){var e=$(id);if(!e||v==null)return;e.value=String(v);}
 /* U-ENTRY-DIR: Entry style soft default, direction-based, Helical only
    (the field is hidden for Stepped). Top-to-Bottom -> 'Old' style entry;
    every other case (Bottom-to-Top) -> '45'. Runs whenever direction is
    set (manually, via AUTO, or via a tmStyle preset) so the field starts
    correct — but it stays a plain editable dropdown afterward, same as
    every other soft-defaulted field this session. */
-function _entryStyleDefault(){if(entryEdited)return;var pm=$('path'),d=$('dir'),e=$('entry');if(!pm||!d||!e)return;if(pm.value==='Stepped'){e.value='45';return;}e.value=(d.value==='Top to Bottom')?'Old':'45';}function applyTmStyle(){var sel=$('tmStyle');if(!sel)return;var st=TM_STYLES[sel.value];var hint=$('tmStyleHint');if(!st){if(hint)hint.textContent='Manual \u2014 set each cell yourself.';return;}_tmSetV('mcode',st.mcode);_tmSetV('dir',st.dir);_tmSetV('path',st.path);if('teeth' in st)_tmSetV('teeth',st.teeth);try{_entryStyleDefault();}catch(e){}if('entry' in st)_tmSetV('entry',st.entry);if('engred' in st)_tmSetV('engred',st.engred);_tmSetV('brepass',st.brepass);if(st.brepass==='Yes'){if('repp' in st)_tmSetV('repp',st.repp);if('repoff' in st)_tmSetV('repoff',st.repoff);}try{updateSubs();}catch(e){}try{if(typeof matChange==='function')matChange();}catch(e){}try{if(typeof updateTeeth==='function')updateTeeth();}catch(e){}try{if(typeof recalc==='function')recalc();}catch(e){}try{if(typeof renderPassPcts==='function')renderPassPcts();}catch(e){}try{if(typeof fdUpd==='function')fdUpd();}catch(e){}if(hint){var msg='Applied: '+sel.options[sel.selectedIndex].text;msg+='  \u2014 taper: set by Dia diff at end of thread.';if(st.brepass==='Yes')msg+='  Repass +'+st.repoff+' mm dia (edit 0.02\u20130.05).';if(st.path==='Stepped')msg+='  Teeth from insert length \u00f7 pitch.';hint.textContent=msg;}}
+function _entryStyleDefault(){if(entryEdited)return;var pm=$('path'),d=$('dir'),e=$('entry');if(!pm||!d||!e)return;if(pm.value==='Stepped'){e.value='45';return;}e.value=(d.value==='Top to Bottom')?'Old':'45';}function applyTmStyle(){var sel=$('tmStyle');if(!sel)return;var st=TM_STYLES[sel.value];var hint=$('tmStyleHint');if(!st){if(hint)hint.textContent='Manual \u2014 set each cell yourself.';return;}_tmSetV('mcode',st.mcode);_tmSetV('dir',st.dir);_tmSetV('path',st.path);if('teeth' in st)_tmSetV('teeth',st.teeth);try{_entryStyleDefault();}catch(e){}if('entry' in st)_tmSetV('entry',st.entry);_tmSetV('brepass',st.brepass);if(st.brepass==='Yes'){if('repp' in st)_tmSetV('repp',st.repp);if('repoff' in st)_tmSetV('repoff',st.repoff);}try{updateSubs();}catch(e){}try{if(typeof matChange==='function')matChange();}catch(e){}try{if(typeof updateTeeth==='function')updateTeeth();}catch(e){}try{if(typeof recalc==='function')recalc();}catch(e){}try{if(typeof renderPassPcts==='function')renderPassPcts();}catch(e){}try{if(typeof fdUpd==='function')fdUpd();}catch(e){}if(hint){var msg='Applied: '+sel.options[sel.selectedIndex].text;msg+='  \u2014 taper: set by Dia diff at end of thread.';if(st.brepass==='Yes')msg+='  Repass +'+st.repoff+' mm dia (edit 0.02\u20130.05).';if(st.path==='Stepped')msg+='  Teeth from insert length \u00f7 pitch.';hint.textContent=msg;}}
 /* ===== AUTO cycle: page (requirement + tool type) overriding tool, cycle & parameters ===== */
 var autoActive=false;
 /* U-NO-SILENT-AUTO-LOCK: 'autoActive' is a sticky, browser-wide flag (saved to
@@ -3863,7 +3863,7 @@ function _autoToolLabel(v){return ({single:'1 — single teeth','3m03':'3 teeth 
 function _autoHint(msg){var h=$('autoHint');if(h)h.innerHTML=msg;}
 function _autoBtn(){var b=$('autoBtn');if(!b)return;b.classList.toggle('on',!!autoActive);b.textContent=autoActive?'AUTO ✓':'AUTO';}
 function _autoSave(){try{localStorage.setItem('yantra_auto',JSON.stringify({on:autoActive,req:(($('autoReq')||{}).value)||'std',tool:(($('autoTool')||{}).value)||'single'}));}catch(e){}}
-var AUTO_LOCK_ALL=['teeth','path','dir','stab','mcode','thtaper','diadiff','taperdeg','engred'];
+var AUTO_LOCK_ALL=['teeth','path','dir','stab','mcode','thtaper','diadiff','taperdeg'];
 function _autoLock(lockIds){AUTO_LOCK_ALL.forEach(function(id){var e=$(id);if(!e)return;var dis=!!(lockIds&&lockIds.indexOf(id)>=0);e.disabled=dis;e.style.opacity=dis?'0.55':'';e.style.cursor=dis?'not-allowed':'';});}
 /* AUTO's Difficult/below-SS316 repass is built in — no Cycles cell at all, same mechanism as the Spring pass checkbox:
    one extra no-infeed pass at final size, appended live by buildPcts() whenever this is true. No engine changes needed
@@ -3901,13 +3901,13 @@ function applyAuto(){
   } else {
     teeth=null;mcode='M03';dir=dirXOR;engred=null;path='Stepped';
   }
-  if(teeth!=null){_tmSetV('teeth',teeth);}_tmSetV('path',path);_tmSetV('dir',dir);if(mcode)_tmSetV('mcode',mcode);if(engred!=null)_tmSetV('engred',engred);
+  if(teeth!=null){_tmSetV('teeth',teeth);}_tmSetV('path',path);_tmSetV('dir',dir);if(mcode)_tmSetV('mcode',mcode);/* U-ENGFEED: AUTO no longer writes/locks engagement feed - field shows the rule default (engpctRefresh) and stays editable */
   _tmSetV('stab',stab);
   try{_entryStyleDefault();}catch(e){}
   /* U-TEETH-EDIT: 'single' locks teeth=1, '3m03'/'3m04' lock teeth=3 (real
      physical tooth count). 'multi_single'/'multi_multi' (teeth=null here)
      stay fully manual/editable — no auto-lock, no auto-derivation. */
-  var lockIds=['path','dir','stab'];if(teeth!=null)lockIds.push('teeth');if(mcode)lockIds.push('mcode');if(engred!=null)lockIds.push('engred');
+  var lockIds=['path','dir','stab'];if(teeth!=null)lockIds.push('teeth');if(mcode)lockIds.push('mcode');
   if(tool!=='single'){
     _tmSetV('thtaper','None');_tmSetV('diadiff',0);lockIds.push('thtaper','diadiff','taperdeg');
   }
@@ -3920,7 +3920,7 @@ function applyAuto(){
      leftover. Every AUTO branch now drives teeth by its own rule only. */
   try{matChange();}catch(e){}try{updateSubs();}catch(e){}try{recalc();}catch(e){}try{renderPassPcts();}catch(e){}try{fdUpd();}catch(e){}
   _autoLock(lockIds);
-  var extra=(engred!=null?', 50% entry feed':'');
+  var extra='';
   var repassNote=repassOn?'+1 full repass pass (Difficult/below-SS316, built in \u2014 like Spring pass)':'no extra repass pass';
   var teethNote=(teeth==null)?' \u00b7 teeth = insert length \u00f7 pitch':'';
   _autoHint('<b>'+req+' \u00b7 '+_autoToolLabel(tool)+'</b> \u2014 '+path+' \u00b7 '+dir+(mcode?(' \u00b7 '+mcode):'')+teethNote+', stability '+stab+'%'+extra+', '+repassNote+'. Bottom repass (Cycles): separate, always manual. Thread taper/Dia diff: set manually (not locked by AUTO). Passes &amp; parameters: default.');
@@ -3930,7 +3930,7 @@ function closeAuto(){var m=$('autoModal');if(m)m.style.display='none';}
 function autoApply(){autoActive=true;autoAppliedThisJob=true;_autoSave();applyAuto();_autoBtn();setTimeout(closeAuto,120);}
 function _autoManualDefaults(){
   _tmSetV('path','Helical');_tmSetV('dir','Top to Bottom');_tmSetV('stab',50);
-  _tmSetV('mcode','M03');_tmSetV('engred',0);
+  _tmSetV('mcode','M03');try{engpctReset();}catch(e){}
   _tmSetV('thtaper','None');_tmSetV('diadiff',0);_tmSetV('taperdeg',0);
   try{_entryStyleDefault();}catch(e){}
   try{updateSubs();}catch(e){}try{matChange();}catch(e){}try{recalc();}catch(e){}try{renderPassPcts();}catch(e){}try{fdUpd();}catch(e){}
@@ -3961,7 +3961,29 @@ function updateTeeth(){var il=$('insl'),tt=$('teeth');if(!il||!tt)return;
   var t=parseFloat(il.value),P=num('P',0);
   if(il.value.trim()&&t>0&&P>0){tt.value=Math.max(1,Math.floor(t/P));}
   matChange();}
+/* U-ENGFEED (v28.77, 24 Nov 2026): "Engagement feed (%)" = ACTUAL entry feed as % of the orbit F
+   (type 75 -> entry runs at 75% of F).  Field always shows the engine's rule default until the operator
+   types a value; typed value is sent as entry_feed_pct and overrides the rule.  Clearing it -> back to auto.
+   Defaults mirror thread_mill.py: Helical BTT 50 / TTB 100, Stepped 75, Stepped single axial band 33.
+   engpct_ed (hidden) = '1' when operator-typed; saved/restored with the job like any other field. */
+function engpctDefault(){var pm=$('path'),d=$('dir');var st=!!(pm&&pm.value==='Stepped');
+  if(!st)return (d&&d.value==='Top to Bottom')?100:50;
+  var N=Math.max(1,Math.round(num('teeth',1))),P=num('P',0),L=num('L',0),ns=Math.max(1,Math.round(num('starts',1)));
+  var cov=(N-1)*P+ns*P;return (P>0&&L>0&&L<=cov+1e-9)?33:75;}
+function engpctEdited(){var h=$('engpct_ed'),e=$('engpct');return !!(h&&h.value==='1'&&e&&e.value.trim()!=='');}
+function engpctRefresh(){var e=$('engpct'),h=$('engpct_ed'),hn=$('engpctHint');if(!e)return;
+  if(engpctEdited()){e.style.color='';if(hn)hn.textContent='Your value (auto = '+engpctDefault()+'%). Clear to go back to auto.';return;}
+  if(h)h.value='0';e.value=engpctDefault();e.style.color='var(--accent,#4fc3f7)';if(hn)hn.textContent='Auto default — type to override.';}
+function engpctReset(){var h=$('engpct_ed');if(h)h.value='0';var e=$('engpct');if(e)e.value='';engpctRefresh();}
+(function(){function wire(){var e=$('engpct');if(!e||e._engW)return;e._engW=1;
+  e.addEventListener('input',function(ev){if(!ev.isTrusted)return;var h=$('engpct_ed');if(h)h.value=(e.value.trim()!=='')?'1':'0';e.style.color='';});
+  e.addEventListener('blur',function(){if(e.value.trim()===''){engpctReset();return;}var v=parseFloat(e.value);if(isNaN(v)){engpctReset();return;}var c=Math.max(5,Math.min(100,Math.round(v)));if(c!==v)e.value=c;engpctRefresh();});
+  var ids={path:1,dir:1,teeth:1,L:1,P:1,starts:1,insl:1,size:1,psel:1,pother:1,tpi:1,tpiother:1};
+  ['input','change'].forEach(function(t){document.addEventListener(t,function(ev){var x=ev.target;if(x&&x.id&&ids[x.id])setTimeout(function(){try{engpctRefresh();}catch(_){}} ,0);},true);});
+  engpctRefresh();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wire);else setTimeout(wire,0);})();
 function updateSubs(){
+  try{engpctRefresh();}catch(e){}
   var tt=$('thtaper');if(tt&&$('mTaper'))$('mTaper').style.display=(tt.value==='Manual')?'block':'none';
   var pm=$('path');if(pm){var st=pm.value==='Stepped';if($('mStepWrap'))$('mStepWrap').style.display=st?'block':'none';
     /* U-ENTRY-ALWAYS: Entry style is read by the engine for BOTH Helical
@@ -4703,7 +4725,7 @@ function resetAll(){editOn=false;entryEdited=false;autoAppliedThisJob=false;try{
   $('opsel').value='Milling';method='Mill';$('side').value='Internal';$('hand').value='RH';$('starts').value='1';
   $('mat').value='Stainless 316 austenitic';$('stab').value='50';$('dir').value='Top to Bottom';$('spring').value='No';$('eqvol').value='Yes';
   $('Z').value='3';$('teeth').value='1';$('insl').value='';$('path').value='Helical';$('safez').value='20';if($('msg'))$('msg').value='';if($('username'))$('username').value='';
-  if($('mcode'))$('mcode').value='M03';if($('maxrpm'))$('maxrpm').value='5000';minorEdited=false;if($('minor'))$('minor').value='';if($('majadj'))$('majadj').value='0';if($('engred'))$('engred').value='0';
+  if($('mcode'))$('mcode').value='M03';if($('maxrpm'))$('maxrpm').value='5000';minorEdited=false;if($('minor'))$('minor').value='';if($('majadj'))$('majadj').value='0';try{engpctReset();}catch(e){}
   if($('thtaper'))$('thtaper').value='None';if($('taperdeg'))$('taperdeg').value='0';if($('diadiff'))$('diadiff').value='0';if($('brepass'))$('brepass').value='No';if($('startxyz'))$('startxyz').value='No';if($('toff'))$('toff').value='No';if($('subprog'))$('subprog').value='No';if($('req'))$('req').value='Standard';if($('ctrl'))$('ctrl').value='Fanuc I & J';
   $('profile').value='ISO Metric';profChange();$('size').value='M16';sizeChange();clearD();
   $('p_res').innerHTML='';if($('cyc'))$('cyc').innerHTML='';
@@ -5049,7 +5071,7 @@ async function genMill(){
   var P0={D:D,L:L,P:P,d:d,Z:num('Z',1),Vc:Vc,fz:fz,hand:$('hand').value,direction:$('dir').value,mode:$('path').value,
     num_passes:pcts.length,pcts:pcts,repass_pitches:(brepass?Math.max(1,Math.round(num('repp',1))):0),repass_offset:num('repoff',0),num_teeth:teeth,
     bottom_offset:toff,spindle:(LOCK_ADV?'M03':$('mcode').value),dia_end_offset:toff,minor:minor,entry_style:(internal?(LOCK_ADV?'Old':$('entry').value):(LOCK_ADV?'90':$('entry').value)),
-    num_starts:Math.max(1,Math.round(num('starts',1))),entry_feed_reduction:(LOCK_ADV?0:num('engred',0)),max_rpm:(LOCK_ADV?5000:num('maxrpm',5000)),
+    num_starts:Math.max(1,Math.round(num('starts',1))),entry_feed_pct:((!LOCK_ADV&&engpctEdited()&&num('engpct',0)>0)?Math.max(5,Math.min(100,num('engpct',0))):null),max_rpm:(LOCK_ADV?5000:num('maxrpm',5000)),
     stepped_style:(LOCK_ADV?'Modified':($('sstyle').value.indexOf('Carmex')>=0?'Carmex':'Modified')),is_external:!internal,
     strategy:'Standard',finishing:(req==='Finishing'),entry_angle:(LOCK_ADV?0:num('entryang',0)),tool_offset_mode:(toolOD?'od':'centre'),
     rctf_strength:(LOCK_ADV?0:num('rctf',0)/100),control:$('ctrl').value,safez:num('safez',20),sx:sX,sy:sY,sz:sZ,toolaxis:tax,tnum:(toffY?num('tool_t',1):1),hnum:(toffY?num('tool_h',1):1),dnum:(toffY?num('tool_d',1):1),taper_arcs:(LOCK_ADV?4:num('taparcs',4)),feed_teeth:teeth};
@@ -5335,7 +5357,7 @@ function yaWireOne(id,srcId){var e=document.getElementById(id);if(!e||e._yaFlow)
 function yaFlowWire(order){YA_ORDER=order;order.forEach(function(id){yaWireOne(id,id);});['psel','tpi','pother','tpiother'].forEach(function(pid){yaWireOne(pid,'P');});['D','Dinch'].forEach(function(did){var de=document.getElementById(did);if(!de||de._yaFlowD)return;de._yaFlowD=1;de.addEventListener('keydown',function(ev){var isEnter=(ev.key==='Enter'||ev.keyCode===13);var isTab=(ev.key==='Tab'||ev.keyCode===9)&&!ev.shiftKey;if(!(isEnter||isTab))return;if(typeof progMode==='undefined'||progMode!=='new')return;if(!de.value||String(de.value).trim()==='')return;var L=document.getElementById('L');if(L){ev.preventDefault();yaFocusOpen(L);}});});}
 function yaThreadFocus(){try{var o=yaThreadOrder();yaFlowWire(o);if(window._tmSuppressFocus){window._tmSuppressFocus=false;return;}var pv=document.getElementById('prog');var vis=pv&&pv.offsetParent!==null;if(!vis)return;var f0=yaResolve(o[0]);if(f0)setTimeout(function(){yaFocusOpen(f0);},120);}catch(e){}}
 var TURN_JOB_IDS=['t_infeed','t_trans','t_first','t_e100','t_idle','t_pctred','t_pctanchor','t_flank','t_modflank','t_zone','t_req','t_startang','t_presize','tp_len','t_thtaper','t_taperdeg','t_diadiff','t_safex','t_safez','t_pos1','t_pos2x','t_pos2z','t_subprog','t_toff','t_tool','t_cool','t_coolcustom','t_mcode','t_shank','t_stab','t_vc','t_majadj','t_opti','t_optistyle','t_opticode','t_optin','t_optigap','t_optiret'];
-var MILL_JOB_IDS=['passes','spring','eqvol','rctf','path','dir','sstyle','entry','engred','thtaper','taparcs','taperdeg','diadiff','brepass','repp','repoff','subprog','startxyz','safez','start_x','start_y','start_z','toolpath','entryang','insl','mcode','toff','tool_t','tool_h','tool_d','stab','vc','majadj'];
+var MILL_JOB_IDS=['passes','spring','eqvol','rctf','path','dir','sstyle','entry','engpct','engpct_ed','thtaper','taparcs','taperdeg','diadiff','brepass','repp','repoff','subprog','startxyz','safez','start_x','start_y','start_z','toolpath','entryang','insl','mcode','toff','tool_t','tool_h','tool_d','stab','vc','majadj'];
 function _resetDef(id){var el=$(id);if(!el)return;if(el.tagName==='SELECT'){var set=false;for(var i=0;i<el.options.length;i++){if(el.options[i].defaultSelected){el.selectedIndex=i;set=true;break;}}if(!set&&el.options.length)el.selectedIndex=0;}else if('defaultValue' in el){el.value=el.defaultValue;}}
 function refreshJobDefaults(){try{TURN_JOB_IDS.forEach(_resetDef);}catch(e){}try{MILL_JOB_IDS.forEach(_resetDef);}catch(e){}try{tnAutoOn=true;tnAutoMode='Standard';tnFirstAuto=true;if($('tnAutoReq'))$('tnAutoReq').value='Standard';}catch(e){}try{tnAutoUI();}catch(e){}try{updateSubs();}catch(e){}try{if($('mat'))$('mat').value='Stainless 316 austenitic';}catch(e){}try{matChange();}catch(e){}try{setDefaultPasses();}catch(e){}try{renderPassPcts();}catch(e){}try{recalcT();}catch(e){}try{recalc();}catch(e){}}
 function setProgMode(m){progMode=m;var s=$('pm_sample'),n=$('pm_new');if(s)s.classList.toggle('on',m==='sample');if(n)n.classList.toggle('on',m==='new');var h=$('pm_hint');if(m==='new'){applyNewBlanks();try{yaThreadFocus();}catch(_e){}if(h)h.textContent='New program — choose the fields marked in red, then Generate and Save.';}else{restoreSampleDefaults();if(h)h.textContent='Sample — edit and study freely. Saving is off; tap New to make your own.';}try{pbNote('p','');}catch(e){}try{refreshJobDefaults();}catch(e){}refreshReq();}
