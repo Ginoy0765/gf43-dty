@@ -253,7 +253,7 @@
 </defs></svg>
 <div class="wrap">
   <header style="display:flex;align-items:center;gap:10px"><div class="brand" style="flex:1;display:flex;align-items:center;gap:11px"><div class="logo">&#2351;</div>
-    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.79 &middot; 24 Nov 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="display:none;flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
+    <div><h1>YANTRA<span class="advbadge" id="advbadge">ADVANCED</span></h1><small><span id="appver">v28.80 &middot; 26 Nov 2026</span> &middot; <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--mut);text-decoration:underline">Privacy</a></small></div></div><div id="hubtoggle"><button type="button" id="hub-generate" class="on" data-hub="generate" onclick="hubTab('generate')">Programming</button><button type="button" id="hub-calc" data-hub="calc" onclick="hubTab('calc')">Calculator</button></div><div id="crumb" style="display:none;align-items:center;gap:0;flex:none;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:4px;cursor:pointer"><span id="crumbName" style="font-weight:700;color:#e8eef4;font-size:16px;letter-spacing:.4px;white-space:nowrap;background:#334559;border-radius:16px;padding:10px 26px;box-shadow:inset 3px 0 0 var(--acc)"></span></div><div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:8px"><button id="fullmodebtn" type="button" onclick="toggleFullMode()" title="Dev: switch between Simple and Full build" style="display:none;flex:none;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;background:var(--bg2);color:var(--mut)">FULL</button><button id="helpbtn" type="button" onclick="toggleHelp()" aria-label="Field help" style="flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;line-height:1">?</button></div></header>
   <main>
     <!-- HOME: operations roadmap -->
     <section id="home" class="view on">
@@ -1670,11 +1670,6 @@
         <div id="toffWrap" style="display:none"><div class="row3"><div><label>Tool no. T</label><input id="tool_t" type="number" value="1" inputmode="numeric"></div><div><label>Length H</label><input id="tool_h" type="number" value="1" inputmode="numeric"></div><div><label>Comp D</label><input id="tool_d" type="number" value="1" inputmode="numeric"></div></div></div>
         
       </div></div>
-      <div class="sec mill-only" id="mtProfSec"><div class="st" onclick="tog(this)">PROFILE <span>&#9656;</span></div><div class="sb" style="display:none">
-        <p class="note" style="text-align:left">Custom thread profile &amp; insert geometry for the generative toolpath. Leave any field blank if not applicable.</p>
-        <div id="sp_inline_host_m"></div>
-        <button class="btn btn2" type="button" onclick="var _e=$('sp_feat');if(_e)_e.value='Thread';if(typeof spSave==='function')spSave();" style="margin-top:8px">&#10003; Apply specials</button>
-      </div></div>
       <div class="sec mill-only"><div class="st" onclick="tog(this)"><span class="reqttl">PARAMETERS <button type="button" class="autobtn" id="autoBtn" onclick="event.stopPropagation();openAuto()">AUTO</button></span><span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Stability %</label><input id="stab" type="number" value="50" inputmode="numeric" oninput="matChange()"></div><div><label>Vc (m/min)</label><input id="vc" type="number" value="60" inputmode="decimal" oninput="vcEdited=true;rpmEdited=false;recalc()"></div></div>
         <div class="row2"><div><label>Spindle RPM (S)</label><input id="rpm" type="number" inputmode="numeric" placeholder="auto" oninput="tmRpmEdit()" onchange="tmRpmDone()"></div><div><label>fz (mm/tooth)</label><input id="fz" inputmode="decimal" oninput="fzEdited=true;recalc()" placeholder="auto"></div></div>
@@ -1694,6 +1689,11 @@
         <div id="repWrap" style="display:none"><div class="row2"><div><label>Repass threads (pitches)</label><input id="repp" type="number" value="1" inputmode="numeric"></div><div><label>Repass offset dia (mm)</label><input id="repoff" type="number" value="0" inputmode="decimal"></div></div></div>
 
         <label>Subprogram (M99, no tool call)</label><select id="subprog"><option>No</option><option>Yes</option></select>
+      </div></div>
+      <div class="sec mill-only" id="mtProfSec"><div class="st" onclick="tog(this)">PROFILE <span>&#9656;</span></div><div class="sb" style="display:none">
+        <p class="note" style="text-align:left">Custom thread profile &amp; insert geometry for the generative toolpath. Leave any field blank if not applicable.</p>
+        <div id="sp_inline_host_m"></div>
+        <button class="btn btn2" type="button" onclick="var _e=$('sp_feat');if(_e)_e.value='Thread';if(typeof spSave==='function')spSave();" style="margin-top:8px">&#10003; Apply specials</button>
       </div></div>
       <div class="sec mill-only"><div class="st" onclick="tog(this)">PATTERN <span>&#9656;</span></div><div class="sb" style="display:none">
         <label>Pattern</label><select id="mt_pat" onchange="mtPosChange()"><option>Point</option><option>Line</option><option>Rows (grid)</option><option>PCD circle</option><option>Manual coords</option></select>
@@ -1733,11 +1733,6 @@
         <div class="row2"><div><label>Coolant</label><select id="t_cool" onchange="tCoolVis()"><option value="M08">M08 flood</option><option value="M07">M07 mist</option><option value="Custom">Custom</option></select></div><div id="t_coolCustWrap" style="display:none"><label>Custom coolant code</label><input id="t_coolcustom" placeholder="e.g. M51"></div></div>
         <label>Shank dia (reference &middot; not used in program yet)</label><input id="t_shank" readonly disabled placeholder="auto" style="opacity:.55">
       </div></div>
-      <div class="sec turn-only"><div class="st" onclick="tog(this)">PROFILE <span>&#9656;</span></div><div class="sb" style="display:none">
-        <p class="note" style="text-align:left">Custom thread profile &amp; insert geometry for the generative toolpath. Leave any field blank if not applicable.</p>
-        <div id="sp_inline_host"></div>
-        <button class="btn btn2" type="button" onclick="var _e=$('sp_feat');if(_e)_e.value='Thread';if(typeof spSave==='function')spSave();" style="margin-top:8px">&#10003; Apply specials</button>
-      </div></div>
       <div class="sec turn-only"><div class="st" onclick="tog(this)">PARAMETERS <button type="button" class="autobtn" id="tnAutoBtn" onclick="event.stopPropagation();tnAutoOpen()">AUTO</button> <span>&#9656;</span></div><div class="sb" style="display:none">
         <div class="row2"><div><label>Stability %</label><input id="t_stab" type="number" value="50" inputmode="numeric" oninput="matChange()"></div><div><label>Vc (m/min)</label><input id="t_vc" type="number" value="120" inputmode="decimal" oninput="recalcT()"></div></div>
         <div class="row2"><div><label>RPM (auto)</label><input id="t_rpm" readonly></div><div><label>Max RPM</label><input id="t_maxrpm" type="number" value="5000" inputmode="numeric" oninput="recalcT()"></div></div>
@@ -1764,6 +1759,11 @@
         <p class="note" style="text-align:left"><b>NPT profile only.</b> When Yes, a finish pre-size program is written ABOVE the thread program, split by <b>M01</b>: external turns the OD to the major cone, internal bores the ID to the minor cone (NPT 1:16), each with a 45&deg; lead chamfer. Only the length is needed &mdash; all diameters, the chamfer and feeds are computed. OD tool T0303 / ID tool T0505, 0.1&nbsp;mm/rev finish feed.</p>
         <div class="row2"><div><label>Requirement</label><select id="t_req"><option>Standard</option><option>Finishing</option><option>Productivity</option><option>Weak setup</option><option>Tool life</option></select></div><div><label>Thread start angle (deg)</label><input id="t_startang" type="number" value="0" inputmode="decimal"></div></div>
         <label>Subprogram (M99, no tool call)</label><select id="t_subprog"><option>No</option><option>Yes</option></select>
+      </div></div>
+      <div class="sec turn-only"><div class="st" onclick="tog(this)">PROFILE <span>&#9656;</span></div><div class="sb" style="display:none">
+        <p class="note" style="text-align:left">Custom thread profile &amp; insert geometry for the generative toolpath. Leave any field blank if not applicable.</p>
+        <div id="sp_inline_host"></div>
+        <button class="btn btn2" type="button" onclick="var _e=$('sp_feat');if(_e)_e.value='Thread';if(typeof spSave==='function')spSave();" style="margin-top:8px">&#10003; Apply specials</button>
       </div></div>
       <div class="sec turn-only"><div class="st" onclick="tog(this)">POSITIONING <span>&#9656;</span></div><div class="sb" style="display:none">
         <label>Safe position 1 (tool change)</label><input id="t_pos1" value="G28 U0 W0">
